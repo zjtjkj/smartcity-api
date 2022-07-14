@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package api.user.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "user/api/user/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.user.v1";
+
+service UserService {
+	rpc CreateUser (CreateUserRequest) returns (CreateUserReply) {
+		option (google.api.http) = {
+			post: "/api/v1/user/create"
+		};
+	}
+	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply) {
+		option (google.api.http) = {
+			post: "/api/v1/user/update"
+
+		};
+	}
+	rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply) {
+		option (google.api.http) = {
+			post: "/api/v1/user/delete"
+		};
+	}
+	rpc GetUser (GetUserRequest) returns (GetUserReply) {
+		option (google.api.http) = {
+			post: "/api/v1/user/get"
+		};
+	}
+	rpc FindUser (FindUserRequest) returns (FindUserReply) {
+		option (google.api.http) = {
+			post: "/api/v1/user/find"
+		};
+	}
+	rpc ListUser (ListUserRequest) returns (ListUserReply) {
+		option (google.api.http) = {
+			get: "/api/v1/user/list"
+		};
+	}
+}
+
+message User {
+	uint64 id = 1;
+	int64 created_at = 2;
+	int64 updated_at = 3;
+	string username = 4;
+	string password = 5;
+	string name = 6;
+	string phone = 7;
+	string email = 8;
+}
+
+message CreateUserRequest {
+	message User {
+		string username = 1;
+		string password = 2;
+		string name = 3;
+		string phone = 4;
+		string email = 5;
+	}
+	User user = 1;
+}
+message CreateUserReply {
+	User user = 1;
+}
+
+message UpdateUserRequest {
+	message User {
+		uint64 id = 1;
+		string username = 2;
+		string password = 3;
+		string name = 4;
+		string phone = 5;
+		string email = 6;
+	}
+	User user = 1;
+}
+message UpdateUserReply {
+	User user = 1;
+}
+
+message DeleteUserRequest {
+	uint64 id = 1;
+}
+message DeleteUserReply {
+	User user = 1;
+}
+
+message GetUserRequest {
+	uint64 id = 1;
+}
+message GetUserReply {
+	User user = 1;
+}
+
+message FindUserRequest {
+	string username = 1;
+	string name = 2;
+	string phone = 3;
+	string email = 4;
+}
+message FindUserReply {
+	repeated User users = 1;
+}
+
+message ListUserRequest {}
+message ListUserReply {
+	repeated User users = 1;
+}
