@@ -51,6 +51,7 @@ message User {
 	string name = 6;
 	string phone = 7;
 	string email = 8;
+	bool is_root = 9;
 }
 
 message CreateUserRequest {
@@ -60,6 +61,7 @@ message CreateUserRequest {
 		string name = 3;
 		string phone = 4;
 		string email = 5;
+		bool is_root = 6;
 	}
 	User user = 1;
 }
@@ -75,6 +77,7 @@ message UpdateUserRequest {
 		string name = 4;
 		string phone = 5;
 		string email = 6;
+		bool is_root = 7;
 	}
 	User user = 1;
 }
@@ -101,9 +104,15 @@ message FindUserRequest {
 	string name = 2;
 	string phone = 3;
 	string email = 4;
+	int64 index = 5;
+	int64 size = 6;
 }
 message FindUserReply {
-	repeated User users = 1;
+	int64 index = 1;
+	int64 size = 2;
+	int64 page = 3;
+	int64 total = 4;
+	repeated User users = 5;
 }
 
 message ListUserRequest {}

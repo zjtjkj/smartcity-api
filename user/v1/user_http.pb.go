@@ -42,7 +42,7 @@ func RegisterUserServiceHTTPServer(s *http.Server, srv UserServiceHTTPServer) {
 	r.POST("/api/v1/user/delete", _UserService_DeleteUser0_HTTP_Handler(srv))
 	r.POST("/api/v1/user/get", _UserService_GetUser0_HTTP_Handler(srv))
 	r.POST("/api/v1/user/find", _UserService_FindUser0_HTTP_Handler(srv))
-	r.POST("/api/v1/user/list", _UserService_ListUser0_HTTP_Handler(srv))
+	r.GET("/api/v1/user/list", _UserService_ListUser0_HTTP_Handler(srv))
 }
 
 func _UserService_CreateUser0_HTTP_Handler(srv UserServiceHTTPServer) func(ctx http.Context) error {
@@ -234,7 +234,7 @@ func (c *UserServiceHTTPClientImpl) ListUser(ctx context.Context, in *ListUserRe
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationUserServiceListUser))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
