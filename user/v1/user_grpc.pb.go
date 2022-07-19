@@ -28,6 +28,7 @@ type UserServiceClient interface {
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserReply, error)
 	FindUser(ctx context.Context, in *FindUserRequest, opts ...grpc.CallOption) (*FindUserReply, error)
 	ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserReply, error)
+	FindUserByUsername(ctx context.Context, in *FindUserByUsernameRequest, opts ...grpc.CallOption) (*FindUserByUsernameReply, error)
 }
 
 type userServiceClient struct {
@@ -92,6 +93,15 @@ func (c *userServiceClient) ListUser(ctx context.Context, in *ListUserRequest, o
 	return out, nil
 }
 
+func (c *userServiceClient) FindUserByUsername(ctx context.Context, in *FindUserByUsernameRequest, opts ...grpc.CallOption) (*FindUserByUsernameReply, error) {
+	out := new(FindUserByUsernameReply)
+	err := c.cc.Invoke(ctx, "/api.user.v1.UserService/FindUserByUsername", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
@@ -102,6 +112,7 @@ type UserServiceServer interface {
 	GetUser(context.Context, *GetUserRequest) (*GetUserReply, error)
 	FindUser(context.Context, *FindUserRequest) (*FindUserReply, error)
 	ListUser(context.Context, *ListUserRequest) (*ListUserReply, error)
+	FindUserByUsername(context.Context, *FindUserByUsernameRequest) (*FindUserByUsernameReply, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -126,6 +137,9 @@ func (UnimplementedUserServiceServer) FindUser(context.Context, *FindUserRequest
 }
 func (UnimplementedUserServiceServer) ListUser(context.Context, *ListUserRequest) (*ListUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUser not implemented")
+}
+func (UnimplementedUserServiceServer) FindUserByUsername(context.Context, *FindUserByUsernameRequest) (*FindUserByUsernameReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindUserByUsername not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 
@@ -248,6 +262,24 @@ func _UserService_ListUser_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_FindUserByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindUserByUsernameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).FindUserByUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.user.v1.UserService/FindUserByUsername",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).FindUserByUsername(ctx, req.(*FindUserByUsernameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -278,6 +310,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUser",
 			Handler:    _UserService_ListUser_Handler,
+		},
+		{
+			MethodName: "FindUserByUsername",
+			Handler:    _UserService_FindUserByUsername_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

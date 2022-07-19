@@ -40,6 +40,11 @@ service UserService {
 			get: "/api/v1/user/list"
 		};
 	}
+	rpc FindUserByUsername (FindUserByUsernameRequest) returns (FindUserByUsernameReply) {
+		option (google.api.http) = {
+			get: "/api/v1/user/find/username"
+		};
+	}
 }
 
 message User {
@@ -118,4 +123,11 @@ message FindUserReply {
 message ListUserRequest {}
 message ListUserReply {
 	repeated User users = 1;
+}
+
+message FindUserByUsernameRequest {
+	string username = 1;
+}
+message FindUserByUsernameReply {
+	User user = 1;
 }

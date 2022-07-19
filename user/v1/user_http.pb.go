@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationUserServiceCreateUser = "/api.user.v1.UserService/CreateUser"
 const OperationUserServiceDeleteUser = "/api.user.v1.UserService/DeleteUser"
 const OperationUserServiceFindUser = "/api.user.v1.UserService/FindUser"
+const OperationUserServiceFindUserByUsername = "/api.user.v1.UserService/FindUserByUsername"
 const OperationUserServiceGetUser = "/api.user.v1.UserService/GetUser"
 const OperationUserServiceListUser = "/api.user.v1.UserService/ListUser"
 const OperationUserServiceUpdateUser = "/api.user.v1.UserService/UpdateUser"
@@ -30,6 +31,7 @@ type UserServiceHTTPServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserReply, error)
 	FindUser(context.Context, *FindUserRequest) (*FindUserReply, error)
+	FindUserByUsername(context.Context, *FindUserByUsernameRequest) (*FindUserByUsernameReply, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserReply, error)
 	ListUser(context.Context, *ListUserRequest) (*ListUserReply, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
@@ -43,6 +45,7 @@ func RegisterUserServiceHTTPServer(s *http.Server, srv UserServiceHTTPServer) {
 	r.POST("/api/v1/user/get", _UserService_GetUser0_HTTP_Handler(srv))
 	r.POST("/api/v1/user/find", _UserService_FindUser0_HTTP_Handler(srv))
 	r.GET("/api/v1/user/list", _UserService_ListUser0_HTTP_Handler(srv))
+	r.GET("/api/v1/user/find/username", _UserService_FindUserByUsername0_HTTP_Handler(srv))
 }
 
 func _UserService_CreateUser0_HTTP_Handler(srv UserServiceHTTPServer) func(ctx http.Context) error {
@@ -159,10 +162,30 @@ func _UserService_ListUser0_HTTP_Handler(srv UserServiceHTTPServer) func(ctx htt
 	}
 }
 
+func _UserService_FindUserByUsername0_HTTP_Handler(srv UserServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in FindUserByUsernameRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserServiceFindUserByUsername)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.FindUserByUsername(ctx, req.(*FindUserByUsernameRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*FindUserByUsernameReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type UserServiceHTTPClient interface {
 	CreateUser(ctx context.Context, req *CreateUserRequest, opts ...http.CallOption) (rsp *CreateUserReply, err error)
 	DeleteUser(ctx context.Context, req *DeleteUserRequest, opts ...http.CallOption) (rsp *DeleteUserReply, err error)
 	FindUser(ctx context.Context, req *FindUserRequest, opts ...http.CallOption) (rsp *FindUserReply, err error)
+	FindUserByUsername(ctx context.Context, req *FindUserByUsernameRequest, opts ...http.CallOption) (rsp *FindUserByUsernameReply, err error)
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserReply, err error)
 	ListUser(ctx context.Context, req *ListUserRequest, opts ...http.CallOption) (rsp *ListUserReply, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserReply, err error)
@@ -209,6 +232,19 @@ func (c *UserServiceHTTPClientImpl) FindUser(ctx context.Context, in *FindUserRe
 	opts = append(opts, http.Operation(OperationUserServiceFindUser))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *UserServiceHTTPClientImpl) FindUserByUsername(ctx context.Context, in *FindUserByUsernameRequest, opts ...http.CallOption) (*FindUserByUsernameReply, error) {
+	var out FindUserByUsernameReply
+	pattern := "/api/v1/user/find/username"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationUserServiceFindUserByUsername))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
