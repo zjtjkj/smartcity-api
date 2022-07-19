@@ -39,6 +39,11 @@ service UserDomain {
 			get: "/api/v1/user/list"
 		};
 	}
+	rpc ListUserDomainByUser (ListUserDomainByUserRequest) returns (ListUserDomainByUserReply) {
+		option (google.api.http) = {
+			get: "/api/v1/user/list/user"
+		};
+	}
 }
 
 message Domain {
@@ -110,5 +115,12 @@ message FindUserDomainReply {
 
 message ListUserDomainRequest {}
 message ListUserDomainReply {
+	repeated Domain domains = 1;
+}
+
+message ListUserDomainByUserRequest {
+	uint64 id = 1;
+}
+message ListUserDomainByUserReply {
 	repeated Domain domains = 1;
 }
