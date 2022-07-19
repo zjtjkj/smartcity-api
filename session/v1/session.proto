@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package api.session.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "session/api/session/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.session.v1";
+
+service SessionService {
+	rpc CreateSession (CreateSessionRequest) returns (CreateSessionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/session/create"
+		};
+	}
+	rpc UpdateSession (UpdateSessionRequest) returns (UpdateSessionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/session/update"
+		};
+	}
+	rpc DeleteSession (DeleteSessionRequest) returns (DeleteSessionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/session/delete"
+		};
+	}
+	rpc GetSession (GetSessionRequest) returns (GetSessionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/session/get"
+		};
+	}
+	rpc GCSession (GCSessionRequest) returns (GCSessionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/session/gc"
+		};
+	}
+}
+
+message Session {
+	string id = 1;
+	User user = 2;
+}
+
+message User {
+	uint64 id = 1;
+	string username = 2;
+	repeated uint64 regions = 3;
+	repeated uint64 features = 4;
+}
+
+message CreateSessionRequest {
+	User user = 1;
+}
+message CreateSessionReply {
+	Session session = 1;
+}
+
+message UpdateSessionRequest {
+	Session session = 1;
+}
+message UpdateSessionReply {
+	Session session = 1;
+}
+
+message DeleteSessionRequest {
+	string id = 1;
+}
+message DeleteSessionReply {}
+
+message GetSessionRequest {
+	string id = 1;
+}
+message GetSessionReply {
+	Session session = 1;
+}
+
+message GCSessionRequest {
+	uint64 id = 1;
+}
+message GCSessionReply {}
