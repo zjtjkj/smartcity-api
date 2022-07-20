@@ -12,26 +12,31 @@ service UserDomain {
 	rpc CreateUserDomain (CreateUserDomainRequest) returns (CreateUserDomainReply) {
 		option (google.api.http) = {
 			post: "/api/v1/userdomain/create"
+			body: "*"
 		};
 	}
 	rpc UpdateUserDomain (UpdateUserDomainRequest) returns (UpdateUserDomainReply) {
 		option (google.api.http) = {
 			post: "/api/v1/userdomain/update"
+			body: "*"
 		};
 	}
 	rpc DeleteUserDomain (DeleteUserDomainRequest) returns (DeleteUserDomainReply) {
 		option (google.api.http) = {
 			post: "/api/v1/userdomain/delete"
+			body: "*"
 		};
 	}
 	rpc GetUserDomain (GetUserDomainRequest) returns (GetUserDomainReply) {
 		option (google.api.http) = {
 			post: "/api/v1/userdomain/get"
+			body: "*"
 		};
 	}
 	rpc FindUserDomain (FindUserDomainRequest) returns (FindUserDomainReply) {
 		option (google.api.http) = {
 			post: "/api/v1/userdomain/find"
+			body: "*"
 		};
 	}
 	rpc ListUserDomain (ListUserDomainRequest) returns (ListUserDomainReply) {
@@ -41,7 +46,8 @@ service UserDomain {
 	}
 	rpc ListUserDomainByUser (ListUserDomainByUserRequest) returns (ListUserDomainByUserReply) {
 		option (google.api.http) = {
-			get: "/api/v1/user/list/user"
+			post: "/api/v1/user/list/user"
+			body: "*"
 		};
 	}
 }

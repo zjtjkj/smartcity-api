@@ -45,13 +45,13 @@ func RegisterUserDomainHTTPServer(s *http.Server, srv UserDomainHTTPServer) {
 	r.POST("/api/v1/userdomain/get", _UserDomain_GetUserDomain0_HTTP_Handler(srv))
 	r.POST("/api/v1/userdomain/find", _UserDomain_FindUserDomain0_HTTP_Handler(srv))
 	r.GET("/api/v1/user/list", _UserDomain_ListUserDomain0_HTTP_Handler(srv))
-	r.GET("/api/v1/user/list/user", _UserDomain_ListUserDomainByUser0_HTTP_Handler(srv))
+	r.POST("/api/v1/user/list/user", _UserDomain_ListUserDomainByUser0_HTTP_Handler(srv))
 }
 
 func _UserDomain_CreateUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateUserDomainRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserDomainCreateUserDomain)
@@ -70,7 +70,7 @@ func _UserDomain_CreateUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(c
 func _UserDomain_UpdateUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateUserDomainRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserDomainUpdateUserDomain)
@@ -89,7 +89,7 @@ func _UserDomain_UpdateUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(c
 func _UserDomain_DeleteUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteUserDomainRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserDomainDeleteUserDomain)
@@ -108,7 +108,7 @@ func _UserDomain_DeleteUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(c
 func _UserDomain_GetUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetUserDomainRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserDomainGetUserDomain)
@@ -127,7 +127,7 @@ func _UserDomain_GetUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx 
 func _UserDomain_FindUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in FindUserDomainRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserDomainFindUserDomain)
@@ -165,7 +165,7 @@ func _UserDomain_ListUserDomain0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx
 func _UserDomain_ListUserDomainByUser0_HTTP_Handler(srv UserDomainHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListUserDomainByUserRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationUserDomainListUserDomainByUser)
@@ -202,10 +202,10 @@ func NewUserDomainHTTPClient(client *http.Client) UserDomainHTTPClient {
 func (c *UserDomainHTTPClientImpl) CreateUserDomain(ctx context.Context, in *CreateUserDomainRequest, opts ...http.CallOption) (*CreateUserDomainReply, error) {
 	var out CreateUserDomainReply
 	pattern := "/api/v1/userdomain/create"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserDomainCreateUserDomain))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -215,10 +215,10 @@ func (c *UserDomainHTTPClientImpl) CreateUserDomain(ctx context.Context, in *Cre
 func (c *UserDomainHTTPClientImpl) DeleteUserDomain(ctx context.Context, in *DeleteUserDomainRequest, opts ...http.CallOption) (*DeleteUserDomainReply, error) {
 	var out DeleteUserDomainReply
 	pattern := "/api/v1/userdomain/delete"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserDomainDeleteUserDomain))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -228,10 +228,10 @@ func (c *UserDomainHTTPClientImpl) DeleteUserDomain(ctx context.Context, in *Del
 func (c *UserDomainHTTPClientImpl) FindUserDomain(ctx context.Context, in *FindUserDomainRequest, opts ...http.CallOption) (*FindUserDomainReply, error) {
 	var out FindUserDomainReply
 	pattern := "/api/v1/userdomain/find"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserDomainFindUserDomain))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -241,10 +241,10 @@ func (c *UserDomainHTTPClientImpl) FindUserDomain(ctx context.Context, in *FindU
 func (c *UserDomainHTTPClientImpl) GetUserDomain(ctx context.Context, in *GetUserDomainRequest, opts ...http.CallOption) (*GetUserDomainReply, error) {
 	var out GetUserDomainReply
 	pattern := "/api/v1/userdomain/get"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserDomainGetUserDomain))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -267,10 +267,10 @@ func (c *UserDomainHTTPClientImpl) ListUserDomain(ctx context.Context, in *ListU
 func (c *UserDomainHTTPClientImpl) ListUserDomainByUser(ctx context.Context, in *ListUserDomainByUserRequest, opts ...http.CallOption) (*ListUserDomainByUserReply, error) {
 	var out ListUserDomainByUserReply
 	pattern := "/api/v1/user/list/user"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserDomainListUserDomainByUser))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -280,10 +280,10 @@ func (c *UserDomainHTTPClientImpl) ListUserDomainByUser(ctx context.Context, in 
 func (c *UserDomainHTTPClientImpl) UpdateUserDomain(ctx context.Context, in *UpdateUserDomainRequest, opts ...http.CallOption) (*UpdateUserDomainReply, error) {
 	var out UpdateUserDomainReply
 	pattern := "/api/v1/userdomain/update"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserDomainUpdateUserDomain))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
