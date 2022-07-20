@@ -12,27 +12,31 @@ service UserService {
 	rpc CreateUser (CreateUserRequest) returns (CreateUserReply) {
 		option (google.api.http) = {
 			post: "/api/v1/user/create"
+			body: "*"
 		};
 	}
 	rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply) {
 		option (google.api.http) = {
 			post: "/api/v1/user/update"
-
+			body: "*"
 		};
 	}
 	rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply) {
 		option (google.api.http) = {
 			post: "/api/v1/user/delete"
+			body: "*"
 		};
 	}
 	rpc GetUser (GetUserRequest) returns (GetUserReply) {
 		option (google.api.http) = {
 			post: "/api/v1/user/get"
+			body: "*"
 		};
 	}
 	rpc FindUser (FindUserRequest) returns (FindUserReply) {
 		option (google.api.http) = {
 			post: "/api/v1/user/find"
+			body: "*"
 		};
 	}
 	rpc ListUser (ListUserRequest) returns (ListUserReply) {
@@ -42,7 +46,8 @@ service UserService {
 	}
 	rpc FindUserByUsername (FindUserByUsernameRequest) returns (FindUserByUsernameReply) {
 		option (google.api.http) = {
-			get: "/api/v1/user/find/username"
+			post: "/api/v1/user/find/username"
+			body: "*"
 		};
 	}
 }
