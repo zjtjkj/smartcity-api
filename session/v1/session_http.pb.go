@@ -45,7 +45,7 @@ func RegisterSessionServiceHTTPServer(s *http.Server, srv SessionServiceHTTPServ
 func _SessionService_CreateSession0_HTTP_Handler(srv SessionServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateSessionRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSessionServiceCreateSession)
@@ -64,7 +64,7 @@ func _SessionService_CreateSession0_HTTP_Handler(srv SessionServiceHTTPServer) f
 func _SessionService_UpdateSession0_HTTP_Handler(srv SessionServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateSessionRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSessionServiceUpdateSession)
@@ -83,7 +83,7 @@ func _SessionService_UpdateSession0_HTTP_Handler(srv SessionServiceHTTPServer) f
 func _SessionService_DeleteSession0_HTTP_Handler(srv SessionServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteSessionRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSessionServiceDeleteSession)
@@ -102,7 +102,7 @@ func _SessionService_DeleteSession0_HTTP_Handler(srv SessionServiceHTTPServer) f
 func _SessionService_GetSession0_HTTP_Handler(srv SessionServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetSessionRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSessionServiceGetSession)
@@ -121,7 +121,7 @@ func _SessionService_GetSession0_HTTP_Handler(srv SessionServiceHTTPServer) func
 func _SessionService_GCSession0_HTTP_Handler(srv SessionServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GCSessionRequest
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationSessionServiceGCSession)
@@ -156,10 +156,10 @@ func NewSessionServiceHTTPClient(client *http.Client) SessionServiceHTTPClient {
 func (c *SessionServiceHTTPClientImpl) CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...http.CallOption) (*CreateSessionReply, error) {
 	var out CreateSessionReply
 	pattern := "/api/v1/session/create"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSessionServiceCreateSession))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -169,10 +169,10 @@ func (c *SessionServiceHTTPClientImpl) CreateSession(ctx context.Context, in *Cr
 func (c *SessionServiceHTTPClientImpl) DeleteSession(ctx context.Context, in *DeleteSessionRequest, opts ...http.CallOption) (*DeleteSessionReply, error) {
 	var out DeleteSessionReply
 	pattern := "/api/v1/session/delete"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSessionServiceDeleteSession))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -182,10 +182,10 @@ func (c *SessionServiceHTTPClientImpl) DeleteSession(ctx context.Context, in *De
 func (c *SessionServiceHTTPClientImpl) GCSession(ctx context.Context, in *GCSessionRequest, opts ...http.CallOption) (*GCSessionReply, error) {
 	var out GCSessionReply
 	pattern := "/api/v1/session/gc"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSessionServiceGCSession))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -195,10 +195,10 @@ func (c *SessionServiceHTTPClientImpl) GCSession(ctx context.Context, in *GCSess
 func (c *SessionServiceHTTPClientImpl) GetSession(ctx context.Context, in *GetSessionRequest, opts ...http.CallOption) (*GetSessionReply, error) {
 	var out GetSessionReply
 	pattern := "/api/v1/session/get"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSessionServiceGetSession))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -208,10 +208,10 @@ func (c *SessionServiceHTTPClientImpl) GetSession(ctx context.Context, in *GetSe
 func (c *SessionServiceHTTPClientImpl) UpdateSession(ctx context.Context, in *UpdateSessionRequest, opts ...http.CallOption) (*UpdateSessionReply, error) {
 	var out UpdateSessionReply
 	pattern := "/api/v1/session/update"
-	path := binding.EncodeURL(pattern, in, true)
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSessionServiceUpdateSession))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

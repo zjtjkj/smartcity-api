@@ -12,26 +12,31 @@ service SessionService {
 	rpc CreateSession (CreateSessionRequest) returns (CreateSessionReply) {
 		option (google.api.http) = {
 			post: "/api/v1/session/create"
+			body: "*"
 		};
 	}
 	rpc UpdateSession (UpdateSessionRequest) returns (UpdateSessionReply) {
 		option (google.api.http) = {
 			post: "/api/v1/session/update"
+			body: "*"
 		};
 	}
 	rpc DeleteSession (DeleteSessionRequest) returns (DeleteSessionReply) {
 		option (google.api.http) = {
 			post: "/api/v1/session/delete"
+			body: "*"
 		};
 	}
 	rpc GetSession (GetSessionRequest) returns (GetSessionReply) {
 		option (google.api.http) = {
 			post: "/api/v1/session/get"
+			body: "*"
 		};
 	}
 	rpc GCSession (GCSessionRequest) returns (GCSessionReply) {
 		option (google.api.http) = {
 			post: "/api/v1/session/gc"
+			body: "*"
 		};
 	}
 }
