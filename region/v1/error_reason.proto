@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package region.v1;
+
+option go_package = "./api/region/v1;v1";
+option java_multiple_files = true;
+option java_package = "region.v1";
+option objc_class_prefix = "APIRegionV1";
+
+enum ErrorReason {
+  REGION_NOT_FOUND = 0;
+  REGION_ALREADY_EXISTED = 1;
+}
