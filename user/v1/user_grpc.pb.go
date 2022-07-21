@@ -24,6 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type UserServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserReply, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserReply, error)
+	UpdateUserPasswd(ctx context.Context, in *UpdateUserPasswdRequest, opts ...grpc.CallOption) (*UpdateUserPasswdReply, error)
+	UpdateUserRoot(ctx context.Context, in *UpdateUserRootRequest, opts ...grpc.CallOption) (*UpdateUserRootReply, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserReply, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserReply, error)
 	FindUser(ctx context.Context, in *FindUserRequest, opts ...grpc.CallOption) (*FindUserReply, error)
@@ -51,6 +53,24 @@ func (c *userServiceClient) CreateUser(ctx context.Context, in *CreateUserReques
 func (c *userServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserReply, error) {
 	out := new(UpdateUserReply)
 	err := c.cc.Invoke(ctx, "/api.user.v1.UserService/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateUserPasswd(ctx context.Context, in *UpdateUserPasswdRequest, opts ...grpc.CallOption) (*UpdateUserPasswdReply, error) {
+	out := new(UpdateUserPasswdReply)
+	err := c.cc.Invoke(ctx, "/api.user.v1.UserService/UpdateUserPasswd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateUserRoot(ctx context.Context, in *UpdateUserRootRequest, opts ...grpc.CallOption) (*UpdateUserRootReply, error) {
+	out := new(UpdateUserRootReply)
+	err := c.cc.Invoke(ctx, "/api.user.v1.UserService/UpdateUserRoot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -108,6 +128,8 @@ func (c *userServiceClient) FindUserByUsername(ctx context.Context, in *FindUser
 type UserServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
+	UpdateUserPasswd(context.Context, *UpdateUserPasswdRequest) (*UpdateUserPasswdReply, error)
+	UpdateUserRoot(context.Context, *UpdateUserRootRequest) (*UpdateUserRootReply, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserReply, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserReply, error)
 	FindUser(context.Context, *FindUserRequest) (*FindUserReply, error)
@@ -125,6 +147,12 @@ func (UnimplementedUserServiceServer) CreateUser(context.Context, *CreateUserReq
 }
 func (UnimplementedUserServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserPasswd(context.Context, *UpdateUserPasswdRequest) (*UpdateUserPasswdReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserPasswd not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserRoot(context.Context, *UpdateUserRootRequest) (*UpdateUserRootReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRoot not implemented")
 }
 func (UnimplementedUserServiceServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
@@ -186,6 +214,42 @@ func _UserService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateUserPasswd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserPasswdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserPasswd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.user.v1.UserService/UpdateUserPasswd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserPasswd(ctx, req.(*UpdateUserPasswdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateUserRoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRootRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserRoot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.user.v1.UserService/UpdateUserRoot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserRoot(ctx, req.(*UpdateUserRootRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -294,6 +358,14 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _UserService_UpdateUser_Handler,
+		},
+		{
+			MethodName: "UpdateUserPasswd",
+			Handler:    _UserService_UpdateUserPasswd_Handler,
+		},
+		{
+			MethodName: "UpdateUserRoot",
+			Handler:    _UserService_UpdateUserRoot_Handler,
 		},
 		{
 			MethodName: "DeleteUser",

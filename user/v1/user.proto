@@ -21,6 +21,18 @@ service UserService {
 			body: "*"
 		};
 	}
+	rpc UpdateUserPasswd (UpdateUserPasswdRequest) returns (UpdateUserPasswdReply) {
+		option (google.api.http) = {
+			post: "/api/v1/user/passwd"
+			body: "*"
+		};
+	}
+	rpc UpdateUserRoot (UpdateUserRootRequest) returns (UpdateUserRootReply) {
+		option (google.api.http) = {
+			post: "/api/v1/user/root"
+			body: "*"
+		};
+	}
 	rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply) {
 		option (google.api.http) = {
 			post: "/api/v1/user/delete"
@@ -83,15 +95,35 @@ message UpdateUserRequest {
 	message User {
 		uint64 id = 1;
 		string username = 2;
-		string password = 3;
-		string name = 4;
-		string phone = 5;
-		string email = 6;
-		bool is_root = 7;
+		string name = 3;
+		string phone = 4;
+		string email = 5;
 	}
 	User user = 1;
 }
 message UpdateUserReply {
+	User user = 1;
+}
+
+message UpdateUserPasswdRequest {
+	message User {
+		uint64 id = 1;
+		string password = 2;
+	}
+	User user = 1;
+}
+message UpdateUserPasswdReply {
+	User user = 1;
+}
+
+message UpdateUserRootRequest {
+	message User {
+		uint64 id = 1;
+		bool is_root = 2;
+	}
+	User user = 1;
+}
+message UpdateUserRootReply {
 	User user = 1;
 }
 

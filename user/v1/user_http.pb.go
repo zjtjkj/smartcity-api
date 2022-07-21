@@ -26,6 +26,8 @@ const OperationUserServiceFindUserByUsername = "/api.user.v1.UserService/FindUse
 const OperationUserServiceGetUser = "/api.user.v1.UserService/GetUser"
 const OperationUserServiceListUser = "/api.user.v1.UserService/ListUser"
 const OperationUserServiceUpdateUser = "/api.user.v1.UserService/UpdateUser"
+const OperationUserServiceUpdateUserPasswd = "/api.user.v1.UserService/UpdateUserPasswd"
+const OperationUserServiceUpdateUserRoot = "/api.user.v1.UserService/UpdateUserRoot"
 
 type UserServiceHTTPServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error)
@@ -35,12 +37,16 @@ type UserServiceHTTPServer interface {
 	GetUser(context.Context, *GetUserRequest) (*GetUserReply, error)
 	ListUser(context.Context, *ListUserRequest) (*ListUserReply, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
+	UpdateUserPasswd(context.Context, *UpdateUserPasswdRequest) (*UpdateUserPasswdReply, error)
+	UpdateUserRoot(context.Context, *UpdateUserRootRequest) (*UpdateUserRootReply, error)
 }
 
 func RegisterUserServiceHTTPServer(s *http.Server, srv UserServiceHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/v1/user/create", _UserService_CreateUser0_HTTP_Handler(srv))
 	r.POST("/api/v1/user/update", _UserService_UpdateUser0_HTTP_Handler(srv))
+	r.POST("/api/v1/user/passwd", _UserService_UpdateUserPasswd0_HTTP_Handler(srv))
+	r.POST("/api/v1/user/root", _UserService_UpdateUserRoot0_HTTP_Handler(srv))
 	r.POST("/api/v1/user/delete", _UserService_DeleteUser0_HTTP_Handler(srv))
 	r.POST("/api/v1/user/get", _UserService_GetUser0_HTTP_Handler(srv))
 	r.POST("/api/v1/user/find", _UserService_FindUser0_HTTP_Handler(srv))
@@ -82,6 +88,44 @@ func _UserService_UpdateUser0_HTTP_Handler(srv UserServiceHTTPServer) func(ctx h
 			return err
 		}
 		reply := out.(*UpdateUserReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _UserService_UpdateUserPasswd0_HTTP_Handler(srv UserServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserPasswdRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserServiceUpdateUserPasswd)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUserPasswd(ctx, req.(*UpdateUserPasswdRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserPasswdReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _UserService_UpdateUserRoot0_HTTP_Handler(srv UserServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateUserRootRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationUserServiceUpdateUserRoot)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateUserRoot(ctx, req.(*UpdateUserRootRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateUserRootReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -189,6 +233,8 @@ type UserServiceHTTPClient interface {
 	GetUser(ctx context.Context, req *GetUserRequest, opts ...http.CallOption) (rsp *GetUserReply, err error)
 	ListUser(ctx context.Context, req *ListUserRequest, opts ...http.CallOption) (rsp *ListUserReply, err error)
 	UpdateUser(ctx context.Context, req *UpdateUserRequest, opts ...http.CallOption) (rsp *UpdateUserReply, err error)
+	UpdateUserPasswd(ctx context.Context, req *UpdateUserPasswdRequest, opts ...http.CallOption) (rsp *UpdateUserPasswdReply, err error)
+	UpdateUserRoot(ctx context.Context, req *UpdateUserRootRequest, opts ...http.CallOption) (rsp *UpdateUserRootReply, err error)
 }
 
 type UserServiceHTTPClientImpl struct {
@@ -282,6 +328,32 @@ func (c *UserServiceHTTPClientImpl) UpdateUser(ctx context.Context, in *UpdateUs
 	pattern := "/api/v1/user/update"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationUserServiceUpdateUser))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *UserServiceHTTPClientImpl) UpdateUserPasswd(ctx context.Context, in *UpdateUserPasswdRequest, opts ...http.CallOption) (*UpdateUserPasswdReply, error) {
+	var out UpdateUserPasswdReply
+	pattern := "/api/v1/user/passwd"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserServiceUpdateUserPasswd))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *UserServiceHTTPClientImpl) UpdateUserRoot(ctx context.Context, in *UpdateUserRootRequest, opts ...http.CallOption) (*UpdateUserRootReply, error) {
+	var out UpdateUserRootReply
+	pattern := "/api/v1/user/root"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationUserServiceUpdateUserRoot))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
