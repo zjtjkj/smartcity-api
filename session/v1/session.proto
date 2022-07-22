@@ -62,7 +62,12 @@ message CreateSessionReply {
 }
 
 message UpdateSessionRequest {
-	Session session = 1;
+	message User {
+		uint64 id = 1;
+		string username = 2;
+		bool is_root = 3;
+	}
+	User user = 1;
 }
 message UpdateSessionReply {}
 
