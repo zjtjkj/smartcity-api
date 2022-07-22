@@ -64,9 +64,7 @@ message CreateSessionReply {
 message UpdateSessionRequest {
 	Session session = 1;
 }
-message UpdateSessionReply {
-	Session session = 1;
-}
+message UpdateSessionReply {}
 
 message DeleteSessionRequest {
 	string id = 1;
