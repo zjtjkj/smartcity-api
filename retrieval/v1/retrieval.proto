@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package api.retrieval;
+
+import "google/api/annotations.proto";
+
+option go_package = "retrieval/api/retrieval/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.retrieval";
+
+service Retrieval {
+	rpc FindAlerts(FindAlertsRequest) returns (FindAlertsReply) {
+		option (google.api.http) = {
+			post: "/api/v1/alert/find"
+			body: "*"
+		};
+	}
+	rpc GetAlert(GetAlertRequest) returns (GetAlertReply) {
+		option (google.api.http) = {
+			post: "/api/v1/alert/get"
+			body: "*"
+		};
+	}
+	rpc GetImage(GetImageRequest) returns (GetImageReply) {
+		option (google.api.http) = {
+			post: "/api/v1/image/get"
+			body: "*"
+		};
+	}
+	rpc DeleteAlert(DeleteAlertRequest) returns (DeleteAlertReply) {
+		option (google.api.http) = {
+			post: "/api/v1/alert/delete"
+			body: "*"
+		};
+	}
+}
+
+message Alert {
+	string id = 1;
+	string eid = 2; // the first event of one alert
+	int64 mid = 3; // mission id
+	int64 created_at = 4;
+	string type = 5;
+	bool finished = 6;
+	message Event {
+		string id = 1;
+		int64 created_at = 2;
+	}
+	repeated Event events = 7;
+}
+
+message FindAlertsRequest {
+	int64 index = 1;
+	int64 size = 2;
+	int64 start = 3;
+	int64 end = 4;
+	string type = 5;
+	bool finished = 6;
+	bool is_finished = 7;
+}
+message FindAlertsReply {
+	int64 index = 1;
+	int64 size = 2;
+	int64 page = 3;
+	int64 total = 4;
+	repeated Alert alerts = 5;
+}
+
+message GetAlertRequest {
+	string eid = 1;
+}
+message GetAlertReply {
+	Alert alert = 1;
+}
+
+message GetImageRequest {
+	string id = 1;
+}
+message GetImageReply {
+	bytes image = 1;
+}
+
+message DeleteAlertRequest {
+	string eid = 1;
+}
+message DeleteAlertReply {}
