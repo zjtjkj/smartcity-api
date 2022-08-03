@@ -116,7 +116,7 @@ func (x *Event) GetAlerts() []*Event_Alert {
 	return nil
 }
 
-type FindAlertsRequest struct {
+type FindEventsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -130,8 +130,8 @@ type FindAlertsRequest struct {
 	IsFinished bool   `protobuf:"varint,7,opt,name=is_finished,json=isFinished,proto3" json:"is_finished,omitempty"`
 }
 
-func (x *FindAlertsRequest) Reset() {
-	*x = FindAlertsRequest{}
+func (x *FindEventsRequest) Reset() {
+	*x = FindEventsRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -139,13 +139,13 @@ func (x *FindAlertsRequest) Reset() {
 	}
 }
 
-func (x *FindAlertsRequest) String() string {
+func (x *FindEventsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FindAlertsRequest) ProtoMessage() {}
+func (*FindEventsRequest) ProtoMessage() {}
 
-func (x *FindAlertsRequest) ProtoReflect() protoreflect.Message {
+func (x *FindEventsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -157,61 +157,61 @@ func (x *FindAlertsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FindAlertsRequest.ProtoReflect.Descriptor instead.
-func (*FindAlertsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use FindEventsRequest.ProtoReflect.Descriptor instead.
+func (*FindEventsRequest) Descriptor() ([]byte, []int) {
 	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *FindAlertsRequest) GetIndex() int64 {
+func (x *FindEventsRequest) GetIndex() int64 {
 	if x != nil {
 		return x.Index
 	}
 	return 0
 }
 
-func (x *FindAlertsRequest) GetSize() int64 {
+func (x *FindEventsRequest) GetSize() int64 {
 	if x != nil {
 		return x.Size
 	}
 	return 0
 }
 
-func (x *FindAlertsRequest) GetStart() int64 {
+func (x *FindEventsRequest) GetStart() int64 {
 	if x != nil {
 		return x.Start
 	}
 	return 0
 }
 
-func (x *FindAlertsRequest) GetEnd() int64 {
+func (x *FindEventsRequest) GetEnd() int64 {
 	if x != nil {
 		return x.End
 	}
 	return 0
 }
 
-func (x *FindAlertsRequest) GetType() string {
+func (x *FindEventsRequest) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-func (x *FindAlertsRequest) GetFinished() bool {
+func (x *FindEventsRequest) GetFinished() bool {
 	if x != nil {
 		return x.Finished
 	}
 	return false
 }
 
-func (x *FindAlertsRequest) GetIsFinished() bool {
+func (x *FindEventsRequest) GetIsFinished() bool {
 	if x != nil {
 		return x.IsFinished
 	}
 	return false
 }
 
-type FindAlertsReply struct {
+type FindEventsReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -223,8 +223,8 @@ type FindAlertsReply struct {
 	Events []*Event `protobuf:"bytes,5,rep,name=events,proto3" json:"events,omitempty"`
 }
 
-func (x *FindAlertsReply) Reset() {
-	*x = FindAlertsReply{}
+func (x *FindEventsReply) Reset() {
+	*x = FindEventsReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -232,13 +232,13 @@ func (x *FindAlertsReply) Reset() {
 	}
 }
 
-func (x *FindAlertsReply) String() string {
+func (x *FindEventsReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FindAlertsReply) ProtoMessage() {}
+func (*FindEventsReply) ProtoMessage() {}
 
-func (x *FindAlertsReply) ProtoReflect() protoreflect.Message {
+func (x *FindEventsReply) ProtoReflect() protoreflect.Message {
 	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -250,47 +250,47 @@ func (x *FindAlertsReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FindAlertsReply.ProtoReflect.Descriptor instead.
-func (*FindAlertsReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use FindEventsReply.ProtoReflect.Descriptor instead.
+func (*FindEventsReply) Descriptor() ([]byte, []int) {
 	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *FindAlertsReply) GetIndex() int64 {
+func (x *FindEventsReply) GetIndex() int64 {
 	if x != nil {
 		return x.Index
 	}
 	return 0
 }
 
-func (x *FindAlertsReply) GetSize() int64 {
+func (x *FindEventsReply) GetSize() int64 {
 	if x != nil {
 		return x.Size
 	}
 	return 0
 }
 
-func (x *FindAlertsReply) GetPage() int64 {
+func (x *FindEventsReply) GetPage() int64 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *FindAlertsReply) GetTotal() int64 {
+func (x *FindEventsReply) GetTotal() int64 {
 	if x != nil {
 		return x.Total
 	}
 	return 0
 }
 
-func (x *FindAlertsReply) GetEvents() []*Event {
+func (x *FindEventsReply) GetEvents() []*Event {
 	if x != nil {
 		return x.Events
 	}
 	return nil
 }
 
-type GetAlertRequest struct {
+type GetEventRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -298,8 +298,8 @@ type GetAlertRequest struct {
 	Eid string `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 }
 
-func (x *GetAlertRequest) Reset() {
-	*x = GetAlertRequest{}
+func (x *GetEventRequest) Reset() {
+	*x = GetEventRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -307,13 +307,13 @@ func (x *GetAlertRequest) Reset() {
 	}
 }
 
-func (x *GetAlertRequest) String() string {
+func (x *GetEventRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAlertRequest) ProtoMessage() {}
+func (*GetEventRequest) ProtoMessage() {}
 
-func (x *GetAlertRequest) ProtoReflect() protoreflect.Message {
+func (x *GetEventRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -325,19 +325,19 @@ func (x *GetAlertRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAlertRequest.ProtoReflect.Descriptor instead.
-func (*GetAlertRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetEventRequest.ProtoReflect.Descriptor instead.
+func (*GetEventRequest) Descriptor() ([]byte, []int) {
 	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetAlertRequest) GetEid() string {
+func (x *GetEventRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-type GetAlertReply struct {
+type GetEventReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -345,8 +345,8 @@ type GetAlertReply struct {
 	Event *Event `protobuf:"bytes,1,opt,name=event,proto3" json:"event,omitempty"`
 }
 
-func (x *GetAlertReply) Reset() {
-	*x = GetAlertReply{}
+func (x *GetEventReply) Reset() {
+	*x = GetEventReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -354,13 +354,13 @@ func (x *GetAlertReply) Reset() {
 	}
 }
 
-func (x *GetAlertReply) String() string {
+func (x *GetEventReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetAlertReply) ProtoMessage() {}
+func (*GetEventReply) ProtoMessage() {}
 
-func (x *GetAlertReply) ProtoReflect() protoreflect.Message {
+func (x *GetEventReply) ProtoReflect() protoreflect.Message {
 	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -372,12 +372,12 @@ func (x *GetAlertReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetAlertReply.ProtoReflect.Descriptor instead.
-func (*GetAlertReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetEventReply.ProtoReflect.Descriptor instead.
+func (*GetEventReply) Descriptor() ([]byte, []int) {
 	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetAlertReply) GetEvent() *Event {
+func (x *GetEventReply) GetEvent() *Event {
 	if x != nil {
 		return x.Event
 	}
@@ -478,7 +478,7 @@ func (x *GetImageReply) GetImage() []byte {
 	return nil
 }
 
-type DeleteAlertRequest struct {
+type DeleteEventRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -486,8 +486,8 @@ type DeleteAlertRequest struct {
 	Eid string `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 }
 
-func (x *DeleteAlertRequest) Reset() {
-	*x = DeleteAlertRequest{}
+func (x *DeleteEventRequest) Reset() {
+	*x = DeleteEventRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -495,13 +495,13 @@ func (x *DeleteAlertRequest) Reset() {
 	}
 }
 
-func (x *DeleteAlertRequest) String() string {
+func (x *DeleteEventRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteAlertRequest) ProtoMessage() {}
+func (*DeleteEventRequest) ProtoMessage() {}
 
-func (x *DeleteAlertRequest) ProtoReflect() protoreflect.Message {
+func (x *DeleteEventRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -513,26 +513,26 @@ func (x *DeleteAlertRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteAlertRequest.ProtoReflect.Descriptor instead.
-func (*DeleteAlertRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteEventRequest.ProtoReflect.Descriptor instead.
+func (*DeleteEventRequest) Descriptor() ([]byte, []int) {
 	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *DeleteAlertRequest) GetEid() string {
+func (x *DeleteEventRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-type DeleteAlertReply struct {
+type DeleteEventReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *DeleteAlertReply) Reset() {
-	*x = DeleteAlertReply{}
+func (x *DeleteEventReply) Reset() {
+	*x = DeleteEventReply{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -540,13 +540,13 @@ func (x *DeleteAlertReply) Reset() {
 	}
 }
 
-func (x *DeleteAlertReply) String() string {
+func (x *DeleteEventReply) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteAlertReply) ProtoMessage() {}
+func (*DeleteEventReply) ProtoMessage() {}
 
-func (x *DeleteAlertReply) ProtoReflect() protoreflect.Message {
+func (x *DeleteEventReply) ProtoReflect() protoreflect.Message {
 	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -558,8 +558,8 @@ func (x *DeleteAlertReply) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteAlertReply.ProtoReflect.Descriptor instead.
-func (*DeleteAlertReply) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteEventReply.ProtoReflect.Descriptor instead.
+func (*DeleteEventReply) Descriptor() ([]byte, []int) {
 	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{8}
 }
 
@@ -642,7 +642,7 @@ var file_api_retrieval_v1_retrieval_proto_rawDesc = []byte{
 	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xb6, 0x01, 0x0a, 0x11, 0x46, 0x69, 0x6e,
-	0x64, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14,
+	0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14,
 	0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x69,
 	0x6e, 0x64, 0x65, 0x78, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01,
 	0x28, 0x03, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x72,
@@ -653,7 +653,7 @@ var file_api_retrieval_v1_retrieval_proto_rawDesc = []byte{
 	0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x66, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64,
 	0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x66, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x18,
 	0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65,
-	0x64, 0x22, 0x93, 0x01, 0x0a, 0x0f, 0x46, 0x69, 0x6e, 0x64, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x73,
+	0x64, 0x22, 0x93, 0x01, 0x0a, 0x0f, 0x46, 0x69, 0x6e, 0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73,
 	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x12, 0x0a, 0x04, 0x73,
 	0x69, 0x7a, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73, 0x69, 0x7a, 0x65, 0x12,
@@ -662,10 +662,10 @@ var file_api_retrieval_v1_retrieval_proto_rawDesc = []byte{
 	0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x12, 0x2c, 0x0a, 0x06, 0x65, 0x76, 0x65,
 	0x6e, 0x74, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x61, 0x70, 0x69, 0x2e,
 	0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52,
-	0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x23, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x41, 0x6c,
-	0x65, 0x72, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x69,
+	0x06, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x23, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x69,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x65, 0x69, 0x64, 0x22, 0x3b, 0x0a, 0x0d,
-	0x47, 0x65, 0x74, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x2a, 0x0a,
+	0x47, 0x65, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x2a, 0x0a,
 	0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x61,
 	0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x45, 0x76, 0x65,
 	0x6e, 0x74, 0x52, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x22, 0x21, 0x0a, 0x0f, 0x47, 0x65, 0x74,
@@ -673,24 +673,24 @@ var file_api_retrieval_v1_retrieval_proto_rawDesc = []byte{
 	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x25, 0x0a, 0x0d,
 	0x47, 0x65, 0x74, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x14, 0x0a,
 	0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x69, 0x6d,
-	0x61, 0x67, 0x65, 0x22, 0x26, 0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x65,
-	0x72, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x69, 0x64,
+	0x61, 0x67, 0x65, 0x22, 0x26, 0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x76, 0x65,
+	0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x65, 0x69, 0x64,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x65, 0x69, 0x64, 0x22, 0x12, 0x0a, 0x10, 0x44,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x32,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x32,
 	0xbe, 0x03, 0x0a, 0x09, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x12, 0x6d, 0x0a,
 	0x0a, 0x46, 0x69, 0x6e, 0x64, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x73, 0x12, 0x20, 0x2e, 0x61, 0x70,
 	0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x46, 0x69, 0x6e, 0x64,
-	0x41, 0x6c, 0x65, 0x72, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1e, 0x2e,
 	0x61, 0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x46, 0x69,
-	0x6e, 0x64, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d, 0x82,
-	0xd3, 0xe4, 0x93, 0x02, 0x17, 0x22, 0x12, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x61,
-	0x6c, 0x65, 0x72, 0x74, 0x2f, 0x66, 0x69, 0x6e, 0x64, 0x3a, 0x01, 0x2a, 0x12, 0x66, 0x0a, 0x08,
+	0x6e, 0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x17, 0x22, 0x12, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x65,
+	0x76, 0x65, 0x6e, 0x74, 0x2f, 0x66, 0x69, 0x6e, 0x64, 0x3a, 0x01, 0x2a, 0x12, 0x66, 0x0a, 0x08,
 	0x47, 0x65, 0x74, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x12, 0x1e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72,
-	0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x65, 0x72,
+	0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x45, 0x76, 0x65, 0x6e,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72,
-	0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x65, 0x72,
+	0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x45, 0x76, 0x65, 0x6e,
 	0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x22, 0x11,
-	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x6c, 0x65, 0x72, 0x74, 0x2f, 0x67, 0x65,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x2f, 0x67, 0x65,
 	0x74, 0x3a, 0x01, 0x2a, 0x12, 0x66, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x49, 0x6d, 0x61, 0x67, 0x65,
 	0x12, 0x1e, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c,
 	0x2e, 0x47, 0x65, 0x74, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
@@ -700,11 +700,11 @@ var file_api_retrieval_v1_retrieval_proto_rawDesc = []byte{
 	0x69, 0x6d, 0x61, 0x67, 0x65, 0x2f, 0x67, 0x65, 0x74, 0x3a, 0x01, 0x2a, 0x12, 0x72, 0x0a, 0x0b,
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x12, 0x21, 0x2e, 0x61, 0x70,
 	0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f,
+	0x74, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f,
 	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x44,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
 	0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x22, 0x14, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31,
-	0x2f, 0x61, 0x6c, 0x65, 0x72, 0x74, 0x2f, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x3a, 0x01, 0x2a,
+	0x2f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x2f, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x3a, 0x01, 0x2a,
 	0x42, 0x30, 0x0a, 0x0d, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61,
 	0x6c, 0x50, 0x01, 0x5a, 0x1d, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2f, 0x61,
 	0x70, 0x69, 0x2f, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2f, 0x76, 0x31, 0x3b,
@@ -726,28 +726,28 @@ func file_api_retrieval_v1_retrieval_proto_rawDescGZIP() []byte {
 var file_api_retrieval_v1_retrieval_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_retrieval_v1_retrieval_proto_goTypes = []interface{}{
 	(*Event)(nil),              // 0: api.retrieval.Event
-	(*FindAlertsRequest)(nil),  // 1: api.retrieval.FindAlertsRequest
-	(*FindAlertsReply)(nil),    // 2: api.retrieval.FindAlertsReply
-	(*GetAlertRequest)(nil),    // 3: api.retrieval.GetAlertRequest
-	(*GetAlertReply)(nil),      // 4: api.retrieval.GetAlertReply
+	(*FindEventsRequest)(nil),  // 1: api.retrieval.FindEventsRequest
+	(*FindEventsReply)(nil),    // 2: api.retrieval.FindEventsReply
+	(*GetEventRequest)(nil),    // 3: api.retrieval.GetEventRequest
+	(*GetEventReply)(nil),      // 4: api.retrieval.GetEventReply
 	(*GetImageRequest)(nil),    // 5: api.retrieval.GetImageRequest
 	(*GetImageReply)(nil),      // 6: api.retrieval.GetImageReply
-	(*DeleteAlertRequest)(nil), // 7: api.retrieval.DeleteAlertRequest
-	(*DeleteAlertReply)(nil),   // 8: api.retrieval.DeleteAlertReply
+	(*DeleteEventRequest)(nil), // 7: api.retrieval.DeleteEventRequest
+	(*DeleteEventReply)(nil),   // 8: api.retrieval.DeleteEventReply
 	(*Event_Alert)(nil),        // 9: api.retrieval.Event.Alert
 }
 var file_api_retrieval_v1_retrieval_proto_depIdxs = []int32{
 	9, // 0: api.retrieval.Event.alerts:type_name -> api.retrieval.Event.Alert
-	0, // 1: api.retrieval.FindAlertsReply.events:type_name -> api.retrieval.Event
-	0, // 2: api.retrieval.GetAlertReply.event:type_name -> api.retrieval.Event
-	1, // 3: api.retrieval.Retrieval.FindAlerts:input_type -> api.retrieval.FindAlertsRequest
-	3, // 4: api.retrieval.Retrieval.GetAlert:input_type -> api.retrieval.GetAlertRequest
+	0, // 1: api.retrieval.FindEventsReply.events:type_name -> api.retrieval.Event
+	0, // 2: api.retrieval.GetEventReply.event:type_name -> api.retrieval.Event
+	1, // 3: api.retrieval.Retrieval.FindAlerts:input_type -> api.retrieval.FindEventsRequest
+	3, // 4: api.retrieval.Retrieval.GetAlert:input_type -> api.retrieval.GetEventRequest
 	5, // 5: api.retrieval.Retrieval.GetImage:input_type -> api.retrieval.GetImageRequest
-	7, // 6: api.retrieval.Retrieval.DeleteAlert:input_type -> api.retrieval.DeleteAlertRequest
-	2, // 7: api.retrieval.Retrieval.FindAlerts:output_type -> api.retrieval.FindAlertsReply
-	4, // 8: api.retrieval.Retrieval.GetAlert:output_type -> api.retrieval.GetAlertReply
+	7, // 6: api.retrieval.Retrieval.DeleteAlert:input_type -> api.retrieval.DeleteEventRequest
+	2, // 7: api.retrieval.Retrieval.FindAlerts:output_type -> api.retrieval.FindEventsReply
+	4, // 8: api.retrieval.Retrieval.GetAlert:output_type -> api.retrieval.GetEventReply
 	6, // 9: api.retrieval.Retrieval.GetImage:output_type -> api.retrieval.GetImageReply
-	8, // 10: api.retrieval.Retrieval.DeleteAlert:output_type -> api.retrieval.DeleteAlertReply
+	8, // 10: api.retrieval.Retrieval.DeleteAlert:output_type -> api.retrieval.DeleteEventReply
 	7, // [7:11] is the sub-list for method output_type
 	3, // [3:7] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -774,7 +774,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FindAlertsRequest); i {
+			switch v := v.(*FindEventsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -786,7 +786,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FindAlertsReply); i {
+			switch v := v.(*FindEventsReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -798,7 +798,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAlertRequest); i {
+			switch v := v.(*GetEventRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -810,7 +810,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetAlertReply); i {
+			switch v := v.(*GetEventReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -846,7 +846,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAlertRequest); i {
+			switch v := v.(*DeleteEventRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -858,7 +858,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAlertReply); i {
+			switch v := v.(*DeleteEventReply); i {
 			case 0:
 				return &v.state
 			case 1:

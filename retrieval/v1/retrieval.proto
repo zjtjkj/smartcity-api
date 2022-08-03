@@ -9,15 +9,15 @@ option java_multiple_files = true;
 option java_package = "api.retrieval";
 
 service Retrieval {
-	rpc FindAlerts(FindAlertsRequest) returns (FindAlertsReply) {
+	rpc FindAlerts(FindEventsRequest) returns (FindEventsReply) {
 		option (google.api.http) = {
-			post: "/api/v1/alert/find"
+			post: "/api/v1/event/find"
 			body: "*"
 		};
 	}
-	rpc GetAlert(GetAlertRequest) returns (GetAlertReply) {
+	rpc GetAlert(GetEventRequest) returns (GetEventReply) {
 		option (google.api.http) = {
-			post: "/api/v1/alert/get"
+			post: "/api/v1/event/get"
 			body: "*"
 		};
 	}
@@ -27,9 +27,9 @@ service Retrieval {
 			body: "*"
 		};
 	}
-	rpc DeleteAlert(DeleteAlertRequest) returns (DeleteAlertReply) {
+	rpc DeleteAlert(DeleteEventRequest) returns (DeleteEventReply) {
 		option (google.api.http) = {
-			post: "/api/v1/alert/delete"
+			post: "/api/v1/event/delete"
 			body: "*"
 		};
 	}
@@ -49,7 +49,7 @@ message Event {
 	repeated Alert alerts = 7;
 }
 
-message FindAlertsRequest {
+message FindEventsRequest {
 	int64 index = 1;
 	int64 size = 2;
 	int64 start = 3;
@@ -58,7 +58,7 @@ message FindAlertsRequest {
 	bool finished = 6;
 	bool is_finished = 7;
 }
-message FindAlertsReply {
+message FindEventsReply {
 	int64 index = 1;
 	int64 size = 2;
 	int64 page = 3;
@@ -66,10 +66,10 @@ message FindAlertsReply {
 	repeated Event events = 5;
 }
 
-message GetAlertRequest {
+message GetEventRequest {
 	string eid = 1;
 }
-message GetAlertReply {
+message GetEventReply {
 	Event event = 1;
 }
 
@@ -80,7 +80,7 @@ message GetImageReply {
 	bytes image = 1;
 }
 
-message DeleteAlertRequest {
+message DeleteEventRequest {
 	string eid = 1;
 }
-message DeleteAlertReply {}
+message DeleteEventReply {}

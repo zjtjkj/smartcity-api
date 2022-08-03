@@ -25,54 +25,54 @@ const OperationRetrievalGetAlert = "/api.retrieval.Retrieval/GetAlert"
 const OperationRetrievalGetImage = "/api.retrieval.Retrieval/GetImage"
 
 type RetrievalHTTPServer interface {
-	DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertReply, error)
-	FindAlerts(context.Context, *FindAlertsRequest) (*FindAlertsReply, error)
-	GetAlert(context.Context, *GetAlertRequest) (*GetAlertReply, error)
+	DeleteAlert(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
+	FindAlerts(context.Context, *FindEventsRequest) (*FindEventsReply, error)
+	GetAlert(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
 }
 
 func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/v1/alert/find", _Retrieval_FindAlerts0_HTTP_Handler(srv))
-	r.POST("/api/v1/alert/get", _Retrieval_GetAlert0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/find", _Retrieval_FindAlerts0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/get", _Retrieval_GetAlert0_HTTP_Handler(srv))
 	r.POST("/api/v1/image/get", _Retrieval_GetImage0_HTTP_Handler(srv))
-	r.POST("/api/v1/alert/delete", _Retrieval_DeleteAlert0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/delete", _Retrieval_DeleteAlert0_HTTP_Handler(srv))
 }
 
 func _Retrieval_FindAlerts0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in FindAlertsRequest
+		var in FindEventsRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationRetrievalFindAlerts)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.FindAlerts(ctx, req.(*FindAlertsRequest))
+			return srv.FindAlerts(ctx, req.(*FindEventsRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*FindAlertsReply)
+		reply := out.(*FindEventsReply)
 		return ctx.Result(200, reply)
 	}
 }
 
 func _Retrieval_GetAlert0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetAlertRequest
+		var in GetEventRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationRetrievalGetAlert)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetAlert(ctx, req.(*GetAlertRequest))
+			return srv.GetAlert(ctx, req.(*GetEventRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetAlertReply)
+		reply := out.(*GetEventReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -98,27 +98,27 @@ func _Retrieval_GetImage0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Co
 
 func _Retrieval_DeleteAlert0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in DeleteAlertRequest
+		var in DeleteEventRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationRetrievalDeleteAlert)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteAlert(ctx, req.(*DeleteAlertRequest))
+			return srv.DeleteAlert(ctx, req.(*DeleteEventRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*DeleteAlertReply)
+		reply := out.(*DeleteEventReply)
 		return ctx.Result(200, reply)
 	}
 }
 
 type RetrievalHTTPClient interface {
-	DeleteAlert(ctx context.Context, req *DeleteAlertRequest, opts ...http.CallOption) (rsp *DeleteAlertReply, err error)
-	FindAlerts(ctx context.Context, req *FindAlertsRequest, opts ...http.CallOption) (rsp *FindAlertsReply, err error)
-	GetAlert(ctx context.Context, req *GetAlertRequest, opts ...http.CallOption) (rsp *GetAlertReply, err error)
+	DeleteAlert(ctx context.Context, req *DeleteEventRequest, opts ...http.CallOption) (rsp *DeleteEventReply, err error)
+	FindAlerts(ctx context.Context, req *FindEventsRequest, opts ...http.CallOption) (rsp *FindEventsReply, err error)
+	GetAlert(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
 	GetImage(ctx context.Context, req *GetImageRequest, opts ...http.CallOption) (rsp *GetImageReply, err error)
 }
 
@@ -130,9 +130,9 @@ func NewRetrievalHTTPClient(client *http.Client) RetrievalHTTPClient {
 	return &RetrievalHTTPClientImpl{client}
 }
 
-func (c *RetrievalHTTPClientImpl) DeleteAlert(ctx context.Context, in *DeleteAlertRequest, opts ...http.CallOption) (*DeleteAlertReply, error) {
-	var out DeleteAlertReply
-	pattern := "/api/v1/alert/delete"
+func (c *RetrievalHTTPClientImpl) DeleteAlert(ctx context.Context, in *DeleteEventRequest, opts ...http.CallOption) (*DeleteEventReply, error) {
+	var out DeleteEventReply
+	pattern := "/api/v1/event/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalDeleteAlert))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -143,9 +143,9 @@ func (c *RetrievalHTTPClientImpl) DeleteAlert(ctx context.Context, in *DeleteAle
 	return &out, err
 }
 
-func (c *RetrievalHTTPClientImpl) FindAlerts(ctx context.Context, in *FindAlertsRequest, opts ...http.CallOption) (*FindAlertsReply, error) {
-	var out FindAlertsReply
-	pattern := "/api/v1/alert/find"
+func (c *RetrievalHTTPClientImpl) FindAlerts(ctx context.Context, in *FindEventsRequest, opts ...http.CallOption) (*FindEventsReply, error) {
+	var out FindEventsReply
+	pattern := "/api/v1/event/find"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalFindAlerts))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -156,9 +156,9 @@ func (c *RetrievalHTTPClientImpl) FindAlerts(ctx context.Context, in *FindAlerts
 	return &out, err
 }
 
-func (c *RetrievalHTTPClientImpl) GetAlert(ctx context.Context, in *GetAlertRequest, opts ...http.CallOption) (*GetAlertReply, error) {
-	var out GetAlertReply
-	pattern := "/api/v1/alert/get"
+func (c *RetrievalHTTPClientImpl) GetAlert(ctx context.Context, in *GetEventRequest, opts ...http.CallOption) (*GetEventReply, error) {
+	var out GetEventReply
+	pattern := "/api/v1/event/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalGetAlert))
 	opts = append(opts, http.PathTemplate(pattern))
