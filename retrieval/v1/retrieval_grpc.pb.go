@@ -22,10 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RetrievalClient interface {
-	FindAlerts(ctx context.Context, in *FindEventsRequest, opts ...grpc.CallOption) (*FindEventsReply, error)
-	GetAlert(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error)
+	FindEvents(ctx context.Context, in *FindEventsRequest, opts ...grpc.CallOption) (*FindEventsReply, error)
+	GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error)
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*GetImageReply, error)
-	DeleteAlert(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*DeleteEventReply, error)
+	DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*DeleteEventReply, error)
 }
 
 type retrievalClient struct {
@@ -36,18 +36,18 @@ func NewRetrievalClient(cc grpc.ClientConnInterface) RetrievalClient {
 	return &retrievalClient{cc}
 }
 
-func (c *retrievalClient) FindAlerts(ctx context.Context, in *FindEventsRequest, opts ...grpc.CallOption) (*FindEventsReply, error) {
+func (c *retrievalClient) FindEvents(ctx context.Context, in *FindEventsRequest, opts ...grpc.CallOption) (*FindEventsReply, error) {
 	out := new(FindEventsReply)
-	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/FindAlerts", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/FindEvents", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *retrievalClient) GetAlert(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error) {
+func (c *retrievalClient) GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error) {
 	out := new(GetEventReply)
-	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/GetAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/GetEvent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,9 +63,9 @@ func (c *retrievalClient) GetImage(ctx context.Context, in *GetImageRequest, opt
 	return out, nil
 }
 
-func (c *retrievalClient) DeleteAlert(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*DeleteEventReply, error) {
+func (c *retrievalClient) DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*DeleteEventReply, error) {
 	out := new(DeleteEventReply)
-	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/DeleteAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/DeleteEvent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,10 +76,10 @@ func (c *retrievalClient) DeleteAlert(ctx context.Context, in *DeleteEventReques
 // All implementations must embed UnimplementedRetrievalServer
 // for forward compatibility
 type RetrievalServer interface {
-	FindAlerts(context.Context, *FindEventsRequest) (*FindEventsReply, error)
-	GetAlert(context.Context, *GetEventRequest) (*GetEventReply, error)
+	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
+	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
-	DeleteAlert(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
+	DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
 	mustEmbedUnimplementedRetrievalServer()
 }
 
@@ -87,17 +87,17 @@ type RetrievalServer interface {
 type UnimplementedRetrievalServer struct {
 }
 
-func (UnimplementedRetrievalServer) FindAlerts(context.Context, *FindEventsRequest) (*FindEventsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindAlerts not implemented")
+func (UnimplementedRetrievalServer) FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindEvents not implemented")
 }
-func (UnimplementedRetrievalServer) GetAlert(context.Context, *GetEventRequest) (*GetEventReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAlert not implemented")
+func (UnimplementedRetrievalServer) GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEvent not implemented")
 }
 func (UnimplementedRetrievalServer) GetImage(context.Context, *GetImageRequest) (*GetImageReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetImage not implemented")
 }
-func (UnimplementedRetrievalServer) DeleteAlert(context.Context, *DeleteEventRequest) (*DeleteEventReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlert not implemented")
+func (UnimplementedRetrievalServer) DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteEvent not implemented")
 }
 func (UnimplementedRetrievalServer) mustEmbedUnimplementedRetrievalServer() {}
 
@@ -112,38 +112,38 @@ func RegisterRetrievalServer(s grpc.ServiceRegistrar, srv RetrievalServer) {
 	s.RegisterService(&Retrieval_ServiceDesc, srv)
 }
 
-func _Retrieval_FindAlerts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Retrieval_FindEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FindEventsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RetrievalServer).FindAlerts(ctx, in)
+		return srv.(RetrievalServer).FindEvents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.retrieval.Retrieval/FindAlerts",
+		FullMethod: "/api.retrieval.Retrieval/FindEvents",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RetrievalServer).FindAlerts(ctx, req.(*FindEventsRequest))
+		return srv.(RetrievalServer).FindEvents(ctx, req.(*FindEventsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Retrieval_GetAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Retrieval_GetEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RetrievalServer).GetAlert(ctx, in)
+		return srv.(RetrievalServer).GetEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.retrieval.Retrieval/GetAlert",
+		FullMethod: "/api.retrieval.Retrieval/GetEvent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RetrievalServer).GetAlert(ctx, req.(*GetEventRequest))
+		return srv.(RetrievalServer).GetEvent(ctx, req.(*GetEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -166,20 +166,20 @@ func _Retrieval_GetImage_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Retrieval_DeleteAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Retrieval_DeleteEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RetrievalServer).DeleteAlert(ctx, in)
+		return srv.(RetrievalServer).DeleteEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.retrieval.Retrieval/DeleteAlert",
+		FullMethod: "/api.retrieval.Retrieval/DeleteEvent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RetrievalServer).DeleteAlert(ctx, req.(*DeleteEventRequest))
+		return srv.(RetrievalServer).DeleteEvent(ctx, req.(*DeleteEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -192,20 +192,20 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*RetrievalServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "FindAlerts",
-			Handler:    _Retrieval_FindAlerts_Handler,
+			MethodName: "FindEvents",
+			Handler:    _Retrieval_FindEvents_Handler,
 		},
 		{
-			MethodName: "GetAlert",
-			Handler:    _Retrieval_GetAlert_Handler,
+			MethodName: "GetEvent",
+			Handler:    _Retrieval_GetEvent_Handler,
 		},
 		{
 			MethodName: "GetImage",
 			Handler:    _Retrieval_GetImage_Handler,
 		},
 		{
-			MethodName: "DeleteAlert",
-			Handler:    _Retrieval_DeleteAlert_Handler,
+			MethodName: "DeleteEvent",
+			Handler:    _Retrieval_DeleteEvent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
