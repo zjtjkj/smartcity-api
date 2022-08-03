@@ -77,7 +77,7 @@ message GetImageRequest {
 	string id = 1;
 }
 message GetImageReply {
-	bytes image = 1;
+	string image = 1;
 }
 
 message DeleteEventRequest {
