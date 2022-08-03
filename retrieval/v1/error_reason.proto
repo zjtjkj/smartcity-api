@@ -8,6 +8,6 @@ option java_package = "retrieval.v1";
 option objc_class_prefix = "APIRetrievalV1";
 
 enum ErrorReason {
-  ALERT_NOT_FOUND = 0;
+  EVENT_NOT_FOUND = 0;
   IMAGE_NOT_FOUND = 1;
 }
