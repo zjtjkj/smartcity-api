@@ -22,7 +22,7 @@ func IsRoot(root string) (bool, error) {
 
 // Region auth user's region privilege
 func Region(regions string, target uint64) (bool, error) {
-	tg := fmt.Sprintf(" %d ", target)
+	tg := fmt.Sprintf(" %d", target)
 	if strings.Contains(regions, tg) {
 		return true, nil
 	} else {
@@ -32,7 +32,7 @@ func Region(regions string, target uint64) (bool, error) {
 
 // Feature auth user's feature privilege
 func Feature(features string, target uint64) (bool, error) {
-	tg := fmt.Sprintf(" %d ", target)
+	tg := fmt.Sprintf(" %d", target)
 	if strings.Contains(features, tg) {
 		return true, nil
 	} else {
