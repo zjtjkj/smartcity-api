@@ -29,6 +29,7 @@ type UserDomainClient interface {
 	FindUserDomain(ctx context.Context, in *FindUserDomainRequest, opts ...grpc.CallOption) (*FindUserDomainReply, error)
 	ListUserDomain(ctx context.Context, in *ListUserDomainRequest, opts ...grpc.CallOption) (*ListUserDomainReply, error)
 	ListUserDomainByUser(ctx context.Context, in *ListUserDomainByUserRequest, opts ...grpc.CallOption) (*ListUserDomainByUserReply, error)
+	ListFeatures(ctx context.Context, in *ListFeaturesRequest, opts ...grpc.CallOption) (*ListFeaturesReply, error)
 }
 
 type userDomainClient struct {
@@ -102,6 +103,15 @@ func (c *userDomainClient) ListUserDomainByUser(ctx context.Context, in *ListUse
 	return out, nil
 }
 
+func (c *userDomainClient) ListFeatures(ctx context.Context, in *ListFeaturesRequest, opts ...grpc.CallOption) (*ListFeaturesReply, error) {
+	out := new(ListFeaturesReply)
+	err := c.cc.Invoke(ctx, "/api.userdomain.v1.UserDomain/ListFeatures", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserDomainServer is the server API for UserDomain service.
 // All implementations must embed UnimplementedUserDomainServer
 // for forward compatibility
@@ -113,6 +123,7 @@ type UserDomainServer interface {
 	FindUserDomain(context.Context, *FindUserDomainRequest) (*FindUserDomainReply, error)
 	ListUserDomain(context.Context, *ListUserDomainRequest) (*ListUserDomainReply, error)
 	ListUserDomainByUser(context.Context, *ListUserDomainByUserRequest) (*ListUserDomainByUserReply, error)
+	ListFeatures(context.Context, *ListFeaturesRequest) (*ListFeaturesReply, error)
 	mustEmbedUnimplementedUserDomainServer()
 }
 
@@ -140,6 +151,9 @@ func (UnimplementedUserDomainServer) ListUserDomain(context.Context, *ListUserDo
 }
 func (UnimplementedUserDomainServer) ListUserDomainByUser(context.Context, *ListUserDomainByUserRequest) (*ListUserDomainByUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUserDomainByUser not implemented")
+}
+func (UnimplementedUserDomainServer) ListFeatures(context.Context, *ListFeaturesRequest) (*ListFeaturesReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListFeatures not implemented")
 }
 func (UnimplementedUserDomainServer) mustEmbedUnimplementedUserDomainServer() {}
 
@@ -280,6 +294,24 @@ func _UserDomain_ListUserDomainByUser_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserDomain_ListFeatures_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFeaturesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserDomainServer).ListFeatures(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.userdomain.v1.UserDomain/ListFeatures",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserDomainServer).ListFeatures(ctx, req.(*ListFeaturesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserDomain_ServiceDesc is the grpc.ServiceDesc for UserDomain service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -314,6 +346,10 @@ var UserDomain_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUserDomainByUser",
 			Handler:    _UserDomain_ListUserDomainByUser_Handler,
+		},
+		{
+			MethodName: "ListFeatures",
+			Handler:    _UserDomain_ListFeatures_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

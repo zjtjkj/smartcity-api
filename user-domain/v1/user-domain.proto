@@ -41,12 +41,18 @@ service UserDomain {
 	}
 	rpc ListUserDomain (ListUserDomainRequest) returns (ListUserDomainReply) {
 		option (google.api.http) = {
-			get: "/api/v1/user/list"
+			get: "/api/v1/userdomain/list"
 		};
 	}
 	rpc ListUserDomainByUser (ListUserDomainByUserRequest) returns (ListUserDomainByUserReply) {
 		option (google.api.http) = {
-			post: "/api/v1/user/list/user"
+			post: "/api/v1/userdomain/list/user"
+			body: "*"
+		};
+	}
+	rpc ListFeatures (ListFeaturesRequest) returns (ListFeaturesReply) {
+		option (google.api.http) = {
+			post: "/api/v1/userdomain/list/features"
 			body: "*"
 		};
 	}
@@ -129,4 +135,17 @@ message ListUserDomainByUserRequest {
 }
 message ListUserDomainByUserReply {
 	repeated Domain domains = 1;
+}
+
+message Feature {
+	uint32 id = 1;
+	string name = 2;
+}
+
+message ListFeaturesRequest {}
+message ListFeaturesReply {
+	message FeatureList {
+		repeated Feature features = 1;
+	}
+	map<string,FeatureList> features = 1;
 }
