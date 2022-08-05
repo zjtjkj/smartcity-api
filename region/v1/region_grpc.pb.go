@@ -27,6 +27,7 @@ type RegionServiceClient interface {
 	DeleteRegion(ctx context.Context, in *DeleteRegionRequest, opts ...grpc.CallOption) (*DeleteRegionReply, error)
 	GetRegion(ctx context.Context, in *GetRegionRequest, opts ...grpc.CallOption) (*GetRegionReply, error)
 	ListRegion(ctx context.Context, in *ListRegionRequest, opts ...grpc.CallOption) (*ListRegionReply, error)
+	ListRegionById(ctx context.Context, in *ListRegionByIdRequest, opts ...grpc.CallOption) (*ListRegionByIdReply, error)
 }
 
 type regionServiceClient struct {
@@ -82,6 +83,15 @@ func (c *regionServiceClient) ListRegion(ctx context.Context, in *ListRegionRequ
 	return out, nil
 }
 
+func (c *regionServiceClient) ListRegionById(ctx context.Context, in *ListRegionByIdRequest, opts ...grpc.CallOption) (*ListRegionByIdReply, error) {
+	out := new(ListRegionByIdReply)
+	err := c.cc.Invoke(ctx, "/api.region.v1.RegionService/ListRegionById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RegionServiceServer is the server API for RegionService service.
 // All implementations must embed UnimplementedRegionServiceServer
 // for forward compatibility
@@ -91,6 +101,7 @@ type RegionServiceServer interface {
 	DeleteRegion(context.Context, *DeleteRegionRequest) (*DeleteRegionReply, error)
 	GetRegion(context.Context, *GetRegionRequest) (*GetRegionReply, error)
 	ListRegion(context.Context, *ListRegionRequest) (*ListRegionReply, error)
+	ListRegionById(context.Context, *ListRegionByIdRequest) (*ListRegionByIdReply, error)
 	mustEmbedUnimplementedRegionServiceServer()
 }
 
@@ -112,6 +123,9 @@ func (UnimplementedRegionServiceServer) GetRegion(context.Context, *GetRegionReq
 }
 func (UnimplementedRegionServiceServer) ListRegion(context.Context, *ListRegionRequest) (*ListRegionReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRegion not implemented")
+}
+func (UnimplementedRegionServiceServer) ListRegionById(context.Context, *ListRegionByIdRequest) (*ListRegionByIdReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRegionById not implemented")
 }
 func (UnimplementedRegionServiceServer) mustEmbedUnimplementedRegionServiceServer() {}
 
@@ -216,6 +230,24 @@ func _RegionService_ListRegion_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RegionService_ListRegionById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegionByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegionServiceServer).ListRegionById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.region.v1.RegionService/ListRegionById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegionServiceServer).ListRegionById(ctx, req.(*ListRegionByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RegionService_ServiceDesc is the grpc.ServiceDesc for RegionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +274,10 @@ var RegionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListRegion",
 			Handler:    _RegionService_ListRegion_Handler,
+		},
+		{
+			MethodName: "ListRegionById",
+			Handler:    _RegionService_ListRegionById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

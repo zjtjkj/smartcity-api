@@ -38,6 +38,11 @@ service RegionService {
 			get: "/api/v1/region/list"
 		};
 	}
+	rpc ListRegionById (ListRegionByIdRequest) returns (ListRegionByIdReply) {
+		option (google.api.http) = {
+			get: "/api/v1/region/list_id"
+		};
+	}
 }
 
 message Region {
@@ -87,5 +92,12 @@ message GetRegionReply {
 
 message ListRegionRequest {}
 message ListRegionReply {
+	repeated Region regions = 1;
+}
+
+message ListRegionByIdRequest {
+	repeated uint64 id = 1;
+}
+message ListRegionByIdReply {
 	repeated Region regions = 1;
 }

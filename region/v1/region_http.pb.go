@@ -23,6 +23,7 @@ const OperationRegionServiceCreateRegion = "/api.region.v1.RegionService/CreateR
 const OperationRegionServiceDeleteRegion = "/api.region.v1.RegionService/DeleteRegion"
 const OperationRegionServiceGetRegion = "/api.region.v1.RegionService/GetRegion"
 const OperationRegionServiceListRegion = "/api.region.v1.RegionService/ListRegion"
+const OperationRegionServiceListRegionById = "/api.region.v1.RegionService/ListRegionById"
 const OperationRegionServiceUpdateRegion = "/api.region.v1.RegionService/UpdateRegion"
 
 type RegionServiceHTTPServer interface {
@@ -30,6 +31,7 @@ type RegionServiceHTTPServer interface {
 	DeleteRegion(context.Context, *DeleteRegionRequest) (*DeleteRegionReply, error)
 	GetRegion(context.Context, *GetRegionRequest) (*GetRegionReply, error)
 	ListRegion(context.Context, *ListRegionRequest) (*ListRegionReply, error)
+	ListRegionById(context.Context, *ListRegionByIdRequest) (*ListRegionByIdReply, error)
 	UpdateRegion(context.Context, *UpdateRegionRequest) (*UpdateRegionReply, error)
 }
 
@@ -40,6 +42,7 @@ func RegisterRegionServiceHTTPServer(s *http.Server, srv RegionServiceHTTPServer
 	r.POST("/api/v1/region/delete", _RegionService_DeleteRegion0_HTTP_Handler(srv))
 	r.POST("/api/v1/region/get", _RegionService_GetRegion0_HTTP_Handler(srv))
 	r.GET("/api/v1/region/list", _RegionService_ListRegion0_HTTP_Handler(srv))
+	r.GET("/api/v1/region/list_id", _RegionService_ListRegionById0_HTTP_Handler(srv))
 }
 
 func _RegionService_CreateRegion0_HTTP_Handler(srv RegionServiceHTTPServer) func(ctx http.Context) error {
@@ -137,11 +140,31 @@ func _RegionService_ListRegion0_HTTP_Handler(srv RegionServiceHTTPServer) func(c
 	}
 }
 
+func _RegionService_ListRegionById0_HTTP_Handler(srv RegionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListRegionByIdRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRegionServiceListRegionById)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListRegionById(ctx, req.(*ListRegionByIdRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListRegionByIdReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type RegionServiceHTTPClient interface {
 	CreateRegion(ctx context.Context, req *CreateRegionRequest, opts ...http.CallOption) (rsp *CreateRegionReply, err error)
 	DeleteRegion(ctx context.Context, req *DeleteRegionRequest, opts ...http.CallOption) (rsp *DeleteRegionReply, err error)
 	GetRegion(ctx context.Context, req *GetRegionRequest, opts ...http.CallOption) (rsp *GetRegionReply, err error)
 	ListRegion(ctx context.Context, req *ListRegionRequest, opts ...http.CallOption) (rsp *ListRegionReply, err error)
+	ListRegionById(ctx context.Context, req *ListRegionByIdRequest, opts ...http.CallOption) (rsp *ListRegionByIdReply, err error)
 	UpdateRegion(ctx context.Context, req *UpdateRegionRequest, opts ...http.CallOption) (rsp *UpdateRegionReply, err error)
 }
 
@@ -197,6 +220,19 @@ func (c *RegionServiceHTTPClientImpl) ListRegion(ctx context.Context, in *ListRe
 	pattern := "/api/v1/region/list"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRegionServiceListRegion))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RegionServiceHTTPClientImpl) ListRegionById(ctx context.Context, in *ListRegionByIdRequest, opts ...http.CallOption) (*ListRegionByIdReply, error) {
+	var out ListRegionByIdReply
+	pattern := "/api/v1/region/list_id"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationRegionServiceListRegionById))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
