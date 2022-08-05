@@ -78,6 +78,20 @@ message GetImageRequest {
 }
 message GetImageReply {
 	bytes image = 1;
+	message Object {
+		string id = 1;
+		repeated Property properties = 2;
+		repeated Point points = 3;
+	}
+	message Property {
+		string key = 1;
+		string value = 2;
+	}
+	message Point {
+		int32 x = 1;
+		int32 y = 2;
+	}
+	repeated Object objs = 2;
 }
 
 message DeleteEventRequest {
