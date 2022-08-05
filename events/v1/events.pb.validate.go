@@ -623,6 +623,8 @@ func (m *ReceiveEventRequest_Object) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	// no validation rules for Aid
+
 	if len(m.GetPoints()) < 2 {
 		err := ReceiveEventRequest_ObjectValidationError{
 			field:  "Points",

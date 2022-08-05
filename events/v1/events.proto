@@ -28,8 +28,9 @@ message ReceiveEventRequest {
 
 	message Object {
 		string id = 1 [(validate.rules).string = {min_len: 1}];
-		repeated Point points = 2 [(validate.rules).repeated = {min_items: 2}];
-		repeated Property properties = 3  [(validate.rules).repeated = {}];
+		uint32 aid = 2;
+		repeated Point points = 3 [(validate.rules).repeated = {min_items: 2}];
+		repeated Property properties = 4  [(validate.rules).repeated = {}];
 	}
 	string id = 1 [(validate.rules).string = {len_bytes: 36}];
 	uint32 mid = 2 [(validate.rules).uint32 = {gt: 0}];
