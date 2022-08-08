@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package api.settings.v1;
+
+option go_package = "settings/api/settings/v1;v1";
+import "google/api/annotations.proto";
+
+service Settings {
+	rpc CreateModule (CreateModuleRequest) returns (CreateModuleReply) {
+		option (google.api.http) = {
+			put: "/api/v1/settings/module"
+			body: "*"
+		};
+	}
+	rpc DeleteModule (DeleteModuleRequest) returns (DeleteModuleReply) {
+		option (google.api.http) = {
+			delete: "/api/v1/settings/module/{id}"
+		};
+	}
+	rpc UpdateModule (UpdateModuleRequest) returns (UpdateModuleReply) {
+		option (google.api.http) = {
+			post: "/api/v1/setting/module/{id}"
+			body: "*"
+		};
+	}
+	rpc GetModule (GetModuleRequest) returns (GetModuleReply) {
+		option (google.api.http) = {
+			get: "/api/v1/settings/module/{id}"
+		};
+	}
+	rpc ListModules (ListModulesRequest) returns (ListModulesReply) {
+		option (google.api.http) = {
+			get: "/api/v1/settings/module"
+		};
+	}
+}
+
+message CreateModuleRequest {
+	string code = 1;
+	string name = 2;
+	string alias = 3;
+}
+message CreateModuleReply {}
+
+message DeleteModuleRequest {
+	uint32 id = 1;
+}
+message DeleteModuleReply {}
+
+message UpdateModuleRequest {
+	uint32 id = 1;
+	string code = 2;
+	string name = 3;
+	string alias = 4;
+}
+message UpdateModuleReply {}
+
+message Module {
+	uint32 id = 1;
+	string code = 2;
+	string name = 3;
+	string alias = 4;
+}
+
+message GetModuleRequest {
+	uint32 id = 1;
+}
+message GetModuleReply {
+	Module module = 1;
+}
+
+message ListModulesRequest {}
+message ListModulesReply {
+	repeated Module modules = 1;
+}
