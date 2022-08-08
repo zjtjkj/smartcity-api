@@ -54,9 +54,13 @@ message FindEventsRequest {
 	int64 size = 2;
 	int64 start = 3;
 	int64 end = 4;
-	string type = 5;
-	bool finished = 6;
-	bool is_finished = 7;
+	repeated string modules = 5;
+	enum State {
+		Finished = 0;
+		NotFinished = 1;
+	}
+  repeated State states = 6;
+	repeated int32 missions = 7;
 }
 message FindEventsReply {
 	int64 index = 1;
