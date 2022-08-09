@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package api.camera.v1;
+
+option go_package = "camera/api/camera/v1;v1";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+service Camera {
+	rpc CreateCamera (CreateCameraRequest) returns (CreateCameraReply) {
+		option (google.api.http) = {
+			put: "/api/v1/camera"
+			body: "*"
+		};
+	}
+	rpc UpdateCamera (UpdateCameraRequest) returns (UpdateCameraReply) {
+		option (google.api.http) = {
+			post: "/api/v1/camera/{id}"
+			body: "*"
+		};
+	}
+	rpc DeleteCamera (DeleteCameraRequest) returns (DeleteCameraReply) {
+		option (google.api.http) = {
+			delete: "/api/v1/camera/{id}"
+		};
+	}
+	rpc GetCamera (GetCameraRequest) returns (GetCameraReply) {
+		option (google.api.http) = {
+			get: "/api/v1/camera/{id}"
+		};
+	}
+	rpc ListCamera (ListCameraRequest) returns (ListCameraReply) {
+		option (google.api.http) = {
+			get: "/api/v1/cameras/{id}"
+		};
+	}
+}
+
+enum Source {
+	Direct = 0;
+	FromGB = 1;
+	//		Stream = 2;
+}
+enum Manufacture {
+	Unknown = 0;
+	UnView = 1;
+	Hik = 2;
+	DaHua = 3;
+}
+
+message CreateCameraRequest {
+	string name = 1 [(validate.rules).string = {min_len: 1}];
+	uint32 region = 2;
+	Source source = 3;
+	Manufacture manufacture = 4;
+	bool movable = 5;
+	float longitude = 6;
+	float latitude = 7;
+	string desc = 8;
+	string gb_device_id = 9;
+	string gb_channel_id = 10;
+	string ip = 11;
+	uint32 port = 12;
+	string username = 13;
+	string password = 14;
+	string rtsp = 15;
+}
+message CreateCameraReply {}
+
+message UpdateCameraRequest {
+	string id = 1;
+	uint32 region = 2;
+	string name = 3;
+	bool movable = 4;
+	float longitude = 5;
+	float latitude = 6;
+	string desc= 7;
+	string username = 8;
+	string password = 9;
+	string ip = 10;
+	uint32 port = 11;
+	string rtsp = 12;
+}
+message UpdateCameraReply {}
+
+message DeleteCameraRequest {
+	string id = 1;
+}
+message DeleteCameraReply {}
+
+message GetCameraRequest {
+	string id = 1;
+}
+message GetCameraReply {}
+
+message ListCameraRequest {
+	uint32 id = 1;
+}
+message ListCameraReply {}
