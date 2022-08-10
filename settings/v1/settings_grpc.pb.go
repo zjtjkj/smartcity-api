@@ -27,6 +27,10 @@ type SettingsClient interface {
 	UpdateModule(ctx context.Context, in *UpdateModuleRequest, opts ...grpc.CallOption) (*UpdateModuleReply, error)
 	GetModule(ctx context.Context, in *GetModuleRequest, opts ...grpc.CallOption) (*GetModuleReply, error)
 	ListModules(ctx context.Context, in *ListModulesRequest, opts ...grpc.CallOption) (*ListModulesReply, error)
+	CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...grpc.CallOption) (*CreateIconReply, error)
+	DeleteIcon(ctx context.Context, in *DeleteIconRequest, opts ...grpc.CallOption) (*DeleteIconReply, error)
+	GetIcon(ctx context.Context, in *GetIconRequest, opts ...grpc.CallOption) (*GetIconReply, error)
+	LostIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error)
 }
 
 type settingsClient struct {
@@ -82,6 +86,42 @@ func (c *settingsClient) ListModules(ctx context.Context, in *ListModulesRequest
 	return out, nil
 }
 
+func (c *settingsClient) CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...grpc.CallOption) (*CreateIconReply, error) {
+	out := new(CreateIconReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateIcon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) DeleteIcon(ctx context.Context, in *DeleteIconRequest, opts ...grpc.CallOption) (*DeleteIconReply, error) {
+	out := new(DeleteIconReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/DeleteIcon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) GetIcon(ctx context.Context, in *GetIconRequest, opts ...grpc.CallOption) (*GetIconReply, error) {
+	out := new(GetIconReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetIcon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) LostIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error) {
+	out := new(ListIconReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/LostIcon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SettingsServer is the server API for Settings service.
 // All implementations must embed UnimplementedSettingsServer
 // for forward compatibility
@@ -91,6 +131,10 @@ type SettingsServer interface {
 	UpdateModule(context.Context, *UpdateModuleRequest) (*UpdateModuleReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
 	ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error)
+	CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error)
+	DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error)
+	GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error)
+	LostIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
 	mustEmbedUnimplementedSettingsServer()
 }
 
@@ -112,6 +156,18 @@ func (UnimplementedSettingsServer) GetModule(context.Context, *GetModuleRequest)
 }
 func (UnimplementedSettingsServer) ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListModules not implemented")
+}
+func (UnimplementedSettingsServer) CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateIcon not implemented")
+}
+func (UnimplementedSettingsServer) DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteIcon not implemented")
+}
+func (UnimplementedSettingsServer) GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetIcon not implemented")
+}
+func (UnimplementedSettingsServer) LostIcon(context.Context, *ListIconRequest) (*ListIconReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LostIcon not implemented")
 }
 func (UnimplementedSettingsServer) mustEmbedUnimplementedSettingsServer() {}
 
@@ -216,6 +272,78 @@ func _Settings_ListModules_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Settings_CreateIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateIconRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreateIcon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreateIcon",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreateIcon(ctx, req.(*CreateIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_DeleteIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteIconRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).DeleteIcon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/DeleteIcon",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).DeleteIcon(ctx, req.(*DeleteIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_GetIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIconRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetIcon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/GetIcon",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetIcon(ctx, req.(*GetIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_LostIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListIconRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).LostIcon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/LostIcon",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).LostIcon(ctx, req.(*ListIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Settings_ServiceDesc is the grpc.ServiceDesc for Settings service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -242,6 +370,22 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListModules",
 			Handler:    _Settings_ListModules_Handler,
+		},
+		{
+			MethodName: "CreateIcon",
+			Handler:    _Settings_CreateIcon_Handler,
+		},
+		{
+			MethodName: "DeleteIcon",
+			Handler:    _Settings_DeleteIcon_Handler,
+		},
+		{
+			MethodName: "GetIcon",
+			Handler:    _Settings_GetIcon_Handler,
+		},
+		{
+			MethodName: "LostIcon",
+			Handler:    _Settings_LostIcon_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

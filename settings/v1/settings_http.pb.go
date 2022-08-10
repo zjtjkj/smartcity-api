@@ -19,17 +19,25 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationSettingsCreateIcon = "/api.settings.v1.Settings/CreateIcon"
 const OperationSettingsCreateModule = "/api.settings.v1.Settings/CreateModule"
+const OperationSettingsDeleteIcon = "/api.settings.v1.Settings/DeleteIcon"
 const OperationSettingsDeleteModule = "/api.settings.v1.Settings/DeleteModule"
+const OperationSettingsGetIcon = "/api.settings.v1.Settings/GetIcon"
 const OperationSettingsGetModule = "/api.settings.v1.Settings/GetModule"
 const OperationSettingsListModules = "/api.settings.v1.Settings/ListModules"
+const OperationSettingsLostIcon = "/api.settings.v1.Settings/LostIcon"
 const OperationSettingsUpdateModule = "/api.settings.v1.Settings/UpdateModule"
 
 type SettingsHTTPServer interface {
+	CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
+	DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error)
 	DeleteModule(context.Context, *DeleteModuleRequest) (*DeleteModuleReply, error)
+	GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
 	ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error)
+	LostIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
 	UpdateModule(context.Context, *UpdateModuleRequest) (*UpdateModuleReply, error)
 }
 
@@ -40,6 +48,10 @@ func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r.POST("/api/v1/setting/module/{id}", _Settings_UpdateModule0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/module/{id}", _Settings_GetModule0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/module", _Settings_ListModules0_HTTP_Handler(srv))
+	r.PUT("/api/v1/settings/icon", _Settings_CreateIcon0_HTTP_Handler(srv))
+	r.DELETE("/api/v1/settings/icon/{id}", _Settings_DeleteIcon0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/icon/{id}", _Settings_GetIcon0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/icons", _Settings_LostIcon0_HTTP_Handler(srv))
 }
 
 func _Settings_CreateModule0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
@@ -146,11 +158,97 @@ func _Settings_ListModules0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.C
 	}
 }
 
+func _Settings_CreateIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateIconRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsCreateIcon)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateIcon(ctx, req.(*CreateIconRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateIconReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_DeleteIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteIconRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsDeleteIcon)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteIcon(ctx, req.(*DeleteIconRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteIconReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_GetIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetIconRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsGetIcon)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetIcon(ctx, req.(*GetIconRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetIconReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_LostIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListIconRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsLostIcon)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.LostIcon(ctx, req.(*ListIconRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListIconReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type SettingsHTTPClient interface {
+	CreateIcon(ctx context.Context, req *CreateIconRequest, opts ...http.CallOption) (rsp *CreateIconReply, err error)
 	CreateModule(ctx context.Context, req *CreateModuleRequest, opts ...http.CallOption) (rsp *CreateModuleReply, err error)
+	DeleteIcon(ctx context.Context, req *DeleteIconRequest, opts ...http.CallOption) (rsp *DeleteIconReply, err error)
 	DeleteModule(ctx context.Context, req *DeleteModuleRequest, opts ...http.CallOption) (rsp *DeleteModuleReply, err error)
+	GetIcon(ctx context.Context, req *GetIconRequest, opts ...http.CallOption) (rsp *GetIconReply, err error)
 	GetModule(ctx context.Context, req *GetModuleRequest, opts ...http.CallOption) (rsp *GetModuleReply, err error)
 	ListModules(ctx context.Context, req *ListModulesRequest, opts ...http.CallOption) (rsp *ListModulesReply, err error)
+	LostIcon(ctx context.Context, req *ListIconRequest, opts ...http.CallOption) (rsp *ListIconReply, err error)
 	UpdateModule(ctx context.Context, req *UpdateModuleRequest, opts ...http.CallOption) (rsp *UpdateModuleReply, err error)
 }
 
@@ -160,6 +258,19 @@ type SettingsHTTPClientImpl struct {
 
 func NewSettingsHTTPClient(client *http.Client) SettingsHTTPClient {
 	return &SettingsHTTPClientImpl{client}
+}
+
+func (c *SettingsHTTPClientImpl) CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...http.CallOption) (*CreateIconReply, error) {
+	var out CreateIconReply
+	pattern := "/api/v1/settings/icon"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationSettingsCreateIcon))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *SettingsHTTPClientImpl) CreateModule(ctx context.Context, in *CreateModuleRequest, opts ...http.CallOption) (*CreateModuleReply, error) {
@@ -175,6 +286,19 @@ func (c *SettingsHTTPClientImpl) CreateModule(ctx context.Context, in *CreateMod
 	return &out, err
 }
 
+func (c *SettingsHTTPClientImpl) DeleteIcon(ctx context.Context, in *DeleteIconRequest, opts ...http.CallOption) (*DeleteIconReply, error) {
+	var out DeleteIconReply
+	pattern := "/api/v1/settings/icon/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsDeleteIcon))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *SettingsHTTPClientImpl) DeleteModule(ctx context.Context, in *DeleteModuleRequest, opts ...http.CallOption) (*DeleteModuleReply, error) {
 	var out DeleteModuleReply
 	pattern := "/api/v1/settings/module/{id}"
@@ -182,6 +306,19 @@ func (c *SettingsHTTPClientImpl) DeleteModule(ctx context.Context, in *DeleteMod
 	opts = append(opts, http.Operation(OperationSettingsDeleteModule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) GetIcon(ctx context.Context, in *GetIconRequest, opts ...http.CallOption) (*GetIconReply, error) {
+	var out GetIconReply
+	pattern := "/api/v1/settings/icon/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsGetIcon))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -206,6 +343,19 @@ func (c *SettingsHTTPClientImpl) ListModules(ctx context.Context, in *ListModule
 	pattern := "/api/v1/settings/module"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationSettingsListModules))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) LostIcon(ctx context.Context, in *ListIconRequest, opts ...http.CallOption) (*ListIconReply, error) {
+	var out ListIconReply
+	pattern := "/api/v1/settings/icons"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsLostIcon))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

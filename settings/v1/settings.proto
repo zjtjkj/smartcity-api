@@ -4,6 +4,7 @@ package api.settings.v1;
 
 option go_package = "settings/api/settings/v1;v1";
 import "google/api/annotations.proto";
+import "validate/validate.proto";
 
 service Settings {
 	rpc CreateModule (CreateModuleRequest) returns (CreateModuleReply) {
@@ -33,11 +34,59 @@ service Settings {
 			get: "/api/v1/settings/module"
 		};
 	}
+
+	rpc CreateIcon(CreateIconRequest) returns (CreateIconReply) {
+		option(google.api.http) = {
+			put: "/api/v1/settings/icon"
+			body: "*"
+		};
+	}
+	rpc DeleteIcon(DeleteIconRequest) returns (DeleteIconReply) {
+		option(google.api.http) = {
+			delete: "/api/v1/settings/icon/{id}"
+		};
+	}
+	rpc GetIcon(GetIconRequest) returns (GetIconReply) {
+		option(google.api.http) = {
+			get: "/api/v1/settings/icon/{id}"
+		};
+	}
+	rpc LostIcon(ListIconRequest) returns (ListIconReply) {
+		option(google.api.http) = {
+			get: "/api/v1/settings/icons"
+		};
+	}
+}
+
+message CreateIconRequest {
+	bytes src = 1;
+}
+message CreateIconReply {}
+
+message DeleteIconRequest {
+	uint32 id = 1;
+}
+message DeleteIconReply {}
+
+message GetIconRequest {
+	uint32 id = 1;
+}
+message GetIconReply {
+	bytes image = 1;
+}
+
+message ListIconRequest {}
+message ListIconReply {
+	message Image {
+		uint32 id = 1;
+		bytes src = 2;
+	}
+	repeated Image images = 1;
 }
 
 message CreateModuleRequest {
-	string code = 1;
-	string name = 2;
+	string code = 1 [(validate.rules).string = {min_len: 1}];
+	string name = 2 [(validate.rules).string = {min_len: 1}];
 	string alias = 3;
 }
 message CreateModuleReply {}
@@ -49,8 +98,8 @@ message DeleteModuleReply {}
 
 message UpdateModuleRequest {
 	uint32 id = 1;
-	string code = 2;
-	string name = 3;
+	string code = 2 [(validate.rules).string = {min_len: 1}];
+	string name = 3 [(validate.rules).string = {min_len: 1}];
 	string alias = 4;
 }
 message UpdateModuleReply {}
