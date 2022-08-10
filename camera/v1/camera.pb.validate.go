@@ -35,6 +35,168 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on Instance with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Instance) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Instance with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in InstanceMultiError, or nil
+// if none found.
+func (m *Instance) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Instance) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if all {
+		switch v := interface{}(m.GetCreated()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, InstanceValidationError{
+					field:  "Created",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, InstanceValidationError{
+					field:  "Created",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreated()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return InstanceValidationError{
+				field:  "Created",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Name
+
+	// no validation rules for Region
+
+	// no validation rules for Icon
+
+	// no validation rules for Source
+
+	// no validation rules for Manufacture
+
+	// no validation rules for Movable
+
+	// no validation rules for Longitude
+
+	// no validation rules for Latitude
+
+	// no validation rules for Desc
+
+	// no validation rules for GbDeviceId
+
+	// no validation rules for GbChannelId
+
+	// no validation rules for Ip
+
+	// no validation rules for Port
+
+	// no validation rules for Username
+
+	// no validation rules for Password
+
+	// no validation rules for Rtsp
+
+	if len(errors) > 0 {
+		return InstanceMultiError(errors)
+	}
+
+	return nil
+}
+
+// InstanceMultiError is an error wrapping multiple validation errors returned
+// by Instance.ValidateAll() if the designated constraints aren't met.
+type InstanceMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InstanceMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InstanceMultiError) AllErrors() []error { return m }
+
+// InstanceValidationError is the validation error returned by
+// Instance.Validate if the designated constraints aren't met.
+type InstanceValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InstanceValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InstanceValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InstanceValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InstanceValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InstanceValidationError) ErrorName() string { return "InstanceValidationError" }
+
+// Error satisfies the builtin error interface
+func (e InstanceValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInstance.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InstanceValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InstanceValidationError{}
+
 // Validate checks the field values on CreateCameraRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -70,11 +232,11 @@ func (m *CreateCameraRequest) validate(all bool) error {
 
 	// no validation rules for Region
 
+	// no validation rules for Icon
+
 	// no validation rules for Source
 
 	// no validation rules for Manufacture
-
-	// no validation rules for Movable
 
 	// no validation rules for Longitude
 
@@ -95,6 +257,8 @@ func (m *CreateCameraRequest) validate(all bool) error {
 	// no validation rules for Password
 
 	// no validation rules for Rtsp
+
+	// no validation rules for Movable
 
 	if len(errors) > 0 {
 		return CreateCameraRequestMultiError(errors)

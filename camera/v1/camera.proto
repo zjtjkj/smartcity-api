@@ -5,6 +5,7 @@ package api.camera.v1;
 option go_package = "camera/api/camera/v1;v1";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
 
 service Camera {
 	rpc CreateCamera (CreateCameraRequest) returns (CreateCameraReply) {
@@ -37,23 +38,44 @@ service Camera {
 }
 
 enum Source {
-	Direct = 0;
-	FromGB = 1;
-	//		Stream = 2;
+	Direct = 0;  // 直连
+	FromGB = 1;  // 国标
 }
 enum Manufacture {
-	Unknown = 0;
-	UnView = 1;
-	Hik = 2;
-	DaHua = 3;
+	Unknown = 0;  // 未知
+	UnView = 1;   // 宇视
+	Hik = 2;      // 海康
+	DaHua = 3;    // 大华
 }
 
+message Instance {
+	string id = 1; // 点位ID
+	google.protobuf.Timestamp created = 2; // 创建时间
+	string name = 3;  // 点位名称
+	uint32 region = 4; // 区域ID
+	uint32 icon = 5;
+	Source source = 6; // 点位来源
+	Manufacture manufacture = 7;  // 生产厂商
+	bool movable = 8; // 是否可以遥控移动
+	float longitude = 9; // 经度
+	float latitude = 10; // 维度
+	string desc = 11; // 描述
+	string gb_device_id = 12; // 国标设备ID
+	string gb_channel_id = 13; // 国标通道ID
+	string ip = 14; // IP地址
+	uint32 port = 15; // 端口号
+	string username = 16; // 用户名
+	string password = 17; // 密码
+	string rtsp = 18; // 流地址
+}
+
+
 message CreateCameraRequest {
-	string name = 1 [(validate.rules).string = {min_len: 1}];
+	string name = 1 [(validate.rules).string = {min_len: 1}]; // 点位唯一ID // 点位中文名称
 	uint32 region = 2;
-	Source source = 3;
-	Manufacture manufacture = 4;
-	bool movable = 5;
+	uint32 icon = 3;
+	Source source = 4;
+	Manufacture manufacture = 5;
 	float longitude = 6;
 	float latitude = 7;
 	string desc = 8;
@@ -64,6 +86,7 @@ message CreateCameraRequest {
 	string username = 13;
 	string password = 14;
 	string rtsp = 15;
+	bool movable = 16;
 }
 message CreateCameraReply {}
 
@@ -72,9 +95,9 @@ message UpdateCameraRequest {
 	uint32 region = 2;
 	string name = 3;
 	bool movable = 4;
-	float longitude = 5;
-	float latitude = 6;
-	string desc= 7;
+	float longitude = 5;	 // 经度
+	float latitude = 6;    // 维度
+	string desc= 7;        // 备注
 	string username = 8;
 	string password = 9;
 	string ip = 10;
