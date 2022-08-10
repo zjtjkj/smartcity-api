@@ -1,0 +1,144 @@
+syntax = "proto3";
+
+package api.gb.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "gb/api/gb/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.gb.v1";
+
+service GB {
+  rpc CreateGroup (CreateGroupRequest) returns (CreateGroupReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/create"
+      body: "*"
+    };
+  }
+  rpc UpdateGroup (UpdateGroupRequest) returns (UpdateGroupReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/update"
+      body: "*"
+    };
+  }
+  rpc DeleteGroup (DeleteGroupRequest) returns (DeleteGroupReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/delete"
+      body: "*"
+    };
+  }
+  rpc ListGroups (ListGroupsRequest) returns (ListGroupsReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/list"
+      body: "*"
+    };
+  }
+  rpc AddChannel (AddChannelRequest) returns (AddChannelReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/channel/add"
+      body: "*"
+    };
+  }
+  rpc DeleteChannel (DeleteChannelRequest) returns (DeleteChannelReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/channel/delete"
+      body: "*"
+    };
+  }
+  rpc ListChannels (ListChannelsRequest) returns (ListChannelsReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/channel/list"
+      body: "*"
+    };
+  }
+  rpc GetChannel (GetChannelRequest) returns (GetChannelReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/channel/get"
+      body: "*"
+    };
+  }
+}
+
+message Group {
+  uint32 id = 1;
+  string name = 2;
+  string describe = 3;
+}
+
+message Channel {
+  uint32 id = 1;
+  string channel_id = 2;
+  string device_id = 3;
+  string name = 4;
+  string manufacture = 5;
+  string model = 6;
+  string address = 7;
+  string ip = 8;
+  int32 port = 9;
+  float longitude = 10;
+  float latitude = 11;
+  int32 ptz_type = 12;
+}
+
+message CreateGroupRequest {
+  string name = 1;
+  string describe = 2;
+}
+message CreateGroupReply {
+  Group group = 1;
+}
+
+message UpdateGroupRequest {
+  uint32 id = 1;
+  string name = 2;
+  string describe = 3;
+}
+message UpdateGroupReply {}
+
+message DeleteGroupRequest {
+  uint32 id = 1;
+}
+message DeleteGroupReply {}
+
+message ListGroupsRequest {}
+message ListGroupsReply {
+  repeated Group groups = 1;
+}
+
+message AddChannelRequest {
+  uint32 id = 1;
+  message Channel {
+    string channel_id = 2;
+    string device_id = 3;
+    string name = 4;
+    string manufacture = 5;
+    string model = 6;
+    string address = 7;
+    string ip = 8;
+    int32 port = 9;
+    float longitude = 10;
+    float latitude = 11;
+    int32 ptz_type = 12;
+  }
+  Channel channel = 2;
+}
+message AddChannelReply {}
+
+message DeleteChannelRequest {
+  uint32 channel_id = 1;
+}
+message DeleteChannelReply {}
+
+message ListChannelsRequest {
+  uint32 group_id = 1;
+}
+message ListChannelsReply {
+  repeated Channel channels = 1;
+}
+
+message GetChannelRequest {
+  uint32 channel_id = 1;
+}
+message GetChannelReply {
+  Channel channel = 1;
+}

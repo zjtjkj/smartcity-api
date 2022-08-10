@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package gb.v1;
+
+option go_package = "./api/gb/v1;v1";
+option java_multiple_files = true;
+option java_package = "gb.v1";
+option objc_class_prefix = "APIGbV1";
+
+enum ErrorReason {
+  GROUP_ALREADY_EXISTED = 0;
+  CHANNEL_ALREADY_EXISTED = 1;
+  CHANNEL_NOT_FOUND = 2;
+}
