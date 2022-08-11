@@ -1,0 +1,168 @@
+syntax = "proto3";
+
+package api.video.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "video/api/video/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.video.v1";
+
+service Video {
+  rpc FindDevices (FindDevicesRequest) returns (FindDevicesReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/device/find"
+      body: "*"
+    };
+  }
+  rpc FindChannels (FindChannelsRequest) returns (FindChannelsReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/channel/find"
+      body: "*"
+    };
+  }
+  rpc StartPlay (StartPlayRequest) returns (StartPlayReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/start"
+      body: "*"
+    };
+  }
+  rpc StopPlay (StopPlayRequest) returns (StopPlayReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/stop"
+      body: "*"
+    };
+  }
+  rpc StartProxy (StartProxyRequest) returns (StartProxyReply) {
+    option (google.api.http) = {
+      post: "/api/v1/proxy/start"
+      body: "*"
+    };
+  }
+  rpc StopProxy (StopProxyRequest) returns (StopProxyReply) {
+    option (google.api.http) = {
+      post: "/api/v1/proxy/stop"
+      body: "*"
+    };
+  }
+  rpc DeleteProxy (DeleteProxyRequest) returns (DeleteProxyReply) {
+    option (google.api.http) = {
+      post: "/api/v1/proxy/delete"
+      body: "*"
+    };
+  }
+}
+
+message Device {
+  string id = 1;
+  string name = 2;
+  string manufacturer = 3;
+  string model = 4;
+  string firmware = 5;
+  string transport = 6;
+  string stream_mode = 7;
+  string host = 8;
+  int32 online = 9;
+  string register_time = 10;
+  int32 channel_count = 11;
+}
+
+message Channel {
+  string id = 1;
+  string device_id = 2;
+  string name = 3;
+  string manufacture = 4;
+  string model = 5;
+  string address = 6;
+  string ip_address = 7;
+  int32 port = 8;
+  float longitude = 9;
+  float latitude = 10;
+  int32 status = 11;
+  int32 ptztype = 12;
+}
+
+message FindDevicesRequest {
+  int64 index = 1;
+  int64 size = 2;
+}
+message FindDevicesReply {
+  int64 index = 1;
+  int64 size = 2;
+  int64 page = 3;
+  int64 total = 4;
+  repeated Device devices = 5;
+}
+
+message FindChannelsRequest {
+  int64 index = 1;
+  int64 size = 2;
+  string device_id = 3;
+}
+message FindChannelsReply {
+  int64 index = 1;
+  int64 size = 2;
+  int64 page = 3;
+  int64 total = 4;
+  repeated Channel channels = 5;
+}
+
+message StartPlayRequest {
+  string device_id = 1;
+  string channel_id = 2;
+}
+message StartPlayReply {
+  string app = 1;
+  string stream = 2;
+  string device_id = 3;
+  string channel_id = 4;
+  string flv = 5;
+  string rtsp = 6;
+  string media_server_id = 7;
+  message Track {
+    bool ready = 1;
+    int32 fps = 2;
+    int32 width = 3;
+    int32 height = 4;
+  }
+  Track tracks = 8;
+}
+
+message StopPlayRequest {
+  string device_id = 1;
+  string channel_id = 2;
+}
+message StopPlayReply {}
+
+message StartProxyRequest {
+  string app = 1;
+  string name = 2;
+  string stream = 3;
+  string url = 4; // 拉流地址，例如rtmp://live.hkstv.hk.lxdns.com/live/hks2
+}
+message StartProxyReply {
+  string app = 1;
+  string stream = 2;
+  string flv = 3;
+  string rtsp = 4;
+  string media_server_id = 5;
+  message Track {
+    bool ready = 1;
+    int32 fps = 2;
+    int32 width = 3;
+    int32 height= 4;
+  }
+  Track track = 6;
+}
+
+message StopProxyRequest {
+  string app = 1;
+  string stream = 2;
+}
+message StopProxyReply {}
+
+message DeleteProxyRequest {
+  string app = 1;
+  string stream = 2;
+}
+message DeleteProxyReply {}
