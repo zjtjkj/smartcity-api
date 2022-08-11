@@ -108,6 +108,7 @@ message FindChannelsRequest {
   int64 index = 1;
   int64 size = 2;
   string device_id = 3;
+  string keyword = 4;
 }
 message FindChannelsReply {
   int64 index = 1;
