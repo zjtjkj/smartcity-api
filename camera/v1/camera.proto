@@ -30,9 +30,14 @@ service Camera {
 			get: "/api/v1/camera/{id}"
 		};
 	}
-	rpc ListCamera (ListCameraRequest) returns (ListCameraReply) {
+	rpc ListCameraByRegion (ListCameraByRegionRequest) returns (ListCameraByRegionReply) {
 		option (google.api.http) = {
 			get: "/api/v1/cameras/{id}"
+		};
+	}
+	rpc ListCameraByKey (ListCameraByKeyRequest) returns (ListCameraByKeyReply) {
+		option (google.api.http) = {
+			get: "/api/v1/cameras/key/{key}"
 		};
 	}
 }
@@ -116,7 +121,29 @@ message GetCameraRequest {
 }
 message GetCameraReply {}
 
-message ListCameraRequest {
+message ListCameraByRegionRequest {
 	uint32 id = 1;
+	uint32 index = 2;
+	uint32 size = 3;
 }
-message ListCameraReply {}
+message ListCameraByRegionReply {
+	repeated Instance camera = 1;
+	uint32 index = 2;
+	uint32 size = 3;
+	uint32 pages = 4;
+	uint32 total = 5;
+}
+
+message ListCameraByKeyRequest {
+	string key = 1;
+	uint32 index = 2;
+	uint32 size = 3;
+}
+
+message ListCameraByKeyReply {
+	repeated Instance camera = 1;
+	uint32 index = 2;
+	uint32 size = 3;
+	uint32 pages = 4;
+	uint32 total = 5;
+}

@@ -26,7 +26,8 @@ type CameraClient interface {
 	UpdateCamera(ctx context.Context, in *UpdateCameraRequest, opts ...grpc.CallOption) (*UpdateCameraReply, error)
 	DeleteCamera(ctx context.Context, in *DeleteCameraRequest, opts ...grpc.CallOption) (*DeleteCameraReply, error)
 	GetCamera(ctx context.Context, in *GetCameraRequest, opts ...grpc.CallOption) (*GetCameraReply, error)
-	ListCamera(ctx context.Context, in *ListCameraRequest, opts ...grpc.CallOption) (*ListCameraReply, error)
+	ListCameraByRegion(ctx context.Context, in *ListCameraByRegionRequest, opts ...grpc.CallOption) (*ListCameraByRegionReply, error)
+	ListCameraByKey(ctx context.Context, in *ListCameraByKeyRequest, opts ...grpc.CallOption) (*ListCameraByKeyReply, error)
 }
 
 type cameraClient struct {
@@ -73,9 +74,18 @@ func (c *cameraClient) GetCamera(ctx context.Context, in *GetCameraRequest, opts
 	return out, nil
 }
 
-func (c *cameraClient) ListCamera(ctx context.Context, in *ListCameraRequest, opts ...grpc.CallOption) (*ListCameraReply, error) {
-	out := new(ListCameraReply)
-	err := c.cc.Invoke(ctx, "/api.camera.v1.Camera/ListCamera", in, out, opts...)
+func (c *cameraClient) ListCameraByRegion(ctx context.Context, in *ListCameraByRegionRequest, opts ...grpc.CallOption) (*ListCameraByRegionReply, error) {
+	out := new(ListCameraByRegionReply)
+	err := c.cc.Invoke(ctx, "/api.camera.v1.Camera/ListCameraByRegion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cameraClient) ListCameraByKey(ctx context.Context, in *ListCameraByKeyRequest, opts ...grpc.CallOption) (*ListCameraByKeyReply, error) {
+	out := new(ListCameraByKeyReply)
+	err := c.cc.Invoke(ctx, "/api.camera.v1.Camera/ListCameraByKey", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +100,8 @@ type CameraServer interface {
 	UpdateCamera(context.Context, *UpdateCameraRequest) (*UpdateCameraReply, error)
 	DeleteCamera(context.Context, *DeleteCameraRequest) (*DeleteCameraReply, error)
 	GetCamera(context.Context, *GetCameraRequest) (*GetCameraReply, error)
-	ListCamera(context.Context, *ListCameraRequest) (*ListCameraReply, error)
+	ListCameraByRegion(context.Context, *ListCameraByRegionRequest) (*ListCameraByRegionReply, error)
+	ListCameraByKey(context.Context, *ListCameraByKeyRequest) (*ListCameraByKeyReply, error)
 	mustEmbedUnimplementedCameraServer()
 }
 
@@ -110,8 +121,11 @@ func (UnimplementedCameraServer) DeleteCamera(context.Context, *DeleteCameraRequ
 func (UnimplementedCameraServer) GetCamera(context.Context, *GetCameraRequest) (*GetCameraReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCamera not implemented")
 }
-func (UnimplementedCameraServer) ListCamera(context.Context, *ListCameraRequest) (*ListCameraReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCamera not implemented")
+func (UnimplementedCameraServer) ListCameraByRegion(context.Context, *ListCameraByRegionRequest) (*ListCameraByRegionReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCameraByRegion not implemented")
+}
+func (UnimplementedCameraServer) ListCameraByKey(context.Context, *ListCameraByKeyRequest) (*ListCameraByKeyReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCameraByKey not implemented")
 }
 func (UnimplementedCameraServer) mustEmbedUnimplementedCameraServer() {}
 
@@ -198,20 +212,38 @@ func _Camera_GetCamera_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Camera_ListCamera_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCameraRequest)
+func _Camera_ListCameraByRegion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCameraByRegionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CameraServer).ListCamera(ctx, in)
+		return srv.(CameraServer).ListCameraByRegion(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.camera.v1.Camera/ListCamera",
+		FullMethod: "/api.camera.v1.Camera/ListCameraByRegion",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CameraServer).ListCamera(ctx, req.(*ListCameraRequest))
+		return srv.(CameraServer).ListCameraByRegion(ctx, req.(*ListCameraByRegionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Camera_ListCameraByKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCameraByKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CameraServer).ListCameraByKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.camera.v1.Camera/ListCameraByKey",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CameraServer).ListCameraByKey(ctx, req.(*ListCameraByKeyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -240,8 +272,12 @@ var Camera_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Camera_GetCamera_Handler,
 		},
 		{
-			MethodName: "ListCamera",
-			Handler:    _Camera_ListCamera_Handler,
+			MethodName: "ListCameraByRegion",
+			Handler:    _Camera_ListCameraByRegion_Handler,
+		},
+		{
+			MethodName: "ListCameraByKey",
+			Handler:    _Camera_ListCameraByKey_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

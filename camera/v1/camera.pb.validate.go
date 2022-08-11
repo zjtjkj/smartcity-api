@@ -1078,22 +1078,22 @@ var _ interface {
 	ErrorName() string
 } = GetCameraReplyValidationError{}
 
-// Validate checks the field values on ListCameraRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *ListCameraRequest) Validate() error {
+// Validate checks the field values on ListCameraByRegionRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCameraByRegionRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListCameraRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ListCameraByRegionRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListCameraRequestMultiError, or nil if none found.
-func (m *ListCameraRequest) ValidateAll() error {
+// ListCameraByRegionRequestMultiError, or nil if none found.
+func (m *ListCameraByRegionRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListCameraRequest) validate(all bool) error {
+func (m *ListCameraByRegionRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1102,20 +1102,24 @@ func (m *ListCameraRequest) validate(all bool) error {
 
 	// no validation rules for Id
 
+	// no validation rules for Index
+
+	// no validation rules for Size
+
 	if len(errors) > 0 {
-		return ListCameraRequestMultiError(errors)
+		return ListCameraByRegionRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListCameraRequestMultiError is an error wrapping multiple validation errors
-// returned by ListCameraRequest.ValidateAll() if the designated constraints
-// aren't met.
-type ListCameraRequestMultiError []error
+// ListCameraByRegionRequestMultiError is an error wrapping multiple validation
+// errors returned by ListCameraByRegionRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListCameraByRegionRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListCameraRequestMultiError) Error() string {
+func (m ListCameraByRegionRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1124,11 +1128,11 @@ func (m ListCameraRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListCameraRequestMultiError) AllErrors() []error { return m }
+func (m ListCameraByRegionRequestMultiError) AllErrors() []error { return m }
 
-// ListCameraRequestValidationError is the validation error returned by
-// ListCameraRequest.Validate if the designated constraints aren't met.
-type ListCameraRequestValidationError struct {
+// ListCameraByRegionRequestValidationError is the validation error returned by
+// ListCameraByRegionRequest.Validate if the designated constraints aren't met.
+type ListCameraByRegionRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1136,24 +1140,24 @@ type ListCameraRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListCameraRequestValidationError) Field() string { return e.field }
+func (e ListCameraByRegionRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListCameraRequestValidationError) Reason() string { return e.reason }
+func (e ListCameraByRegionRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListCameraRequestValidationError) Cause() error { return e.cause }
+func (e ListCameraByRegionRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListCameraRequestValidationError) Key() bool { return e.key }
+func (e ListCameraByRegionRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListCameraRequestValidationError) ErrorName() string {
-	return "ListCameraRequestValidationError"
+func (e ListCameraByRegionRequestValidationError) ErrorName() string {
+	return "ListCameraByRegionRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e ListCameraRequestValidationError) Error() string {
+func (e ListCameraByRegionRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1165,14 +1169,14 @@ func (e ListCameraRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListCameraRequest.%s: %s%s",
+		"invalid %sListCameraByRegionRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListCameraRequestValidationError{}
+var _ error = ListCameraByRegionRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1180,44 +1184,86 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListCameraRequestValidationError{}
+} = ListCameraByRegionRequestValidationError{}
 
-// Validate checks the field values on ListCameraReply with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *ListCameraReply) Validate() error {
+// Validate checks the field values on ListCameraByRegionReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCameraByRegionReply) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListCameraReply with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on ListCameraByRegionReply with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListCameraReplyMultiError, or nil if none found.
-func (m *ListCameraReply) ValidateAll() error {
+// ListCameraByRegionReplyMultiError, or nil if none found.
+func (m *ListCameraByRegionReply) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListCameraReply) validate(all bool) error {
+func (m *ListCameraByRegionReply) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
+	for idx, item := range m.GetCamera() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCameraByRegionReplyValidationError{
+						field:  fmt.Sprintf("Camera[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCameraByRegionReplyValidationError{
+						field:  fmt.Sprintf("Camera[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCameraByRegionReplyValidationError{
+					field:  fmt.Sprintf("Camera[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Index
+
+	// no validation rules for Size
+
+	// no validation rules for Pages
+
+	// no validation rules for Total
+
 	if len(errors) > 0 {
-		return ListCameraReplyMultiError(errors)
+		return ListCameraByRegionReplyMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListCameraReplyMultiError is an error wrapping multiple validation errors
-// returned by ListCameraReply.ValidateAll() if the designated constraints
-// aren't met.
-type ListCameraReplyMultiError []error
+// ListCameraByRegionReplyMultiError is an error wrapping multiple validation
+// errors returned by ListCameraByRegionReply.ValidateAll() if the designated
+// constraints aren't met.
+type ListCameraByRegionReplyMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListCameraReplyMultiError) Error() string {
+func (m ListCameraByRegionReplyMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1226,11 +1272,11 @@ func (m ListCameraReplyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListCameraReplyMultiError) AllErrors() []error { return m }
+func (m ListCameraByRegionReplyMultiError) AllErrors() []error { return m }
 
-// ListCameraReplyValidationError is the validation error returned by
-// ListCameraReply.Validate if the designated constraints aren't met.
-type ListCameraReplyValidationError struct {
+// ListCameraByRegionReplyValidationError is the validation error returned by
+// ListCameraByRegionReply.Validate if the designated constraints aren't met.
+type ListCameraByRegionReplyValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1238,22 +1284,24 @@ type ListCameraReplyValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListCameraReplyValidationError) Field() string { return e.field }
+func (e ListCameraByRegionReplyValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListCameraReplyValidationError) Reason() string { return e.reason }
+func (e ListCameraByRegionReplyValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListCameraReplyValidationError) Cause() error { return e.cause }
+func (e ListCameraByRegionReplyValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListCameraReplyValidationError) Key() bool { return e.key }
+func (e ListCameraByRegionReplyValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListCameraReplyValidationError) ErrorName() string { return "ListCameraReplyValidationError" }
+func (e ListCameraByRegionReplyValidationError) ErrorName() string {
+	return "ListCameraByRegionReplyValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e ListCameraReplyValidationError) Error() string {
+func (e ListCameraByRegionReplyValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1265,14 +1313,14 @@ func (e ListCameraReplyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListCameraReply.%s: %s%s",
+		"invalid %sListCameraByRegionReply.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListCameraReplyValidationError{}
+var _ error = ListCameraByRegionReplyValidationError{}
 
 var _ interface {
 	Field() string
@@ -1280,4 +1328,256 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListCameraReplyValidationError{}
+} = ListCameraByRegionReplyValidationError{}
+
+// Validate checks the field values on ListCameraByKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCameraByKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCameraByKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCameraByKeyRequestMultiError, or nil if none found.
+func (m *ListCameraByKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCameraByKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Key
+
+	// no validation rules for Index
+
+	// no validation rules for Size
+
+	if len(errors) > 0 {
+		return ListCameraByKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCameraByKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by ListCameraByKeyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListCameraByKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCameraByKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCameraByKeyRequestMultiError) AllErrors() []error { return m }
+
+// ListCameraByKeyRequestValidationError is the validation error returned by
+// ListCameraByKeyRequest.Validate if the designated constraints aren't met.
+type ListCameraByKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCameraByKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCameraByKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCameraByKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCameraByKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCameraByKeyRequestValidationError) ErrorName() string {
+	return "ListCameraByKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCameraByKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCameraByKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCameraByKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCameraByKeyRequestValidationError{}
+
+// Validate checks the field values on ListCameraByKeyReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCameraByKeyReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCameraByKeyReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCameraByKeyReplyMultiError, or nil if none found.
+func (m *ListCameraByKeyReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCameraByKeyReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetCamera() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListCameraByKeyReplyValidationError{
+						field:  fmt.Sprintf("Camera[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListCameraByKeyReplyValidationError{
+						field:  fmt.Sprintf("Camera[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListCameraByKeyReplyValidationError{
+					field:  fmt.Sprintf("Camera[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Index
+
+	// no validation rules for Size
+
+	// no validation rules for Pages
+
+	// no validation rules for Total
+
+	if len(errors) > 0 {
+		return ListCameraByKeyReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListCameraByKeyReplyMultiError is an error wrapping multiple validation
+// errors returned by ListCameraByKeyReply.ValidateAll() if the designated
+// constraints aren't met.
+type ListCameraByKeyReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListCameraByKeyReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListCameraByKeyReplyMultiError) AllErrors() []error { return m }
+
+// ListCameraByKeyReplyValidationError is the validation error returned by
+// ListCameraByKeyReply.Validate if the designated constraints aren't met.
+type ListCameraByKeyReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListCameraByKeyReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListCameraByKeyReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListCameraByKeyReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListCameraByKeyReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListCameraByKeyReplyValidationError) ErrorName() string {
+	return "ListCameraByKeyReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListCameraByKeyReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListCameraByKeyReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListCameraByKeyReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListCameraByKeyReplyValidationError{}
