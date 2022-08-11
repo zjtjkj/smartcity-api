@@ -62,7 +62,12 @@ message Device {
   string transport = 6;
   string stream_mode = 7;
   string host = 8;
-  int32 online = 9;
+  enum Status {
+    Unknown = 0;
+    Online = 1;
+    Offline = 2;
+  }
+  Status status = 9;
   string register_time = 10;
   int32 channel_count = 11;
 }
@@ -78,7 +83,12 @@ message Channel {
   int32 port = 8;
   float longitude = 9;
   float latitude = 10;
-  int32 status = 11;
+  enum Status {
+    Unknown = 0;
+    Online = 1;
+    Offline = 2;
+  }
+  Status status = 11;
   int32 ptztype = 12;
 }
 
