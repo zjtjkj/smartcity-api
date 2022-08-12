@@ -119,7 +119,9 @@ message DeleteCameraReply {}
 message GetCameraRequest {
 	string id = 1;
 }
-message GetCameraReply {}
+message GetCameraReply {
+	Instance camera = 1;
+}
 
 message ListCameraByRegionRequest {
 	uint32 id = 1;
