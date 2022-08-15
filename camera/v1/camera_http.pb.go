@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationCameraCreateCamera = "/api.camera.v1.Camera/CreateCamera"
 const OperationCameraDeleteCamera = "/api.camera.v1.Camera/DeleteCamera"
 const OperationCameraGetCamera = "/api.camera.v1.Camera/GetCamera"
+const OperationCameragetCameraByGBInfo = "/api.camera.v1.Camera/getCameraByGBInfo"
 const OperationCameraListCameraByKey = "/api.camera.v1.Camera/ListCameraByKey"
 const OperationCameraListCameraByRegion = "/api.camera.v1.Camera/ListCameraByRegion"
 const OperationCameraUpdateCamera = "/api.camera.v1.Camera/UpdateCamera"
@@ -30,6 +31,7 @@ type CameraHTTPServer interface {
 	CreateCamera(context.Context, *CreateCameraRequest) (*CreateCameraReply, error)
 	DeleteCamera(context.Context, *DeleteCameraRequest) (*DeleteCameraReply, error)
 	GetCamera(context.Context, *GetCameraRequest) (*GetCameraReply, error)
+	GetCameraByGBInfo(context.Context, *GetCameraByGBInfoRequest) (*GetCameraByGBInfoReply, error)
 	ListCameraByKey(context.Context, *ListCameraByKeyRequest) (*ListCameraByKeyReply, error)
 	ListCameraByRegion(context.Context, *ListCameraByRegionRequest) (*ListCameraByRegionReply, error)
 	UpdateCamera(context.Context, *UpdateCameraRequest) (*UpdateCameraReply, error)
@@ -41,6 +43,7 @@ func RegisterCameraHTTPServer(s *http.Server, srv CameraHTTPServer) {
 	r.POST("/api/v1/camera/{id}", _Camera_UpdateCamera0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/camera/{id}", _Camera_DeleteCamera0_HTTP_Handler(srv))
 	r.GET("/api/v1/camera/{id}", _Camera_GetCamera0_HTTP_Handler(srv))
+	r.POST("/api/v1/camera/gb", _Camera_GetCameraByGBInfo0_HTTP_Handler(srv))
 	r.GET("/api/v1/cameras/{id}", _Camera_ListCameraByRegion0_HTTP_Handler(srv))
 	r.GET("/api/v1/cameras/key/{key}", _Camera_ListCameraByKey0_HTTP_Handler(srv))
 }
@@ -130,6 +133,25 @@ func _Camera_GetCamera0_HTTP_Handler(srv CameraHTTPServer) func(ctx http.Context
 	}
 }
 
+func _Camera_GetCameraByGBInfo0_HTTP_Handler(srv CameraHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetCameraByGBInfoRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationCameragetCameraByGBInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetCameraByGBInfo(ctx, req.(*GetCameraByGBInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetCameraByGBInfoReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Camera_ListCameraByRegion0_HTTP_Handler(srv CameraHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListCameraByRegionRequest
@@ -178,6 +200,7 @@ type CameraHTTPClient interface {
 	CreateCamera(ctx context.Context, req *CreateCameraRequest, opts ...http.CallOption) (rsp *CreateCameraReply, err error)
 	DeleteCamera(ctx context.Context, req *DeleteCameraRequest, opts ...http.CallOption) (rsp *DeleteCameraReply, err error)
 	GetCamera(ctx context.Context, req *GetCameraRequest, opts ...http.CallOption) (rsp *GetCameraReply, err error)
+	GetCameraByGBInfo(ctx context.Context, req *GetCameraByGBInfoRequest, opts ...http.CallOption) (rsp *GetCameraByGBInfoReply, err error)
 	ListCameraByKey(ctx context.Context, req *ListCameraByKeyRequest, opts ...http.CallOption) (rsp *ListCameraByKeyReply, err error)
 	ListCameraByRegion(ctx context.Context, req *ListCameraByRegionRequest, opts ...http.CallOption) (rsp *ListCameraByRegionReply, err error)
 	UpdateCamera(ctx context.Context, req *UpdateCameraRequest, opts ...http.CallOption) (rsp *UpdateCameraReply, err error)
@@ -224,6 +247,19 @@ func (c *CameraHTTPClientImpl) GetCamera(ctx context.Context, in *GetCameraReque
 	opts = append(opts, http.Operation(OperationCameraGetCamera))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *CameraHTTPClientImpl) GetCameraByGBInfo(ctx context.Context, in *GetCameraByGBInfoRequest, opts ...http.CallOption) (*GetCameraByGBInfoReply, error) {
+	var out GetCameraByGBInfoReply
+	pattern := "/api/v1/camera/gb"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationCameragetCameraByGBInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

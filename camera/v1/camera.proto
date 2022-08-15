@@ -30,6 +30,12 @@ service Camera {
 			get: "/api/v1/camera/{id}"
 		};
 	}
+	rpc getCameraByGBInfo(GetCameraByGBInfoRequest) returns (GetCameraByGBInfoReply) {
+		option (google.api.http) = {
+			post: "/api/v1/camera/gb"
+			body: "*"
+		};
+	}
 	rpc ListCameraByRegion (ListCameraByRegionRequest) returns (ListCameraByRegionReply) {
 		option (google.api.http) = {
 			get: "/api/v1/cameras/{id}"
@@ -52,7 +58,6 @@ enum Manufacture {
 	Hik = 2;      // 海康
 	DaHua = 3;    // 大华
 }
-
 message Instance {
 	string id = 1; // 点位ID
 	google.protobuf.Timestamp created = 2; // 创建时间
@@ -123,6 +128,14 @@ message GetCameraReply {
 	Instance camera = 1;
 }
 
+message GetCameraByGBInfoRequest {
+	string device = 1;
+	string channel = 2;
+}
+message GetCameraByGBInfoReply {
+	Instance image = 1;
+}
+
 message ListCameraByRegionRequest {
 	uint32 id = 1;
 	uint32 index = 2;
@@ -141,7 +154,6 @@ message ListCameraByKeyRequest {
 	uint32 index = 2;
 	uint32 size = 3;
 }
-
 message ListCameraByKeyReply {
 	repeated Instance camera = 1;
 	uint32 index = 2;

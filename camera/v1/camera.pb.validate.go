@@ -1107,6 +1107,243 @@ var _ interface {
 	ErrorName() string
 } = GetCameraReplyValidationError{}
 
+// Validate checks the field values on GetCameraByGBInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCameraByGBInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCameraByGBInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCameraByGBInfoRequestMultiError, or nil if none found.
+func (m *GetCameraByGBInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCameraByGBInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Device
+
+	// no validation rules for Channel
+
+	if len(errors) > 0 {
+		return GetCameraByGBInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCameraByGBInfoRequestMultiError is an error wrapping multiple validation
+// errors returned by GetCameraByGBInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetCameraByGBInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCameraByGBInfoRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCameraByGBInfoRequestMultiError) AllErrors() []error { return m }
+
+// GetCameraByGBInfoRequestValidationError is the validation error returned by
+// GetCameraByGBInfoRequest.Validate if the designated constraints aren't met.
+type GetCameraByGBInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCameraByGBInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCameraByGBInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCameraByGBInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCameraByGBInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCameraByGBInfoRequestValidationError) ErrorName() string {
+	return "GetCameraByGBInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCameraByGBInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCameraByGBInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCameraByGBInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCameraByGBInfoRequestValidationError{}
+
+// Validate checks the field values on GetCameraByGBInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCameraByGBInfoReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetCameraByGBInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCameraByGBInfoReplyMultiError, or nil if none found.
+func (m *GetCameraByGBInfoReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetCameraByGBInfoReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetImage()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetCameraByGBInfoReplyValidationError{
+					field:  "Image",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetCameraByGBInfoReplyValidationError{
+					field:  "Image",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetImage()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetCameraByGBInfoReplyValidationError{
+				field:  "Image",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetCameraByGBInfoReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCameraByGBInfoReplyMultiError is an error wrapping multiple validation
+// errors returned by GetCameraByGBInfoReply.ValidateAll() if the designated
+// constraints aren't met.
+type GetCameraByGBInfoReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCameraByGBInfoReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCameraByGBInfoReplyMultiError) AllErrors() []error { return m }
+
+// GetCameraByGBInfoReplyValidationError is the validation error returned by
+// GetCameraByGBInfoReply.Validate if the designated constraints aren't met.
+type GetCameraByGBInfoReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCameraByGBInfoReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCameraByGBInfoReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCameraByGBInfoReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCameraByGBInfoReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCameraByGBInfoReplyValidationError) ErrorName() string {
+	return "GetCameraByGBInfoReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCameraByGBInfoReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCameraByGBInfoReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCameraByGBInfoReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCameraByGBInfoReplyValidationError{}
+
 // Validate checks the field values on ListCameraByRegionRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
