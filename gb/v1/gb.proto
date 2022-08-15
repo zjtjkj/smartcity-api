@@ -57,6 +57,12 @@ service GB {
       body: "*"
     };
   }
+  rpc GetChannelById (GetChannelByIdRequest) returns (GetChannelByIdReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/channel/find"
+      body: "*"
+    };
+  }
 }
 
 message Group {
@@ -106,7 +112,7 @@ message ListGroupsReply {
 }
 
 message AddChannelRequest {
-  uint32 id = 1;
+  uint32 group_id = 1;
   message Channel {
     string channel_id = 2;
     string device_id = 3;
@@ -140,5 +146,13 @@ message GetChannelRequest {
   uint32 channel_id = 1;
 }
 message GetChannelReply {
+  Channel channel = 1;
+}
+
+message GetChannelByIdRequest {
+  string channel_id = 1;
+  string device_id = 2;
+}
+message GetChannelByIdReply {
   Channel channel = 1;
 }

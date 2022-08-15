@@ -30,6 +30,7 @@ type GBClient interface {
 	DeleteChannel(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*DeleteChannelReply, error)
 	ListChannels(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsReply, error)
 	GetChannel(ctx context.Context, in *GetChannelRequest, opts ...grpc.CallOption) (*GetChannelReply, error)
+	GetChannelById(ctx context.Context, in *GetChannelByIdRequest, opts ...grpc.CallOption) (*GetChannelByIdReply, error)
 }
 
 type gBClient struct {
@@ -112,6 +113,15 @@ func (c *gBClient) GetChannel(ctx context.Context, in *GetChannelRequest, opts .
 	return out, nil
 }
 
+func (c *gBClient) GetChannelById(ctx context.Context, in *GetChannelByIdRequest, opts ...grpc.CallOption) (*GetChannelByIdReply, error) {
+	out := new(GetChannelByIdReply)
+	err := c.cc.Invoke(ctx, "/api.gb.v1.GB/GetChannelById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GBServer is the server API for GB service.
 // All implementations must embed UnimplementedGBServer
 // for forward compatibility
@@ -124,6 +134,7 @@ type GBServer interface {
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelReply, error)
 	ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsReply, error)
 	GetChannel(context.Context, *GetChannelRequest) (*GetChannelReply, error)
+	GetChannelById(context.Context, *GetChannelByIdRequest) (*GetChannelByIdReply, error)
 	mustEmbedUnimplementedGBServer()
 }
 
@@ -154,6 +165,9 @@ func (UnimplementedGBServer) ListChannels(context.Context, *ListChannelsRequest)
 }
 func (UnimplementedGBServer) GetChannel(context.Context, *GetChannelRequest) (*GetChannelReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChannel not implemented")
+}
+func (UnimplementedGBServer) GetChannelById(context.Context, *GetChannelByIdRequest) (*GetChannelByIdReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChannelById not implemented")
 }
 func (UnimplementedGBServer) mustEmbedUnimplementedGBServer() {}
 
@@ -312,6 +326,24 @@ func _GB_GetChannel_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GB_GetChannelById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChannelByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GBServer).GetChannelById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.gb.v1.GB/GetChannelById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GBServer).GetChannelById(ctx, req.(*GetChannelByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GB_ServiceDesc is the grpc.ServiceDesc for GB service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -350,6 +382,10 @@ var GB_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetChannel",
 			Handler:    _GB_GetChannel_Handler,
+		},
+		{
+			MethodName: "GetChannelById",
+			Handler:    _GB_GetChannelById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
