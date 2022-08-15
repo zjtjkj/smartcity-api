@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package camera.v1;
+
+option go_package = "./api/camera/v1;v1";
+
+enum ErrorReason {
+  CAMERA_NOT_FOUND = 0;
+}
