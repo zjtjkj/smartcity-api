@@ -133,7 +133,7 @@ message GetCameraByGBInfoRequest {
 	string channel = 2;
 }
 message GetCameraByGBInfoReply {
-	Instance image = 1;
+	Instance Camera = 1;
 }
 
 message ListCameraByRegionRequest {

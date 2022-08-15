@@ -1236,11 +1236,11 @@ func (m *GetCameraByGBInfoReply) validate(all bool) error {
 	var errors []error
 
 	if all {
-		switch v := interface{}(m.GetImage()).(type) {
+		switch v := interface{}(m.GetCamera()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, GetCameraByGBInfoReplyValidationError{
-					field:  "Image",
+					field:  "Camera",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1248,16 +1248,16 @@ func (m *GetCameraByGBInfoReply) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, GetCameraByGBInfoReplyValidationError{
-					field:  "Image",
+					field:  "Camera",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetImage()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetCamera()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return GetCameraByGBInfoReplyValidationError{
-				field:  "Image",
+				field:  "Camera",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
