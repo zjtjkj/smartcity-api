@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package api.mission.v1;
+
+option go_package = "mission/api/mission/v1;v1";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service Mission {
+	rpc CreateMission (CreateMissionRequest) returns (CreateMissionReply) {
+		option (google.api.http) = {
+			put: "/api/v1/mission"
+			body: "*"
+		};
+	}
+	rpc UpdateMission (UpdateMissionRequest) returns (UpdateMissionReply);
+	rpc DeleteMission (DeleteMissionRequest) returns (DeleteMissionReply);
+	rpc GetMission (GetMissionRequest) returns (GetMissionReply);
+	rpc ListMission (ListMissionRequest) returns (ListMissionReply);
+}
+
+message Point {
+	uint32 x = 1;
+	uint32 y = 2;
+}
+
+message Area {
+	repeated Point points = 1;
+}
+
+message CreateMissionRequest {
+	string name = 1;
+	string camera = 2;
+	bool movable = 3;
+	uint32 preset = 4;
+}
+message CreateMissionReply {}
+
+message UpdateMissionRequest {
+	uint32 id = 1;
+	string name = 2;
+}
+message UpdateMissionReply {}
+
+message DeleteMissionRequest {
+	uint32 id = 1;
+}
+message DeleteMissionReply {}
+
+message GetMissionRequest {
+	uint32 id = 1;
+}
+
+message Instance {
+	uint32 id = 1;
+	google.protobuf.Timestamp created = 2;
+	string name = 3;
+	uint32 camera = 4;
+	uint32 preset = 5;
+	uint32 module = 6;
+	repeated Area areas = 7;
+	uint32 start = 8;
+	uint32 end = 9;
+	map<string, string> config = 10;
+}
+
+message GetMissionReply {
+	Instance mission = 1;
+}
+
+message ListMissionRequest {}
+message ListMissionReply {
+	repeated Instance missions = 1;
+}
