@@ -26,7 +26,7 @@ type MissionClient interface {
 	UpdateMission(ctx context.Context, in *UpdateMissionRequest, opts ...grpc.CallOption) (*UpdateMissionReply, error)
 	DeleteMission(ctx context.Context, in *DeleteMissionRequest, opts ...grpc.CallOption) (*DeleteMissionReply, error)
 	GetMission(ctx context.Context, in *GetMissionRequest, opts ...grpc.CallOption) (*GetMissionReply, error)
-	ListMission(ctx context.Context, in *ListMissionRequest, opts ...grpc.CallOption) (*ListMissionReply, error)
+	ListMissionByCameraAndPreset(ctx context.Context, in *ListMissionByCameraAndPresetRequest, opts ...grpc.CallOption) (*ListMissionByCameraAndPresetReply, error)
 }
 
 type missionClient struct {
@@ -73,9 +73,9 @@ func (c *missionClient) GetMission(ctx context.Context, in *GetMissionRequest, o
 	return out, nil
 }
 
-func (c *missionClient) ListMission(ctx context.Context, in *ListMissionRequest, opts ...grpc.CallOption) (*ListMissionReply, error) {
-	out := new(ListMissionReply)
-	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ListMission", in, out, opts...)
+func (c *missionClient) ListMissionByCameraAndPreset(ctx context.Context, in *ListMissionByCameraAndPresetRequest, opts ...grpc.CallOption) (*ListMissionByCameraAndPresetReply, error) {
+	out := new(ListMissionByCameraAndPresetReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ListMissionByCameraAndPreset", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ type MissionServer interface {
 	UpdateMission(context.Context, *UpdateMissionRequest) (*UpdateMissionReply, error)
 	DeleteMission(context.Context, *DeleteMissionRequest) (*DeleteMissionReply, error)
 	GetMission(context.Context, *GetMissionRequest) (*GetMissionReply, error)
-	ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error)
+	ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error)
 	mustEmbedUnimplementedMissionServer()
 }
 
@@ -110,8 +110,8 @@ func (UnimplementedMissionServer) DeleteMission(context.Context, *DeleteMissionR
 func (UnimplementedMissionServer) GetMission(context.Context, *GetMissionRequest) (*GetMissionReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMission not implemented")
 }
-func (UnimplementedMissionServer) ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMission not implemented")
+func (UnimplementedMissionServer) ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMissionByCameraAndPreset not implemented")
 }
 func (UnimplementedMissionServer) mustEmbedUnimplementedMissionServer() {}
 
@@ -198,20 +198,20 @@ func _Mission_GetMission_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Mission_ListMission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMissionRequest)
+func _Mission_ListMissionByCameraAndPreset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMissionByCameraAndPresetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MissionServer).ListMission(ctx, in)
+		return srv.(MissionServer).ListMissionByCameraAndPreset(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.mission.v1.Mission/ListMission",
+		FullMethod: "/api.mission.v1.Mission/ListMissionByCameraAndPreset",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MissionServer).ListMission(ctx, req.(*ListMissionRequest))
+		return srv.(MissionServer).ListMissionByCameraAndPreset(ctx, req.(*ListMissionByCameraAndPresetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -240,8 +240,8 @@ var Mission_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Mission_GetMission_Handler,
 		},
 		{
-			MethodName: "ListMission",
-			Handler:    _Mission_ListMission_Handler,
+			MethodName: "ListMissionByCameraAndPreset",
+			Handler:    _Mission_ListMissionByCameraAndPreset_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
