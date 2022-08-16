@@ -58,10 +58,11 @@ message Instance {
 	string camera = 4;
 	uint32 preset = 5;
 	uint32 module = 6;
-	repeated Area areas = 7;
-	uint32 start = 8;
-	uint32 end = 9;
-	map<string, string> config = 10;
+	bool movable = 7;
+	repeated Area areas = 8;
+	uint32 start = 9;
+	uint32 end = 10;
+	map<string, string> config = 11;
 }
 
 message GetMissionReply {
