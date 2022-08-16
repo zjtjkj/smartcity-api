@@ -68,7 +68,10 @@ message GetMissionReply {
 	Instance mission = 1;
 }
 
-message ListMissionRequest {}
+message ListMissionRequest {
+	string id = 1;
+	uint32 preset = 2;
+}
 message ListMissionReply {
 	repeated Instance missions = 1;
 }
