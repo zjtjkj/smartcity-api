@@ -55,7 +55,7 @@ message Instance {
 	uint32 id = 1;
 	google.protobuf.Timestamp created = 2;
 	string name = 3;
-	uint32 camera = 4;
+	string camera = 4;
 	uint32 preset = 5;
 	uint32 module = 6;
 	repeated Area areas = 7;
