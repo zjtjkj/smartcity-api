@@ -75,7 +75,7 @@ message CreateMissionRequest {
 	uint32 preset = 4;
 }
 message CreateMissionReply {
-	uint32 id = 1;
+	Instance mission = 1;
 }
 
 message UpdateMissionRequest {
