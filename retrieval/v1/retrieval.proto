@@ -40,13 +40,14 @@ message Event {
 	string eid = 2; // the first event of one alert
 	int64 mid = 3; // mission id
 	int64 created_at = 4;
-	string type = 5;
-	bool finished = 6;
+	int64 updated_at = 5;
+	string type = 6;
+	bool finished = 7;
 	message Alert {
 		string id = 1;
 		int64 created_at = 2;
 	}
-	repeated Alert alerts = 7;
+	repeated Alert alerts = 8;
 }
 
 message FindEventsRequest {
