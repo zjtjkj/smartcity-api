@@ -22,6 +22,7 @@ const _ = http.SupportPackageIsVersion1
 const OperationMissionCreateMission = "/api.mission.v1.Mission/CreateMission"
 const OperationMissionDeleteMission = "/api.mission.v1.Mission/DeleteMission"
 const OperationMissionGetMission = "/api.mission.v1.Mission/GetMission"
+const OperationMissionListMissionByCamera = "/api.mission.v1.Mission/ListMissionByCamera"
 const OperationMissionListMissionByCameraAndPreset = "/api.mission.v1.Mission/ListMissionByCameraAndPreset"
 const OperationMissionUpdateMission = "/api.mission.v1.Mission/UpdateMission"
 
@@ -29,6 +30,7 @@ type MissionHTTPServer interface {
 	CreateMission(context.Context, *CreateMissionRequest) (*CreateMissionReply, error)
 	DeleteMission(context.Context, *DeleteMissionRequest) (*DeleteMissionReply, error)
 	GetMission(context.Context, *GetMissionRequest) (*GetMissionReply, error)
+	ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error)
 	ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error)
 	UpdateMission(context.Context, *UpdateMissionRequest) (*UpdateMissionReply, error)
 }
@@ -40,6 +42,7 @@ func RegisterMissionHTTPServer(s *http.Server, srv MissionHTTPServer) {
 	r.DELETE("/api/v1/mission/{id}", _Mission_DeleteMission0_HTTP_Handler(srv))
 	r.GET("/api/v1/mission/{id}", _Mission_GetMission0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/cameraPreset", _Mission_ListMissionByCameraAndPreset0_HTTP_Handler(srv))
+	r.POST("/api/v1/mission/camera/{id}", _Mission_ListMissionByCamera0_HTTP_Handler(srv))
 }
 
 func _Mission_CreateMission0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
@@ -146,10 +149,33 @@ func _Mission_ListMissionByCameraAndPreset0_HTTP_Handler(srv MissionHTTPServer) 
 	}
 }
 
+func _Mission_ListMissionByCamera0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListMissionByCameraRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionListMissionByCamera)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListMissionByCamera(ctx, req.(*ListMissionByCameraRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListMissionByCameraReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type MissionHTTPClient interface {
 	CreateMission(ctx context.Context, req *CreateMissionRequest, opts ...http.CallOption) (rsp *CreateMissionReply, err error)
 	DeleteMission(ctx context.Context, req *DeleteMissionRequest, opts ...http.CallOption) (rsp *DeleteMissionReply, err error)
 	GetMission(ctx context.Context, req *GetMissionRequest, opts ...http.CallOption) (rsp *GetMissionReply, err error)
+	ListMissionByCamera(ctx context.Context, req *ListMissionByCameraRequest, opts ...http.CallOption) (rsp *ListMissionByCameraReply, err error)
 	ListMissionByCameraAndPreset(ctx context.Context, req *ListMissionByCameraAndPresetRequest, opts ...http.CallOption) (rsp *ListMissionByCameraAndPresetReply, err error)
 	UpdateMission(ctx context.Context, req *UpdateMissionRequest, opts ...http.CallOption) (rsp *UpdateMissionReply, err error)
 }
@@ -195,6 +221,19 @@ func (c *MissionHTTPClientImpl) GetMission(ctx context.Context, in *GetMissionRe
 	opts = append(opts, http.Operation(OperationMissionGetMission))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MissionHTTPClientImpl) ListMissionByCamera(ctx context.Context, in *ListMissionByCameraRequest, opts ...http.CallOption) (*ListMissionByCameraReply, error) {
+	var out ListMissionByCameraReply
+	pattern := "/api/v1/mission/camera/{id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationMissionListMissionByCamera))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

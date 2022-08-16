@@ -35,6 +35,12 @@ service Mission {
 			body: "*"
 		};
 	}
+	rpc ListMissionByCamera (ListMissionByCameraRequest) returns (ListMissionByCameraReply) {
+		option (google.api.http) = {
+			post: "/api/v1/mission/camera/{id}"
+			body: "*"
+		};
+	}
 }
 
 message Point {
@@ -94,5 +100,12 @@ message ListMissionByCameraAndPresetRequest {
 	uint32 preset = 2;
 }
 message ListMissionByCameraAndPresetReply {
+	repeated Instance missions = 1;
+}
+
+message ListMissionByCameraRequest {
+	string id = 1;
+}
+message ListMissionByCameraReply {
 	repeated Instance missions = 1;
 }

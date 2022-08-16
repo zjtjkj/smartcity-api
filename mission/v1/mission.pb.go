@@ -742,6 +742,100 @@ func (x *ListMissionByCameraAndPresetReply) GetMissions() []*Instance {
 	return nil
 }
 
+type ListMissionByCameraRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *ListMissionByCameraRequest) Reset() {
+	*x = ListMissionByCameraRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mission_v1_mission_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMissionByCameraRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMissionByCameraRequest) ProtoMessage() {}
+
+func (x *ListMissionByCameraRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_mission_v1_mission_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMissionByCameraRequest.ProtoReflect.Descriptor instead.
+func (*ListMissionByCameraRequest) Descriptor() ([]byte, []int) {
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ListMissionByCameraRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type ListMissionByCameraReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Missions []*Instance `protobuf:"bytes,1,rep,name=missions,proto3" json:"missions,omitempty"`
+}
+
+func (x *ListMissionByCameraReply) Reset() {
+	*x = ListMissionByCameraReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mission_v1_mission_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMissionByCameraReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMissionByCameraReply) ProtoMessage() {}
+
+func (x *ListMissionByCameraReply) ProtoReflect() protoreflect.Message {
+	mi := &file_mission_v1_mission_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMissionByCameraReply.ProtoReflect.Descriptor instead.
+func (*ListMissionByCameraReply) Descriptor() ([]byte, []int) {
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ListMissionByCameraReply) GetMissions() []*Instance {
+	if x != nil {
+		return x.Missions
+	}
+	return nil
+}
+
 var File_mission_v1_mission_proto protoreflect.FileDescriptor
 
 var file_mission_v1_mission_proto_rawDesc = []byte{
@@ -819,7 +913,15 @@ var file_mission_v1_mission_proto_rawDesc = []byte{
 	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x34, 0x0a, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
 	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x69,
 	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63,
-	0x65, 0x52, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x32, 0x97, 0x05, 0x0a, 0x07,
+	0x65, 0x52, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x2c, 0x0a, 0x1a, 0x4c,
+	0x69, 0x73, 0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x43, 0x61, 0x6d, 0x65,
+	0x72, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x50, 0x0a, 0x18, 0x4c, 0x69, 0x73,
+	0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x34, 0x0a, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63,
+	0x65, 0x52, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x32, 0xad, 0x06, 0x0a, 0x07,
 	0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x75, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74,
 	0x65, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d,
 	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
@@ -861,9 +963,18 @@ var file_mission_v1_mission_proto_rawDesc = []byte{
 	0x64, 0x50, 0x72, 0x65, 0x73, 0x65, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x27, 0x82, 0xd3,
 	0xe4, 0x93, 0x02, 0x21, 0x22, 0x1c, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x69,
 	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2f, 0x63, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x50, 0x72, 0x65, 0x73,
-	0x65, 0x74, 0x3a, 0x01, 0x2a, 0x42, 0x1b, 0x5a, 0x19, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x3b,
-	0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x74, 0x3a, 0x01, 0x2a, 0x12, 0x93, 0x01, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x12, 0x2a, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x43, 0x61, 0x6d, 0x65,
+	0x72, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x52, 0x65,
+	0x70, 0x6c, 0x79, 0x22, 0x26, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x20, 0x22, 0x1b, 0x2f, 0x61, 0x70,
+	0x69, 0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2f, 0x63, 0x61, 0x6d,
+	0x65, 0x72, 0x61, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x3a, 0x01, 0x2a, 0x42, 0x1b, 0x5a, 0x19, 0x6d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -878,7 +989,7 @@ func file_mission_v1_mission_proto_rawDescGZIP() []byte {
 	return file_mission_v1_mission_proto_rawDescData
 }
 
-var file_mission_v1_mission_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_mission_v1_mission_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_mission_v1_mission_proto_goTypes = []interface{}{
 	(*Point)(nil),                               // 0: api.mission.v1.Point
 	(*Area)(nil),                                // 1: api.mission.v1.Area
@@ -893,31 +1004,36 @@ var file_mission_v1_mission_proto_goTypes = []interface{}{
 	(*GetMissionReply)(nil),                     // 10: api.mission.v1.GetMissionReply
 	(*ListMissionByCameraAndPresetRequest)(nil), // 11: api.mission.v1.ListMissionByCameraAndPresetRequest
 	(*ListMissionByCameraAndPresetReply)(nil),   // 12: api.mission.v1.ListMissionByCameraAndPresetReply
-	nil,                           // 13: api.mission.v1.Instance.ConfigEntry
-	(*timestamppb.Timestamp)(nil), // 14: google.protobuf.Timestamp
+	(*ListMissionByCameraRequest)(nil),          // 13: api.mission.v1.ListMissionByCameraRequest
+	(*ListMissionByCameraReply)(nil),            // 14: api.mission.v1.ListMissionByCameraReply
+	nil,                                         // 15: api.mission.v1.Instance.ConfigEntry
+	(*timestamppb.Timestamp)(nil),               // 16: google.protobuf.Timestamp
 }
 var file_mission_v1_mission_proto_depIdxs = []int32{
 	0,  // 0: api.mission.v1.Area.points:type_name -> api.mission.v1.Point
-	14, // 1: api.mission.v1.Instance.created:type_name -> google.protobuf.Timestamp
+	16, // 1: api.mission.v1.Instance.created:type_name -> google.protobuf.Timestamp
 	1,  // 2: api.mission.v1.Instance.areas:type_name -> api.mission.v1.Area
-	13, // 3: api.mission.v1.Instance.config:type_name -> api.mission.v1.Instance.ConfigEntry
+	15, // 3: api.mission.v1.Instance.config:type_name -> api.mission.v1.Instance.ConfigEntry
 	2,  // 4: api.mission.v1.GetMissionReply.mission:type_name -> api.mission.v1.Instance
 	2,  // 5: api.mission.v1.ListMissionByCameraAndPresetReply.missions:type_name -> api.mission.v1.Instance
-	3,  // 6: api.mission.v1.Mission.CreateMission:input_type -> api.mission.v1.CreateMissionRequest
-	5,  // 7: api.mission.v1.Mission.UpdateMission:input_type -> api.mission.v1.UpdateMissionRequest
-	7,  // 8: api.mission.v1.Mission.DeleteMission:input_type -> api.mission.v1.DeleteMissionRequest
-	9,  // 9: api.mission.v1.Mission.GetMission:input_type -> api.mission.v1.GetMissionRequest
-	11, // 10: api.mission.v1.Mission.ListMissionByCameraAndPreset:input_type -> api.mission.v1.ListMissionByCameraAndPresetRequest
-	4,  // 11: api.mission.v1.Mission.CreateMission:output_type -> api.mission.v1.CreateMissionReply
-	6,  // 12: api.mission.v1.Mission.UpdateMission:output_type -> api.mission.v1.UpdateMissionReply
-	8,  // 13: api.mission.v1.Mission.DeleteMission:output_type -> api.mission.v1.DeleteMissionReply
-	10, // 14: api.mission.v1.Mission.GetMission:output_type -> api.mission.v1.GetMissionReply
-	12, // 15: api.mission.v1.Mission.ListMissionByCameraAndPreset:output_type -> api.mission.v1.ListMissionByCameraAndPresetReply
-	11, // [11:16] is the sub-list for method output_type
-	6,  // [6:11] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	2,  // 6: api.mission.v1.ListMissionByCameraReply.missions:type_name -> api.mission.v1.Instance
+	3,  // 7: api.mission.v1.Mission.CreateMission:input_type -> api.mission.v1.CreateMissionRequest
+	5,  // 8: api.mission.v1.Mission.UpdateMission:input_type -> api.mission.v1.UpdateMissionRequest
+	7,  // 9: api.mission.v1.Mission.DeleteMission:input_type -> api.mission.v1.DeleteMissionRequest
+	9,  // 10: api.mission.v1.Mission.GetMission:input_type -> api.mission.v1.GetMissionRequest
+	11, // 11: api.mission.v1.Mission.ListMissionByCameraAndPreset:input_type -> api.mission.v1.ListMissionByCameraAndPresetRequest
+	13, // 12: api.mission.v1.Mission.ListMissionByCamera:input_type -> api.mission.v1.ListMissionByCameraRequest
+	4,  // 13: api.mission.v1.Mission.CreateMission:output_type -> api.mission.v1.CreateMissionReply
+	6,  // 14: api.mission.v1.Mission.UpdateMission:output_type -> api.mission.v1.UpdateMissionReply
+	8,  // 15: api.mission.v1.Mission.DeleteMission:output_type -> api.mission.v1.DeleteMissionReply
+	10, // 16: api.mission.v1.Mission.GetMission:output_type -> api.mission.v1.GetMissionReply
+	12, // 17: api.mission.v1.Mission.ListMissionByCameraAndPreset:output_type -> api.mission.v1.ListMissionByCameraAndPresetReply
+	14, // 18: api.mission.v1.Mission.ListMissionByCamera:output_type -> api.mission.v1.ListMissionByCameraReply
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_mission_v1_mission_proto_init() }
@@ -1082,6 +1198,30 @@ func file_mission_v1_mission_proto_init() {
 				return nil
 			}
 		}
+		file_mission_v1_mission_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMissionByCameraRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mission_v1_mission_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMissionByCameraReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1089,7 +1229,7 @@ func file_mission_v1_mission_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mission_v1_mission_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
