@@ -99,7 +99,9 @@ message CreateAreaRequest {
 	string name = 2;
 	repeated Point points = 3;
 }
-message CreateAreaReply{}
+message CreateAreaReply{
+	Area area = 1;
+}
 
 message UpdateAreaRequest {
 	uint32 id = 1;
