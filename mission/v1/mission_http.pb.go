@@ -19,19 +19,27 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationMissionCreateArea = "/api.mission.v1.Mission/CreateArea"
 const OperationMissionCreateMission = "/api.mission.v1.Mission/CreateMission"
+const OperationMissionDeleteArea = "/api.mission.v1.Mission/DeleteArea"
 const OperationMissionDeleteMission = "/api.mission.v1.Mission/DeleteMission"
 const OperationMissionGetMission = "/api.mission.v1.Mission/GetMission"
+const OperationMissionListArea = "/api.mission.v1.Mission/ListArea"
 const OperationMissionListMissionByCamera = "/api.mission.v1.Mission/ListMissionByCamera"
 const OperationMissionListMissionByCameraAndPreset = "/api.mission.v1.Mission/ListMissionByCameraAndPreset"
+const OperationMissionUpdateArea = "/api.mission.v1.Mission/UpdateArea"
 const OperationMissionUpdateMission = "/api.mission.v1.Mission/UpdateMission"
 
 type MissionHTTPServer interface {
+	CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error)
 	CreateMission(context.Context, *CreateMissionRequest) (*CreateMissionReply, error)
+	DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error)
 	DeleteMission(context.Context, *DeleteMissionRequest) (*DeleteMissionReply, error)
 	GetMission(context.Context, *GetMissionRequest) (*GetMissionReply, error)
+	ListArea(context.Context, *ListAreaRequest) (*ListAreaReply, error)
 	ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error)
 	ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error)
+	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error)
 	UpdateMission(context.Context, *UpdateMissionRequest) (*UpdateMissionReply, error)
 }
 
@@ -43,6 +51,10 @@ func RegisterMissionHTTPServer(s *http.Server, srv MissionHTTPServer) {
 	r.GET("/api/v1/mission/{id}", _Mission_GetMission0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/cameraPreset", _Mission_ListMissionByCameraAndPreset0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/camera/{id}", _Mission_ListMissionByCamera0_HTTP_Handler(srv))
+	r.PUT("/api/v1/area", _Mission_CreateArea0_HTTP_Handler(srv))
+	r.POST("/api/v1/area/{id}", _Mission_UpdateArea0_HTTP_Handler(srv))
+	r.DELETE("/api/v1/area/{id}", _Mission_DeleteArea0_HTTP_Handler(srv))
+	r.GET("/api/v1/areas/{mission}", _Mission_ListArea0_HTTP_Handler(srv))
 }
 
 func _Mission_CreateMission0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
@@ -171,12 +183,101 @@ func _Mission_ListMissionByCamera0_HTTP_Handler(srv MissionHTTPServer) func(ctx 
 	}
 }
 
+func _Mission_CreateArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateAreaRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionCreateArea)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateArea(ctx, req.(*CreateAreaRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateAreaReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Mission_UpdateArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateAreaRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionUpdateArea)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateArea(ctx, req.(*UpdateAreaRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateAreaReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Mission_DeleteArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteAreaRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionDeleteArea)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteArea(ctx, req.(*DeleteAreaRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteAreaReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Mission_ListArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListAreaRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionListArea)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListArea(ctx, req.(*ListAreaRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListAreaReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type MissionHTTPClient interface {
+	CreateArea(ctx context.Context, req *CreateAreaRequest, opts ...http.CallOption) (rsp *CreateAreaReply, err error)
 	CreateMission(ctx context.Context, req *CreateMissionRequest, opts ...http.CallOption) (rsp *CreateMissionReply, err error)
+	DeleteArea(ctx context.Context, req *DeleteAreaRequest, opts ...http.CallOption) (rsp *DeleteAreaReply, err error)
 	DeleteMission(ctx context.Context, req *DeleteMissionRequest, opts ...http.CallOption) (rsp *DeleteMissionReply, err error)
 	GetMission(ctx context.Context, req *GetMissionRequest, opts ...http.CallOption) (rsp *GetMissionReply, err error)
+	ListArea(ctx context.Context, req *ListAreaRequest, opts ...http.CallOption) (rsp *ListAreaReply, err error)
 	ListMissionByCamera(ctx context.Context, req *ListMissionByCameraRequest, opts ...http.CallOption) (rsp *ListMissionByCameraReply, err error)
 	ListMissionByCameraAndPreset(ctx context.Context, req *ListMissionByCameraAndPresetRequest, opts ...http.CallOption) (rsp *ListMissionByCameraAndPresetReply, err error)
+	UpdateArea(ctx context.Context, req *UpdateAreaRequest, opts ...http.CallOption) (rsp *UpdateAreaReply, err error)
 	UpdateMission(ctx context.Context, req *UpdateMissionRequest, opts ...http.CallOption) (rsp *UpdateMissionReply, err error)
 }
 
@@ -188,6 +289,19 @@ func NewMissionHTTPClient(client *http.Client) MissionHTTPClient {
 	return &MissionHTTPClientImpl{client}
 }
 
+func (c *MissionHTTPClientImpl) CreateArea(ctx context.Context, in *CreateAreaRequest, opts ...http.CallOption) (*CreateAreaReply, error) {
+	var out CreateAreaReply
+	pattern := "/api/v1/area"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationMissionCreateArea))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *MissionHTTPClientImpl) CreateMission(ctx context.Context, in *CreateMissionRequest, opts ...http.CallOption) (*CreateMissionReply, error) {
 	var out CreateMissionReply
 	pattern := "/api/v1/mission"
@@ -195,6 +309,19 @@ func (c *MissionHTTPClientImpl) CreateMission(ctx context.Context, in *CreateMis
 	opts = append(opts, http.Operation(OperationMissionCreateMission))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MissionHTTPClientImpl) DeleteArea(ctx context.Context, in *DeleteAreaRequest, opts ...http.CallOption) (*DeleteAreaReply, error) {
+	var out DeleteAreaReply
+	pattern := "/api/v1/area/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationMissionDeleteArea))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -227,6 +354,19 @@ func (c *MissionHTTPClientImpl) GetMission(ctx context.Context, in *GetMissionRe
 	return &out, err
 }
 
+func (c *MissionHTTPClientImpl) ListArea(ctx context.Context, in *ListAreaRequest, opts ...http.CallOption) (*ListAreaReply, error) {
+	var out ListAreaReply
+	pattern := "/api/v1/areas/{mission}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationMissionListArea))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *MissionHTTPClientImpl) ListMissionByCamera(ctx context.Context, in *ListMissionByCameraRequest, opts ...http.CallOption) (*ListMissionByCameraReply, error) {
 	var out ListMissionByCameraReply
 	pattern := "/api/v1/mission/camera/{id}"
@@ -245,6 +385,19 @@ func (c *MissionHTTPClientImpl) ListMissionByCameraAndPreset(ctx context.Context
 	pattern := "/api/v1/mission/cameraPreset"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationMissionListMissionByCameraAndPreset))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MissionHTTPClientImpl) UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...http.CallOption) (*UpdateAreaReply, error) {
+	var out UpdateAreaReply
+	pattern := "/api/v1/area/{id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationMissionUpdateArea))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

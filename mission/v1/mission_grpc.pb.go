@@ -28,6 +28,10 @@ type MissionClient interface {
 	GetMission(ctx context.Context, in *GetMissionRequest, opts ...grpc.CallOption) (*GetMissionReply, error)
 	ListMissionByCameraAndPreset(ctx context.Context, in *ListMissionByCameraAndPresetRequest, opts ...grpc.CallOption) (*ListMissionByCameraAndPresetReply, error)
 	ListMissionByCamera(ctx context.Context, in *ListMissionByCameraRequest, opts ...grpc.CallOption) (*ListMissionByCameraReply, error)
+	CreateArea(ctx context.Context, in *CreateAreaRequest, opts ...grpc.CallOption) (*CreateAreaReply, error)
+	UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaReply, error)
+	DeleteArea(ctx context.Context, in *DeleteAreaRequest, opts ...grpc.CallOption) (*DeleteAreaReply, error)
+	ListArea(ctx context.Context, in *ListAreaRequest, opts ...grpc.CallOption) (*ListAreaReply, error)
 }
 
 type missionClient struct {
@@ -92,6 +96,42 @@ func (c *missionClient) ListMissionByCamera(ctx context.Context, in *ListMission
 	return out, nil
 }
 
+func (c *missionClient) CreateArea(ctx context.Context, in *CreateAreaRequest, opts ...grpc.CallOption) (*CreateAreaReply, error) {
+	out := new(CreateAreaReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/CreateArea", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *missionClient) UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaReply, error) {
+	out := new(UpdateAreaReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/UpdateArea", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *missionClient) DeleteArea(ctx context.Context, in *DeleteAreaRequest, opts ...grpc.CallOption) (*DeleteAreaReply, error) {
+	out := new(DeleteAreaReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/DeleteArea", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *missionClient) ListArea(ctx context.Context, in *ListAreaRequest, opts ...grpc.CallOption) (*ListAreaReply, error) {
+	out := new(ListAreaReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ListArea", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MissionServer is the server API for Mission service.
 // All implementations must embed UnimplementedMissionServer
 // for forward compatibility
@@ -102,6 +142,10 @@ type MissionServer interface {
 	GetMission(context.Context, *GetMissionRequest) (*GetMissionReply, error)
 	ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error)
 	ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error)
+	CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error)
+	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error)
+	DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error)
+	ListArea(context.Context, *ListAreaRequest) (*ListAreaReply, error)
 	mustEmbedUnimplementedMissionServer()
 }
 
@@ -126,6 +170,18 @@ func (UnimplementedMissionServer) ListMissionByCameraAndPreset(context.Context, 
 }
 func (UnimplementedMissionServer) ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMissionByCamera not implemented")
+}
+func (UnimplementedMissionServer) CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateArea not implemented")
+}
+func (UnimplementedMissionServer) UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateArea not implemented")
+}
+func (UnimplementedMissionServer) DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteArea not implemented")
+}
+func (UnimplementedMissionServer) ListArea(context.Context, *ListAreaRequest) (*ListAreaReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListArea not implemented")
 }
 func (UnimplementedMissionServer) mustEmbedUnimplementedMissionServer() {}
 
@@ -248,6 +304,78 @@ func _Mission_ListMissionByCamera_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Mission_CreateArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAreaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).CreateArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/CreateArea",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).CreateArea(ctx, req.(*CreateAreaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Mission_UpdateArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAreaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).UpdateArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/UpdateArea",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).UpdateArea(ctx, req.(*UpdateAreaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Mission_DeleteArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAreaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).DeleteArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/DeleteArea",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).DeleteArea(ctx, req.(*DeleteAreaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Mission_ListArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAreaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).ListArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/ListArea",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).ListArea(ctx, req.(*ListAreaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Mission_ServiceDesc is the grpc.ServiceDesc for Mission service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -278,6 +406,22 @@ var Mission_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMissionByCamera",
 			Handler:    _Mission_ListMissionByCamera_Handler,
+		},
+		{
+			MethodName: "CreateArea",
+			Handler:    _Mission_CreateArea_Handler,
+		},
+		{
+			MethodName: "UpdateArea",
+			Handler:    _Mission_UpdateArea_Handler,
+		},
+		{
+			MethodName: "DeleteArea",
+			Handler:    _Mission_DeleteArea_Handler,
+		},
+		{
+			MethodName: "ListArea",
+			Handler:    _Mission_ListArea_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
