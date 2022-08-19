@@ -130,13 +130,6 @@ message StartPlayReply {
   string flv = 5;
   string rtsp = 6;
   string media_server_id = 7;
-  message Track {
-    bool ready = 1;
-    int32 fps = 2;
-    int32 width = 3;
-    int32 height = 4;
-  }
-  Track tracks = 8;
 }
 
 message StopPlayRequest {
@@ -157,13 +150,6 @@ message StartProxyReply {
   string flv = 3;
   string rtsp = 4;
   string media_server_id = 5;
-  message Track {
-    bool ready = 1;
-    int32 fps = 2;
-    int32 width = 3;
-    int32 height= 4;
-  }
-  Track track = 6;
 }
 
 message StopProxyRequest {
