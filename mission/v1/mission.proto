@@ -41,6 +41,12 @@ service Mission {
 			body: "*"
 		};
 	}
+	rpc ConfigMission(ConfigMissionRequest) returns (ConfigMissionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/mission/config/{id}"
+			body: "*"
+		};
+	}
 
 	rpc CreateArea(CreateAreaRequest) returns (CreateAreaReply) {
 		option (google.api.http) = {
@@ -66,6 +72,19 @@ service Mission {
 	}
 }
 
+message ConfigMissionRequest {
+	uint32 id = 1;
+	uint32 start = 2;
+	uint32 end = 3;
+	bool enable = 4;
+	bool reverse = 5;
+	uint32 mode = 6;
+	map<string, string> config = 7;
+	repeated uint32 modules = 8;
+
+}
+message ConfigMissionReply {}
+
 message Point {
 	uint32 x = 1;
 	uint32 y = 2;
@@ -86,12 +105,15 @@ message Instance {
 	string name = 3;
 	string camera = 4;
 	uint32 preset = 5;
-	repeated uint32 module = 6;
+	repeated uint32 modules = 6;
 	bool movable = 7;
 	bool configure = 8;
 	uint32 start = 9;
 	uint32 end = 10;
-	map<string, string> config = 11;
+	bool enable = 11;
+	bool reverse = 12;
+	uint32 Mode = 13;
+	map<string, string> config = 14;
 }
 
 

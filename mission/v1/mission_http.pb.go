@@ -19,6 +19,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationMissionConfigMission = "/api.mission.v1.Mission/ConfigMission"
 const OperationMissionCreateArea = "/api.mission.v1.Mission/CreateArea"
 const OperationMissionCreateMission = "/api.mission.v1.Mission/CreateMission"
 const OperationMissionDeleteArea = "/api.mission.v1.Mission/DeleteArea"
@@ -31,6 +32,7 @@ const OperationMissionUpdateArea = "/api.mission.v1.Mission/UpdateArea"
 const OperationMissionUpdateMission = "/api.mission.v1.Mission/UpdateMission"
 
 type MissionHTTPServer interface {
+	ConfigMission(context.Context, *ConfigMissionRequest) (*ConfigMissionReply, error)
 	CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error)
 	CreateMission(context.Context, *CreateMissionRequest) (*CreateMissionReply, error)
 	DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error)
@@ -51,6 +53,7 @@ func RegisterMissionHTTPServer(s *http.Server, srv MissionHTTPServer) {
 	r.GET("/api/v1/mission/{id}", _Mission_GetMission0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/cameraPreset", _Mission_ListMissionByCameraAndPreset0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/camera/{id}", _Mission_ListMissionByCamera0_HTTP_Handler(srv))
+	r.POST("/api/v1/mission/config/{id}", _Mission_ConfigMission0_HTTP_Handler(srv))
 	r.PUT("/api/v1/area", _Mission_CreateArea0_HTTP_Handler(srv))
 	r.POST("/api/v1/area/{id}", _Mission_UpdateArea0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/area/{id}", _Mission_DeleteArea0_HTTP_Handler(srv))
@@ -183,6 +186,28 @@ func _Mission_ListMissionByCamera0_HTTP_Handler(srv MissionHTTPServer) func(ctx 
 	}
 }
 
+func _Mission_ConfigMission0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ConfigMissionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionConfigMission)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ConfigMission(ctx, req.(*ConfigMissionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ConfigMissionReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Mission_CreateArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateAreaRequest
@@ -269,6 +294,7 @@ func _Mission_ListArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Contex
 }
 
 type MissionHTTPClient interface {
+	ConfigMission(ctx context.Context, req *ConfigMissionRequest, opts ...http.CallOption) (rsp *ConfigMissionReply, err error)
 	CreateArea(ctx context.Context, req *CreateAreaRequest, opts ...http.CallOption) (rsp *CreateAreaReply, err error)
 	CreateMission(ctx context.Context, req *CreateMissionRequest, opts ...http.CallOption) (rsp *CreateMissionReply, err error)
 	DeleteArea(ctx context.Context, req *DeleteAreaRequest, opts ...http.CallOption) (rsp *DeleteAreaReply, err error)
@@ -287,6 +313,19 @@ type MissionHTTPClientImpl struct {
 
 func NewMissionHTTPClient(client *http.Client) MissionHTTPClient {
 	return &MissionHTTPClientImpl{client}
+}
+
+func (c *MissionHTTPClientImpl) ConfigMission(ctx context.Context, in *ConfigMissionRequest, opts ...http.CallOption) (*ConfigMissionReply, error) {
+	var out ConfigMissionReply
+	pattern := "/api/v1/mission/config/{id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationMissionConfigMission))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *MissionHTTPClientImpl) CreateArea(ctx context.Context, in *CreateAreaRequest, opts ...http.CallOption) (*CreateAreaReply, error) {
