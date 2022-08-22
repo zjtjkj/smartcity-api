@@ -5,6 +5,7 @@ package api.settings.v1;
 option go_package = "settings/api/settings/v1;v1";
 import "google/api/annotations.proto";
 import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
 
 service Settings {
 	rpc CreateModule (CreateModuleRequest) returns (CreateModuleReply) {
@@ -51,12 +52,76 @@ service Settings {
 			get: "/api/v1/settings/icon/{id}"
 		};
 	}
-	rpc LostIcon(ListIconRequest) returns (ListIconReply) {
+	rpc ListIcon(ListIconRequest) returns (ListIconReply) {
 		option(google.api.http) = {
 			get: "/api/v1/settings/icons"
 		};
 	}
+
+
+	rpc CreateGeneralParameters(CreateGeneralParametersRequest) returns (CreateGeneralParametersReply) {
+		option(google.api.http) = {
+			put: "/api/v1/settings/parameter"
+			body: "*"
+		};
+	}
+	rpc UpdateGeneralParameters(UpdateGeneralParametersRequest) returns (updateGeneralParametersReply) {
+		option(google.api.http) = {
+			post: "/api/v1/settings/parameter/{id}"
+			body: "*"
+		};
+	}
+	rpc DeleteGeneralParameters(DeleteGeneralParametersRequest) returns (DeleteGeneralParametersReply) {
+		option(google.api.http) = {
+			delete: "/api/v1/settings/parameter/{id}"
+		};
+	}
+
+	rpc ListGeneralParameters(ListGeneralParametersRequest) returns (ListGeneralParametersReply) {
+		option(google.api.http) = {
+			get: "/api/v1/settings/parameters"
+		};
+	}
+
+
 }
+
+message GeneralParameters {
+	uint32 id = 1;
+	google.protobuf.Timestamp created = 2;
+	string name = 3;
+	string key = 4;
+	string default = 5;
+	bool enable = 6;
+}
+
+message ListGeneralParametersRequest {
+}
+message ListGeneralParametersReply {
+	repeated GeneralParameters parameters = 1;
+}
+
+message DeleteGeneralParametersRequest {
+	uint32 id = 1;
+}
+message DeleteGeneralParametersReply {}
+
+message UpdateGeneralParametersRequest {
+	uint32 id = 1;
+	string name = 2;
+	string key = 3;
+	string default = 4;
+	bool enable = 5;
+}
+message updateGeneralParametersReply {}
+
+message CreateGeneralParametersRequest {
+	string name = 1;
+	string key = 2;
+	string default = 3;
+	bool enable = 4;
+}
+message CreateGeneralParametersReply {}
 
 message CreateIconRequest {
 	bytes src = 1;

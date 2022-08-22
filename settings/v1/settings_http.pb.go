@@ -19,25 +19,33 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationSettingsCreateGeneralParameters = "/api.settings.v1.Settings/CreateGeneralParameters"
 const OperationSettingsCreateIcon = "/api.settings.v1.Settings/CreateIcon"
 const OperationSettingsCreateModule = "/api.settings.v1.Settings/CreateModule"
+const OperationSettingsDeleteGeneralParameters = "/api.settings.v1.Settings/DeleteGeneralParameters"
 const OperationSettingsDeleteIcon = "/api.settings.v1.Settings/DeleteIcon"
 const OperationSettingsDeleteModule = "/api.settings.v1.Settings/DeleteModule"
 const OperationSettingsGetIcon = "/api.settings.v1.Settings/GetIcon"
 const OperationSettingsGetModule = "/api.settings.v1.Settings/GetModule"
+const OperationSettingsListGeneralParameters = "/api.settings.v1.Settings/ListGeneralParameters"
+const OperationSettingsListIcon = "/api.settings.v1.Settings/ListIcon"
 const OperationSettingsListModules = "/api.settings.v1.Settings/ListModules"
-const OperationSettingsLostIcon = "/api.settings.v1.Settings/LostIcon"
+const OperationSettingsUpdateGeneralParameters = "/api.settings.v1.Settings/UpdateGeneralParameters"
 const OperationSettingsUpdateModule = "/api.settings.v1.Settings/UpdateModule"
 
 type SettingsHTTPServer interface {
+	CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error)
 	CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
+	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
 	DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error)
 	DeleteModule(context.Context, *DeleteModuleRequest) (*DeleteModuleReply, error)
 	GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
+	ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error)
+	ListIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
 	ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error)
-	LostIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
+	UpdateGeneralParameters(context.Context, *UpdateGeneralParametersRequest) (*UpdateGeneralParametersReply, error)
 	UpdateModule(context.Context, *UpdateModuleRequest) (*UpdateModuleReply, error)
 }
 
@@ -51,7 +59,11 @@ func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r.PUT("/api/v1/settings/icon", _Settings_CreateIcon0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/settings/icon/{id}", _Settings_DeleteIcon0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/icon/{id}", _Settings_GetIcon0_HTTP_Handler(srv))
-	r.GET("/api/v1/settings/icons", _Settings_LostIcon0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/icons", _Settings_ListIcon0_HTTP_Handler(srv))
+	r.PUT("/api/v1/settings/parameter", _Settings_CreateGeneralParameters0_HTTP_Handler(srv))
+	r.POST("/api/v1/settings/parameter/{id}", _Settings_UpdateGeneralParameters0_HTTP_Handler(srv))
+	r.DELETE("/api/v1/settings/parameter/{id}", _Settings_DeleteGeneralParameters0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/parameters", _Settings_ListGeneralParameters0_HTTP_Handler(srv))
 }
 
 func _Settings_CreateModule0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
@@ -221,15 +233,15 @@ func _Settings_GetIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Conte
 	}
 }
 
-func _Settings_LostIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+func _Settings_ListIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListIconRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationSettingsLostIcon)
+		http.SetOperation(ctx, OperationSettingsListIcon)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.LostIcon(ctx, req.(*ListIconRequest))
+			return srv.ListIcon(ctx, req.(*ListIconRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
@@ -240,15 +252,101 @@ func _Settings_LostIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Cont
 	}
 }
 
+func _Settings_CreateGeneralParameters0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateGeneralParametersRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsCreateGeneralParameters)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateGeneralParameters(ctx, req.(*CreateGeneralParametersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateGeneralParametersReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_UpdateGeneralParameters0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in UpdateGeneralParametersRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsUpdateGeneralParameters)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.UpdateGeneralParameters(ctx, req.(*UpdateGeneralParametersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*UpdateGeneralParametersReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_DeleteGeneralParameters0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteGeneralParametersRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsDeleteGeneralParameters)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteGeneralParameters(ctx, req.(*DeleteGeneralParametersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteGeneralParametersReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_ListGeneralParameters0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListGeneralParametersRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsListGeneralParameters)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListGeneralParameters(ctx, req.(*ListGeneralParametersRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListGeneralParametersReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type SettingsHTTPClient interface {
+	CreateGeneralParameters(ctx context.Context, req *CreateGeneralParametersRequest, opts ...http.CallOption) (rsp *CreateGeneralParametersReply, err error)
 	CreateIcon(ctx context.Context, req *CreateIconRequest, opts ...http.CallOption) (rsp *CreateIconReply, err error)
 	CreateModule(ctx context.Context, req *CreateModuleRequest, opts ...http.CallOption) (rsp *CreateModuleReply, err error)
+	DeleteGeneralParameters(ctx context.Context, req *DeleteGeneralParametersRequest, opts ...http.CallOption) (rsp *DeleteGeneralParametersReply, err error)
 	DeleteIcon(ctx context.Context, req *DeleteIconRequest, opts ...http.CallOption) (rsp *DeleteIconReply, err error)
 	DeleteModule(ctx context.Context, req *DeleteModuleRequest, opts ...http.CallOption) (rsp *DeleteModuleReply, err error)
 	GetIcon(ctx context.Context, req *GetIconRequest, opts ...http.CallOption) (rsp *GetIconReply, err error)
 	GetModule(ctx context.Context, req *GetModuleRequest, opts ...http.CallOption) (rsp *GetModuleReply, err error)
+	ListGeneralParameters(ctx context.Context, req *ListGeneralParametersRequest, opts ...http.CallOption) (rsp *ListGeneralParametersReply, err error)
+	ListIcon(ctx context.Context, req *ListIconRequest, opts ...http.CallOption) (rsp *ListIconReply, err error)
 	ListModules(ctx context.Context, req *ListModulesRequest, opts ...http.CallOption) (rsp *ListModulesReply, err error)
-	LostIcon(ctx context.Context, req *ListIconRequest, opts ...http.CallOption) (rsp *ListIconReply, err error)
+	UpdateGeneralParameters(ctx context.Context, req *UpdateGeneralParametersRequest, opts ...http.CallOption) (rsp *UpdateGeneralParametersReply, err error)
 	UpdateModule(ctx context.Context, req *UpdateModuleRequest, opts ...http.CallOption) (rsp *UpdateModuleReply, err error)
 }
 
@@ -258,6 +356,19 @@ type SettingsHTTPClientImpl struct {
 
 func NewSettingsHTTPClient(client *http.Client) SettingsHTTPClient {
 	return &SettingsHTTPClientImpl{client}
+}
+
+func (c *SettingsHTTPClientImpl) CreateGeneralParameters(ctx context.Context, in *CreateGeneralParametersRequest, opts ...http.CallOption) (*CreateGeneralParametersReply, error) {
+	var out CreateGeneralParametersReply
+	pattern := "/api/v1/settings/parameter"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationSettingsCreateGeneralParameters))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *SettingsHTTPClientImpl) CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...http.CallOption) (*CreateIconReply, error) {
@@ -280,6 +391,19 @@ func (c *SettingsHTTPClientImpl) CreateModule(ctx context.Context, in *CreateMod
 	opts = append(opts, http.Operation(OperationSettingsCreateModule))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...http.CallOption) (*DeleteGeneralParametersReply, error) {
+	var out DeleteGeneralParametersReply
+	pattern := "/api/v1/settings/parameter/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsDeleteGeneralParameters))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -338,6 +462,32 @@ func (c *SettingsHTTPClientImpl) GetModule(ctx context.Context, in *GetModuleReq
 	return &out, err
 }
 
+func (c *SettingsHTTPClientImpl) ListGeneralParameters(ctx context.Context, in *ListGeneralParametersRequest, opts ...http.CallOption) (*ListGeneralParametersReply, error) {
+	var out ListGeneralParametersReply
+	pattern := "/api/v1/settings/parameters"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsListGeneralParameters))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) ListIcon(ctx context.Context, in *ListIconRequest, opts ...http.CallOption) (*ListIconReply, error) {
+	var out ListIconReply
+	pattern := "/api/v1/settings/icons"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsListIcon))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *SettingsHTTPClientImpl) ListModules(ctx context.Context, in *ListModulesRequest, opts ...http.CallOption) (*ListModulesReply, error) {
 	var out ListModulesReply
 	pattern := "/api/v1/settings/module"
@@ -351,13 +501,13 @@ func (c *SettingsHTTPClientImpl) ListModules(ctx context.Context, in *ListModule
 	return &out, err
 }
 
-func (c *SettingsHTTPClientImpl) LostIcon(ctx context.Context, in *ListIconRequest, opts ...http.CallOption) (*ListIconReply, error) {
-	var out ListIconReply
-	pattern := "/api/v1/settings/icons"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationSettingsLostIcon))
+func (c *SettingsHTTPClientImpl) UpdateGeneralParameters(ctx context.Context, in *UpdateGeneralParametersRequest, opts ...http.CallOption) (*UpdateGeneralParametersReply, error) {
+	var out UpdateGeneralParametersReply
+	pattern := "/api/v1/settings/parameter/{id}"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationSettingsUpdateGeneralParameters))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

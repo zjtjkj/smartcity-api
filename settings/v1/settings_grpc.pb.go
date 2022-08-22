@@ -30,7 +30,11 @@ type SettingsClient interface {
 	CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...grpc.CallOption) (*CreateIconReply, error)
 	DeleteIcon(ctx context.Context, in *DeleteIconRequest, opts ...grpc.CallOption) (*DeleteIconReply, error)
 	GetIcon(ctx context.Context, in *GetIconRequest, opts ...grpc.CallOption) (*GetIconReply, error)
-	LostIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error)
+	ListIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error)
+	CreateGeneralParameters(ctx context.Context, in *CreateGeneralParametersRequest, opts ...grpc.CallOption) (*CreateGeneralParametersReply, error)
+	UpdateGeneralParameters(ctx context.Context, in *UpdateGeneralParametersRequest, opts ...grpc.CallOption) (*UpdateGeneralParametersReply, error)
+	DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...grpc.CallOption) (*DeleteGeneralParametersReply, error)
+	ListGeneralParameters(ctx context.Context, in *ListGeneralParametersRequest, opts ...grpc.CallOption) (*ListGeneralParametersReply, error)
 }
 
 type settingsClient struct {
@@ -113,9 +117,45 @@ func (c *settingsClient) GetIcon(ctx context.Context, in *GetIconRequest, opts .
 	return out, nil
 }
 
-func (c *settingsClient) LostIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error) {
+func (c *settingsClient) ListIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error) {
 	out := new(ListIconReply)
-	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/LostIcon", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/ListIcon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) CreateGeneralParameters(ctx context.Context, in *CreateGeneralParametersRequest, opts ...grpc.CallOption) (*CreateGeneralParametersReply, error) {
+	out := new(CreateGeneralParametersReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateGeneralParameters", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) UpdateGeneralParameters(ctx context.Context, in *UpdateGeneralParametersRequest, opts ...grpc.CallOption) (*UpdateGeneralParametersReply, error) {
+	out := new(UpdateGeneralParametersReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/UpdateGeneralParameters", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...grpc.CallOption) (*DeleteGeneralParametersReply, error) {
+	out := new(DeleteGeneralParametersReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/DeleteGeneralParameters", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) ListGeneralParameters(ctx context.Context, in *ListGeneralParametersRequest, opts ...grpc.CallOption) (*ListGeneralParametersReply, error) {
+	out := new(ListGeneralParametersReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/ListGeneralParameters", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +174,11 @@ type SettingsServer interface {
 	CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error)
 	DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error)
 	GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error)
-	LostIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
+	ListIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
+	CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error)
+	UpdateGeneralParameters(context.Context, *UpdateGeneralParametersRequest) (*UpdateGeneralParametersReply, error)
+	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
+	ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error)
 	mustEmbedUnimplementedSettingsServer()
 }
 
@@ -166,8 +210,20 @@ func (UnimplementedSettingsServer) DeleteIcon(context.Context, *DeleteIconReques
 func (UnimplementedSettingsServer) GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetIcon not implemented")
 }
-func (UnimplementedSettingsServer) LostIcon(context.Context, *ListIconRequest) (*ListIconReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LostIcon not implemented")
+func (UnimplementedSettingsServer) ListIcon(context.Context, *ListIconRequest) (*ListIconReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIcon not implemented")
+}
+func (UnimplementedSettingsServer) CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGeneralParameters not implemented")
+}
+func (UnimplementedSettingsServer) UpdateGeneralParameters(context.Context, *UpdateGeneralParametersRequest) (*UpdateGeneralParametersReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGeneralParameters not implemented")
+}
+func (UnimplementedSettingsServer) DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGeneralParameters not implemented")
+}
+func (UnimplementedSettingsServer) ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGeneralParameters not implemented")
 }
 func (UnimplementedSettingsServer) mustEmbedUnimplementedSettingsServer() {}
 
@@ -326,20 +382,92 @@ func _Settings_GetIcon_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Settings_LostIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Settings_ListIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListIconRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SettingsServer).LostIcon(ctx, in)
+		return srv.(SettingsServer).ListIcon(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.settings.v1.Settings/LostIcon",
+		FullMethod: "/api.settings.v1.Settings/ListIcon",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SettingsServer).LostIcon(ctx, req.(*ListIconRequest))
+		return srv.(SettingsServer).ListIcon(ctx, req.(*ListIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_CreateGeneralParameters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGeneralParametersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreateGeneralParameters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreateGeneralParameters",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreateGeneralParameters(ctx, req.(*CreateGeneralParametersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_UpdateGeneralParameters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGeneralParametersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).UpdateGeneralParameters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/UpdateGeneralParameters",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).UpdateGeneralParameters(ctx, req.(*UpdateGeneralParametersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_DeleteGeneralParameters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteGeneralParametersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).DeleteGeneralParameters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/DeleteGeneralParameters",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).DeleteGeneralParameters(ctx, req.(*DeleteGeneralParametersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_ListGeneralParameters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGeneralParametersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).ListGeneralParameters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/ListGeneralParameters",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).ListGeneralParameters(ctx, req.(*ListGeneralParametersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -384,8 +512,24 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Settings_GetIcon_Handler,
 		},
 		{
-			MethodName: "LostIcon",
-			Handler:    _Settings_LostIcon_Handler,
+			MethodName: "ListIcon",
+			Handler:    _Settings_ListIcon_Handler,
+		},
+		{
+			MethodName: "CreateGeneralParameters",
+			Handler:    _Settings_CreateGeneralParameters_Handler,
+		},
+		{
+			MethodName: "UpdateGeneralParameters",
+			Handler:    _Settings_UpdateGeneralParameters_Handler,
+		},
+		{
+			MethodName: "DeleteGeneralParameters",
+			Handler:    _Settings_DeleteGeneralParameters_Handler,
+		},
+		{
+			MethodName: "ListGeneralParameters",
+			Handler:    _Settings_ListGeneralParameters_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

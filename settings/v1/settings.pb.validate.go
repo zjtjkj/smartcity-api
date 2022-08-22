@@ -35,6 +35,1024 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on GeneralParameters with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GeneralParameters) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GeneralParameters with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GeneralParametersMultiError, or nil if none found.
+func (m *GeneralParameters) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GeneralParameters) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if all {
+		switch v := interface{}(m.GetCreated()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GeneralParametersValidationError{
+					field:  "Created",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GeneralParametersValidationError{
+					field:  "Created",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreated()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GeneralParametersValidationError{
+				field:  "Created",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Name
+
+	// no validation rules for Key
+
+	// no validation rules for Default
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return GeneralParametersMultiError(errors)
+	}
+
+	return nil
+}
+
+// GeneralParametersMultiError is an error wrapping multiple validation errors
+// returned by GeneralParameters.ValidateAll() if the designated constraints
+// aren't met.
+type GeneralParametersMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GeneralParametersMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GeneralParametersMultiError) AllErrors() []error { return m }
+
+// GeneralParametersValidationError is the validation error returned by
+// GeneralParameters.Validate if the designated constraints aren't met.
+type GeneralParametersValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GeneralParametersValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GeneralParametersValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GeneralParametersValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GeneralParametersValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GeneralParametersValidationError) ErrorName() string {
+	return "GeneralParametersValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GeneralParametersValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGeneralParameters.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GeneralParametersValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GeneralParametersValidationError{}
+
+// Validate checks the field values on ListGeneralParametersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListGeneralParametersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGeneralParametersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListGeneralParametersRequestMultiError, or nil if none found.
+func (m *ListGeneralParametersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGeneralParametersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListGeneralParametersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGeneralParametersRequestMultiError is an error wrapping multiple
+// validation errors returned by ListGeneralParametersRequest.ValidateAll() if
+// the designated constraints aren't met.
+type ListGeneralParametersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGeneralParametersRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGeneralParametersRequestMultiError) AllErrors() []error { return m }
+
+// ListGeneralParametersRequestValidationError is the validation error returned
+// by ListGeneralParametersRequest.Validate if the designated constraints
+// aren't met.
+type ListGeneralParametersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGeneralParametersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGeneralParametersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGeneralParametersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGeneralParametersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGeneralParametersRequestValidationError) ErrorName() string {
+	return "ListGeneralParametersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGeneralParametersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGeneralParametersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGeneralParametersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGeneralParametersRequestValidationError{}
+
+// Validate checks the field values on ListGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListGeneralParametersReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListGeneralParametersReplyMultiError, or nil if none found.
+func (m *ListGeneralParametersReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListGeneralParametersReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetParameters() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListGeneralParametersReplyValidationError{
+						field:  fmt.Sprintf("Parameters[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListGeneralParametersReplyValidationError{
+						field:  fmt.Sprintf("Parameters[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListGeneralParametersReplyValidationError{
+					field:  fmt.Sprintf("Parameters[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListGeneralParametersReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListGeneralParametersReplyMultiError is an error wrapping multiple
+// validation errors returned by ListGeneralParametersReply.ValidateAll() if
+// the designated constraints aren't met.
+type ListGeneralParametersReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListGeneralParametersReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListGeneralParametersReplyMultiError) AllErrors() []error { return m }
+
+// ListGeneralParametersReplyValidationError is the validation error returned
+// by ListGeneralParametersReply.Validate if the designated constraints aren't met.
+type ListGeneralParametersReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListGeneralParametersReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListGeneralParametersReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListGeneralParametersReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListGeneralParametersReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListGeneralParametersReplyValidationError) ErrorName() string {
+	return "ListGeneralParametersReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListGeneralParametersReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListGeneralParametersReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListGeneralParametersReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListGeneralParametersReplyValidationError{}
+
+// Validate checks the field values on DeleteGeneralParametersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteGeneralParametersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteGeneralParametersRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// DeleteGeneralParametersRequestMultiError, or nil if none found.
+func (m *DeleteGeneralParametersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteGeneralParametersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteGeneralParametersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteGeneralParametersRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteGeneralParametersRequest.ValidateAll()
+// if the designated constraints aren't met.
+type DeleteGeneralParametersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteGeneralParametersRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteGeneralParametersRequestMultiError) AllErrors() []error { return m }
+
+// DeleteGeneralParametersRequestValidationError is the validation error
+// returned by DeleteGeneralParametersRequest.Validate if the designated
+// constraints aren't met.
+type DeleteGeneralParametersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteGeneralParametersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteGeneralParametersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteGeneralParametersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteGeneralParametersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteGeneralParametersRequestValidationError) ErrorName() string {
+	return "DeleteGeneralParametersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteGeneralParametersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteGeneralParametersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteGeneralParametersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteGeneralParametersRequestValidationError{}
+
+// Validate checks the field values on DeleteGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteGeneralParametersReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteGeneralParametersReplyMultiError, or nil if none found.
+func (m *DeleteGeneralParametersReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteGeneralParametersReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteGeneralParametersReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteGeneralParametersReplyMultiError is an error wrapping multiple
+// validation errors returned by DeleteGeneralParametersReply.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteGeneralParametersReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteGeneralParametersReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteGeneralParametersReplyMultiError) AllErrors() []error { return m }
+
+// DeleteGeneralParametersReplyValidationError is the validation error returned
+// by DeleteGeneralParametersReply.Validate if the designated constraints
+// aren't met.
+type DeleteGeneralParametersReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteGeneralParametersReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteGeneralParametersReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteGeneralParametersReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteGeneralParametersReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteGeneralParametersReplyValidationError) ErrorName() string {
+	return "DeleteGeneralParametersReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteGeneralParametersReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteGeneralParametersReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteGeneralParametersReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteGeneralParametersReplyValidationError{}
+
+// Validate checks the field values on UpdateGeneralParametersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGeneralParametersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGeneralParametersRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// UpdateGeneralParametersRequestMultiError, or nil if none found.
+func (m *UpdateGeneralParametersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGeneralParametersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	// no validation rules for Key
+
+	// no validation rules for Default
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return UpdateGeneralParametersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGeneralParametersRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateGeneralParametersRequest.ValidateAll()
+// if the designated constraints aren't met.
+type UpdateGeneralParametersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGeneralParametersRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGeneralParametersRequestMultiError) AllErrors() []error { return m }
+
+// UpdateGeneralParametersRequestValidationError is the validation error
+// returned by UpdateGeneralParametersRequest.Validate if the designated
+// constraints aren't met.
+type UpdateGeneralParametersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGeneralParametersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGeneralParametersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGeneralParametersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGeneralParametersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGeneralParametersRequestValidationError) ErrorName() string {
+	return "UpdateGeneralParametersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGeneralParametersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGeneralParametersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGeneralParametersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGeneralParametersRequestValidationError{}
+
+// Validate checks the field values on UpdateGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateGeneralParametersReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateGeneralParametersReplyMultiError, or nil if none found.
+func (m *UpdateGeneralParametersReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateGeneralParametersReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateGeneralParametersReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateGeneralParametersReplyMultiError is an error wrapping multiple
+// validation errors returned by UpdateGeneralParametersReply.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateGeneralParametersReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateGeneralParametersReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateGeneralParametersReplyMultiError) AllErrors() []error { return m }
+
+// UpdateGeneralParametersReplyValidationError is the validation error returned
+// by UpdateGeneralParametersReply.Validate if the designated constraints
+// aren't met.
+type UpdateGeneralParametersReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateGeneralParametersReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateGeneralParametersReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateGeneralParametersReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateGeneralParametersReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateGeneralParametersReplyValidationError) ErrorName() string {
+	return "UpdateGeneralParametersReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateGeneralParametersReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateGeneralParametersReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateGeneralParametersReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateGeneralParametersReplyValidationError{}
+
+// Validate checks the field values on CreateGeneralParametersRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGeneralParametersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGeneralParametersRequest with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// CreateGeneralParametersRequestMultiError, or nil if none found.
+func (m *CreateGeneralParametersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGeneralParametersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Key
+
+	// no validation rules for Default
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return CreateGeneralParametersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGeneralParametersRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateGeneralParametersRequest.ValidateAll()
+// if the designated constraints aren't met.
+type CreateGeneralParametersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGeneralParametersRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGeneralParametersRequestMultiError) AllErrors() []error { return m }
+
+// CreateGeneralParametersRequestValidationError is the validation error
+// returned by CreateGeneralParametersRequest.Validate if the designated
+// constraints aren't met.
+type CreateGeneralParametersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGeneralParametersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGeneralParametersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGeneralParametersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGeneralParametersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGeneralParametersRequestValidationError) ErrorName() string {
+	return "CreateGeneralParametersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGeneralParametersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGeneralParametersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGeneralParametersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGeneralParametersRequestValidationError{}
+
+// Validate checks the field values on CreateGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateGeneralParametersReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateGeneralParametersReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateGeneralParametersReplyMultiError, or nil if none found.
+func (m *CreateGeneralParametersReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateGeneralParametersReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateGeneralParametersReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateGeneralParametersReplyMultiError is an error wrapping multiple
+// validation errors returned by CreateGeneralParametersReply.ValidateAll() if
+// the designated constraints aren't met.
+type CreateGeneralParametersReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateGeneralParametersReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateGeneralParametersReplyMultiError) AllErrors() []error { return m }
+
+// CreateGeneralParametersReplyValidationError is the validation error returned
+// by CreateGeneralParametersReply.Validate if the designated constraints
+// aren't met.
+type CreateGeneralParametersReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateGeneralParametersReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateGeneralParametersReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateGeneralParametersReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateGeneralParametersReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateGeneralParametersReplyValidationError) ErrorName() string {
+	return "CreateGeneralParametersReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateGeneralParametersReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateGeneralParametersReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateGeneralParametersReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateGeneralParametersReplyValidationError{}
+
 // Validate checks the field values on CreateIconRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
