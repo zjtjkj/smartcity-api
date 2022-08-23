@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package api.home.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "home-config/api/home-config/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.home.v1";
+
+service HomeConfig {
+  rpc SaveHomeConfig(SaveHomeConfigRequest) returns (SaveHomeConfigReply) {
+    option (google.api.http) = {
+      post: "/api/v1/home/config/save"
+      body: "*"
+    };
+  };
+  rpc DeleteHomeConfig(DeleteHomeConfigRequest) returns (DeleteHomeConfigReply) {
+    option (google.api.http) = {
+      post: "/api/v1/home/config/delete"
+      body: "*"
+    };
+  }
+  rpc GetHomeConfig(GetHomeConfigRequest) returns (GetHomeConfigReply) {
+    option (google.api.http) = {
+      post: "/api/v1/home/config/get"
+      body: "*"
+    };
+  };
+  rpc GetOptions(GetOptionsRequest) returns (GetOptionsReply) {
+    option (google.api.http) = {
+      post: "/api/v1/home/option/get"
+      body: "*"
+    };
+  };
+}
+
+message HomeConf {
+  uint32 id = 1;
+  string conf = 2;
+}
+
+message SaveHomeConfigRequest {
+  repeated HomeConf home_confs = 1;
+}
+message SaveHomeConfigReply {}
+
+message DeleteHomeConfigRequest {
+  uint32 id = 1;
+}
+message DeleteHomeConfigReply {}
+
+message GetHomeConfigRequest {}
+message GetHomeConfigReply {
+  repeated HomeConf home_confs = 1;
+}
+
+message Option {
+  string id = 1;
+  string name = 2;
+  int32 data = 3;
+}
+
+message GetOptionsRequest {}
+message GetOptionsReply {
+  repeated Option options = 1;
+}
