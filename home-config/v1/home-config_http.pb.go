@@ -19,13 +19,11 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationHomeConfigDeleteHomeConfig = "/api.home.v1.HomeConfig/DeleteHomeConfig"
 const OperationHomeConfigGetHomeConfig = "/api.home.v1.HomeConfig/GetHomeConfig"
 const OperationHomeConfigGetOptions = "/api.home.v1.HomeConfig/GetOptions"
 const OperationHomeConfigSaveHomeConfig = "/api.home.v1.HomeConfig/SaveHomeConfig"
 
 type HomeConfigHTTPServer interface {
-	DeleteHomeConfig(context.Context, *DeleteHomeConfigRequest) (*DeleteHomeConfigReply, error)
 	GetHomeConfig(context.Context, *GetHomeConfigRequest) (*GetHomeConfigReply, error)
 	GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsReply, error)
 	SaveHomeConfig(context.Context, *SaveHomeConfigRequest) (*SaveHomeConfigReply, error)
@@ -34,7 +32,6 @@ type HomeConfigHTTPServer interface {
 func RegisterHomeConfigHTTPServer(s *http.Server, srv HomeConfigHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/v1/home/config/save", _HomeConfig_SaveHomeConfig0_HTTP_Handler(srv))
-	r.POST("/api/v1/home/config/delete", _HomeConfig_DeleteHomeConfig0_HTTP_Handler(srv))
 	r.POST("/api/v1/home/config/get", _HomeConfig_GetHomeConfig0_HTTP_Handler(srv))
 	r.POST("/api/v1/home/option/get", _HomeConfig_GetOptions0_HTTP_Handler(srv))
 }
@@ -54,25 +51,6 @@ func _HomeConfig_SaveHomeConfig0_HTTP_Handler(srv HomeConfigHTTPServer) func(ctx
 			return err
 		}
 		reply := out.(*SaveHomeConfigReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _HomeConfig_DeleteHomeConfig0_HTTP_Handler(srv HomeConfigHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DeleteHomeConfigRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationHomeConfigDeleteHomeConfig)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteHomeConfig(ctx, req.(*DeleteHomeConfigRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*DeleteHomeConfigReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -116,7 +94,6 @@ func _HomeConfig_GetOptions0_HTTP_Handler(srv HomeConfigHTTPServer) func(ctx htt
 }
 
 type HomeConfigHTTPClient interface {
-	DeleteHomeConfig(ctx context.Context, req *DeleteHomeConfigRequest, opts ...http.CallOption) (rsp *DeleteHomeConfigReply, err error)
 	GetHomeConfig(ctx context.Context, req *GetHomeConfigRequest, opts ...http.CallOption) (rsp *GetHomeConfigReply, err error)
 	GetOptions(ctx context.Context, req *GetOptionsRequest, opts ...http.CallOption) (rsp *GetOptionsReply, err error)
 	SaveHomeConfig(ctx context.Context, req *SaveHomeConfigRequest, opts ...http.CallOption) (rsp *SaveHomeConfigReply, err error)
@@ -128,19 +105,6 @@ type HomeConfigHTTPClientImpl struct {
 
 func NewHomeConfigHTTPClient(client *http.Client) HomeConfigHTTPClient {
 	return &HomeConfigHTTPClientImpl{client}
-}
-
-func (c *HomeConfigHTTPClientImpl) DeleteHomeConfig(ctx context.Context, in *DeleteHomeConfigRequest, opts ...http.CallOption) (*DeleteHomeConfigReply, error) {
-	var out DeleteHomeConfigReply
-	pattern := "/api/v1/home/config/delete"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationHomeConfigDeleteHomeConfig))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
 }
 
 func (c *HomeConfigHTTPClientImpl) GetHomeConfig(ctx context.Context, in *GetHomeConfigRequest, opts ...http.CallOption) (*GetHomeConfigReply, error) {

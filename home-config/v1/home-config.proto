@@ -15,12 +15,6 @@ service HomeConfig {
       body: "*"
     };
   };
-  rpc DeleteHomeConfig(DeleteHomeConfigRequest) returns (DeleteHomeConfigReply) {
-    option (google.api.http) = {
-      post: "/api/v1/home/config/delete"
-      body: "*"
-    };
-  }
   rpc GetHomeConfig(GetHomeConfigRequest) returns (GetHomeConfigReply) {
     option (google.api.http) = {
       post: "/api/v1/home/config/get"
@@ -41,18 +35,13 @@ message HomeConf {
 }
 
 message SaveHomeConfigRequest {
-  repeated HomeConf home_confs = 1;
+  HomeConf home_conf = 1;
 }
 message SaveHomeConfigReply {}
 
-message DeleteHomeConfigRequest {
-  uint32 id = 1;
-}
-message DeleteHomeConfigReply {}
-
 message GetHomeConfigRequest {}
 message GetHomeConfigReply {
-  repeated HomeConf home_confs = 1;
+  HomeConf home_conf = 1;
 }
 
 message Option {

@@ -23,7 +23,6 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HomeConfigClient interface {
 	SaveHomeConfig(ctx context.Context, in *SaveHomeConfigRequest, opts ...grpc.CallOption) (*SaveHomeConfigReply, error)
-	DeleteHomeConfig(ctx context.Context, in *DeleteHomeConfigRequest, opts ...grpc.CallOption) (*DeleteHomeConfigReply, error)
 	GetHomeConfig(ctx context.Context, in *GetHomeConfigRequest, opts ...grpc.CallOption) (*GetHomeConfigReply, error)
 	GetOptions(ctx context.Context, in *GetOptionsRequest, opts ...grpc.CallOption) (*GetOptionsReply, error)
 }
@@ -39,15 +38,6 @@ func NewHomeConfigClient(cc grpc.ClientConnInterface) HomeConfigClient {
 func (c *homeConfigClient) SaveHomeConfig(ctx context.Context, in *SaveHomeConfigRequest, opts ...grpc.CallOption) (*SaveHomeConfigReply, error) {
 	out := new(SaveHomeConfigReply)
 	err := c.cc.Invoke(ctx, "/api.home.v1.HomeConfig/SaveHomeConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *homeConfigClient) DeleteHomeConfig(ctx context.Context, in *DeleteHomeConfigRequest, opts ...grpc.CallOption) (*DeleteHomeConfigReply, error) {
-	out := new(DeleteHomeConfigReply)
-	err := c.cc.Invoke(ctx, "/api.home.v1.HomeConfig/DeleteHomeConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +67,6 @@ func (c *homeConfigClient) GetOptions(ctx context.Context, in *GetOptionsRequest
 // for forward compatibility
 type HomeConfigServer interface {
 	SaveHomeConfig(context.Context, *SaveHomeConfigRequest) (*SaveHomeConfigReply, error)
-	DeleteHomeConfig(context.Context, *DeleteHomeConfigRequest) (*DeleteHomeConfigReply, error)
 	GetHomeConfig(context.Context, *GetHomeConfigRequest) (*GetHomeConfigReply, error)
 	GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsReply, error)
 	mustEmbedUnimplementedHomeConfigServer()
@@ -89,9 +78,6 @@ type UnimplementedHomeConfigServer struct {
 
 func (UnimplementedHomeConfigServer) SaveHomeConfig(context.Context, *SaveHomeConfigRequest) (*SaveHomeConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveHomeConfig not implemented")
-}
-func (UnimplementedHomeConfigServer) DeleteHomeConfig(context.Context, *DeleteHomeConfigRequest) (*DeleteHomeConfigReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteHomeConfig not implemented")
 }
 func (UnimplementedHomeConfigServer) GetHomeConfig(context.Context, *GetHomeConfigRequest) (*GetHomeConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHomeConfig not implemented")
@@ -126,24 +112,6 @@ func _HomeConfig_SaveHomeConfig_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(HomeConfigServer).SaveHomeConfig(ctx, req.(*SaveHomeConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _HomeConfig_DeleteHomeConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteHomeConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HomeConfigServer).DeleteHomeConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.home.v1.HomeConfig/DeleteHomeConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HomeConfigServer).DeleteHomeConfig(ctx, req.(*DeleteHomeConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -194,10 +162,6 @@ var HomeConfig_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SaveHomeConfig",
 			Handler:    _HomeConfig_SaveHomeConfig_Handler,
-		},
-		{
-			MethodName: "DeleteHomeConfig",
-			Handler:    _HomeConfig_DeleteHomeConfig_Handler,
 		},
 		{
 			MethodName: "GetHomeConfig",
