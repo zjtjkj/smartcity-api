@@ -76,7 +76,6 @@ service Settings {
 			delete: "/api/v1/settings/parameter/{id}"
 		};
 	}
-
 	rpc ListGeneralParameters(ListGeneralParametersRequest) returns (ListGeneralParametersReply) {
 		option(google.api.http) = {
 			get: "/api/v1/settings/parameters"
@@ -92,7 +91,8 @@ message GeneralParameters {
 	string name = 3;
 	string key = 4;
 	string default = 5;
-	bool enable = 6;
+	string desc = 6;
+	bool enable = 7;
 }
 
 message ListGeneralParametersRequest {
@@ -111,7 +111,8 @@ message UpdateGeneralParametersRequest {
 	string name = 2;
 	string key = 3;
 	string default = 4;
-	bool enable = 5;
+	string desc = 5;
+	bool enable = 6;
 }
 message updateGeneralParametersReply {}
 
@@ -119,7 +120,8 @@ message CreateGeneralParametersRequest {
 	string name = 1;
 	string key = 2;
 	string default = 3;
-	bool enable = 4;
+	string desc = 4;
+	bool enable = 5;
 }
 message CreateGeneralParametersReply {}
 

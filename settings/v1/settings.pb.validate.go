@@ -94,6 +94,8 @@ func (m *GeneralParameters) validate(all bool) error {
 
 	// no validation rules for Default
 
+	// no validation rules for Desc
+
 	// no validation rules for Enable
 
 	if len(errors) > 0 {
@@ -653,6 +655,8 @@ func (m *UpdateGeneralParametersRequest) validate(all bool) error {
 
 	// no validation rules for Default
 
+	// no validation rules for Desc
+
 	// no validation rules for Enable
 
 	if len(errors) > 0 {
@@ -866,6 +870,8 @@ func (m *CreateGeneralParametersRequest) validate(all bool) error {
 	// no validation rules for Key
 
 	// no validation rules for Default
+
+	// no validation rules for Desc
 
 	// no validation rules for Enable
 
