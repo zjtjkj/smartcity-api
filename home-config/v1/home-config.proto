@@ -27,6 +27,12 @@ service HomeConfig {
       body: "*"
     };
   };
+  rpc GetOptionById(GetOptionByIdRequest) returns (GetOptionByIdReply) {
+    option (google.api.http) = {
+      post: "/api/v1/home/option/get"
+      body: "*"
+    };
+  };
 }
 
 message HomeConf {
@@ -53,4 +59,11 @@ message Option {
 message GetOptionsRequest {}
 message GetOptionsReply {
   repeated Option options = 1;
+}
+
+message GetOptionByIdRequest {
+  string id = 1;
+}
+message GetOptionByIdReply {
+  Option option = 1;
 }

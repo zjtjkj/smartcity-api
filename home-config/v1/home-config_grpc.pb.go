@@ -25,6 +25,7 @@ type HomeConfigClient interface {
 	SaveHomeConfig(ctx context.Context, in *SaveHomeConfigRequest, opts ...grpc.CallOption) (*SaveHomeConfigReply, error)
 	GetHomeConfig(ctx context.Context, in *GetHomeConfigRequest, opts ...grpc.CallOption) (*GetHomeConfigReply, error)
 	GetOptions(ctx context.Context, in *GetOptionsRequest, opts ...grpc.CallOption) (*GetOptionsReply, error)
+	GetOptionById(ctx context.Context, in *GetOptionByIdRequest, opts ...grpc.CallOption) (*GetOptionByIdReply, error)
 }
 
 type homeConfigClient struct {
@@ -62,6 +63,15 @@ func (c *homeConfigClient) GetOptions(ctx context.Context, in *GetOptionsRequest
 	return out, nil
 }
 
+func (c *homeConfigClient) GetOptionById(ctx context.Context, in *GetOptionByIdRequest, opts ...grpc.CallOption) (*GetOptionByIdReply, error) {
+	out := new(GetOptionByIdReply)
+	err := c.cc.Invoke(ctx, "/api.home.v1.HomeConfig/GetOptionById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // HomeConfigServer is the server API for HomeConfig service.
 // All implementations must embed UnimplementedHomeConfigServer
 // for forward compatibility
@@ -69,6 +79,7 @@ type HomeConfigServer interface {
 	SaveHomeConfig(context.Context, *SaveHomeConfigRequest) (*SaveHomeConfigReply, error)
 	GetHomeConfig(context.Context, *GetHomeConfigRequest) (*GetHomeConfigReply, error)
 	GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsReply, error)
+	GetOptionById(context.Context, *GetOptionByIdRequest) (*GetOptionByIdReply, error)
 	mustEmbedUnimplementedHomeConfigServer()
 }
 
@@ -84,6 +95,9 @@ func (UnimplementedHomeConfigServer) GetHomeConfig(context.Context, *GetHomeConf
 }
 func (UnimplementedHomeConfigServer) GetOptions(context.Context, *GetOptionsRequest) (*GetOptionsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOptions not implemented")
+}
+func (UnimplementedHomeConfigServer) GetOptionById(context.Context, *GetOptionByIdRequest) (*GetOptionByIdReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOptionById not implemented")
 }
 func (UnimplementedHomeConfigServer) mustEmbedUnimplementedHomeConfigServer() {}
 
@@ -152,6 +166,24 @@ func _HomeConfig_GetOptions_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _HomeConfig_GetOptionById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOptionByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HomeConfigServer).GetOptionById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.home.v1.HomeConfig/GetOptionById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HomeConfigServer).GetOptionById(ctx, req.(*GetOptionByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // HomeConfig_ServiceDesc is the grpc.ServiceDesc for HomeConfig service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -170,6 +202,10 @@ var HomeConfig_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOptions",
 			Handler:    _HomeConfig_GetOptions_Handler,
+		},
+		{
+			MethodName: "GetOptionById",
+			Handler:    _HomeConfig_GetOptionById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
