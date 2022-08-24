@@ -33,6 +33,12 @@ service Retrieval {
 			body: "*"
 		};
 	}
+	rpc MissionLatestInfo(MissionLatestInfoRequest) returns (MissionLatestInfoReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/delete"
+			body: "*"
+		};
+	}
 }
 
 message Event {
@@ -103,3 +109,14 @@ message DeleteEventRequest {
 	string eid = 1;
 }
 message DeleteEventReply {}
+
+message MissionLatestInfoRequest {
+	int32 mission_id = 1;
+	int32 length = 2;
+}
+message MissionLatestInfoReply {
+	int32 total = 1;
+	int32 finished = 2;
+	int32 unfinished = 3;
+	repeated string events = 4;
+}

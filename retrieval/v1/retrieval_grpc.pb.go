@@ -26,6 +26,7 @@ type RetrievalClient interface {
 	GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error)
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*GetImageReply, error)
 	DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*DeleteEventReply, error)
+	MissionLatestInfo(ctx context.Context, in *MissionLatestInfoRequest, opts ...grpc.CallOption) (*MissionLatestInfoReply, error)
 }
 
 type retrievalClient struct {
@@ -72,6 +73,15 @@ func (c *retrievalClient) DeleteEvent(ctx context.Context, in *DeleteEventReques
 	return out, nil
 }
 
+func (c *retrievalClient) MissionLatestInfo(ctx context.Context, in *MissionLatestInfoRequest, opts ...grpc.CallOption) (*MissionLatestInfoReply, error) {
+	out := new(MissionLatestInfoReply)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/MissionLatestInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RetrievalServer is the server API for Retrieval service.
 // All implementations must embed UnimplementedRetrievalServer
 // for forward compatibility
@@ -80,6 +90,7 @@ type RetrievalServer interface {
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
 	DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
+	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
 	mustEmbedUnimplementedRetrievalServer()
 }
 
@@ -98,6 +109,9 @@ func (UnimplementedRetrievalServer) GetImage(context.Context, *GetImageRequest) 
 }
 func (UnimplementedRetrievalServer) DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteEvent not implemented")
+}
+func (UnimplementedRetrievalServer) MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MissionLatestInfo not implemented")
 }
 func (UnimplementedRetrievalServer) mustEmbedUnimplementedRetrievalServer() {}
 
@@ -184,6 +198,24 @@ func _Retrieval_DeleteEvent_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Retrieval_MissionLatestInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MissionLatestInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RetrievalServer).MissionLatestInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.retrieval.Retrieval/MissionLatestInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RetrievalServer).MissionLatestInfo(ctx, req.(*MissionLatestInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Retrieval_ServiceDesc is the grpc.ServiceDesc for Retrieval service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -206,6 +238,10 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteEvent",
 			Handler:    _Retrieval_DeleteEvent_Handler,
+		},
+		{
+			MethodName: "MissionLatestInfo",
+			Handler:    _Retrieval_MissionLatestInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

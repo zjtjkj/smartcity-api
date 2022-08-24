@@ -23,12 +23,14 @@ const OperationRetrievalDeleteEvent = "/api.retrieval.Retrieval/DeleteEvent"
 const OperationRetrievalFindEvents = "/api.retrieval.Retrieval/FindEvents"
 const OperationRetrievalGetEvent = "/api.retrieval.Retrieval/GetEvent"
 const OperationRetrievalGetImage = "/api.retrieval.Retrieval/GetImage"
+const OperationRetrievalMissionLatestInfo = "/api.retrieval.Retrieval/MissionLatestInfo"
 
 type RetrievalHTTPServer interface {
 	DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
+	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
 }
 
 func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
@@ -37,6 +39,7 @@ func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r.POST("/api/v1/event/get", _Retrieval_GetEvent0_HTTP_Handler(srv))
 	r.POST("/api/v1/image/get", _Retrieval_GetImage0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/delete", _Retrieval_DeleteEvent0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/delete", _Retrieval_MissionLatestInfo0_HTTP_Handler(srv))
 }
 
 func _Retrieval_FindEvents0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
@@ -115,11 +118,31 @@ func _Retrieval_DeleteEvent0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http
 	}
 }
 
+func _Retrieval_MissionLatestInfo0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in MissionLatestInfoRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRetrievalMissionLatestInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.MissionLatestInfo(ctx, req.(*MissionLatestInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*MissionLatestInfoReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type RetrievalHTTPClient interface {
 	DeleteEvent(ctx context.Context, req *DeleteEventRequest, opts ...http.CallOption) (rsp *DeleteEventReply, err error)
 	FindEvents(ctx context.Context, req *FindEventsRequest, opts ...http.CallOption) (rsp *FindEventsReply, err error)
 	GetEvent(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
 	GetImage(ctx context.Context, req *GetImageRequest, opts ...http.CallOption) (rsp *GetImageReply, err error)
+	MissionLatestInfo(ctx context.Context, req *MissionLatestInfoRequest, opts ...http.CallOption) (rsp *MissionLatestInfoReply, err error)
 }
 
 type RetrievalHTTPClientImpl struct {
@@ -174,6 +197,19 @@ func (c *RetrievalHTTPClientImpl) GetImage(ctx context.Context, in *GetImageRequ
 	pattern := "/api/v1/image/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalGetImage))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RetrievalHTTPClientImpl) MissionLatestInfo(ctx context.Context, in *MissionLatestInfoRequest, opts ...http.CallOption) (*MissionLatestInfoReply, error) {
+	var out MissionLatestInfoReply
+	pattern := "/api/v1/event/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationRetrievalMissionLatestInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
