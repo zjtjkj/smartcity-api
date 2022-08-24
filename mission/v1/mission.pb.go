@@ -22,6 +22,99 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ConfigAreaRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id     uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Object uint32 `protobuf:"varint,2,opt,name=object,proto3" json:"object,omitempty"`
+}
+
+func (x *ConfigAreaRequest) Reset() {
+	*x = ConfigAreaRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mission_v1_mission_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ConfigAreaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigAreaRequest) ProtoMessage() {}
+
+func (x *ConfigAreaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_mission_v1_mission_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigAreaRequest.ProtoReflect.Descriptor instead.
+func (*ConfigAreaRequest) Descriptor() ([]byte, []int) {
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ConfigAreaRequest) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *ConfigAreaRequest) GetObject() uint32 {
+	if x != nil {
+		return x.Object
+	}
+	return 0
+}
+
+type ConfigAreaReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ConfigAreaReply) Reset() {
+	*x = ConfigAreaReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mission_v1_mission_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ConfigAreaReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigAreaReply) ProtoMessage() {}
+
+func (x *ConfigAreaReply) ProtoReflect() protoreflect.Message {
+	mi := &file_mission_v1_mission_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigAreaReply.ProtoReflect.Descriptor instead.
+func (*ConfigAreaReply) Descriptor() ([]byte, []int) {
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{1}
+}
+
 type ConfigMissionRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -40,7 +133,7 @@ type ConfigMissionRequest struct {
 func (x *ConfigMissionRequest) Reset() {
 	*x = ConfigMissionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[0]
+		mi := &file_mission_v1_mission_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -53,7 +146,7 @@ func (x *ConfigMissionRequest) String() string {
 func (*ConfigMissionRequest) ProtoMessage() {}
 
 func (x *ConfigMissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[0]
+	mi := &file_mission_v1_mission_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66,7 +159,7 @@ func (x *ConfigMissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigMissionRequest.ProtoReflect.Descriptor instead.
 func (*ConfigMissionRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{0}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ConfigMissionRequest) GetId() uint32 {
@@ -134,7 +227,7 @@ type ConfigMissionReply struct {
 func (x *ConfigMissionReply) Reset() {
 	*x = ConfigMissionReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[1]
+		mi := &file_mission_v1_mission_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -147,7 +240,7 @@ func (x *ConfigMissionReply) String() string {
 func (*ConfigMissionReply) ProtoMessage() {}
 
 func (x *ConfigMissionReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[1]
+	mi := &file_mission_v1_mission_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -160,7 +253,7 @@ func (x *ConfigMissionReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigMissionReply.ProtoReflect.Descriptor instead.
 func (*ConfigMissionReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{1}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{3}
 }
 
 type Point struct {
@@ -175,7 +268,7 @@ type Point struct {
 func (x *Point) Reset() {
 	*x = Point{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[2]
+		mi := &file_mission_v1_mission_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -188,7 +281,7 @@ func (x *Point) String() string {
 func (*Point) ProtoMessage() {}
 
 func (x *Point) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[2]
+	mi := &file_mission_v1_mission_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -201,7 +294,7 @@ func (x *Point) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Point.ProtoReflect.Descriptor instead.
 func (*Point) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{2}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Point) GetX() uint32 {
@@ -234,7 +327,7 @@ type Area struct {
 func (x *Area) Reset() {
 	*x = Area{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[3]
+		mi := &file_mission_v1_mission_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -247,7 +340,7 @@ func (x *Area) String() string {
 func (*Area) ProtoMessage() {}
 
 func (x *Area) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[3]
+	mi := &file_mission_v1_mission_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -260,7 +353,7 @@ func (x *Area) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Area.ProtoReflect.Descriptor instead.
 func (*Area) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{3}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Area) GetId() uint32 {
@@ -329,7 +422,7 @@ type Instance struct {
 func (x *Instance) Reset() {
 	*x = Instance{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[4]
+		mi := &file_mission_v1_mission_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -342,7 +435,7 @@ func (x *Instance) String() string {
 func (*Instance) ProtoMessage() {}
 
 func (x *Instance) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[4]
+	mi := &file_mission_v1_mission_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -355,7 +448,7 @@ func (x *Instance) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Instance.ProtoReflect.Descriptor instead.
 func (*Instance) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{4}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Instance) GetId() uint32 {
@@ -470,7 +563,7 @@ type CreateAreaRequest struct {
 func (x *CreateAreaRequest) Reset() {
 	*x = CreateAreaRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[5]
+		mi := &file_mission_v1_mission_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -483,7 +576,7 @@ func (x *CreateAreaRequest) String() string {
 func (*CreateAreaRequest) ProtoMessage() {}
 
 func (x *CreateAreaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[5]
+	mi := &file_mission_v1_mission_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -496,7 +589,7 @@ func (x *CreateAreaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAreaRequest.ProtoReflect.Descriptor instead.
 func (*CreateAreaRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{5}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreateAreaRequest) GetMission() uint32 {
@@ -538,7 +631,7 @@ type CreateAreaReply struct {
 func (x *CreateAreaReply) Reset() {
 	*x = CreateAreaReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[6]
+		mi := &file_mission_v1_mission_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -551,7 +644,7 @@ func (x *CreateAreaReply) String() string {
 func (*CreateAreaReply) ProtoMessage() {}
 
 func (x *CreateAreaReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[6]
+	mi := &file_mission_v1_mission_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -564,7 +657,7 @@ func (x *CreateAreaReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAreaReply.ProtoReflect.Descriptor instead.
 func (*CreateAreaReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{6}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateAreaReply) GetArea() *Area {
@@ -586,7 +679,7 @@ type UpdateAreaRequest struct {
 func (x *UpdateAreaRequest) Reset() {
 	*x = UpdateAreaRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[7]
+		mi := &file_mission_v1_mission_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -599,7 +692,7 @@ func (x *UpdateAreaRequest) String() string {
 func (*UpdateAreaRequest) ProtoMessage() {}
 
 func (x *UpdateAreaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[7]
+	mi := &file_mission_v1_mission_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -612,7 +705,7 @@ func (x *UpdateAreaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAreaRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAreaRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{7}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateAreaRequest) GetId() uint32 {
@@ -638,7 +731,7 @@ type UpdateAreaReply struct {
 func (x *UpdateAreaReply) Reset() {
 	*x = UpdateAreaReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[8]
+		mi := &file_mission_v1_mission_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -651,7 +744,7 @@ func (x *UpdateAreaReply) String() string {
 func (*UpdateAreaReply) ProtoMessage() {}
 
 func (x *UpdateAreaReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[8]
+	mi := &file_mission_v1_mission_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -664,7 +757,7 @@ func (x *UpdateAreaReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAreaReply.ProtoReflect.Descriptor instead.
 func (*UpdateAreaReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{8}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{10}
 }
 
 type DeleteAreaRequest struct {
@@ -678,7 +771,7 @@ type DeleteAreaRequest struct {
 func (x *DeleteAreaRequest) Reset() {
 	*x = DeleteAreaRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[9]
+		mi := &file_mission_v1_mission_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -691,7 +784,7 @@ func (x *DeleteAreaRequest) String() string {
 func (*DeleteAreaRequest) ProtoMessage() {}
 
 func (x *DeleteAreaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[9]
+	mi := &file_mission_v1_mission_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -704,7 +797,7 @@ func (x *DeleteAreaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAreaRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAreaRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{9}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteAreaRequest) GetId() uint32 {
@@ -723,7 +816,7 @@ type DeleteAreaReply struct {
 func (x *DeleteAreaReply) Reset() {
 	*x = DeleteAreaReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[10]
+		mi := &file_mission_v1_mission_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -736,7 +829,7 @@ func (x *DeleteAreaReply) String() string {
 func (*DeleteAreaReply) ProtoMessage() {}
 
 func (x *DeleteAreaReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[10]
+	mi := &file_mission_v1_mission_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +842,7 @@ func (x *DeleteAreaReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAreaReply.ProtoReflect.Descriptor instead.
 func (*DeleteAreaReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{10}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{12}
 }
 
 type ListAreaRequest struct {
@@ -763,7 +856,7 @@ type ListAreaRequest struct {
 func (x *ListAreaRequest) Reset() {
 	*x = ListAreaRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[11]
+		mi := &file_mission_v1_mission_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -776,7 +869,7 @@ func (x *ListAreaRequest) String() string {
 func (*ListAreaRequest) ProtoMessage() {}
 
 func (x *ListAreaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[11]
+	mi := &file_mission_v1_mission_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -789,7 +882,7 @@ func (x *ListAreaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAreaRequest.ProtoReflect.Descriptor instead.
 func (*ListAreaRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{11}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListAreaRequest) GetMission() uint32 {
@@ -810,7 +903,7 @@ type ListAreaReply struct {
 func (x *ListAreaReply) Reset() {
 	*x = ListAreaReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[12]
+		mi := &file_mission_v1_mission_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -823,7 +916,7 @@ func (x *ListAreaReply) String() string {
 func (*ListAreaReply) ProtoMessage() {}
 
 func (x *ListAreaReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[12]
+	mi := &file_mission_v1_mission_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -836,7 +929,7 @@ func (x *ListAreaReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAreaReply.ProtoReflect.Descriptor instead.
 func (*ListAreaReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{12}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListAreaReply) GetAreas() []*Area {
@@ -860,7 +953,7 @@ type CreateMissionRequest struct {
 func (x *CreateMissionRequest) Reset() {
 	*x = CreateMissionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[13]
+		mi := &file_mission_v1_mission_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -873,7 +966,7 @@ func (x *CreateMissionRequest) String() string {
 func (*CreateMissionRequest) ProtoMessage() {}
 
 func (x *CreateMissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[13]
+	mi := &file_mission_v1_mission_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -886,7 +979,7 @@ func (x *CreateMissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMissionRequest.ProtoReflect.Descriptor instead.
 func (*CreateMissionRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{13}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CreateMissionRequest) GetName() string {
@@ -928,7 +1021,7 @@ type CreateMissionReply struct {
 func (x *CreateMissionReply) Reset() {
 	*x = CreateMissionReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[14]
+		mi := &file_mission_v1_mission_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -941,7 +1034,7 @@ func (x *CreateMissionReply) String() string {
 func (*CreateMissionReply) ProtoMessage() {}
 
 func (x *CreateMissionReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[14]
+	mi := &file_mission_v1_mission_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -954,7 +1047,7 @@ func (x *CreateMissionReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMissionReply.ProtoReflect.Descriptor instead.
 func (*CreateMissionReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{14}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreateMissionReply) GetMission() *Instance {
@@ -976,7 +1069,7 @@ type UpdateMissionRequest struct {
 func (x *UpdateMissionRequest) Reset() {
 	*x = UpdateMissionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[15]
+		mi := &file_mission_v1_mission_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -989,7 +1082,7 @@ func (x *UpdateMissionRequest) String() string {
 func (*UpdateMissionRequest) ProtoMessage() {}
 
 func (x *UpdateMissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[15]
+	mi := &file_mission_v1_mission_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1002,7 +1095,7 @@ func (x *UpdateMissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMissionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMissionRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{15}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdateMissionRequest) GetId() uint32 {
@@ -1028,7 +1121,7 @@ type UpdateMissionReply struct {
 func (x *UpdateMissionReply) Reset() {
 	*x = UpdateMissionReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[16]
+		mi := &file_mission_v1_mission_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1041,7 +1134,7 @@ func (x *UpdateMissionReply) String() string {
 func (*UpdateMissionReply) ProtoMessage() {}
 
 func (x *UpdateMissionReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[16]
+	mi := &file_mission_v1_mission_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1054,7 +1147,7 @@ func (x *UpdateMissionReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMissionReply.ProtoReflect.Descriptor instead.
 func (*UpdateMissionReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{16}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{18}
 }
 
 type DeleteMissionRequest struct {
@@ -1068,7 +1161,7 @@ type DeleteMissionRequest struct {
 func (x *DeleteMissionRequest) Reset() {
 	*x = DeleteMissionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[17]
+		mi := &file_mission_v1_mission_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1081,7 +1174,7 @@ func (x *DeleteMissionRequest) String() string {
 func (*DeleteMissionRequest) ProtoMessage() {}
 
 func (x *DeleteMissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[17]
+	mi := &file_mission_v1_mission_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,7 +1187,7 @@ func (x *DeleteMissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMissionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteMissionRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{17}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DeleteMissionRequest) GetId() uint32 {
@@ -1113,7 +1206,7 @@ type DeleteMissionReply struct {
 func (x *DeleteMissionReply) Reset() {
 	*x = DeleteMissionReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[18]
+		mi := &file_mission_v1_mission_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1126,7 +1219,7 @@ func (x *DeleteMissionReply) String() string {
 func (*DeleteMissionReply) ProtoMessage() {}
 
 func (x *DeleteMissionReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[18]
+	mi := &file_mission_v1_mission_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1139,7 +1232,7 @@ func (x *DeleteMissionReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMissionReply.ProtoReflect.Descriptor instead.
 func (*DeleteMissionReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{18}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{20}
 }
 
 type GetMissionRequest struct {
@@ -1153,7 +1246,7 @@ type GetMissionRequest struct {
 func (x *GetMissionRequest) Reset() {
 	*x = GetMissionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[19]
+		mi := &file_mission_v1_mission_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1166,7 +1259,7 @@ func (x *GetMissionRequest) String() string {
 func (*GetMissionRequest) ProtoMessage() {}
 
 func (x *GetMissionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[19]
+	mi := &file_mission_v1_mission_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1179,7 +1272,7 @@ func (x *GetMissionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMissionRequest.ProtoReflect.Descriptor instead.
 func (*GetMissionRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{19}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetMissionRequest) GetId() uint32 {
@@ -1200,7 +1293,7 @@ type GetMissionReply struct {
 func (x *GetMissionReply) Reset() {
 	*x = GetMissionReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[20]
+		mi := &file_mission_v1_mission_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1213,7 +1306,7 @@ func (x *GetMissionReply) String() string {
 func (*GetMissionReply) ProtoMessage() {}
 
 func (x *GetMissionReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[20]
+	mi := &file_mission_v1_mission_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1226,7 +1319,7 @@ func (x *GetMissionReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMissionReply.ProtoReflect.Descriptor instead.
 func (*GetMissionReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{20}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetMissionReply) GetMission() *Instance {
@@ -1248,7 +1341,7 @@ type ListMissionByCameraAndPresetRequest struct {
 func (x *ListMissionByCameraAndPresetRequest) Reset() {
 	*x = ListMissionByCameraAndPresetRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[21]
+		mi := &file_mission_v1_mission_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1261,7 +1354,7 @@ func (x *ListMissionByCameraAndPresetRequest) String() string {
 func (*ListMissionByCameraAndPresetRequest) ProtoMessage() {}
 
 func (x *ListMissionByCameraAndPresetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[21]
+	mi := &file_mission_v1_mission_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1274,7 +1367,7 @@ func (x *ListMissionByCameraAndPresetRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ListMissionByCameraAndPresetRequest.ProtoReflect.Descriptor instead.
 func (*ListMissionByCameraAndPresetRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{21}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListMissionByCameraAndPresetRequest) GetId() string {
@@ -1302,7 +1395,7 @@ type ListMissionByCameraAndPresetReply struct {
 func (x *ListMissionByCameraAndPresetReply) Reset() {
 	*x = ListMissionByCameraAndPresetReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[22]
+		mi := &file_mission_v1_mission_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1315,7 +1408,7 @@ func (x *ListMissionByCameraAndPresetReply) String() string {
 func (*ListMissionByCameraAndPresetReply) ProtoMessage() {}
 
 func (x *ListMissionByCameraAndPresetReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[22]
+	mi := &file_mission_v1_mission_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1328,7 +1421,7 @@ func (x *ListMissionByCameraAndPresetReply) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListMissionByCameraAndPresetReply.ProtoReflect.Descriptor instead.
 func (*ListMissionByCameraAndPresetReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{22}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListMissionByCameraAndPresetReply) GetMissions() []*Instance {
@@ -1349,7 +1442,7 @@ type ListMissionByCameraRequest struct {
 func (x *ListMissionByCameraRequest) Reset() {
 	*x = ListMissionByCameraRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[23]
+		mi := &file_mission_v1_mission_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1362,7 +1455,7 @@ func (x *ListMissionByCameraRequest) String() string {
 func (*ListMissionByCameraRequest) ProtoMessage() {}
 
 func (x *ListMissionByCameraRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[23]
+	mi := &file_mission_v1_mission_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1375,7 +1468,7 @@ func (x *ListMissionByCameraRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMissionByCameraRequest.ProtoReflect.Descriptor instead.
 func (*ListMissionByCameraRequest) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{23}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListMissionByCameraRequest) GetId() string {
@@ -1396,7 +1489,7 @@ type ListMissionByCameraReply struct {
 func (x *ListMissionByCameraReply) Reset() {
 	*x = ListMissionByCameraReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mission_v1_mission_proto_msgTypes[24]
+		mi := &file_mission_v1_mission_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1409,7 +1502,7 @@ func (x *ListMissionByCameraReply) String() string {
 func (*ListMissionByCameraReply) ProtoMessage() {}
 
 func (x *ListMissionByCameraReply) ProtoReflect() protoreflect.Message {
-	mi := &file_mission_v1_mission_proto_msgTypes[24]
+	mi := &file_mission_v1_mission_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1422,7 +1515,7 @@ func (x *ListMissionByCameraReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMissionByCameraReply.ProtoReflect.Descriptor instead.
 func (*ListMissionByCameraReply) Descriptor() ([]byte, []int) {
-	return file_mission_v1_mission_proto_rawDescGZIP(), []int{24}
+	return file_mission_v1_mission_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListMissionByCameraReply) GetMissions() []*Instance {
@@ -1441,7 +1534,12 @@ var file_mission_v1_mission_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f,
 	0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
-	0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb3, 0x02, 0x0a, 0x14, 0x43, 0x6f,
+	0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x3b, 0x0a, 0x11, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x16,
+	0x0a, 0x06, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x06,
+	0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x22, 0x11, 0x0a, 0x0f, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x41, 0x72, 0x65, 0x61, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0xb3, 0x02, 0x0a, 0x14, 0x43, 0x6f,
 	0x6e, 0x66, 0x69, 0x67, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02,
 	0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x72, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
@@ -1580,7 +1678,7 @@ var file_mission_v1_mission_proto_rawDesc = []byte{
 	0x72, 0x61, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x34, 0x0a, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69,
 	0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e,
 	0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x73, 0x74, 0x61,
-	0x6e, 0x63, 0x65, 0x52, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x32, 0xe6, 0x0a,
+	0x6e, 0x63, 0x65, 0x52, 0x08, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x32, 0xdd, 0x0b,
 	0x0a, 0x07, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x75, 0x0a, 0x0d, 0x43, 0x72, 0x65,
 	0x61, 0x74, 0x65, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69,
 	0x2e, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61,
@@ -1667,9 +1765,17 @@ var file_mission_v1_mission_proto_rawDesc = []byte{
 	0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x72, 0x65, 0x61,
 	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x12, 0x17, 0x2f,
 	0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x72, 0x65, 0x61, 0x73, 0x2f, 0x7b, 0x6d, 0x69,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x7d, 0x42, 0x1b, 0x5a, 0x19, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
-	0x6e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2f, 0x76, 0x31,
-	0x3b, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x7d, 0x12, 0x75, 0x0a, 0x0a, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x41, 0x72, 0x65, 0x61, 0x12, 0x21, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x69, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x41, 0x72, 0x65, 0x61,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x41,
+	0x72, 0x65, 0x61, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d,
+	0x22, 0x18, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x72, 0x65, 0x61, 0x2f, 0x63,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x3a, 0x01, 0x2a, 0x42, 0x1b, 0x5a,
+	0x19, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6d, 0x69, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -1684,75 +1790,79 @@ func file_mission_v1_mission_proto_rawDescGZIP() []byte {
 	return file_mission_v1_mission_proto_rawDescData
 }
 
-var file_mission_v1_mission_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_mission_v1_mission_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_mission_v1_mission_proto_goTypes = []interface{}{
-	(*ConfigMissionRequest)(nil),                // 0: api.mission.v1.ConfigMissionRequest
-	(*ConfigMissionReply)(nil),                  // 1: api.mission.v1.ConfigMissionReply
-	(*Point)(nil),                               // 2: api.mission.v1.Point
-	(*Area)(nil),                                // 3: api.mission.v1.Area
-	(*Instance)(nil),                            // 4: api.mission.v1.Instance
-	(*CreateAreaRequest)(nil),                   // 5: api.mission.v1.CreateAreaRequest
-	(*CreateAreaReply)(nil),                     // 6: api.mission.v1.CreateAreaReply
-	(*UpdateAreaRequest)(nil),                   // 7: api.mission.v1.UpdateAreaRequest
-	(*UpdateAreaReply)(nil),                     // 8: api.mission.v1.UpdateAreaReply
-	(*DeleteAreaRequest)(nil),                   // 9: api.mission.v1.DeleteAreaRequest
-	(*DeleteAreaReply)(nil),                     // 10: api.mission.v1.DeleteAreaReply
-	(*ListAreaRequest)(nil),                     // 11: api.mission.v1.ListAreaRequest
-	(*ListAreaReply)(nil),                       // 12: api.mission.v1.ListAreaReply
-	(*CreateMissionRequest)(nil),                // 13: api.mission.v1.CreateMissionRequest
-	(*CreateMissionReply)(nil),                  // 14: api.mission.v1.CreateMissionReply
-	(*UpdateMissionRequest)(nil),                // 15: api.mission.v1.UpdateMissionRequest
-	(*UpdateMissionReply)(nil),                  // 16: api.mission.v1.UpdateMissionReply
-	(*DeleteMissionRequest)(nil),                // 17: api.mission.v1.DeleteMissionRequest
-	(*DeleteMissionReply)(nil),                  // 18: api.mission.v1.DeleteMissionReply
-	(*GetMissionRequest)(nil),                   // 19: api.mission.v1.GetMissionRequest
-	(*GetMissionReply)(nil),                     // 20: api.mission.v1.GetMissionReply
-	(*ListMissionByCameraAndPresetRequest)(nil), // 21: api.mission.v1.ListMissionByCameraAndPresetRequest
-	(*ListMissionByCameraAndPresetReply)(nil),   // 22: api.mission.v1.ListMissionByCameraAndPresetReply
-	(*ListMissionByCameraRequest)(nil),          // 23: api.mission.v1.ListMissionByCameraRequest
-	(*ListMissionByCameraReply)(nil),            // 24: api.mission.v1.ListMissionByCameraReply
-	nil,                                         // 25: api.mission.v1.ConfigMissionRequest.ConfigEntry
-	nil,                                         // 26: api.mission.v1.Instance.ConfigEntry
-	(*timestamppb.Timestamp)(nil),               // 27: google.protobuf.Timestamp
+	(*ConfigAreaRequest)(nil),                   // 0: api.mission.v1.ConfigAreaRequest
+	(*ConfigAreaReply)(nil),                     // 1: api.mission.v1.ConfigAreaReply
+	(*ConfigMissionRequest)(nil),                // 2: api.mission.v1.ConfigMissionRequest
+	(*ConfigMissionReply)(nil),                  // 3: api.mission.v1.ConfigMissionReply
+	(*Point)(nil),                               // 4: api.mission.v1.Point
+	(*Area)(nil),                                // 5: api.mission.v1.Area
+	(*Instance)(nil),                            // 6: api.mission.v1.Instance
+	(*CreateAreaRequest)(nil),                   // 7: api.mission.v1.CreateAreaRequest
+	(*CreateAreaReply)(nil),                     // 8: api.mission.v1.CreateAreaReply
+	(*UpdateAreaRequest)(nil),                   // 9: api.mission.v1.UpdateAreaRequest
+	(*UpdateAreaReply)(nil),                     // 10: api.mission.v1.UpdateAreaReply
+	(*DeleteAreaRequest)(nil),                   // 11: api.mission.v1.DeleteAreaRequest
+	(*DeleteAreaReply)(nil),                     // 12: api.mission.v1.DeleteAreaReply
+	(*ListAreaRequest)(nil),                     // 13: api.mission.v1.ListAreaRequest
+	(*ListAreaReply)(nil),                       // 14: api.mission.v1.ListAreaReply
+	(*CreateMissionRequest)(nil),                // 15: api.mission.v1.CreateMissionRequest
+	(*CreateMissionReply)(nil),                  // 16: api.mission.v1.CreateMissionReply
+	(*UpdateMissionRequest)(nil),                // 17: api.mission.v1.UpdateMissionRequest
+	(*UpdateMissionReply)(nil),                  // 18: api.mission.v1.UpdateMissionReply
+	(*DeleteMissionRequest)(nil),                // 19: api.mission.v1.DeleteMissionRequest
+	(*DeleteMissionReply)(nil),                  // 20: api.mission.v1.DeleteMissionReply
+	(*GetMissionRequest)(nil),                   // 21: api.mission.v1.GetMissionRequest
+	(*GetMissionReply)(nil),                     // 22: api.mission.v1.GetMissionReply
+	(*ListMissionByCameraAndPresetRequest)(nil), // 23: api.mission.v1.ListMissionByCameraAndPresetRequest
+	(*ListMissionByCameraAndPresetReply)(nil),   // 24: api.mission.v1.ListMissionByCameraAndPresetReply
+	(*ListMissionByCameraRequest)(nil),          // 25: api.mission.v1.ListMissionByCameraRequest
+	(*ListMissionByCameraReply)(nil),            // 26: api.mission.v1.ListMissionByCameraReply
+	nil,                                         // 27: api.mission.v1.ConfigMissionRequest.ConfigEntry
+	nil,                                         // 28: api.mission.v1.Instance.ConfigEntry
+	(*timestamppb.Timestamp)(nil),               // 29: google.protobuf.Timestamp
 }
 var file_mission_v1_mission_proto_depIdxs = []int32{
-	25, // 0: api.mission.v1.ConfigMissionRequest.config:type_name -> api.mission.v1.ConfigMissionRequest.ConfigEntry
-	27, // 1: api.mission.v1.Area.created:type_name -> google.protobuf.Timestamp
-	2,  // 2: api.mission.v1.Area.points:type_name -> api.mission.v1.Point
-	27, // 3: api.mission.v1.Instance.created:type_name -> google.protobuf.Timestamp
-	26, // 4: api.mission.v1.Instance.config:type_name -> api.mission.v1.Instance.ConfigEntry
-	2,  // 5: api.mission.v1.CreateAreaRequest.points:type_name -> api.mission.v1.Point
-	3,  // 6: api.mission.v1.CreateAreaReply.area:type_name -> api.mission.v1.Area
-	2,  // 7: api.mission.v1.UpdateAreaRequest.points:type_name -> api.mission.v1.Point
-	3,  // 8: api.mission.v1.ListAreaReply.areas:type_name -> api.mission.v1.Area
-	4,  // 9: api.mission.v1.CreateMissionReply.mission:type_name -> api.mission.v1.Instance
-	4,  // 10: api.mission.v1.GetMissionReply.mission:type_name -> api.mission.v1.Instance
-	4,  // 11: api.mission.v1.ListMissionByCameraAndPresetReply.missions:type_name -> api.mission.v1.Instance
-	4,  // 12: api.mission.v1.ListMissionByCameraReply.missions:type_name -> api.mission.v1.Instance
-	13, // 13: api.mission.v1.Mission.CreateMission:input_type -> api.mission.v1.CreateMissionRequest
-	15, // 14: api.mission.v1.Mission.UpdateMission:input_type -> api.mission.v1.UpdateMissionRequest
-	17, // 15: api.mission.v1.Mission.DeleteMission:input_type -> api.mission.v1.DeleteMissionRequest
-	19, // 16: api.mission.v1.Mission.GetMission:input_type -> api.mission.v1.GetMissionRequest
-	21, // 17: api.mission.v1.Mission.ListMissionByCameraAndPreset:input_type -> api.mission.v1.ListMissionByCameraAndPresetRequest
-	23, // 18: api.mission.v1.Mission.ListMissionByCamera:input_type -> api.mission.v1.ListMissionByCameraRequest
-	0,  // 19: api.mission.v1.Mission.ConfigMission:input_type -> api.mission.v1.ConfigMissionRequest
-	5,  // 20: api.mission.v1.Mission.CreateArea:input_type -> api.mission.v1.CreateAreaRequest
-	7,  // 21: api.mission.v1.Mission.UpdateArea:input_type -> api.mission.v1.UpdateAreaRequest
-	9,  // 22: api.mission.v1.Mission.DeleteArea:input_type -> api.mission.v1.DeleteAreaRequest
-	11, // 23: api.mission.v1.Mission.ListArea:input_type -> api.mission.v1.ListAreaRequest
-	14, // 24: api.mission.v1.Mission.CreateMission:output_type -> api.mission.v1.CreateMissionReply
-	16, // 25: api.mission.v1.Mission.UpdateMission:output_type -> api.mission.v1.UpdateMissionReply
-	18, // 26: api.mission.v1.Mission.DeleteMission:output_type -> api.mission.v1.DeleteMissionReply
-	20, // 27: api.mission.v1.Mission.GetMission:output_type -> api.mission.v1.GetMissionReply
-	22, // 28: api.mission.v1.Mission.ListMissionByCameraAndPreset:output_type -> api.mission.v1.ListMissionByCameraAndPresetReply
-	24, // 29: api.mission.v1.Mission.ListMissionByCamera:output_type -> api.mission.v1.ListMissionByCameraReply
-	1,  // 30: api.mission.v1.Mission.ConfigMission:output_type -> api.mission.v1.ConfigMissionReply
-	6,  // 31: api.mission.v1.Mission.CreateArea:output_type -> api.mission.v1.CreateAreaReply
-	8,  // 32: api.mission.v1.Mission.UpdateArea:output_type -> api.mission.v1.UpdateAreaReply
-	10, // 33: api.mission.v1.Mission.DeleteArea:output_type -> api.mission.v1.DeleteAreaReply
-	12, // 34: api.mission.v1.Mission.ListArea:output_type -> api.mission.v1.ListAreaReply
-	24, // [24:35] is the sub-list for method output_type
-	13, // [13:24] is the sub-list for method input_type
+	27, // 0: api.mission.v1.ConfigMissionRequest.config:type_name -> api.mission.v1.ConfigMissionRequest.ConfigEntry
+	29, // 1: api.mission.v1.Area.created:type_name -> google.protobuf.Timestamp
+	4,  // 2: api.mission.v1.Area.points:type_name -> api.mission.v1.Point
+	29, // 3: api.mission.v1.Instance.created:type_name -> google.protobuf.Timestamp
+	28, // 4: api.mission.v1.Instance.config:type_name -> api.mission.v1.Instance.ConfigEntry
+	4,  // 5: api.mission.v1.CreateAreaRequest.points:type_name -> api.mission.v1.Point
+	5,  // 6: api.mission.v1.CreateAreaReply.area:type_name -> api.mission.v1.Area
+	4,  // 7: api.mission.v1.UpdateAreaRequest.points:type_name -> api.mission.v1.Point
+	5,  // 8: api.mission.v1.ListAreaReply.areas:type_name -> api.mission.v1.Area
+	6,  // 9: api.mission.v1.CreateMissionReply.mission:type_name -> api.mission.v1.Instance
+	6,  // 10: api.mission.v1.GetMissionReply.mission:type_name -> api.mission.v1.Instance
+	6,  // 11: api.mission.v1.ListMissionByCameraAndPresetReply.missions:type_name -> api.mission.v1.Instance
+	6,  // 12: api.mission.v1.ListMissionByCameraReply.missions:type_name -> api.mission.v1.Instance
+	15, // 13: api.mission.v1.Mission.CreateMission:input_type -> api.mission.v1.CreateMissionRequest
+	17, // 14: api.mission.v1.Mission.UpdateMission:input_type -> api.mission.v1.UpdateMissionRequest
+	19, // 15: api.mission.v1.Mission.DeleteMission:input_type -> api.mission.v1.DeleteMissionRequest
+	21, // 16: api.mission.v1.Mission.GetMission:input_type -> api.mission.v1.GetMissionRequest
+	23, // 17: api.mission.v1.Mission.ListMissionByCameraAndPreset:input_type -> api.mission.v1.ListMissionByCameraAndPresetRequest
+	25, // 18: api.mission.v1.Mission.ListMissionByCamera:input_type -> api.mission.v1.ListMissionByCameraRequest
+	2,  // 19: api.mission.v1.Mission.ConfigMission:input_type -> api.mission.v1.ConfigMissionRequest
+	7,  // 20: api.mission.v1.Mission.CreateArea:input_type -> api.mission.v1.CreateAreaRequest
+	9,  // 21: api.mission.v1.Mission.UpdateArea:input_type -> api.mission.v1.UpdateAreaRequest
+	11, // 22: api.mission.v1.Mission.DeleteArea:input_type -> api.mission.v1.DeleteAreaRequest
+	13, // 23: api.mission.v1.Mission.ListArea:input_type -> api.mission.v1.ListAreaRequest
+	0,  // 24: api.mission.v1.Mission.ConfigArea:input_type -> api.mission.v1.ConfigAreaRequest
+	16, // 25: api.mission.v1.Mission.CreateMission:output_type -> api.mission.v1.CreateMissionReply
+	18, // 26: api.mission.v1.Mission.UpdateMission:output_type -> api.mission.v1.UpdateMissionReply
+	20, // 27: api.mission.v1.Mission.DeleteMission:output_type -> api.mission.v1.DeleteMissionReply
+	22, // 28: api.mission.v1.Mission.GetMission:output_type -> api.mission.v1.GetMissionReply
+	24, // 29: api.mission.v1.Mission.ListMissionByCameraAndPreset:output_type -> api.mission.v1.ListMissionByCameraAndPresetReply
+	26, // 30: api.mission.v1.Mission.ListMissionByCamera:output_type -> api.mission.v1.ListMissionByCameraReply
+	3,  // 31: api.mission.v1.Mission.ConfigMission:output_type -> api.mission.v1.ConfigMissionReply
+	8,  // 32: api.mission.v1.Mission.CreateArea:output_type -> api.mission.v1.CreateAreaReply
+	10, // 33: api.mission.v1.Mission.UpdateArea:output_type -> api.mission.v1.UpdateAreaReply
+	12, // 34: api.mission.v1.Mission.DeleteArea:output_type -> api.mission.v1.DeleteAreaReply
+	14, // 35: api.mission.v1.Mission.ListArea:output_type -> api.mission.v1.ListAreaReply
+	1,  // 36: api.mission.v1.Mission.ConfigArea:output_type -> api.mission.v1.ConfigAreaReply
+	25, // [25:37] is the sub-list for method output_type
+	13, // [13:25] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -1765,7 +1875,7 @@ func file_mission_v1_mission_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_mission_v1_mission_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ConfigMissionRequest); i {
+			switch v := v.(*ConfigAreaRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1777,7 +1887,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ConfigMissionReply); i {
+			switch v := v.(*ConfigAreaReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1789,7 +1899,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Point); i {
+			switch v := v.(*ConfigMissionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1801,7 +1911,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Area); i {
+			switch v := v.(*ConfigMissionReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1813,7 +1923,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Instance); i {
+			switch v := v.(*Point); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1825,7 +1935,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateAreaRequest); i {
+			switch v := v.(*Area); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1837,7 +1947,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateAreaReply); i {
+			switch v := v.(*Instance); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1849,7 +1959,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateAreaRequest); i {
+			switch v := v.(*CreateAreaRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1861,7 +1971,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateAreaReply); i {
+			switch v := v.(*CreateAreaReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1873,7 +1983,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAreaRequest); i {
+			switch v := v.(*UpdateAreaRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1885,7 +1995,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAreaReply); i {
+			switch v := v.(*UpdateAreaReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1897,7 +2007,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListAreaRequest); i {
+			switch v := v.(*DeleteAreaRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1909,7 +2019,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListAreaReply); i {
+			switch v := v.(*DeleteAreaReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1921,7 +2031,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMissionRequest); i {
+			switch v := v.(*ListAreaRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1933,7 +2043,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMissionReply); i {
+			switch v := v.(*ListAreaReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1945,7 +2055,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateMissionRequest); i {
+			switch v := v.(*CreateMissionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1957,7 +2067,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateMissionReply); i {
+			switch v := v.(*CreateMissionReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1969,7 +2079,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteMissionRequest); i {
+			switch v := v.(*UpdateMissionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1981,7 +2091,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteMissionReply); i {
+			switch v := v.(*UpdateMissionReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1993,7 +2103,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetMissionRequest); i {
+			switch v := v.(*DeleteMissionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2005,7 +2115,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetMissionReply); i {
+			switch v := v.(*DeleteMissionReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2017,7 +2127,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMissionByCameraAndPresetRequest); i {
+			switch v := v.(*GetMissionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2029,7 +2139,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMissionByCameraAndPresetReply); i {
+			switch v := v.(*GetMissionReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2041,7 +2151,7 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMissionByCameraRequest); i {
+			switch v := v.(*ListMissionByCameraAndPresetRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2053,6 +2163,30 @@ func file_mission_v1_mission_proto_init() {
 			}
 		}
 		file_mission_v1_mission_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMissionByCameraAndPresetReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mission_v1_mission_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMissionByCameraRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mission_v1_mission_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListMissionByCameraReply); i {
 			case 0:
 				return &v.state
@@ -2071,7 +2205,7 @@ func file_mission_v1_mission_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mission_v1_mission_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   27,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

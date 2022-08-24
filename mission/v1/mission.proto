@@ -70,7 +70,19 @@ service Mission {
 			get: "/api/v1/areas/{mission}"
 		};
 	}
+	rpc ConfigArea(ConfigAreaRequest) returns (ConfigAreaReply) {
+		option (google.api.http) = {
+			post: "/api/v1/area/config/{id}"
+			body: "*"
+		};
+	}
 }
+
+message ConfigAreaRequest {
+	uint32 id = 1;
+	uint32 object = 2;
+}
+message ConfigAreaReply {}
 
 message ConfigMissionRequest {
 	uint32 id = 1;

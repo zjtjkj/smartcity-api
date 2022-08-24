@@ -33,6 +33,7 @@ type MissionClient interface {
 	UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaReply, error)
 	DeleteArea(ctx context.Context, in *DeleteAreaRequest, opts ...grpc.CallOption) (*DeleteAreaReply, error)
 	ListArea(ctx context.Context, in *ListAreaRequest, opts ...grpc.CallOption) (*ListAreaReply, error)
+	ConfigArea(ctx context.Context, in *ConfigAreaRequest, opts ...grpc.CallOption) (*ConfigAreaReply, error)
 }
 
 type missionClient struct {
@@ -142,6 +143,15 @@ func (c *missionClient) ListArea(ctx context.Context, in *ListAreaRequest, opts 
 	return out, nil
 }
 
+func (c *missionClient) ConfigArea(ctx context.Context, in *ConfigAreaRequest, opts ...grpc.CallOption) (*ConfigAreaReply, error) {
+	out := new(ConfigAreaReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ConfigArea", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MissionServer is the server API for Mission service.
 // All implementations must embed UnimplementedMissionServer
 // for forward compatibility
@@ -157,6 +167,7 @@ type MissionServer interface {
 	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error)
 	DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error)
 	ListArea(context.Context, *ListAreaRequest) (*ListAreaReply, error)
+	ConfigArea(context.Context, *ConfigAreaRequest) (*ConfigAreaReply, error)
 	mustEmbedUnimplementedMissionServer()
 }
 
@@ -196,6 +207,9 @@ func (UnimplementedMissionServer) DeleteArea(context.Context, *DeleteAreaRequest
 }
 func (UnimplementedMissionServer) ListArea(context.Context, *ListAreaRequest) (*ListAreaReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListArea not implemented")
+}
+func (UnimplementedMissionServer) ConfigArea(context.Context, *ConfigAreaRequest) (*ConfigAreaReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigArea not implemented")
 }
 func (UnimplementedMissionServer) mustEmbedUnimplementedMissionServer() {}
 
@@ -408,6 +422,24 @@ func _Mission_ListArea_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Mission_ConfigArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigAreaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).ConfigArea(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/ConfigArea",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).ConfigArea(ctx, req.(*ConfigAreaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Mission_ServiceDesc is the grpc.ServiceDesc for Mission service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -458,6 +490,10 @@ var Mission_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListArea",
 			Handler:    _Mission_ListArea_Handler,
+		},
+		{
+			MethodName: "ConfigArea",
+			Handler:    _Mission_ConfigArea_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
