@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package api.object.v1;
+
+option go_package = "object/api/object/v1;v1";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service Object {
+	rpc CreateObject (CreateObjectRequest) returns (CreateObjectReply) {
+		option (google.api.http) = {
+			put: "/api/v1/object"
+			body: "*"
+		};
+	}
+	rpc UpdateObject (UpdateObjectRequest) returns (UpdateObjectReply) {
+		option (google.api.http) = {
+			post: "/api/v1/object/{id}"
+			body: "*"
+		};
+	}
+	rpc DeleteObject (DeleteObjectRequest) returns (DeleteObjectReply) {
+		option (google.api.http) = {
+			delete: "/api/v1/object/{id}"
+		};
+	}
+	rpc GetObject (GetObjectRequest) returns (GetObjectReply) {
+		option (google.api.http) = {
+			get: "/api/v1/object/{id}"
+		};
+	}
+	rpc ListObject (ListObjectRequest) returns (ListObjectReply) {
+		option (google.api.http) = {
+			get: "/api/v1/objects"
+		};
+	}
+}
+
+message Instance {
+	uint32 id = 1;
+	google.protobuf.Timestamp created = 2;
+	string uuid = 3;
+	string name = 4;
+	map<string, string> attr = 5;
+}
+
+message CreateObjectRequest {
+	string uuid = 1;
+	string name = 2;
+	map<string, string> attr = 3;
+}
+message CreateObjectReply {
+	Instance object = 1;
+}
+
+message UpdateObjectRequest {
+	uint32 id = 1;
+	string uuid = 2;
+	string name = 3;
+	map<string, string> attr = 4;
+}
+message UpdateObjectReply {
+	Instance object = 2;
+}
+
+message DeleteObjectRequest {
+	uint32 id = 1;
+}
+message DeleteObjectReply {}
+
+message GetObjectRequest {
+	uint32 id = 1;
+}
+message GetObjectReply {
+	Instance object = 1;
+}
+
+message ListObjectRequest {
+	string key = 1;
+	uint32 index = 2;
+	uint32 size = 3;
+}
+message ListObjectReply {
+	repeated Instance objects = 1;
+	uint32 index = 2;
+	uint32 size = 3;
+	uint32 pages = 4;
+	uint32 total = 5;
+}
