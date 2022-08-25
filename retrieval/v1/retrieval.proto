@@ -113,6 +113,7 @@ message DeleteEventReply {}
 message MissionLatestInfoRequest {
 	int32 mission_id = 1;
 	int32 length = 2;
+	string type = 3;
 }
 message MissionLatestInfoReply {
 	int32 total = 1;
