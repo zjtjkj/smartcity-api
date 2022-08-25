@@ -21,12 +21,15 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationMissionConfigArea = "/api.mission.v1.Mission/ConfigArea"
 const OperationMissionConfigMission = "/api.mission.v1.Mission/ConfigMission"
+const OperationMissionControlMissionByCamera = "/api.mission.v1.Mission/ControlMissionByCamera"
+const OperationMissionControlMissionBySingle = "/api.mission.v1.Mission/ControlMissionBySingle"
 const OperationMissionCreateArea = "/api.mission.v1.Mission/CreateArea"
 const OperationMissionCreateMission = "/api.mission.v1.Mission/CreateMission"
 const OperationMissionDeleteArea = "/api.mission.v1.Mission/DeleteArea"
 const OperationMissionDeleteMission = "/api.mission.v1.Mission/DeleteMission"
 const OperationMissionGetMission = "/api.mission.v1.Mission/GetMission"
 const OperationMissionListArea = "/api.mission.v1.Mission/ListArea"
+const OperationMissionListMission = "/api.mission.v1.Mission/ListMission"
 const OperationMissionListMissionByCamera = "/api.mission.v1.Mission/ListMissionByCamera"
 const OperationMissionListMissionByCameraAndPreset = "/api.mission.v1.Mission/ListMissionByCameraAndPreset"
 const OperationMissionUpdateArea = "/api.mission.v1.Mission/UpdateArea"
@@ -35,12 +38,15 @@ const OperationMissionUpdateMission = "/api.mission.v1.Mission/UpdateMission"
 type MissionHTTPServer interface {
 	ConfigArea(context.Context, *ConfigAreaRequest) (*ConfigAreaReply, error)
 	ConfigMission(context.Context, *ConfigMissionRequest) (*ConfigMissionReply, error)
+	ControlMissionByCamera(context.Context, *ControlMissionByCameraRequest) (*ControlMissionByCameraReply, error)
+	ControlMissionBySingle(context.Context, *ControlMissionBySingleRequest) (*ControlMissionBySingleReply, error)
 	CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error)
 	CreateMission(context.Context, *CreateMissionRequest) (*CreateMissionReply, error)
 	DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error)
 	DeleteMission(context.Context, *DeleteMissionRequest) (*DeleteMissionReply, error)
 	GetMission(context.Context, *GetMissionRequest) (*GetMissionReply, error)
 	ListArea(context.Context, *ListAreaRequest) (*ListAreaReply, error)
+	ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error)
 	ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error)
 	ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error)
 	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error)
@@ -55,12 +61,15 @@ func RegisterMissionHTTPServer(s *http.Server, srv MissionHTTPServer) {
 	r.GET("/api/v1/mission/{id}", _Mission_GetMission0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/cameraPreset", _Mission_ListMissionByCameraAndPreset0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/camera/{id}", _Mission_ListMissionByCamera0_HTTP_Handler(srv))
+	r.GET("/api/v1/mission/cameras", _Mission_ListMission0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/config/{id}", _Mission_ConfigMission0_HTTP_Handler(srv))
 	r.PUT("/api/v1/area", _Mission_CreateArea0_HTTP_Handler(srv))
 	r.POST("/api/v1/area/{id}", _Mission_UpdateArea0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/area/{id}", _Mission_DeleteArea0_HTTP_Handler(srv))
 	r.GET("/api/v1/areas/{mission}", _Mission_ListArea0_HTTP_Handler(srv))
 	r.POST("/api/v1/area/config/{id}", _Mission_ConfigArea0_HTTP_Handler(srv))
+	r.GET("/api/v1/control/single/{id}", _Mission_ControlMissionBySingle0_HTTP_Handler(srv))
+	r.GET("/api/v1/control/camera/{id}", _Mission_ControlMissionByCamera0_HTTP_Handler(srv))
 }
 
 func _Mission_CreateMission0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
@@ -185,6 +194,25 @@ func _Mission_ListMissionByCamera0_HTTP_Handler(srv MissionHTTPServer) func(ctx 
 			return err
 		}
 		reply := out.(*ListMissionByCameraReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Mission_ListMission0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListMissionRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionListMission)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListMission(ctx, req.(*ListMissionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListMissionReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -318,15 +346,62 @@ func _Mission_ConfigArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Cont
 	}
 }
 
+func _Mission_ControlMissionBySingle0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ControlMissionBySingleRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionControlMissionBySingle)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ControlMissionBySingle(ctx, req.(*ControlMissionBySingleRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ControlMissionBySingleReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Mission_ControlMissionByCamera0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ControlMissionByCameraRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindVars(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionControlMissionByCamera)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ControlMissionByCamera(ctx, req.(*ControlMissionByCameraRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ControlMissionByCameraReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type MissionHTTPClient interface {
 	ConfigArea(ctx context.Context, req *ConfigAreaRequest, opts ...http.CallOption) (rsp *ConfigAreaReply, err error)
 	ConfigMission(ctx context.Context, req *ConfigMissionRequest, opts ...http.CallOption) (rsp *ConfigMissionReply, err error)
+	ControlMissionByCamera(ctx context.Context, req *ControlMissionByCameraRequest, opts ...http.CallOption) (rsp *ControlMissionByCameraReply, err error)
+	ControlMissionBySingle(ctx context.Context, req *ControlMissionBySingleRequest, opts ...http.CallOption) (rsp *ControlMissionBySingleReply, err error)
 	CreateArea(ctx context.Context, req *CreateAreaRequest, opts ...http.CallOption) (rsp *CreateAreaReply, err error)
 	CreateMission(ctx context.Context, req *CreateMissionRequest, opts ...http.CallOption) (rsp *CreateMissionReply, err error)
 	DeleteArea(ctx context.Context, req *DeleteAreaRequest, opts ...http.CallOption) (rsp *DeleteAreaReply, err error)
 	DeleteMission(ctx context.Context, req *DeleteMissionRequest, opts ...http.CallOption) (rsp *DeleteMissionReply, err error)
 	GetMission(ctx context.Context, req *GetMissionRequest, opts ...http.CallOption) (rsp *GetMissionReply, err error)
 	ListArea(ctx context.Context, req *ListAreaRequest, opts ...http.CallOption) (rsp *ListAreaReply, err error)
+	ListMission(ctx context.Context, req *ListMissionRequest, opts ...http.CallOption) (rsp *ListMissionReply, err error)
 	ListMissionByCamera(ctx context.Context, req *ListMissionByCameraRequest, opts ...http.CallOption) (rsp *ListMissionByCameraReply, err error)
 	ListMissionByCameraAndPreset(ctx context.Context, req *ListMissionByCameraAndPresetRequest, opts ...http.CallOption) (rsp *ListMissionByCameraAndPresetReply, err error)
 	UpdateArea(ctx context.Context, req *UpdateAreaRequest, opts ...http.CallOption) (rsp *UpdateAreaReply, err error)
@@ -361,6 +436,32 @@ func (c *MissionHTTPClientImpl) ConfigMission(ctx context.Context, in *ConfigMis
 	opts = append(opts, http.Operation(OperationMissionConfigMission))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MissionHTTPClientImpl) ControlMissionByCamera(ctx context.Context, in *ControlMissionByCameraRequest, opts ...http.CallOption) (*ControlMissionByCameraReply, error) {
+	var out ControlMissionByCameraReply
+	pattern := "/api/v1/control/camera/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationMissionControlMissionByCamera))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MissionHTTPClientImpl) ControlMissionBySingle(ctx context.Context, in *ControlMissionBySingleRequest, opts ...http.CallOption) (*ControlMissionBySingleReply, error) {
+	var out ControlMissionBySingleReply
+	pattern := "/api/v1/control/single/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationMissionControlMissionBySingle))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -437,6 +538,19 @@ func (c *MissionHTTPClientImpl) ListArea(ctx context.Context, in *ListAreaReques
 	pattern := "/api/v1/areas/{mission}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationMissionListArea))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MissionHTTPClientImpl) ListMission(ctx context.Context, in *ListMissionRequest, opts ...http.CallOption) (*ListMissionReply, error) {
+	var out ListMissionReply
+	pattern := "/api/v1/mission/cameras"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationMissionListMission))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

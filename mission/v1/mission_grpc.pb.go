@@ -28,12 +28,15 @@ type MissionClient interface {
 	GetMission(ctx context.Context, in *GetMissionRequest, opts ...grpc.CallOption) (*GetMissionReply, error)
 	ListMissionByCameraAndPreset(ctx context.Context, in *ListMissionByCameraAndPresetRequest, opts ...grpc.CallOption) (*ListMissionByCameraAndPresetReply, error)
 	ListMissionByCamera(ctx context.Context, in *ListMissionByCameraRequest, opts ...grpc.CallOption) (*ListMissionByCameraReply, error)
+	ListMission(ctx context.Context, in *ListMissionRequest, opts ...grpc.CallOption) (*ListMissionReply, error)
 	ConfigMission(ctx context.Context, in *ConfigMissionRequest, opts ...grpc.CallOption) (*ConfigMissionReply, error)
 	CreateArea(ctx context.Context, in *CreateAreaRequest, opts ...grpc.CallOption) (*CreateAreaReply, error)
 	UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaReply, error)
 	DeleteArea(ctx context.Context, in *DeleteAreaRequest, opts ...grpc.CallOption) (*DeleteAreaReply, error)
 	ListArea(ctx context.Context, in *ListAreaRequest, opts ...grpc.CallOption) (*ListAreaReply, error)
 	ConfigArea(ctx context.Context, in *ConfigAreaRequest, opts ...grpc.CallOption) (*ConfigAreaReply, error)
+	ControlMissionBySingle(ctx context.Context, in *ControlMissionBySingleRequest, opts ...grpc.CallOption) (*ControlMissionBySingleReply, error)
+	ControlMissionByCamera(ctx context.Context, in *ControlMissionByCameraRequest, opts ...grpc.CallOption) (*ControlMissionByCameraReply, error)
 }
 
 type missionClient struct {
@@ -98,6 +101,15 @@ func (c *missionClient) ListMissionByCamera(ctx context.Context, in *ListMission
 	return out, nil
 }
 
+func (c *missionClient) ListMission(ctx context.Context, in *ListMissionRequest, opts ...grpc.CallOption) (*ListMissionReply, error) {
+	out := new(ListMissionReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ListMission", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *missionClient) ConfigMission(ctx context.Context, in *ConfigMissionRequest, opts ...grpc.CallOption) (*ConfigMissionReply, error) {
 	out := new(ConfigMissionReply)
 	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ConfigMission", in, out, opts...)
@@ -152,6 +164,24 @@ func (c *missionClient) ConfigArea(ctx context.Context, in *ConfigAreaRequest, o
 	return out, nil
 }
 
+func (c *missionClient) ControlMissionBySingle(ctx context.Context, in *ControlMissionBySingleRequest, opts ...grpc.CallOption) (*ControlMissionBySingleReply, error) {
+	out := new(ControlMissionBySingleReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ControlMissionBySingle", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *missionClient) ControlMissionByCamera(ctx context.Context, in *ControlMissionByCameraRequest, opts ...grpc.CallOption) (*ControlMissionByCameraReply, error) {
+	out := new(ControlMissionByCameraReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/ControlMissionByCamera", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MissionServer is the server API for Mission service.
 // All implementations must embed UnimplementedMissionServer
 // for forward compatibility
@@ -162,12 +192,15 @@ type MissionServer interface {
 	GetMission(context.Context, *GetMissionRequest) (*GetMissionReply, error)
 	ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error)
 	ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error)
+	ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error)
 	ConfigMission(context.Context, *ConfigMissionRequest) (*ConfigMissionReply, error)
 	CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error)
 	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error)
 	DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error)
 	ListArea(context.Context, *ListAreaRequest) (*ListAreaReply, error)
 	ConfigArea(context.Context, *ConfigAreaRequest) (*ConfigAreaReply, error)
+	ControlMissionBySingle(context.Context, *ControlMissionBySingleRequest) (*ControlMissionBySingleReply, error)
+	ControlMissionByCamera(context.Context, *ControlMissionByCameraRequest) (*ControlMissionByCameraReply, error)
 	mustEmbedUnimplementedMissionServer()
 }
 
@@ -193,6 +226,9 @@ func (UnimplementedMissionServer) ListMissionByCameraAndPreset(context.Context, 
 func (UnimplementedMissionServer) ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMissionByCamera not implemented")
 }
+func (UnimplementedMissionServer) ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMission not implemented")
+}
 func (UnimplementedMissionServer) ConfigMission(context.Context, *ConfigMissionRequest) (*ConfigMissionReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigMission not implemented")
 }
@@ -210,6 +246,12 @@ func (UnimplementedMissionServer) ListArea(context.Context, *ListAreaRequest) (*
 }
 func (UnimplementedMissionServer) ConfigArea(context.Context, *ConfigAreaRequest) (*ConfigAreaReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigArea not implemented")
+}
+func (UnimplementedMissionServer) ControlMissionBySingle(context.Context, *ControlMissionBySingleRequest) (*ControlMissionBySingleReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControlMissionBySingle not implemented")
+}
+func (UnimplementedMissionServer) ControlMissionByCamera(context.Context, *ControlMissionByCameraRequest) (*ControlMissionByCameraReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControlMissionByCamera not implemented")
 }
 func (UnimplementedMissionServer) mustEmbedUnimplementedMissionServer() {}
 
@@ -332,6 +374,24 @@ func _Mission_ListMissionByCamera_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Mission_ListMission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).ListMission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/ListMission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).ListMission(ctx, req.(*ListMissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Mission_ConfigMission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConfigMissionRequest)
 	if err := dec(in); err != nil {
@@ -440,6 +500,42 @@ func _Mission_ConfigArea_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Mission_ControlMissionBySingle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlMissionBySingleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).ControlMissionBySingle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/ControlMissionBySingle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).ControlMissionBySingle(ctx, req.(*ControlMissionBySingleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Mission_ControlMissionByCamera_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlMissionByCameraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).ControlMissionByCamera(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/ControlMissionByCamera",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).ControlMissionByCamera(ctx, req.(*ControlMissionByCameraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Mission_ServiceDesc is the grpc.ServiceDesc for Mission service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -472,6 +568,10 @@ var Mission_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Mission_ListMissionByCamera_Handler,
 		},
 		{
+			MethodName: "ListMission",
+			Handler:    _Mission_ListMission_Handler,
+		},
+		{
 			MethodName: "ConfigMission",
 			Handler:    _Mission_ConfigMission_Handler,
 		},
@@ -494,6 +594,14 @@ var Mission_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfigArea",
 			Handler:    _Mission_ConfigArea_Handler,
+		},
+		{
+			MethodName: "ControlMissionBySingle",
+			Handler:    _Mission_ControlMissionBySingle_Handler,
+		},
+		{
+			MethodName: "ControlMissionByCamera",
+			Handler:    _Mission_ControlMissionByCamera_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

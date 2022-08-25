@@ -41,6 +41,11 @@ service Mission {
 			body: "*"
 		};
 	}
+	rpc ListMission(ListMissionRequest) returns (ListMissionReply) {
+		option (google.api.http) = {
+			get: "/api/v1/mission/cameras"
+		};
+	}
 	rpc ConfigMission(ConfigMissionRequest) returns (ConfigMissionReply) {
 		option (google.api.http) = {
 			post: "/api/v1/mission/config/{id}"
@@ -76,6 +81,34 @@ service Mission {
 			body: "*"
 		};
 	}
+
+	rpc ControlMissionBySingle(ControlMissionBySingleRequest) returns (ControlMissionBySingleReply) {
+		option (google.api.http) = {
+			get: "/api/v1/control/single/{id}"
+		};
+	}
+	rpc ControlMissionByCamera(ControlMissionByCameraRequest) returns (ControlMissionByCameraReply) {
+		option (google.api.http) = {
+			get: "/api/v1/control/camera/{id}"
+		};
+	}
+}
+
+message ControlMissionBySingleRequest {
+	uint32 id = 1;
+	bool enable = 2;
+}
+message ControlMissionBySingleReply {}
+
+message ControlMissionByCameraRequest {
+	string id = 1;
+	bool enable = 2;
+}
+message ControlMissionByCameraReply {}
+
+message ListMissionRequest{}
+message ListMissionReply{
+	repeated Instance missions = 1;
 }
 
 message ConfigAreaRequest {
@@ -88,11 +121,10 @@ message ConfigMissionRequest {
 	uint32 id = 1;
 	uint32 start = 2;
 	uint32 end = 3;
-	bool enable = 4;
-	bool reverse = 5;
-	uint32 mode = 6;
-	map<string, string> config = 7;
-	repeated uint32 modules = 8;
+	bool reverse = 4;
+	uint32 mode = 5;
+	map<string, string> config = 6;
+	repeated uint32 modules = 7;
 
 }
 message ConfigMissionReply {}
