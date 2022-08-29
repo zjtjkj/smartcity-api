@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package api.operator.v1;
+
+option go_package = "operator/api/operator/v1;v1";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service Operator {
+  rpc GetMission(GetMissionRequest) returns (GetMissionReply) {
+    option (google.api.http) = {
+      get: "/api/v1/operator/mission/{id}"
+    };
+  }
+  rpc RefreshMission(RefreshMissionRequest) returns (RefreshMissionReply) {
+    option (google.api.http) = {
+      get: "/api/v1/operator/refresh/{id}"
+    };
+  }
+}
+
+message RefreshMissionRequest {
+	uint32 id = 1;
+}
+message RefreshMissionReply {}
+
+message GetMissionRequest {
+  uint32 id = 1;
+}
+enum Status {
+  Analyzing = 0;
+  Scheduled = 1;
+  Failed = 2;
+  Demo = 3;
+}
+message GetMissionReply {
+  uint32 id = 1;
+  google.protobuf.Timestamp updated = 2;
+  Status status = 3;
+  string info = 4;
+}
+
+message CreateOperatorRequest {}
+message CreateOperatorReply {}
+
+message UpdateOperatorRequest {}
+message UpdateOperatorReply {}
+
+message DeleteOperatorRequest {}
+message DeleteOperatorReply {}
+
+message GetOperatorRequest {}
+message GetOperatorReply {}
+
+message ListOperatorRequest {}
+message ListOperatorReply {}
