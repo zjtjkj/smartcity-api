@@ -141,6 +141,7 @@ message Area {
 	string name = 4;
 	uint32 type = 5;
 	repeated Point points = 6;
+	uint32 object = 7;
 }
 
 message Instance {
