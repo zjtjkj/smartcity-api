@@ -625,10 +625,10 @@ func (m *ReceiveEventRequest_Object) validate(all bool) error {
 
 	// no validation rules for Aid
 
-	if len(m.GetPoints()) < 2 {
+	if len(m.GetPoints()) != 2 {
 		err := ReceiveEventRequest_ObjectValidationError{
 			field:  "Points",
-			reason: "value must contain at least 2 item(s)",
+			reason: "value must contain exactly 2 item(s)",
 		}
 		if !all {
 			return err
