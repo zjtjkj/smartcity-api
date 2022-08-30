@@ -32,6 +32,7 @@ const OperationMissionListArea = "/api.mission.v1.Mission/ListArea"
 const OperationMissionListMission = "/api.mission.v1.Mission/ListMission"
 const OperationMissionListMissionByCamera = "/api.mission.v1.Mission/ListMissionByCamera"
 const OperationMissionListMissionByCameraAndPreset = "/api.mission.v1.Mission/ListMissionByCameraAndPreset"
+const OperationMissionSearchMission = "/api.mission.v1.Mission/SearchMission"
 const OperationMissionUpdateArea = "/api.mission.v1.Mission/UpdateArea"
 const OperationMissionUpdateMission = "/api.mission.v1.Mission/UpdateMission"
 
@@ -49,6 +50,7 @@ type MissionHTTPServer interface {
 	ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error)
 	ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error)
 	ListMissionByCameraAndPreset(context.Context, *ListMissionByCameraAndPresetRequest) (*ListMissionByCameraAndPresetReply, error)
+	SearchMission(context.Context, *SearchMissionRequest) (*SearchMissionReply, error)
 	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error)
 	UpdateMission(context.Context, *UpdateMissionRequest) (*UpdateMissionReply, error)
 }
@@ -63,6 +65,7 @@ func RegisterMissionHTTPServer(s *http.Server, srv MissionHTTPServer) {
 	r.POST("/api/v1/mission/camera/{id}", _Mission_ListMissionByCamera0_HTTP_Handler(srv))
 	r.GET("/api/v1/mission/cameras", _Mission_ListMission0_HTTP_Handler(srv))
 	r.POST("/api/v1/mission/config/{id}", _Mission_ConfigMission0_HTTP_Handler(srv))
+	r.POST("/api/v1/mission/search", _Mission_SearchMission0_HTTP_Handler(srv))
 	r.PUT("/api/v1/area", _Mission_CreateArea0_HTTP_Handler(srv))
 	r.POST("/api/v1/area/{id}", _Mission_UpdateArea0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/area/{id}", _Mission_DeleteArea0_HTTP_Handler(srv))
@@ -239,6 +242,25 @@ func _Mission_ConfigMission0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.C
 	}
 }
 
+func _Mission_SearchMission0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SearchMissionRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationMissionSearchMission)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SearchMission(ctx, req.(*SearchMissionRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SearchMissionReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Mission_CreateArea0_HTTP_Handler(srv MissionHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateAreaRequest
@@ -404,6 +426,7 @@ type MissionHTTPClient interface {
 	ListMission(ctx context.Context, req *ListMissionRequest, opts ...http.CallOption) (rsp *ListMissionReply, err error)
 	ListMissionByCamera(ctx context.Context, req *ListMissionByCameraRequest, opts ...http.CallOption) (rsp *ListMissionByCameraReply, err error)
 	ListMissionByCameraAndPreset(ctx context.Context, req *ListMissionByCameraAndPresetRequest, opts ...http.CallOption) (rsp *ListMissionByCameraAndPresetReply, err error)
+	SearchMission(ctx context.Context, req *SearchMissionRequest, opts ...http.CallOption) (rsp *SearchMissionReply, err error)
 	UpdateArea(ctx context.Context, req *UpdateAreaRequest, opts ...http.CallOption) (rsp *UpdateAreaReply, err error)
 	UpdateMission(ctx context.Context, req *UpdateMissionRequest, opts ...http.CallOption) (rsp *UpdateMissionReply, err error)
 }
@@ -577,6 +600,19 @@ func (c *MissionHTTPClientImpl) ListMissionByCameraAndPreset(ctx context.Context
 	pattern := "/api/v1/mission/cameraPreset"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationMissionListMissionByCameraAndPreset))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MissionHTTPClientImpl) SearchMission(ctx context.Context, in *SearchMissionRequest, opts ...http.CallOption) (*SearchMissionReply, error) {
+	var out SearchMissionReply
+	pattern := "/api/v1/mission/search"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationMissionSearchMission))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

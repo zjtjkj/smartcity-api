@@ -52,6 +52,12 @@ service Mission {
 			body: "*"
 		};
 	}
+	rpc SearchMission(SearchMissionRequest) returns (SearchMissionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/mission/search"
+			body: "*"
+		};
+	}
 
 	rpc CreateArea(CreateAreaRequest) returns (CreateAreaReply) {
 		option (google.api.http) = {
@@ -92,6 +98,17 @@ service Mission {
 			get: "/api/v1/control/camera/{id}"
 		};
 	}
+}
+
+message SearchMissionRequest {
+	uint32 index = 1;
+	uint32 size = 2;
+	string key = 3;
+	string camera = 4;
+	uint32 region = 5;
+}
+message SearchMissionReply {
+	repeated Instance missions = 1;
 }
 
 message ControlMissionBySingleRequest {

@@ -30,6 +30,7 @@ type MissionClient interface {
 	ListMissionByCamera(ctx context.Context, in *ListMissionByCameraRequest, opts ...grpc.CallOption) (*ListMissionByCameraReply, error)
 	ListMission(ctx context.Context, in *ListMissionRequest, opts ...grpc.CallOption) (*ListMissionReply, error)
 	ConfigMission(ctx context.Context, in *ConfigMissionRequest, opts ...grpc.CallOption) (*ConfigMissionReply, error)
+	SearchMission(ctx context.Context, in *SearchMissionRequest, opts ...grpc.CallOption) (*SearchMissionReply, error)
 	CreateArea(ctx context.Context, in *CreateAreaRequest, opts ...grpc.CallOption) (*CreateAreaReply, error)
 	UpdateArea(ctx context.Context, in *UpdateAreaRequest, opts ...grpc.CallOption) (*UpdateAreaReply, error)
 	DeleteArea(ctx context.Context, in *DeleteAreaRequest, opts ...grpc.CallOption) (*DeleteAreaReply, error)
@@ -119,6 +120,15 @@ func (c *missionClient) ConfigMission(ctx context.Context, in *ConfigMissionRequ
 	return out, nil
 }
 
+func (c *missionClient) SearchMission(ctx context.Context, in *SearchMissionRequest, opts ...grpc.CallOption) (*SearchMissionReply, error) {
+	out := new(SearchMissionReply)
+	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/SearchMission", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *missionClient) CreateArea(ctx context.Context, in *CreateAreaRequest, opts ...grpc.CallOption) (*CreateAreaReply, error) {
 	out := new(CreateAreaReply)
 	err := c.cc.Invoke(ctx, "/api.mission.v1.Mission/CreateArea", in, out, opts...)
@@ -194,6 +204,7 @@ type MissionServer interface {
 	ListMissionByCamera(context.Context, *ListMissionByCameraRequest) (*ListMissionByCameraReply, error)
 	ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error)
 	ConfigMission(context.Context, *ConfigMissionRequest) (*ConfigMissionReply, error)
+	SearchMission(context.Context, *SearchMissionRequest) (*SearchMissionReply, error)
 	CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error)
 	UpdateArea(context.Context, *UpdateAreaRequest) (*UpdateAreaReply, error)
 	DeleteArea(context.Context, *DeleteAreaRequest) (*DeleteAreaReply, error)
@@ -231,6 +242,9 @@ func (UnimplementedMissionServer) ListMission(context.Context, *ListMissionReque
 }
 func (UnimplementedMissionServer) ConfigMission(context.Context, *ConfigMissionRequest) (*ConfigMissionReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigMission not implemented")
+}
+func (UnimplementedMissionServer) SearchMission(context.Context, *SearchMissionRequest) (*SearchMissionReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchMission not implemented")
 }
 func (UnimplementedMissionServer) CreateArea(context.Context, *CreateAreaRequest) (*CreateAreaReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateArea not implemented")
@@ -410,6 +424,24 @@ func _Mission_ConfigMission_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Mission_SearchMission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchMissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MissionServer).SearchMission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.mission.v1.Mission/SearchMission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MissionServer).SearchMission(ctx, req.(*SearchMissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Mission_CreateArea_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAreaRequest)
 	if err := dec(in); err != nil {
@@ -574,6 +606,10 @@ var Mission_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfigMission",
 			Handler:    _Mission_ConfigMission_Handler,
+		},
+		{
+			MethodName: "SearchMission",
+			Handler:    _Mission_SearchMission_Handler,
 		},
 		{
 			MethodName: "CreateArea",
