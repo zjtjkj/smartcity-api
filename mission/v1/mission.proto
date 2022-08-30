@@ -105,10 +105,13 @@ message SearchMissionRequest {
 	uint32 size = 2;
 	string key = 3;
 	string camera = 4;
-	uint32 region = 5;
 }
 message SearchMissionReply {
-	repeated Instance missions = 1;
+	uint32 total = 1;
+	uint32 size = 2;
+	uint32 pages = 3;
+	uint32 index = 4;
+	repeated Instance missions = 5;
 }
 
 message ControlMissionBySingleRequest {
