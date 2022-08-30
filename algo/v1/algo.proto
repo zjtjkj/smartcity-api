@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package api.algo.v1;
+
+option go_package = "fake/api/algo/v1;v1";
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+service Algo {
+	rpc CreateMission (CreateMissionRequest) returns (CreateMissionReply) {
+		option (google.api.http) = {
+			post: "/api/v1/algo/mission"
+			body: "*"
+		};
+	}
+	rpc DeleteMission (DeleteMissionRequest) returns (DeleteMissionReply) {
+		option (google.api.http) = {
+			delete: "/api/v1/algo/mission/{id}"
+		};
+	}
+	rpc DeleteMultiMission (DeleteMissionMultiRequest) returns (DeleteMissionMultiReply) {
+		option (google.api.http) = {
+			delete: "/api/v1/algo/missions/{id}"
+		};
+	}
+	rpc ListMission (ListMissionRequest) returns (ListMissionReply) {
+		option (google.api.http) = {
+			get: "/api/v1/algo/missions/{id}"
+		};
+	}
+	rpc ListAll (ListAllRequest) returns (ListAllReply) {
+		option (google.api.http) = {
+			delete: "/api/v1/algo/mission"
+		};
+	}
+
+	rpc Debug(DebugRequest) returns (DebugResponse) {
+		option (google.api.http) = {
+			get: "/api/v1/algo/debug"
+		};
+	}
+	rpc Clear(ClearRequest) returns (ClearReply) {
+		option (google.api.http) = {
+			get: "/api/v1/algo/clear"
+		};
+	}
+}
+
+message ClearRequest {
+
+}
+message ClearReply {
+
+}
+
+message DebugRequest {}
+message DebugResponse {
+	string log = 1;
+}
+
+message Point {
+	uint32 x = 1 [(validate.rules).uint32 = {gte: 0, lte: 10000}];
+	uint32 y = 2 [(validate.rules).uint32 = {gte: 0, lte: 10000}];
+}
+
+message PolygonArea {
+	repeated Point points = 1 [(validate.rules).repeated = {min_items: 3}];
+}
+
+message LineArea {
+	Point start = 1;
+	Point end = 2;
+}
+
+message Areas {
+	repeated LineArea lines = 1;
+	repeated PolygonArea polygons = 2;
+}
+message Camera {
+	uint32 preset = 1; // 预置位
+	string rtsp = 2; // 地址
+	string ip = 3;
+	uint32 port = 4;
+	string username = 5;
+	string password = 6;
+}
+
+message CreateMissionRequest {
+	string id = 1; // uuid
+	uint32 mid = 2; // 任务ID  da
+	bool demo = 3; // 演示模式
+	map<string, string> config = 4; // 其他参数
+	Camera camera = 5; // 源信息
+	Areas areas = 6; // 区域信息
+}
+message CreateMissionReply {}
+
+message DeleteMissionRequest {
+	string id = 1;
+}
+message DeleteMissionReply {}
+
+message DeleteMissionMultiRequest {
+	uint32 id = 1;
+}
+message DeleteMissionMultiReply {}
+
+message Mission {
+	string id = 1; // uuid
+	uint32 mid = 2; // 任务ID  da
+	bool demo = 3; // 演示模式
+	map<string, string> config = 4; // 其他参数
+	Camera camera = 5; // 源信息
+	Areas areas = 6; // 区域信息
+}
+
+message ListMissionRequest {
+	uint32 id = 1;
+}
+message ListMissionReply {
+	repeated Mission missions = 1;
+}
+
+message ListAllRequest {}
+message ListAllReply {
+	repeated Mission missions = 1;
+}
