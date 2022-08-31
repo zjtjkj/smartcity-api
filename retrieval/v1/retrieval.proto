@@ -67,7 +67,8 @@ message FindEventsRequest {
 		NotFinished = 1;
 	}
   repeated State states = 6;
-	repeated int32 missions = 7;
+	repeated uint32 regions = 7;
+	repeated string cameras = 8;
 }
 message FindEventsReply {
 	int64 index = 1;
