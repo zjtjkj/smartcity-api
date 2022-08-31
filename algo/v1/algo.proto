@@ -88,10 +88,11 @@ message Camera {
 message CreateMissionRequest {
 	string id = 1; // uuid
 	uint32 mid = 2; // 任务ID  da
-	bool demo = 3; // 演示模式
-	map<string, string> config = 4; // 其他参数
-	Camera camera = 5; // 源信息
-	Areas areas = 6; // 区域信息
+	string type = 3; // 模型id
+	bool demo = 4; // 演示模式
+	map<string, string> config = 5; // 其他参数
+	Camera camera = 6; // 源信息
+	Areas areas = 7; // 区域信息
 }
 message CreateMissionReply {}
 
@@ -112,6 +113,7 @@ message Mission {
 	map<string, string> config = 4; // 其他参数
 	Camera camera = 5; // 源信息
 	Areas areas = 6; // 区域信息
+	string type = 7;
 }
 
 message ListMissionRequest {
