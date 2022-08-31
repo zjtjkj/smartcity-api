@@ -64,12 +64,14 @@ message Point {
 }
 
 message PolygonArea {
-	repeated Point points = 1 [(validate.rules).repeated = {min_items: 3}];
+	uint32 id = 1;
+	repeated Point points = 2 [(validate.rules).repeated = {min_items: 3}];
 }
 
 message LineArea {
-	Point start = 1;
-	Point end = 2;
+	uint32 id = 1;
+	Point start = 2;
+	Point end = 3;
 }
 
 message Areas {
