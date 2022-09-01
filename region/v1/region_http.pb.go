@@ -24,6 +24,7 @@ const OperationRegionServiceDeleteRegion = "/api.region.v1.RegionService/DeleteR
 const OperationRegionServiceGetRegion = "/api.region.v1.RegionService/GetRegion"
 const OperationRegionServiceListRegion = "/api.region.v1.RegionService/ListRegion"
 const OperationRegionServiceListRegionById = "/api.region.v1.RegionService/ListRegionById"
+const OperationRegionServiceListRegionByLinear = "/api.region.v1.RegionService/ListRegionByLinear"
 const OperationRegionServiceUpdateRegion = "/api.region.v1.RegionService/UpdateRegion"
 
 type RegionServiceHTTPServer interface {
@@ -32,6 +33,7 @@ type RegionServiceHTTPServer interface {
 	GetRegion(context.Context, *GetRegionRequest) (*GetRegionReply, error)
 	ListRegion(context.Context, *ListRegionRequest) (*ListRegionReply, error)
 	ListRegionById(context.Context, *ListRegionByIdRequest) (*ListRegionByIdReply, error)
+	ListRegionByLinear(context.Context, *ListRegionByLinearRequest) (*ListRegionByLinearReply, error)
 	UpdateRegion(context.Context, *UpdateRegionRequest) (*UpdateRegionReply, error)
 }
 
@@ -43,6 +45,7 @@ func RegisterRegionServiceHTTPServer(s *http.Server, srv RegionServiceHTTPServer
 	r.POST("/api/v1/region/get", _RegionService_GetRegion0_HTTP_Handler(srv))
 	r.GET("/api/v1/region/list", _RegionService_ListRegion0_HTTP_Handler(srv))
 	r.GET("/api/v1/region/list_id", _RegionService_ListRegionById0_HTTP_Handler(srv))
+	r.GET("/api/v1/region/list/linear", _RegionService_ListRegionByLinear0_HTTP_Handler(srv))
 }
 
 func _RegionService_CreateRegion0_HTTP_Handler(srv RegionServiceHTTPServer) func(ctx http.Context) error {
@@ -159,12 +162,32 @@ func _RegionService_ListRegionById0_HTTP_Handler(srv RegionServiceHTTPServer) fu
 	}
 }
 
+func _RegionService_ListRegionByLinear0_HTTP_Handler(srv RegionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListRegionByLinearRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRegionServiceListRegionByLinear)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListRegionByLinear(ctx, req.(*ListRegionByLinearRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListRegionByLinearReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type RegionServiceHTTPClient interface {
 	CreateRegion(ctx context.Context, req *CreateRegionRequest, opts ...http.CallOption) (rsp *CreateRegionReply, err error)
 	DeleteRegion(ctx context.Context, req *DeleteRegionRequest, opts ...http.CallOption) (rsp *DeleteRegionReply, err error)
 	GetRegion(ctx context.Context, req *GetRegionRequest, opts ...http.CallOption) (rsp *GetRegionReply, err error)
 	ListRegion(ctx context.Context, req *ListRegionRequest, opts ...http.CallOption) (rsp *ListRegionReply, err error)
 	ListRegionById(ctx context.Context, req *ListRegionByIdRequest, opts ...http.CallOption) (rsp *ListRegionByIdReply, err error)
+	ListRegionByLinear(ctx context.Context, req *ListRegionByLinearRequest, opts ...http.CallOption) (rsp *ListRegionByLinearReply, err error)
 	UpdateRegion(ctx context.Context, req *UpdateRegionRequest, opts ...http.CallOption) (rsp *UpdateRegionReply, err error)
 }
 
@@ -233,6 +256,19 @@ func (c *RegionServiceHTTPClientImpl) ListRegionById(ctx context.Context, in *Li
 	pattern := "/api/v1/region/list_id"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRegionServiceListRegionById))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RegionServiceHTTPClientImpl) ListRegionByLinear(ctx context.Context, in *ListRegionByLinearRequest, opts ...http.CallOption) (*ListRegionByLinearReply, error) {
+	var out ListRegionByLinearReply
+	pattern := "/api/v1/region/list/linear"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationRegionServiceListRegionByLinear))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
