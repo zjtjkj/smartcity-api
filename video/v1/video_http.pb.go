@@ -19,6 +19,7 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationVideoControl = "/api.video.v1.Video/Control"
 const OperationVideoDeleteProxy = "/api.video.v1.Video/DeleteProxy"
 const OperationVideoFindChannels = "/api.video.v1.Video/FindChannels"
 const OperationVideoFindDevices = "/api.video.v1.Video/FindDevices"
@@ -28,6 +29,7 @@ const OperationVideoStopPlay = "/api.video.v1.Video/StopPlay"
 const OperationVideoStopProxy = "/api.video.v1.Video/StopProxy"
 
 type VideoHTTPServer interface {
+	Control(context.Context, *ControlRequest) (*ControlReply, error)
 	DeleteProxy(context.Context, *DeleteProxyRequest) (*DeleteProxyReply, error)
 	FindChannels(context.Context, *FindChannelsRequest) (*FindChannelsReply, error)
 	FindDevices(context.Context, *FindDevicesRequest) (*FindDevicesReply, error)
@@ -43,6 +45,7 @@ func RegisterVideoHTTPServer(s *http.Server, srv VideoHTTPServer) {
 	r.POST("/api/v1/gb/channel/find", _Video_FindChannels0_HTTP_Handler(srv))
 	r.POST("/api/v1/gb/start", _Video_StartPlay0_HTTP_Handler(srv))
 	r.POST("/api/v1/gb/stop", _Video_StopPlay0_HTTP_Handler(srv))
+	r.POST("/api/v1/gb/control", _Video_Control0_HTTP_Handler(srv))
 	r.POST("/api/v1/proxy/start", _Video_StartProxy0_HTTP_Handler(srv))
 	r.POST("/api/v1/proxy/stop", _Video_StopProxy0_HTTP_Handler(srv))
 	r.POST("/api/v1/proxy/delete", _Video_DeleteProxy0_HTTP_Handler(srv))
@@ -124,6 +127,25 @@ func _Video_StopPlay0_HTTP_Handler(srv VideoHTTPServer) func(ctx http.Context) e
 	}
 }
 
+func _Video_Control0_HTTP_Handler(srv VideoHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ControlRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationVideoControl)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Control(ctx, req.(*ControlRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ControlReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Video_StartProxy0_HTTP_Handler(srv VideoHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in StartProxyRequest
@@ -182,6 +204,7 @@ func _Video_DeleteProxy0_HTTP_Handler(srv VideoHTTPServer) func(ctx http.Context
 }
 
 type VideoHTTPClient interface {
+	Control(ctx context.Context, req *ControlRequest, opts ...http.CallOption) (rsp *ControlReply, err error)
 	DeleteProxy(ctx context.Context, req *DeleteProxyRequest, opts ...http.CallOption) (rsp *DeleteProxyReply, err error)
 	FindChannels(ctx context.Context, req *FindChannelsRequest, opts ...http.CallOption) (rsp *FindChannelsReply, err error)
 	FindDevices(ctx context.Context, req *FindDevicesRequest, opts ...http.CallOption) (rsp *FindDevicesReply, err error)
@@ -197,6 +220,19 @@ type VideoHTTPClientImpl struct {
 
 func NewVideoHTTPClient(client *http.Client) VideoHTTPClient {
 	return &VideoHTTPClientImpl{client}
+}
+
+func (c *VideoHTTPClientImpl) Control(ctx context.Context, in *ControlRequest, opts ...http.CallOption) (*ControlReply, error) {
+	var out ControlReply
+	pattern := "/api/v1/gb/control"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationVideoControl))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *VideoHTTPClientImpl) DeleteProxy(ctx context.Context, in *DeleteProxyRequest, opts ...http.CallOption) (*DeleteProxyReply, error) {

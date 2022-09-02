@@ -26,6 +26,7 @@ type VideoClient interface {
 	FindChannels(ctx context.Context, in *FindChannelsRequest, opts ...grpc.CallOption) (*FindChannelsReply, error)
 	StartPlay(ctx context.Context, in *StartPlayRequest, opts ...grpc.CallOption) (*StartPlayReply, error)
 	StopPlay(ctx context.Context, in *StopPlayRequest, opts ...grpc.CallOption) (*StopPlayReply, error)
+	Control(ctx context.Context, in *ControlRequest, opts ...grpc.CallOption) (*ControlReply, error)
 	StartProxy(ctx context.Context, in *StartProxyRequest, opts ...grpc.CallOption) (*StartProxyReply, error)
 	StopProxy(ctx context.Context, in *StopProxyRequest, opts ...grpc.CallOption) (*StopProxyReply, error)
 	DeleteProxy(ctx context.Context, in *DeleteProxyRequest, opts ...grpc.CallOption) (*DeleteProxyReply, error)
@@ -75,6 +76,15 @@ func (c *videoClient) StopPlay(ctx context.Context, in *StopPlayRequest, opts ..
 	return out, nil
 }
 
+func (c *videoClient) Control(ctx context.Context, in *ControlRequest, opts ...grpc.CallOption) (*ControlReply, error) {
+	out := new(ControlReply)
+	err := c.cc.Invoke(ctx, "/api.video.v1.Video/Control", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *videoClient) StartProxy(ctx context.Context, in *StartProxyRequest, opts ...grpc.CallOption) (*StartProxyReply, error) {
 	out := new(StartProxyReply)
 	err := c.cc.Invoke(ctx, "/api.video.v1.Video/StartProxy", in, out, opts...)
@@ -110,6 +120,7 @@ type VideoServer interface {
 	FindChannels(context.Context, *FindChannelsRequest) (*FindChannelsReply, error)
 	StartPlay(context.Context, *StartPlayRequest) (*StartPlayReply, error)
 	StopPlay(context.Context, *StopPlayRequest) (*StopPlayReply, error)
+	Control(context.Context, *ControlRequest) (*ControlReply, error)
 	StartProxy(context.Context, *StartProxyRequest) (*StartProxyReply, error)
 	StopProxy(context.Context, *StopProxyRequest) (*StopProxyReply, error)
 	DeleteProxy(context.Context, *DeleteProxyRequest) (*DeleteProxyReply, error)
@@ -131,6 +142,9 @@ func (UnimplementedVideoServer) StartPlay(context.Context, *StartPlayRequest) (*
 }
 func (UnimplementedVideoServer) StopPlay(context.Context, *StopPlayRequest) (*StopPlayReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopPlay not implemented")
+}
+func (UnimplementedVideoServer) Control(context.Context, *ControlRequest) (*ControlReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Control not implemented")
 }
 func (UnimplementedVideoServer) StartProxy(context.Context, *StartProxyRequest) (*StartProxyReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartProxy not implemented")
@@ -226,6 +240,24 @@ func _Video_StopPlay_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Video_Control_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServer).Control(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.video.v1.Video/Control",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServer).Control(ctx, req.(*ControlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Video_StartProxy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartProxyRequest)
 	if err := dec(in); err != nil {
@@ -302,6 +334,10 @@ var Video_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopPlay",
 			Handler:    _Video_StopPlay_Handler,
+		},
+		{
+			MethodName: "Control",
+			Handler:    _Video_Control_Handler,
 		},
 		{
 			MethodName: "StartProxy",

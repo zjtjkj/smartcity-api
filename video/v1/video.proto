@@ -33,6 +33,12 @@ service Video {
       body: "*"
     };
   }
+  rpc Control(ControlRequest) returns (ControlReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/control"
+      body: "*"
+    };
+  }
   rpc StartProxy (StartProxyRequest) returns (StartProxyReply) {
     option (google.api.http) = {
       post: "/api/v1/proxy/start"
@@ -163,3 +169,10 @@ message DeleteProxyRequest {
   string stream = 2;
 }
 message DeleteProxyReply {}
+
+message ControlRequest {
+  string device_id = 1;
+  string channel_id = 2;
+  string command = 3;
+}
+message ControlReply {}
