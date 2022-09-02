@@ -107,7 +107,8 @@ message FindDevicesReply {
   int64 size = 2;
   int64 page = 3;
   int64 total = 4;
-  repeated Device devices = 5;
+  bool has_next_page = 5;
+  repeated Device devices = 6;
 }
 
 message FindChannelsRequest {
@@ -121,7 +122,8 @@ message FindChannelsReply {
   int64 size = 2;
   int64 page = 3;
   int64 total = 4;
-  repeated Channel channels = 5;
+  bool has_next_page = 5;
+  repeated Channel channels = 6;
 }
 
 message StartPlayRequest {
