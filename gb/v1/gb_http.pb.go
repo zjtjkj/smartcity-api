@@ -19,7 +19,6 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationGBAddChannel = "/api.gb.v1.GB/AddChannel"
 const OperationGBCreateGroup = "/api.gb.v1.GB/CreateGroup"
 const OperationGBDeleteChannel = "/api.gb.v1.GB/DeleteChannel"
 const OperationGBDeleteGroup = "/api.gb.v1.GB/DeleteGroup"
@@ -28,10 +27,10 @@ const OperationGBFindGroupsByChannels = "/api.gb.v1.GB/FindGroupsByChannels"
 const OperationGBGetChannel = "/api.gb.v1.GB/GetChannel"
 const OperationGBListChannels = "/api.gb.v1.GB/ListChannels"
 const OperationGBListGroups = "/api.gb.v1.GB/ListGroups"
+const OperationGBStarChannel = "/api.gb.v1.GB/StarChannel"
 const OperationGBUpdateGroup = "/api.gb.v1.GB/UpdateGroup"
 
 type GBHTTPServer interface {
-	AddChannel(context.Context, *AddChannelRequest) (*AddChannelReply, error)
 	CreateGroup(context.Context, *CreateGroupRequest) (*CreateGroupReply, error)
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelReply, error)
 	DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupReply, error)
@@ -40,6 +39,7 @@ type GBHTTPServer interface {
 	GetChannel(context.Context, *GetChannelRequest) (*GetChannelReply, error)
 	ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsReply, error)
 	ListGroups(context.Context, *ListGroupsRequest) (*ListGroupsReply, error)
+	StarChannel(context.Context, *StarChannelRequest) (*StarChannelReply, error)
 	UpdateGroup(context.Context, *UpdateGroupRequest) (*UpdateGroupReply, error)
 }
 
@@ -50,7 +50,7 @@ func RegisterGBHTTPServer(s *http.Server, srv GBHTTPServer) {
 	r.POST("/api/v1/gb/group/delete", _GB_DeleteGroup0_HTTP_Handler(srv))
 	r.POST("/api/v1/gb/group/list", _GB_ListGroups0_HTTP_Handler(srv))
 	r.POST("/api/v1/gb/group/find", _GB_FindGroupsByChannels0_HTTP_Handler(srv))
-	r.POST("/api/v1/gb/group/channel/add", _GB_AddChannel0_HTTP_Handler(srv))
+	r.POST("/api/v1/gb/group/channel/star", _GB_StarChannel0_HTTP_Handler(srv))
 	r.POST("/api/v1/gb/group/channel/delete", _GB_DeleteChannel0_HTTP_Handler(srv))
 	r.POST("/api/v1/gb/group/channel/list", _GB_ListChannels0_HTTP_Handler(srv))
 	r.POST("/api/v1/gb/group/channel/get", _GB_GetChannel0_HTTP_Handler(srv))
@@ -152,21 +152,21 @@ func _GB_FindGroupsByChannels0_HTTP_Handler(srv GBHTTPServer) func(ctx http.Cont
 	}
 }
 
-func _GB_AddChannel0_HTTP_Handler(srv GBHTTPServer) func(ctx http.Context) error {
+func _GB_StarChannel0_HTTP_Handler(srv GBHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in AddChannelRequest
+		var in StarChannelRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationGBAddChannel)
+		http.SetOperation(ctx, OperationGBStarChannel)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddChannel(ctx, req.(*AddChannelRequest))
+			return srv.StarChannel(ctx, req.(*StarChannelRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*AddChannelReply)
+		reply := out.(*StarChannelReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -248,7 +248,6 @@ func _GB_FindChannelsById0_HTTP_Handler(srv GBHTTPServer) func(ctx http.Context)
 }
 
 type GBHTTPClient interface {
-	AddChannel(ctx context.Context, req *AddChannelRequest, opts ...http.CallOption) (rsp *AddChannelReply, err error)
 	CreateGroup(ctx context.Context, req *CreateGroupRequest, opts ...http.CallOption) (rsp *CreateGroupReply, err error)
 	DeleteChannel(ctx context.Context, req *DeleteChannelRequest, opts ...http.CallOption) (rsp *DeleteChannelReply, err error)
 	DeleteGroup(ctx context.Context, req *DeleteGroupRequest, opts ...http.CallOption) (rsp *DeleteGroupReply, err error)
@@ -257,6 +256,7 @@ type GBHTTPClient interface {
 	GetChannel(ctx context.Context, req *GetChannelRequest, opts ...http.CallOption) (rsp *GetChannelReply, err error)
 	ListChannels(ctx context.Context, req *ListChannelsRequest, opts ...http.CallOption) (rsp *ListChannelsReply, err error)
 	ListGroups(ctx context.Context, req *ListGroupsRequest, opts ...http.CallOption) (rsp *ListGroupsReply, err error)
+	StarChannel(ctx context.Context, req *StarChannelRequest, opts ...http.CallOption) (rsp *StarChannelReply, err error)
 	UpdateGroup(ctx context.Context, req *UpdateGroupRequest, opts ...http.CallOption) (rsp *UpdateGroupReply, err error)
 }
 
@@ -266,19 +266,6 @@ type GBHTTPClientImpl struct {
 
 func NewGBHTTPClient(client *http.Client) GBHTTPClient {
 	return &GBHTTPClientImpl{client}
-}
-
-func (c *GBHTTPClientImpl) AddChannel(ctx context.Context, in *AddChannelRequest, opts ...http.CallOption) (*AddChannelReply, error) {
-	var out AddChannelReply
-	pattern := "/api/v1/gb/group/channel/add"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationGBAddChannel))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
 }
 
 func (c *GBHTTPClientImpl) CreateGroup(ctx context.Context, in *CreateGroupRequest, opts ...http.CallOption) (*CreateGroupReply, error) {
@@ -377,6 +364,19 @@ func (c *GBHTTPClientImpl) ListGroups(ctx context.Context, in *ListGroupsRequest
 	pattern := "/api/v1/gb/group/list"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationGBListGroups))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *GBHTTPClientImpl) StarChannel(ctx context.Context, in *StarChannelRequest, opts ...http.CallOption) (*StarChannelReply, error) {
+	var out StarChannelReply
+	pattern := "/api/v1/gb/group/channel/star"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationGBStarChannel))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

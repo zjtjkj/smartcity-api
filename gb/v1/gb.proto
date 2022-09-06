@@ -39,9 +39,9 @@ service GB {
       body: "*"
     };
   }
-  rpc AddChannel (AddChannelRequest) returns (AddChannelReply) {
+  rpc StarChannel (StarChannelRequest) returns (StarChannelReply) {
     option (google.api.http) = {
-      post: "/api/v1/gb/group/channel/add"
+      post: "/api/v1/gb/group/channel/star"
       body: "*"
     };
   }
@@ -117,8 +117,8 @@ message ListGroupsReply {
   repeated Group groups = 1;
 }
 
-message AddChannelRequest {
-  uint32 group_id = 1;
+message StarChannelRequest {
+  repeated uint32 group_id = 1;
   message Channel {
     string channel_id = 2;
     string device_id = 3;
@@ -134,10 +134,11 @@ message AddChannelRequest {
   }
   Channel channel = 2;
 }
-message AddChannelReply {}
+message StarChannelReply {}
 
 message DeleteChannelRequest {
-  uint32 channel_id = 1;
+  uint32 group_id = 1;
+  uint32 channel_id = 2;
 }
 message DeleteChannelReply {}
 

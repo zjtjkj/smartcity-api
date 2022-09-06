@@ -27,7 +27,7 @@ type GBClient interface {
 	DeleteGroup(ctx context.Context, in *DeleteGroupRequest, opts ...grpc.CallOption) (*DeleteGroupReply, error)
 	ListGroups(ctx context.Context, in *ListGroupsRequest, opts ...grpc.CallOption) (*ListGroupsReply, error)
 	FindGroupsByChannels(ctx context.Context, in *FindGroupsByChannelsRequest, opts ...grpc.CallOption) (*FindGroupsByChannelsReply, error)
-	AddChannel(ctx context.Context, in *AddChannelRequest, opts ...grpc.CallOption) (*AddChannelReply, error)
+	StarChannel(ctx context.Context, in *StarChannelRequest, opts ...grpc.CallOption) (*StarChannelReply, error)
 	DeleteChannel(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*DeleteChannelReply, error)
 	ListChannels(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsReply, error)
 	GetChannel(ctx context.Context, in *GetChannelRequest, opts ...grpc.CallOption) (*GetChannelReply, error)
@@ -87,9 +87,9 @@ func (c *gBClient) FindGroupsByChannels(ctx context.Context, in *FindGroupsByCha
 	return out, nil
 }
 
-func (c *gBClient) AddChannel(ctx context.Context, in *AddChannelRequest, opts ...grpc.CallOption) (*AddChannelReply, error) {
-	out := new(AddChannelReply)
-	err := c.cc.Invoke(ctx, "/api.gb.v1.GB/AddChannel", in, out, opts...)
+func (c *gBClient) StarChannel(ctx context.Context, in *StarChannelRequest, opts ...grpc.CallOption) (*StarChannelReply, error) {
+	out := new(StarChannelReply)
+	err := c.cc.Invoke(ctx, "/api.gb.v1.GB/StarChannel", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -141,7 +141,7 @@ type GBServer interface {
 	DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupReply, error)
 	ListGroups(context.Context, *ListGroupsRequest) (*ListGroupsReply, error)
 	FindGroupsByChannels(context.Context, *FindGroupsByChannelsRequest) (*FindGroupsByChannelsReply, error)
-	AddChannel(context.Context, *AddChannelRequest) (*AddChannelReply, error)
+	StarChannel(context.Context, *StarChannelRequest) (*StarChannelReply, error)
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelReply, error)
 	ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsReply, error)
 	GetChannel(context.Context, *GetChannelRequest) (*GetChannelReply, error)
@@ -168,8 +168,8 @@ func (UnimplementedGBServer) ListGroups(context.Context, *ListGroupsRequest) (*L
 func (UnimplementedGBServer) FindGroupsByChannels(context.Context, *FindGroupsByChannelsRequest) (*FindGroupsByChannelsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindGroupsByChannels not implemented")
 }
-func (UnimplementedGBServer) AddChannel(context.Context, *AddChannelRequest) (*AddChannelReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddChannel not implemented")
+func (UnimplementedGBServer) StarChannel(context.Context, *StarChannelRequest) (*StarChannelReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StarChannel not implemented")
 }
 func (UnimplementedGBServer) DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteChannel not implemented")
@@ -286,20 +286,20 @@ func _GB_FindGroupsByChannels_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GB_AddChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddChannelRequest)
+func _GB_StarChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StarChannelRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GBServer).AddChannel(ctx, in)
+		return srv.(GBServer).StarChannel(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.gb.v1.GB/AddChannel",
+		FullMethod: "/api.gb.v1.GB/StarChannel",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GBServer).AddChannel(ctx, req.(*AddChannelRequest))
+		return srv.(GBServer).StarChannel(ctx, req.(*StarChannelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -404,8 +404,8 @@ var GB_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GB_FindGroupsByChannels_Handler,
 		},
 		{
-			MethodName: "AddChannel",
-			Handler:    _GB_AddChannel_Handler,
+			MethodName: "StarChannel",
+			Handler:    _GB_StarChannel_Handler,
 		},
 		{
 			MethodName: "DeleteChannel",
