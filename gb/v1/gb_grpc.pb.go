@@ -26,6 +26,7 @@ type GBClient interface {
 	UpdateGroup(ctx context.Context, in *UpdateGroupRequest, opts ...grpc.CallOption) (*UpdateGroupReply, error)
 	DeleteGroup(ctx context.Context, in *DeleteGroupRequest, opts ...grpc.CallOption) (*DeleteGroupReply, error)
 	ListGroups(ctx context.Context, in *ListGroupsRequest, opts ...grpc.CallOption) (*ListGroupsReply, error)
+	FindGroupsByChannels(ctx context.Context, in *FindGroupsByChannelsRequest, opts ...grpc.CallOption) (*FindGroupsByChannelsReply, error)
 	AddChannel(ctx context.Context, in *AddChannelRequest, opts ...grpc.CallOption) (*AddChannelReply, error)
 	DeleteChannel(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*DeleteChannelReply, error)
 	ListChannels(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsReply, error)
@@ -71,6 +72,15 @@ func (c *gBClient) DeleteGroup(ctx context.Context, in *DeleteGroupRequest, opts
 func (c *gBClient) ListGroups(ctx context.Context, in *ListGroupsRequest, opts ...grpc.CallOption) (*ListGroupsReply, error) {
 	out := new(ListGroupsReply)
 	err := c.cc.Invoke(ctx, "/api.gb.v1.GB/ListGroups", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *gBClient) FindGroupsByChannels(ctx context.Context, in *FindGroupsByChannelsRequest, opts ...grpc.CallOption) (*FindGroupsByChannelsReply, error) {
+	out := new(FindGroupsByChannelsReply)
+	err := c.cc.Invoke(ctx, "/api.gb.v1.GB/FindGroupsByChannels", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -130,6 +140,7 @@ type GBServer interface {
 	UpdateGroup(context.Context, *UpdateGroupRequest) (*UpdateGroupReply, error)
 	DeleteGroup(context.Context, *DeleteGroupRequest) (*DeleteGroupReply, error)
 	ListGroups(context.Context, *ListGroupsRequest) (*ListGroupsReply, error)
+	FindGroupsByChannels(context.Context, *FindGroupsByChannelsRequest) (*FindGroupsByChannelsReply, error)
 	AddChannel(context.Context, *AddChannelRequest) (*AddChannelReply, error)
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelReply, error)
 	ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsReply, error)
@@ -153,6 +164,9 @@ func (UnimplementedGBServer) DeleteGroup(context.Context, *DeleteGroupRequest) (
 }
 func (UnimplementedGBServer) ListGroups(context.Context, *ListGroupsRequest) (*ListGroupsReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGroups not implemented")
+}
+func (UnimplementedGBServer) FindGroupsByChannels(context.Context, *FindGroupsByChannelsRequest) (*FindGroupsByChannelsReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindGroupsByChannels not implemented")
 }
 func (UnimplementedGBServer) AddChannel(context.Context, *AddChannelRequest) (*AddChannelReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddChannel not implemented")
@@ -250,6 +264,24 @@ func _GB_ListGroups_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GBServer).ListGroups(ctx, req.(*ListGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GB_FindGroupsByChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindGroupsByChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GBServer).FindGroupsByChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.gb.v1.GB/FindGroupsByChannels",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GBServer).FindGroupsByChannels(ctx, req.(*FindGroupsByChannelsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -366,6 +398,10 @@ var GB_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGroups",
 			Handler:    _GB_ListGroups_Handler,
+		},
+		{
+			MethodName: "FindGroupsByChannels",
+			Handler:    _GB_FindGroupsByChannels_Handler,
 		},
 		{
 			MethodName: "AddChannel",

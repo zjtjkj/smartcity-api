@@ -33,6 +33,12 @@ service GB {
       body: "*"
     };
   }
+  rpc FindGroupsByChannels(FindGroupsByChannelsRequest) returns (FindGroupsByChannelsReply) {
+    option (google.api.http) = {
+      post: "/api/v1/gb/group/find"
+      body: "*"
+    };
+  }
   rpc AddChannel (AddChannelRequest) returns (AddChannelReply) {
     option (google.api.http) = {
       post: "/api/v1/gb/group/channel/add"
@@ -155,4 +161,11 @@ message FindChannelsByIdRequest {
 }
 message FindChannelsByIdReply {
   repeated Channel channel = 1;
+}
+
+message FindGroupsByChannelsRequest {
+  repeated uint32 channels = 1;
+}
+message FindGroupsByChannelsReply {
+  repeated Group groups = 1;
 }
