@@ -30,7 +30,7 @@ type GBClient interface {
 	DeleteChannel(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*DeleteChannelReply, error)
 	ListChannels(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsReply, error)
 	GetChannel(ctx context.Context, in *GetChannelRequest, opts ...grpc.CallOption) (*GetChannelReply, error)
-	GetChannelById(ctx context.Context, in *GetChannelByIdRequest, opts ...grpc.CallOption) (*GetChannelByIdReply, error)
+	FindChannelsById(ctx context.Context, in *FindChannelsByIdRequest, opts ...grpc.CallOption) (*FindChannelsByIdReply, error)
 }
 
 type gBClient struct {
@@ -113,9 +113,9 @@ func (c *gBClient) GetChannel(ctx context.Context, in *GetChannelRequest, opts .
 	return out, nil
 }
 
-func (c *gBClient) GetChannelById(ctx context.Context, in *GetChannelByIdRequest, opts ...grpc.CallOption) (*GetChannelByIdReply, error) {
-	out := new(GetChannelByIdReply)
-	err := c.cc.Invoke(ctx, "/api.gb.v1.GB/GetChannelById", in, out, opts...)
+func (c *gBClient) FindChannelsById(ctx context.Context, in *FindChannelsByIdRequest, opts ...grpc.CallOption) (*FindChannelsByIdReply, error) {
+	out := new(FindChannelsByIdReply)
+	err := c.cc.Invoke(ctx, "/api.gb.v1.GB/FindChannelsById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +134,7 @@ type GBServer interface {
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelReply, error)
 	ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsReply, error)
 	GetChannel(context.Context, *GetChannelRequest) (*GetChannelReply, error)
-	GetChannelById(context.Context, *GetChannelByIdRequest) (*GetChannelByIdReply, error)
+	FindChannelsById(context.Context, *FindChannelsByIdRequest) (*FindChannelsByIdReply, error)
 	mustEmbedUnimplementedGBServer()
 }
 
@@ -166,8 +166,8 @@ func (UnimplementedGBServer) ListChannels(context.Context, *ListChannelsRequest)
 func (UnimplementedGBServer) GetChannel(context.Context, *GetChannelRequest) (*GetChannelReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChannel not implemented")
 }
-func (UnimplementedGBServer) GetChannelById(context.Context, *GetChannelByIdRequest) (*GetChannelByIdReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetChannelById not implemented")
+func (UnimplementedGBServer) FindChannelsById(context.Context, *FindChannelsByIdRequest) (*FindChannelsByIdReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindChannelsById not implemented")
 }
 func (UnimplementedGBServer) mustEmbedUnimplementedGBServer() {}
 
@@ -326,20 +326,20 @@ func _GB_GetChannel_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GB_GetChannelById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetChannelByIdRequest)
+func _GB_FindChannelsById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindChannelsByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GBServer).GetChannelById(ctx, in)
+		return srv.(GBServer).FindChannelsById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.gb.v1.GB/GetChannelById",
+		FullMethod: "/api.gb.v1.GB/FindChannelsById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GBServer).GetChannelById(ctx, req.(*GetChannelByIdRequest))
+		return srv.(GBServer).FindChannelsById(ctx, req.(*FindChannelsByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -384,8 +384,8 @@ var GB_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GB_GetChannel_Handler,
 		},
 		{
-			MethodName: "GetChannelById",
-			Handler:    _GB_GetChannelById_Handler,
+			MethodName: "FindChannelsById",
+			Handler:    _GB_FindChannelsById_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

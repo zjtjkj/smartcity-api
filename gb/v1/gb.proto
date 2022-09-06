@@ -57,7 +57,7 @@ service GB {
       body: "*"
     };
   }
-  rpc GetChannelById (GetChannelByIdRequest) returns (GetChannelByIdReply) {
+  rpc FindChannelsById (FindChannelsByIdRequest) returns (FindChannelsByIdReply) {
     option (google.api.http) = {
       post: "/api/v1/gb/group/channel/find"
       body: "*"
@@ -149,10 +149,10 @@ message GetChannelReply {
   Channel channel = 1;
 }
 
-message GetChannelByIdRequest {
+message FindChannelsByIdRequest {
   string channel_id = 1;
   string device_id = 2;
 }
-message GetChannelByIdReply {
-  Channel channel = 1;
+message FindChannelsByIdReply {
+  repeated Channel channel = 1;
 }
