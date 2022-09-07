@@ -77,6 +77,7 @@ message Instance {
 	string username = 16; // 用户名
 	string password = 17; // 密码
 	string rtsp = 18; // 流地址
+	uint32 attr = 19; // 点位属性
 }
 
 
@@ -97,6 +98,7 @@ message CreateCameraRequest {
 	string password = 14;
 	string rtsp = 15;
 	bool movable = 16;
+	uint32 attr = 17;
 }
 message CreateCameraReply {}
 

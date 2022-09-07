@@ -120,6 +120,8 @@ func (m *Instance) validate(all bool) error {
 
 	// no validation rules for Rtsp
 
+	// no validation rules for Attr
+
 	if len(errors) > 0 {
 		return InstanceMultiError(errors)
 	}
@@ -259,6 +261,8 @@ func (m *CreateCameraRequest) validate(all bool) error {
 	// no validation rules for Rtsp
 
 	// no validation rules for Movable
+
+	// no validation rules for Attr
 
 	if len(errors) > 0 {
 		return CreateCameraRequestMultiError(errors)
