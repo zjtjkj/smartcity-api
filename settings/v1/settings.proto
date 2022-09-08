@@ -175,9 +175,10 @@ message UpdateModuleReply {}
 
 message Module {
 	uint32 id = 1;
-	string code = 2;
-	string name = 3;
-	string alias = 4;
+	google.protobuf.Timestamp created = 2;
+	string code = 3;
+	string name = 4;
+	string alias = 5;
 }
 
 message GetModuleRequest {
