@@ -19,31 +19,31 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationSettingsCreateCameraAttr = "/api.settings.v1.Settings/CreateCameraAttr"
 const OperationSettingsCreateGeneralParameters = "/api.settings.v1.Settings/CreateGeneralParameters"
-const OperationSettingsCreateIcon = "/api.settings.v1.Settings/CreateIcon"
 const OperationSettingsCreateModule = "/api.settings.v1.Settings/CreateModule"
+const OperationSettingsDeleteCameraAttr = "/api.settings.v1.Settings/DeleteCameraAttr"
 const OperationSettingsDeleteGeneralParameters = "/api.settings.v1.Settings/DeleteGeneralParameters"
-const OperationSettingsDeleteIcon = "/api.settings.v1.Settings/DeleteIcon"
 const OperationSettingsDeleteModule = "/api.settings.v1.Settings/DeleteModule"
-const OperationSettingsGetIcon = "/api.settings.v1.Settings/GetIcon"
+const OperationSettingsGetCameraAttr = "/api.settings.v1.Settings/GetCameraAttr"
 const OperationSettingsGetModule = "/api.settings.v1.Settings/GetModule"
+const OperationSettingsListCameraAttr = "/api.settings.v1.Settings/ListCameraAttr"
 const OperationSettingsListGeneralParameters = "/api.settings.v1.Settings/ListGeneralParameters"
-const OperationSettingsListIcon = "/api.settings.v1.Settings/ListIcon"
 const OperationSettingsListModules = "/api.settings.v1.Settings/ListModules"
 const OperationSettingsUpdateGeneralParameters = "/api.settings.v1.Settings/UpdateGeneralParameters"
 const OperationSettingsUpdateModule = "/api.settings.v1.Settings/UpdateModule"
 
 type SettingsHTTPServer interface {
+	CreateCameraAttr(context.Context, *CreateCameraAttrRequest) (*CreateCameraAttrReply, error)
 	CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error)
-	CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
+	DeleteCameraAttr(context.Context, *DeleteCameraAttrRequest) (*DeleteCameraAttrReply, error)
 	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
-	DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error)
 	DeleteModule(context.Context, *DeleteModuleRequest) (*DeleteModuleReply, error)
-	GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error)
+	GetCameraAttr(context.Context, *GetCameraAttrRequest) (*GetCameraAttrReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
+	ListCameraAttr(context.Context, *ListCameraAttrRequest) (*ListCameraAttrReply, error)
 	ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error)
-	ListIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
 	ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error)
 	UpdateGeneralParameters(context.Context, *UpdateGeneralParametersRequest) (*UpdateGeneralParametersReply, error)
 	UpdateModule(context.Context, *UpdateModuleRequest) (*UpdateModuleReply, error)
@@ -56,10 +56,10 @@ func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r.POST("/api/v1/setting/module/{id}", _Settings_UpdateModule0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/module/{id}", _Settings_GetModule0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/module", _Settings_ListModules0_HTTP_Handler(srv))
-	r.PUT("/api/v1/settings/icon", _Settings_CreateIcon0_HTTP_Handler(srv))
-	r.DELETE("/api/v1/settings/icon/{id}", _Settings_DeleteIcon0_HTTP_Handler(srv))
-	r.GET("/api/v1/settings/icon/{id}", _Settings_GetIcon0_HTTP_Handler(srv))
-	r.GET("/api/v1/settings/icons", _Settings_ListIcon0_HTTP_Handler(srv))
+	r.PUT("/api/v1/settings/icon", _Settings_CreateCameraAttr0_HTTP_Handler(srv))
+	r.DELETE("/api/v1/settings/icon/{id}", _Settings_DeleteCameraAttr0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/icon/{id}", _Settings_GetCameraAttr0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/icons", _Settings_ListCameraAttr0_HTTP_Handler(srv))
 	r.PUT("/api/v1/settings/parameter", _Settings_CreateGeneralParameters0_HTTP_Handler(srv))
 	r.POST("/api/v1/settings/parameter/{id}", _Settings_UpdateGeneralParameters0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/settings/parameter/{id}", _Settings_DeleteGeneralParameters0_HTTP_Handler(srv))
@@ -170,84 +170,84 @@ func _Settings_ListModules0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.C
 	}
 }
 
-func _Settings_CreateIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+func _Settings_CreateCameraAttr0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in CreateIconRequest
+		var in CreateCameraAttrRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationSettingsCreateIcon)
+		http.SetOperation(ctx, OperationSettingsCreateCameraAttr)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateIcon(ctx, req.(*CreateIconRequest))
+			return srv.CreateCameraAttr(ctx, req.(*CreateCameraAttrRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*CreateIconReply)
+		reply := out.(*CreateCameraAttrReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Settings_DeleteIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+func _Settings_DeleteCameraAttr0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in DeleteIconRequest
+		var in DeleteCameraAttrRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationSettingsDeleteIcon)
+		http.SetOperation(ctx, OperationSettingsDeleteCameraAttr)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteIcon(ctx, req.(*DeleteIconRequest))
+			return srv.DeleteCameraAttr(ctx, req.(*DeleteCameraAttrRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*DeleteIconReply)
+		reply := out.(*DeleteCameraAttrReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Settings_GetIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+func _Settings_GetCameraAttr0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetIconRequest
+		var in GetCameraAttrRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationSettingsGetIcon)
+		http.SetOperation(ctx, OperationSettingsGetCameraAttr)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetIcon(ctx, req.(*GetIconRequest))
+			return srv.GetCameraAttr(ctx, req.(*GetCameraAttrRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetIconReply)
+		reply := out.(*GetCameraAttrReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Settings_ListIcon0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+func _Settings_ListCameraAttr0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListIconRequest
+		var in ListCameraAttrRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationSettingsListIcon)
+		http.SetOperation(ctx, OperationSettingsListCameraAttr)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListIcon(ctx, req.(*ListIconRequest))
+			return srv.ListCameraAttr(ctx, req.(*ListCameraAttrRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListIconReply)
+		reply := out.(*ListCameraAttrReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -335,16 +335,16 @@ func _Settings_ListGeneralParameters0_HTTP_Handler(srv SettingsHTTPServer) func(
 }
 
 type SettingsHTTPClient interface {
+	CreateCameraAttr(ctx context.Context, req *CreateCameraAttrRequest, opts ...http.CallOption) (rsp *CreateCameraAttrReply, err error)
 	CreateGeneralParameters(ctx context.Context, req *CreateGeneralParametersRequest, opts ...http.CallOption) (rsp *CreateGeneralParametersReply, err error)
-	CreateIcon(ctx context.Context, req *CreateIconRequest, opts ...http.CallOption) (rsp *CreateIconReply, err error)
 	CreateModule(ctx context.Context, req *CreateModuleRequest, opts ...http.CallOption) (rsp *CreateModuleReply, err error)
+	DeleteCameraAttr(ctx context.Context, req *DeleteCameraAttrRequest, opts ...http.CallOption) (rsp *DeleteCameraAttrReply, err error)
 	DeleteGeneralParameters(ctx context.Context, req *DeleteGeneralParametersRequest, opts ...http.CallOption) (rsp *DeleteGeneralParametersReply, err error)
-	DeleteIcon(ctx context.Context, req *DeleteIconRequest, opts ...http.CallOption) (rsp *DeleteIconReply, err error)
 	DeleteModule(ctx context.Context, req *DeleteModuleRequest, opts ...http.CallOption) (rsp *DeleteModuleReply, err error)
-	GetIcon(ctx context.Context, req *GetIconRequest, opts ...http.CallOption) (rsp *GetIconReply, err error)
+	GetCameraAttr(ctx context.Context, req *GetCameraAttrRequest, opts ...http.CallOption) (rsp *GetCameraAttrReply, err error)
 	GetModule(ctx context.Context, req *GetModuleRequest, opts ...http.CallOption) (rsp *GetModuleReply, err error)
+	ListCameraAttr(ctx context.Context, req *ListCameraAttrRequest, opts ...http.CallOption) (rsp *ListCameraAttrReply, err error)
 	ListGeneralParameters(ctx context.Context, req *ListGeneralParametersRequest, opts ...http.CallOption) (rsp *ListGeneralParametersReply, err error)
-	ListIcon(ctx context.Context, req *ListIconRequest, opts ...http.CallOption) (rsp *ListIconReply, err error)
 	ListModules(ctx context.Context, req *ListModulesRequest, opts ...http.CallOption) (rsp *ListModulesReply, err error)
 	UpdateGeneralParameters(ctx context.Context, req *UpdateGeneralParametersRequest, opts ...http.CallOption) (rsp *UpdateGeneralParametersReply, err error)
 	UpdateModule(ctx context.Context, req *UpdateModuleRequest, opts ...http.CallOption) (rsp *UpdateModuleReply, err error)
@@ -358,11 +358,11 @@ func NewSettingsHTTPClient(client *http.Client) SettingsHTTPClient {
 	return &SettingsHTTPClientImpl{client}
 }
 
-func (c *SettingsHTTPClientImpl) CreateGeneralParameters(ctx context.Context, in *CreateGeneralParametersRequest, opts ...http.CallOption) (*CreateGeneralParametersReply, error) {
-	var out CreateGeneralParametersReply
-	pattern := "/api/v1/settings/parameter"
+func (c *SettingsHTTPClientImpl) CreateCameraAttr(ctx context.Context, in *CreateCameraAttrRequest, opts ...http.CallOption) (*CreateCameraAttrReply, error) {
+	var out CreateCameraAttrReply
+	pattern := "/api/v1/settings/icon"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationSettingsCreateGeneralParameters))
+	opts = append(opts, http.Operation(OperationSettingsCreateCameraAttr))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
@@ -371,11 +371,11 @@ func (c *SettingsHTTPClientImpl) CreateGeneralParameters(ctx context.Context, in
 	return &out, err
 }
 
-func (c *SettingsHTTPClientImpl) CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...http.CallOption) (*CreateIconReply, error) {
-	var out CreateIconReply
-	pattern := "/api/v1/settings/icon"
+func (c *SettingsHTTPClientImpl) CreateGeneralParameters(ctx context.Context, in *CreateGeneralParametersRequest, opts ...http.CallOption) (*CreateGeneralParametersReply, error) {
+	var out CreateGeneralParametersReply
+	pattern := "/api/v1/settings/parameter"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationSettingsCreateIcon))
+	opts = append(opts, http.Operation(OperationSettingsCreateGeneralParameters))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
@@ -397,11 +397,11 @@ func (c *SettingsHTTPClientImpl) CreateModule(ctx context.Context, in *CreateMod
 	return &out, err
 }
 
-func (c *SettingsHTTPClientImpl) DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...http.CallOption) (*DeleteGeneralParametersReply, error) {
-	var out DeleteGeneralParametersReply
-	pattern := "/api/v1/settings/parameter/{id}"
+func (c *SettingsHTTPClientImpl) DeleteCameraAttr(ctx context.Context, in *DeleteCameraAttrRequest, opts ...http.CallOption) (*DeleteCameraAttrReply, error) {
+	var out DeleteCameraAttrReply
+	pattern := "/api/v1/settings/icon/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationSettingsDeleteGeneralParameters))
+	opts = append(opts, http.Operation(OperationSettingsDeleteCameraAttr))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -410,11 +410,11 @@ func (c *SettingsHTTPClientImpl) DeleteGeneralParameters(ctx context.Context, in
 	return &out, err
 }
 
-func (c *SettingsHTTPClientImpl) DeleteIcon(ctx context.Context, in *DeleteIconRequest, opts ...http.CallOption) (*DeleteIconReply, error) {
-	var out DeleteIconReply
-	pattern := "/api/v1/settings/icon/{id}"
+func (c *SettingsHTTPClientImpl) DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...http.CallOption) (*DeleteGeneralParametersReply, error) {
+	var out DeleteGeneralParametersReply
+	pattern := "/api/v1/settings/parameter/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationSettingsDeleteIcon))
+	opts = append(opts, http.Operation(OperationSettingsDeleteGeneralParameters))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
@@ -436,11 +436,11 @@ func (c *SettingsHTTPClientImpl) DeleteModule(ctx context.Context, in *DeleteMod
 	return &out, err
 }
 
-func (c *SettingsHTTPClientImpl) GetIcon(ctx context.Context, in *GetIconRequest, opts ...http.CallOption) (*GetIconReply, error) {
-	var out GetIconReply
+func (c *SettingsHTTPClientImpl) GetCameraAttr(ctx context.Context, in *GetCameraAttrRequest, opts ...http.CallOption) (*GetCameraAttrReply, error) {
+	var out GetCameraAttrReply
 	pattern := "/api/v1/settings/icon/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationSettingsGetIcon))
+	opts = append(opts, http.Operation(OperationSettingsGetCameraAttr))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -462,11 +462,11 @@ func (c *SettingsHTTPClientImpl) GetModule(ctx context.Context, in *GetModuleReq
 	return &out, err
 }
 
-func (c *SettingsHTTPClientImpl) ListGeneralParameters(ctx context.Context, in *ListGeneralParametersRequest, opts ...http.CallOption) (*ListGeneralParametersReply, error) {
-	var out ListGeneralParametersReply
-	pattern := "/api/v1/settings/parameters"
+func (c *SettingsHTTPClientImpl) ListCameraAttr(ctx context.Context, in *ListCameraAttrRequest, opts ...http.CallOption) (*ListCameraAttrReply, error) {
+	var out ListCameraAttrReply
+	pattern := "/api/v1/settings/icons"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationSettingsListGeneralParameters))
+	opts = append(opts, http.Operation(OperationSettingsListCameraAttr))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -475,11 +475,11 @@ func (c *SettingsHTTPClientImpl) ListGeneralParameters(ctx context.Context, in *
 	return &out, err
 }
 
-func (c *SettingsHTTPClientImpl) ListIcon(ctx context.Context, in *ListIconRequest, opts ...http.CallOption) (*ListIconReply, error) {
-	var out ListIconReply
-	pattern := "/api/v1/settings/icons"
+func (c *SettingsHTTPClientImpl) ListGeneralParameters(ctx context.Context, in *ListGeneralParametersRequest, opts ...http.CallOption) (*ListGeneralParametersReply, error) {
+	var out ListGeneralParametersReply
+	pattern := "/api/v1/settings/parameters"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationSettingsListIcon))
+	opts = append(opts, http.Operation(OperationSettingsListGeneralParameters))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

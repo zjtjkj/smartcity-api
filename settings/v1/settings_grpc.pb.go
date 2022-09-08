@@ -27,10 +27,10 @@ type SettingsClient interface {
 	UpdateModule(ctx context.Context, in *UpdateModuleRequest, opts ...grpc.CallOption) (*UpdateModuleReply, error)
 	GetModule(ctx context.Context, in *GetModuleRequest, opts ...grpc.CallOption) (*GetModuleReply, error)
 	ListModules(ctx context.Context, in *ListModulesRequest, opts ...grpc.CallOption) (*ListModulesReply, error)
-	CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...grpc.CallOption) (*CreateIconReply, error)
-	DeleteIcon(ctx context.Context, in *DeleteIconRequest, opts ...grpc.CallOption) (*DeleteIconReply, error)
-	GetIcon(ctx context.Context, in *GetIconRequest, opts ...grpc.CallOption) (*GetIconReply, error)
-	ListIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error)
+	CreateCameraAttr(ctx context.Context, in *CreateCameraAttrRequest, opts ...grpc.CallOption) (*CreateCameraAttrReply, error)
+	DeleteCameraAttr(ctx context.Context, in *DeleteCameraAttrRequest, opts ...grpc.CallOption) (*DeleteCameraAttrReply, error)
+	GetCameraAttr(ctx context.Context, in *GetCameraAttrRequest, opts ...grpc.CallOption) (*GetCameraAttrReply, error)
+	ListCameraAttr(ctx context.Context, in *ListCameraAttrRequest, opts ...grpc.CallOption) (*ListCameraAttrReply, error)
 	CreateGeneralParameters(ctx context.Context, in *CreateGeneralParametersRequest, opts ...grpc.CallOption) (*CreateGeneralParametersReply, error)
 	UpdateGeneralParameters(ctx context.Context, in *UpdateGeneralParametersRequest, opts ...grpc.CallOption) (*UpdateGeneralParametersReply, error)
 	DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...grpc.CallOption) (*DeleteGeneralParametersReply, error)
@@ -90,36 +90,36 @@ func (c *settingsClient) ListModules(ctx context.Context, in *ListModulesRequest
 	return out, nil
 }
 
-func (c *settingsClient) CreateIcon(ctx context.Context, in *CreateIconRequest, opts ...grpc.CallOption) (*CreateIconReply, error) {
-	out := new(CreateIconReply)
-	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateIcon", in, out, opts...)
+func (c *settingsClient) CreateCameraAttr(ctx context.Context, in *CreateCameraAttrRequest, opts ...grpc.CallOption) (*CreateCameraAttrReply, error) {
+	out := new(CreateCameraAttrReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateCameraAttr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *settingsClient) DeleteIcon(ctx context.Context, in *DeleteIconRequest, opts ...grpc.CallOption) (*DeleteIconReply, error) {
-	out := new(DeleteIconReply)
-	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/DeleteIcon", in, out, opts...)
+func (c *settingsClient) DeleteCameraAttr(ctx context.Context, in *DeleteCameraAttrRequest, opts ...grpc.CallOption) (*DeleteCameraAttrReply, error) {
+	out := new(DeleteCameraAttrReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/DeleteCameraAttr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *settingsClient) GetIcon(ctx context.Context, in *GetIconRequest, opts ...grpc.CallOption) (*GetIconReply, error) {
-	out := new(GetIconReply)
-	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetIcon", in, out, opts...)
+func (c *settingsClient) GetCameraAttr(ctx context.Context, in *GetCameraAttrRequest, opts ...grpc.CallOption) (*GetCameraAttrReply, error) {
+	out := new(GetCameraAttrReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetCameraAttr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *settingsClient) ListIcon(ctx context.Context, in *ListIconRequest, opts ...grpc.CallOption) (*ListIconReply, error) {
-	out := new(ListIconReply)
-	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/ListIcon", in, out, opts...)
+func (c *settingsClient) ListCameraAttr(ctx context.Context, in *ListCameraAttrRequest, opts ...grpc.CallOption) (*ListCameraAttrReply, error) {
+	out := new(ListCameraAttrReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/ListCameraAttr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -171,10 +171,10 @@ type SettingsServer interface {
 	UpdateModule(context.Context, *UpdateModuleRequest) (*UpdateModuleReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
 	ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error)
-	CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error)
-	DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error)
-	GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error)
-	ListIcon(context.Context, *ListIconRequest) (*ListIconReply, error)
+	CreateCameraAttr(context.Context, *CreateCameraAttrRequest) (*CreateCameraAttrReply, error)
+	DeleteCameraAttr(context.Context, *DeleteCameraAttrRequest) (*DeleteCameraAttrReply, error)
+	GetCameraAttr(context.Context, *GetCameraAttrRequest) (*GetCameraAttrReply, error)
+	ListCameraAttr(context.Context, *ListCameraAttrRequest) (*ListCameraAttrReply, error)
 	CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error)
 	UpdateGeneralParameters(context.Context, *UpdateGeneralParametersRequest) (*UpdateGeneralParametersReply, error)
 	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
@@ -201,17 +201,17 @@ func (UnimplementedSettingsServer) GetModule(context.Context, *GetModuleRequest)
 func (UnimplementedSettingsServer) ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListModules not implemented")
 }
-func (UnimplementedSettingsServer) CreateIcon(context.Context, *CreateIconRequest) (*CreateIconReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateIcon not implemented")
+func (UnimplementedSettingsServer) CreateCameraAttr(context.Context, *CreateCameraAttrRequest) (*CreateCameraAttrReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCameraAttr not implemented")
 }
-func (UnimplementedSettingsServer) DeleteIcon(context.Context, *DeleteIconRequest) (*DeleteIconReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteIcon not implemented")
+func (UnimplementedSettingsServer) DeleteCameraAttr(context.Context, *DeleteCameraAttrRequest) (*DeleteCameraAttrReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCameraAttr not implemented")
 }
-func (UnimplementedSettingsServer) GetIcon(context.Context, *GetIconRequest) (*GetIconReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetIcon not implemented")
+func (UnimplementedSettingsServer) GetCameraAttr(context.Context, *GetCameraAttrRequest) (*GetCameraAttrReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCameraAttr not implemented")
 }
-func (UnimplementedSettingsServer) ListIcon(context.Context, *ListIconRequest) (*ListIconReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListIcon not implemented")
+func (UnimplementedSettingsServer) ListCameraAttr(context.Context, *ListCameraAttrRequest) (*ListCameraAttrReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCameraAttr not implemented")
 }
 func (UnimplementedSettingsServer) CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateGeneralParameters not implemented")
@@ -328,74 +328,74 @@ func _Settings_ListModules_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Settings_CreateIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateIconRequest)
+func _Settings_CreateCameraAttr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCameraAttrRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SettingsServer).CreateIcon(ctx, in)
+		return srv.(SettingsServer).CreateCameraAttr(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.settings.v1.Settings/CreateIcon",
+		FullMethod: "/api.settings.v1.Settings/CreateCameraAttr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SettingsServer).CreateIcon(ctx, req.(*CreateIconRequest))
+		return srv.(SettingsServer).CreateCameraAttr(ctx, req.(*CreateCameraAttrRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Settings_DeleteIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteIconRequest)
+func _Settings_DeleteCameraAttr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCameraAttrRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SettingsServer).DeleteIcon(ctx, in)
+		return srv.(SettingsServer).DeleteCameraAttr(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.settings.v1.Settings/DeleteIcon",
+		FullMethod: "/api.settings.v1.Settings/DeleteCameraAttr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SettingsServer).DeleteIcon(ctx, req.(*DeleteIconRequest))
+		return srv.(SettingsServer).DeleteCameraAttr(ctx, req.(*DeleteCameraAttrRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Settings_GetIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetIconRequest)
+func _Settings_GetCameraAttr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCameraAttrRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SettingsServer).GetIcon(ctx, in)
+		return srv.(SettingsServer).GetCameraAttr(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.settings.v1.Settings/GetIcon",
+		FullMethod: "/api.settings.v1.Settings/GetCameraAttr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SettingsServer).GetIcon(ctx, req.(*GetIconRequest))
+		return srv.(SettingsServer).GetCameraAttr(ctx, req.(*GetCameraAttrRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Settings_ListIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListIconRequest)
+func _Settings_ListCameraAttr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCameraAttrRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SettingsServer).ListIcon(ctx, in)
+		return srv.(SettingsServer).ListCameraAttr(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.settings.v1.Settings/ListIcon",
+		FullMethod: "/api.settings.v1.Settings/ListCameraAttr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SettingsServer).ListIcon(ctx, req.(*ListIconRequest))
+		return srv.(SettingsServer).ListCameraAttr(ctx, req.(*ListCameraAttrRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -500,20 +500,20 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Settings_ListModules_Handler,
 		},
 		{
-			MethodName: "CreateIcon",
-			Handler:    _Settings_CreateIcon_Handler,
+			MethodName: "CreateCameraAttr",
+			Handler:    _Settings_CreateCameraAttr_Handler,
 		},
 		{
-			MethodName: "DeleteIcon",
-			Handler:    _Settings_DeleteIcon_Handler,
+			MethodName: "DeleteCameraAttr",
+			Handler:    _Settings_DeleteCameraAttr_Handler,
 		},
 		{
-			MethodName: "GetIcon",
-			Handler:    _Settings_GetIcon_Handler,
+			MethodName: "GetCameraAttr",
+			Handler:    _Settings_GetCameraAttr_Handler,
 		},
 		{
-			MethodName: "ListIcon",
-			Handler:    _Settings_ListIcon_Handler,
+			MethodName: "ListCameraAttr",
+			Handler:    _Settings_ListCameraAttr_Handler,
 		},
 		{
 			MethodName: "CreateGeneralParameters",

@@ -1059,44 +1059,46 @@ var _ interface {
 	ErrorName() string
 } = CreateGeneralParametersReplyValidationError{}
 
-// Validate checks the field values on CreateIconRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *CreateIconRequest) Validate() error {
+// Validate checks the field values on CreateCameraAttrRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateCameraAttrRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateIconRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on CreateCameraAttrRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateIconRequestMultiError, or nil if none found.
-func (m *CreateIconRequest) ValidateAll() error {
+// CreateCameraAttrRequestMultiError, or nil if none found.
+func (m *CreateCameraAttrRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateIconRequest) validate(all bool) error {
+func (m *CreateCameraAttrRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
+
+	// no validation rules for Name
 
 	// no validation rules for Src
 
 	if len(errors) > 0 {
-		return CreateIconRequestMultiError(errors)
+		return CreateCameraAttrRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateIconRequestMultiError is an error wrapping multiple validation errors
-// returned by CreateIconRequest.ValidateAll() if the designated constraints
-// aren't met.
-type CreateIconRequestMultiError []error
+// CreateCameraAttrRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateCameraAttrRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateCameraAttrRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateIconRequestMultiError) Error() string {
+func (m CreateCameraAttrRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1105,11 +1107,11 @@ func (m CreateIconRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateIconRequestMultiError) AllErrors() []error { return m }
+func (m CreateCameraAttrRequestMultiError) AllErrors() []error { return m }
 
-// CreateIconRequestValidationError is the validation error returned by
-// CreateIconRequest.Validate if the designated constraints aren't met.
-type CreateIconRequestValidationError struct {
+// CreateCameraAttrRequestValidationError is the validation error returned by
+// CreateCameraAttrRequest.Validate if the designated constraints aren't met.
+type CreateCameraAttrRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1117,24 +1119,24 @@ type CreateIconRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateIconRequestValidationError) Field() string { return e.field }
+func (e CreateCameraAttrRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateIconRequestValidationError) Reason() string { return e.reason }
+func (e CreateCameraAttrRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateIconRequestValidationError) Cause() error { return e.cause }
+func (e CreateCameraAttrRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateIconRequestValidationError) Key() bool { return e.key }
+func (e CreateCameraAttrRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateIconRequestValidationError) ErrorName() string {
-	return "CreateIconRequestValidationError"
+func (e CreateCameraAttrRequestValidationError) ErrorName() string {
+	return "CreateCameraAttrRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateIconRequestValidationError) Error() string {
+func (e CreateCameraAttrRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1146,14 +1148,14 @@ func (e CreateIconRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateIconRequest.%s: %s%s",
+		"invalid %sCreateCameraAttrRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateIconRequestValidationError{}
+var _ error = CreateCameraAttrRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1161,24 +1163,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateIconRequestValidationError{}
+} = CreateCameraAttrRequestValidationError{}
 
-// Validate checks the field values on CreateIconReply with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *CreateIconReply) Validate() error {
+// Validate checks the field values on CreateCameraAttrReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateCameraAttrReply) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateIconReply with the rules
+// ValidateAll checks the field values on CreateCameraAttrReply with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateIconReplyMultiError, or nil if none found.
-func (m *CreateIconReply) ValidateAll() error {
+// CreateCameraAttrReplyMultiError, or nil if none found.
+func (m *CreateCameraAttrReply) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateIconReply) validate(all bool) error {
+func (m *CreateCameraAttrReply) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1186,19 +1188,19 @@ func (m *CreateIconReply) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return CreateIconReplyMultiError(errors)
+		return CreateCameraAttrReplyMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateIconReplyMultiError is an error wrapping multiple validation errors
-// returned by CreateIconReply.ValidateAll() if the designated constraints
-// aren't met.
-type CreateIconReplyMultiError []error
+// CreateCameraAttrReplyMultiError is an error wrapping multiple validation
+// errors returned by CreateCameraAttrReply.ValidateAll() if the designated
+// constraints aren't met.
+type CreateCameraAttrReplyMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateIconReplyMultiError) Error() string {
+func (m CreateCameraAttrReplyMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1207,11 +1209,11 @@ func (m CreateIconReplyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateIconReplyMultiError) AllErrors() []error { return m }
+func (m CreateCameraAttrReplyMultiError) AllErrors() []error { return m }
 
-// CreateIconReplyValidationError is the validation error returned by
-// CreateIconReply.Validate if the designated constraints aren't met.
-type CreateIconReplyValidationError struct {
+// CreateCameraAttrReplyValidationError is the validation error returned by
+// CreateCameraAttrReply.Validate if the designated constraints aren't met.
+type CreateCameraAttrReplyValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1219,22 +1221,24 @@ type CreateIconReplyValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateIconReplyValidationError) Field() string { return e.field }
+func (e CreateCameraAttrReplyValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateIconReplyValidationError) Reason() string { return e.reason }
+func (e CreateCameraAttrReplyValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateIconReplyValidationError) Cause() error { return e.cause }
+func (e CreateCameraAttrReplyValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateIconReplyValidationError) Key() bool { return e.key }
+func (e CreateCameraAttrReplyValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateIconReplyValidationError) ErrorName() string { return "CreateIconReplyValidationError" }
+func (e CreateCameraAttrReplyValidationError) ErrorName() string {
+	return "CreateCameraAttrReplyValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e CreateIconReplyValidationError) Error() string {
+func (e CreateCameraAttrReplyValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1246,14 +1250,14 @@ func (e CreateIconReplyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateIconReply.%s: %s%s",
+		"invalid %sCreateCameraAttrReply.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateIconReplyValidationError{}
+var _ error = CreateCameraAttrReplyValidationError{}
 
 var _ interface {
 	Field() string
@@ -1261,24 +1265,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateIconReplyValidationError{}
+} = CreateCameraAttrReplyValidationError{}
 
-// Validate checks the field values on DeleteIconRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *DeleteIconRequest) Validate() error {
+// Validate checks the field values on DeleteCameraAttrRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteCameraAttrRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DeleteIconRequest with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on DeleteCameraAttrRequest with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// DeleteIconRequestMultiError, or nil if none found.
-func (m *DeleteIconRequest) ValidateAll() error {
+// DeleteCameraAttrRequestMultiError, or nil if none found.
+func (m *DeleteCameraAttrRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DeleteIconRequest) validate(all bool) error {
+func (m *DeleteCameraAttrRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1288,19 +1292,19 @@ func (m *DeleteIconRequest) validate(all bool) error {
 	// no validation rules for Id
 
 	if len(errors) > 0 {
-		return DeleteIconRequestMultiError(errors)
+		return DeleteCameraAttrRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// DeleteIconRequestMultiError is an error wrapping multiple validation errors
-// returned by DeleteIconRequest.ValidateAll() if the designated constraints
-// aren't met.
-type DeleteIconRequestMultiError []error
+// DeleteCameraAttrRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteCameraAttrRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteCameraAttrRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteIconRequestMultiError) Error() string {
+func (m DeleteCameraAttrRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1309,11 +1313,11 @@ func (m DeleteIconRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteIconRequestMultiError) AllErrors() []error { return m }
+func (m DeleteCameraAttrRequestMultiError) AllErrors() []error { return m }
 
-// DeleteIconRequestValidationError is the validation error returned by
-// DeleteIconRequest.Validate if the designated constraints aren't met.
-type DeleteIconRequestValidationError struct {
+// DeleteCameraAttrRequestValidationError is the validation error returned by
+// DeleteCameraAttrRequest.Validate if the designated constraints aren't met.
+type DeleteCameraAttrRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1321,24 +1325,24 @@ type DeleteIconRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteIconRequestValidationError) Field() string { return e.field }
+func (e DeleteCameraAttrRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteIconRequestValidationError) Reason() string { return e.reason }
+func (e DeleteCameraAttrRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteIconRequestValidationError) Cause() error { return e.cause }
+func (e DeleteCameraAttrRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteIconRequestValidationError) Key() bool { return e.key }
+func (e DeleteCameraAttrRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteIconRequestValidationError) ErrorName() string {
-	return "DeleteIconRequestValidationError"
+func (e DeleteCameraAttrRequestValidationError) ErrorName() string {
+	return "DeleteCameraAttrRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DeleteIconRequestValidationError) Error() string {
+func (e DeleteCameraAttrRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1350,14 +1354,14 @@ func (e DeleteIconRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteIconRequest.%s: %s%s",
+		"invalid %sDeleteCameraAttrRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteIconRequestValidationError{}
+var _ error = DeleteCameraAttrRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1365,24 +1369,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteIconRequestValidationError{}
+} = DeleteCameraAttrRequestValidationError{}
 
-// Validate checks the field values on DeleteIconReply with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *DeleteIconReply) Validate() error {
+// Validate checks the field values on DeleteCameraAttrReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteCameraAttrReply) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DeleteIconReply with the rules
+// ValidateAll checks the field values on DeleteCameraAttrReply with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// DeleteIconReplyMultiError, or nil if none found.
-func (m *DeleteIconReply) ValidateAll() error {
+// DeleteCameraAttrReplyMultiError, or nil if none found.
+func (m *DeleteCameraAttrReply) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DeleteIconReply) validate(all bool) error {
+func (m *DeleteCameraAttrReply) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1390,19 +1394,19 @@ func (m *DeleteIconReply) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return DeleteIconReplyMultiError(errors)
+		return DeleteCameraAttrReplyMultiError(errors)
 	}
 
 	return nil
 }
 
-// DeleteIconReplyMultiError is an error wrapping multiple validation errors
-// returned by DeleteIconReply.ValidateAll() if the designated constraints
-// aren't met.
-type DeleteIconReplyMultiError []error
+// DeleteCameraAttrReplyMultiError is an error wrapping multiple validation
+// errors returned by DeleteCameraAttrReply.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteCameraAttrReplyMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteIconReplyMultiError) Error() string {
+func (m DeleteCameraAttrReplyMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1411,11 +1415,11 @@ func (m DeleteIconReplyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteIconReplyMultiError) AllErrors() []error { return m }
+func (m DeleteCameraAttrReplyMultiError) AllErrors() []error { return m }
 
-// DeleteIconReplyValidationError is the validation error returned by
-// DeleteIconReply.Validate if the designated constraints aren't met.
-type DeleteIconReplyValidationError struct {
+// DeleteCameraAttrReplyValidationError is the validation error returned by
+// DeleteCameraAttrReply.Validate if the designated constraints aren't met.
+type DeleteCameraAttrReplyValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1423,22 +1427,24 @@ type DeleteIconReplyValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteIconReplyValidationError) Field() string { return e.field }
+func (e DeleteCameraAttrReplyValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteIconReplyValidationError) Reason() string { return e.reason }
+func (e DeleteCameraAttrReplyValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteIconReplyValidationError) Cause() error { return e.cause }
+func (e DeleteCameraAttrReplyValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteIconReplyValidationError) Key() bool { return e.key }
+func (e DeleteCameraAttrReplyValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteIconReplyValidationError) ErrorName() string { return "DeleteIconReplyValidationError" }
+func (e DeleteCameraAttrReplyValidationError) ErrorName() string {
+	return "DeleteCameraAttrReplyValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e DeleteIconReplyValidationError) Error() string {
+func (e DeleteCameraAttrReplyValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1450,14 +1456,14 @@ func (e DeleteIconReplyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteIconReply.%s: %s%s",
+		"invalid %sDeleteCameraAttrReply.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteIconReplyValidationError{}
+var _ error = DeleteCameraAttrReplyValidationError{}
 
 var _ interface {
 	Field() string
@@ -1465,24 +1471,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteIconReplyValidationError{}
+} = DeleteCameraAttrReplyValidationError{}
 
-// Validate checks the field values on GetIconRequest with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *GetIconRequest) Validate() error {
+// Validate checks the field values on GetCameraAttrRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCameraAttrRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetIconRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in GetIconRequestMultiError,
-// or nil if none found.
-func (m *GetIconRequest) ValidateAll() error {
+// ValidateAll checks the field values on GetCameraAttrRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetCameraAttrRequestMultiError, or nil if none found.
+func (m *GetCameraAttrRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetIconRequest) validate(all bool) error {
+func (m *GetCameraAttrRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1492,19 +1498,19 @@ func (m *GetIconRequest) validate(all bool) error {
 	// no validation rules for Id
 
 	if len(errors) > 0 {
-		return GetIconRequestMultiError(errors)
+		return GetCameraAttrRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetIconRequestMultiError is an error wrapping multiple validation errors
-// returned by GetIconRequest.ValidateAll() if the designated constraints
-// aren't met.
-type GetIconRequestMultiError []error
+// GetCameraAttrRequestMultiError is an error wrapping multiple validation
+// errors returned by GetCameraAttrRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetCameraAttrRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetIconRequestMultiError) Error() string {
+func (m GetCameraAttrRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1513,11 +1519,11 @@ func (m GetIconRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetIconRequestMultiError) AllErrors() []error { return m }
+func (m GetCameraAttrRequestMultiError) AllErrors() []error { return m }
 
-// GetIconRequestValidationError is the validation error returned by
-// GetIconRequest.Validate if the designated constraints aren't met.
-type GetIconRequestValidationError struct {
+// GetCameraAttrRequestValidationError is the validation error returned by
+// GetCameraAttrRequest.Validate if the designated constraints aren't met.
+type GetCameraAttrRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1525,22 +1531,24 @@ type GetIconRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetIconRequestValidationError) Field() string { return e.field }
+func (e GetCameraAttrRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetIconRequestValidationError) Reason() string { return e.reason }
+func (e GetCameraAttrRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetIconRequestValidationError) Cause() error { return e.cause }
+func (e GetCameraAttrRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetIconRequestValidationError) Key() bool { return e.key }
+func (e GetCameraAttrRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetIconRequestValidationError) ErrorName() string { return "GetIconRequestValidationError" }
+func (e GetCameraAttrRequestValidationError) ErrorName() string {
+	return "GetCameraAttrRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e GetIconRequestValidationError) Error() string {
+func (e GetCameraAttrRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1552,14 +1560,14 @@ func (e GetIconRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetIconRequest.%s: %s%s",
+		"invalid %sGetCameraAttrRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetIconRequestValidationError{}
+var _ error = GetCameraAttrRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1567,45 +1575,51 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetIconRequestValidationError{}
+} = GetCameraAttrRequestValidationError{}
 
-// Validate checks the field values on GetIconReply with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
+// Validate checks the field values on CameraAttr with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
-func (m *GetIconReply) Validate() error {
+func (m *CameraAttr) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetIconReply with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in GetIconReplyMultiError, or
+// ValidateAll checks the field values on CameraAttr with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CameraAttrMultiError, or
 // nil if none found.
-func (m *GetIconReply) ValidateAll() error {
+func (m *CameraAttr) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetIconReply) validate(all bool) error {
+func (m *CameraAttr) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Created
+
+	// no validation rules for Name
 
 	// no validation rules for Image
 
 	if len(errors) > 0 {
-		return GetIconReplyMultiError(errors)
+		return CameraAttrMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetIconReplyMultiError is an error wrapping multiple validation errors
-// returned by GetIconReply.ValidateAll() if the designated constraints aren't met.
-type GetIconReplyMultiError []error
+// CameraAttrMultiError is an error wrapping multiple validation errors
+// returned by CameraAttr.ValidateAll() if the designated constraints aren't met.
+type CameraAttrMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetIconReplyMultiError) Error() string {
+func (m CameraAttrMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1614,11 +1628,11 @@ func (m GetIconReplyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetIconReplyMultiError) AllErrors() []error { return m }
+func (m CameraAttrMultiError) AllErrors() []error { return m }
 
-// GetIconReplyValidationError is the validation error returned by
-// GetIconReply.Validate if the designated constraints aren't met.
-type GetIconReplyValidationError struct {
+// CameraAttrValidationError is the validation error returned by
+// CameraAttr.Validate if the designated constraints aren't met.
+type CameraAttrValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1626,22 +1640,22 @@ type GetIconReplyValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetIconReplyValidationError) Field() string { return e.field }
+func (e CameraAttrValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetIconReplyValidationError) Reason() string { return e.reason }
+func (e CameraAttrValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetIconReplyValidationError) Cause() error { return e.cause }
+func (e CameraAttrValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetIconReplyValidationError) Key() bool { return e.key }
+func (e CameraAttrValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetIconReplyValidationError) ErrorName() string { return "GetIconReplyValidationError" }
+func (e CameraAttrValidationError) ErrorName() string { return "CameraAttrValidationError" }
 
 // Error satisfies the builtin error interface
-func (e GetIconReplyValidationError) Error() string {
+func (e CameraAttrValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1653,14 +1667,14 @@ func (e GetIconReplyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetIconReply.%s: %s%s",
+		"invalid %sCameraAttr.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetIconReplyValidationError{}
+var _ error = CameraAttrValidationError{}
 
 var _ interface {
 	Field() string
@@ -1668,24 +1682,155 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetIconReplyValidationError{}
+} = CameraAttrValidationError{}
 
-// Validate checks the field values on ListIconRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *ListIconRequest) Validate() error {
+// Validate checks the field values on GetCameraAttrReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetCameraAttrReply) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListIconRequest with the rules
+// ValidateAll checks the field values on GetCameraAttrReply with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// ListIconRequestMultiError, or nil if none found.
-func (m *ListIconRequest) ValidateAll() error {
+// GetCameraAttrReplyMultiError, or nil if none found.
+func (m *GetCameraAttrReply) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListIconRequest) validate(all bool) error {
+func (m *GetCameraAttrReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetAttr()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetCameraAttrReplyValidationError{
+					field:  "Attr",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetCameraAttrReplyValidationError{
+					field:  "Attr",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAttr()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetCameraAttrReplyValidationError{
+				field:  "Attr",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetCameraAttrReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetCameraAttrReplyMultiError is an error wrapping multiple validation errors
+// returned by GetCameraAttrReply.ValidateAll() if the designated constraints
+// aren't met.
+type GetCameraAttrReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetCameraAttrReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetCameraAttrReplyMultiError) AllErrors() []error { return m }
+
+// GetCameraAttrReplyValidationError is the validation error returned by
+// GetCameraAttrReply.Validate if the designated constraints aren't met.
+type GetCameraAttrReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetCameraAttrReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetCameraAttrReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetCameraAttrReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetCameraAttrReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetCameraAttrReplyValidationError) ErrorName() string {
+	return "GetCameraAttrReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetCameraAttrReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetCameraAttrReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetCameraAttrReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetCameraAttrReplyValidationError{}
+
+// Validate checks the field values on ListCameraAttrRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCameraAttrRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListCameraAttrRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCameraAttrRequestMultiError, or nil if none found.
+func (m *ListCameraAttrRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListCameraAttrRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1693,19 +1838,19 @@ func (m *ListIconRequest) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return ListIconRequestMultiError(errors)
+		return ListCameraAttrRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListIconRequestMultiError is an error wrapping multiple validation errors
-// returned by ListIconRequest.ValidateAll() if the designated constraints
-// aren't met.
-type ListIconRequestMultiError []error
+// ListCameraAttrRequestMultiError is an error wrapping multiple validation
+// errors returned by ListCameraAttrRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListCameraAttrRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListIconRequestMultiError) Error() string {
+func (m ListCameraAttrRequestMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1714,11 +1859,11 @@ func (m ListIconRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListIconRequestMultiError) AllErrors() []error { return m }
+func (m ListCameraAttrRequestMultiError) AllErrors() []error { return m }
 
-// ListIconRequestValidationError is the validation error returned by
-// ListIconRequest.Validate if the designated constraints aren't met.
-type ListIconRequestValidationError struct {
+// ListCameraAttrRequestValidationError is the validation error returned by
+// ListCameraAttrRequest.Validate if the designated constraints aren't met.
+type ListCameraAttrRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1726,22 +1871,24 @@ type ListIconRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListIconRequestValidationError) Field() string { return e.field }
+func (e ListCameraAttrRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListIconRequestValidationError) Reason() string { return e.reason }
+func (e ListCameraAttrRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListIconRequestValidationError) Cause() error { return e.cause }
+func (e ListCameraAttrRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListIconRequestValidationError) Key() bool { return e.key }
+func (e ListCameraAttrRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListIconRequestValidationError) ErrorName() string { return "ListIconRequestValidationError" }
+func (e ListCameraAttrRequestValidationError) ErrorName() string {
+	return "ListCameraAttrRequestValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e ListIconRequestValidationError) Error() string {
+func (e ListCameraAttrRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1753,14 +1900,14 @@ func (e ListIconRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListIconRequest.%s: %s%s",
+		"invalid %sListCameraAttrRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListIconRequestValidationError{}
+var _ error = ListCameraAttrRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1768,47 +1915,47 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListIconRequestValidationError{}
+} = ListCameraAttrRequestValidationError{}
 
-// Validate checks the field values on ListIconReply with the rules defined in
-// the proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *ListIconReply) Validate() error {
+// Validate checks the field values on ListCameraAttrReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListCameraAttrReply) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on ListIconReply with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in ListIconReplyMultiError, or
-// nil if none found.
-func (m *ListIconReply) ValidateAll() error {
+// ValidateAll checks the field values on ListCameraAttrReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListCameraAttrReplyMultiError, or nil if none found.
+func (m *ListCameraAttrReply) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *ListIconReply) validate(all bool) error {
+func (m *ListCameraAttrReply) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	for idx, item := range m.GetImages() {
+	for idx, item := range m.GetAttrs() {
 		_, _ = idx, item
 
 		if all {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ListIconReplyValidationError{
-						field:  fmt.Sprintf("Images[%v]", idx),
+					errors = append(errors, ListCameraAttrReplyValidationError{
+						field:  fmt.Sprintf("Attrs[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, ListIconReplyValidationError{
-						field:  fmt.Sprintf("Images[%v]", idx),
+					errors = append(errors, ListCameraAttrReplyValidationError{
+						field:  fmt.Sprintf("Attrs[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -1816,8 +1963,8 @@ func (m *ListIconReply) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return ListIconReplyValidationError{
-					field:  fmt.Sprintf("Images[%v]", idx),
+				return ListCameraAttrReplyValidationError{
+					field:  fmt.Sprintf("Attrs[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -1827,19 +1974,19 @@ func (m *ListIconReply) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return ListIconReplyMultiError(errors)
+		return ListCameraAttrReplyMultiError(errors)
 	}
 
 	return nil
 }
 
-// ListIconReplyMultiError is an error wrapping multiple validation errors
-// returned by ListIconReply.ValidateAll() if the designated constraints
-// aren't met.
-type ListIconReplyMultiError []error
+// ListCameraAttrReplyMultiError is an error wrapping multiple validation
+// errors returned by ListCameraAttrReply.ValidateAll() if the designated
+// constraints aren't met.
+type ListCameraAttrReplyMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m ListIconReplyMultiError) Error() string {
+func (m ListCameraAttrReplyMultiError) Error() string {
 	var msgs []string
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1848,11 +1995,11 @@ func (m ListIconReplyMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m ListIconReplyMultiError) AllErrors() []error { return m }
+func (m ListCameraAttrReplyMultiError) AllErrors() []error { return m }
 
-// ListIconReplyValidationError is the validation error returned by
-// ListIconReply.Validate if the designated constraints aren't met.
-type ListIconReplyValidationError struct {
+// ListCameraAttrReplyValidationError is the validation error returned by
+// ListCameraAttrReply.Validate if the designated constraints aren't met.
+type ListCameraAttrReplyValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1860,22 +2007,24 @@ type ListIconReplyValidationError struct {
 }
 
 // Field function returns field value.
-func (e ListIconReplyValidationError) Field() string { return e.field }
+func (e ListCameraAttrReplyValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e ListIconReplyValidationError) Reason() string { return e.reason }
+func (e ListCameraAttrReplyValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e ListIconReplyValidationError) Cause() error { return e.cause }
+func (e ListCameraAttrReplyValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e ListIconReplyValidationError) Key() bool { return e.key }
+func (e ListCameraAttrReplyValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e ListIconReplyValidationError) ErrorName() string { return "ListIconReplyValidationError" }
+func (e ListCameraAttrReplyValidationError) ErrorName() string {
+	return "ListCameraAttrReplyValidationError"
+}
 
 // Error satisfies the builtin error interface
-func (e ListIconReplyValidationError) Error() string {
+func (e ListCameraAttrReplyValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1887,14 +2036,14 @@ func (e ListIconReplyValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sListIconReply.%s: %s%s",
+		"invalid %sListCameraAttrReply.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = ListIconReplyValidationError{}
+var _ error = ListCameraAttrReplyValidationError{}
 
 var _ interface {
 	Field() string
@@ -1902,7 +2051,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = ListIconReplyValidationError{}
+} = ListCameraAttrReplyValidationError{}
 
 // Validate checks the field values on CreateModuleRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -3140,109 +3289,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListModulesReplyValidationError{}
-
-// Validate checks the field values on ListIconReply_Image with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *ListIconReply_Image) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on ListIconReply_Image with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// ListIconReply_ImageMultiError, or nil if none found.
-func (m *ListIconReply_Image) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *ListIconReply_Image) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	// no validation rules for Id
-
-	// no validation rules for Src
-
-	if len(errors) > 0 {
-		return ListIconReply_ImageMultiError(errors)
-	}
-
-	return nil
-}
-
-// ListIconReply_ImageMultiError is an error wrapping multiple validation
-// errors returned by ListIconReply_Image.ValidateAll() if the designated
-// constraints aren't met.
-type ListIconReply_ImageMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m ListIconReply_ImageMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m ListIconReply_ImageMultiError) AllErrors() []error { return m }
-
-// ListIconReply_ImageValidationError is the validation error returned by
-// ListIconReply_Image.Validate if the designated constraints aren't met.
-type ListIconReply_ImageValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e ListIconReply_ImageValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e ListIconReply_ImageValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e ListIconReply_ImageValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e ListIconReply_ImageValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e ListIconReply_ImageValidationError) ErrorName() string {
-	return "ListIconReply_ImageValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e ListIconReply_ImageValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sListIconReply_Image.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = ListIconReply_ImageValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = ListIconReply_ImageValidationError{}

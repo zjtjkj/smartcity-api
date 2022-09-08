@@ -36,23 +36,23 @@ service Settings {
 		};
 	}
 
-	rpc CreateIcon(CreateIconRequest) returns (CreateIconReply) {
+	rpc CreateCameraAttr(CreateCameraAttrRequest) returns (CreateCameraAttrReply) {
 		option(google.api.http) = {
 			put: "/api/v1/settings/icon"
 			body: "*"
 		};
 	}
-	rpc DeleteIcon(DeleteIconRequest) returns (DeleteIconReply) {
+	rpc DeleteCameraAttr(DeleteCameraAttrRequest) returns (DeleteCameraAttrReply) {
 		option(google.api.http) = {
 			delete: "/api/v1/settings/icon/{id}"
 		};
 	}
-	rpc GetIcon(GetIconRequest) returns (GetIconReply) {
+	rpc GetCameraAttr(GetCameraAttrRequest) returns (GetCameraAttrReply) {
 		option(google.api.http) = {
 			get: "/api/v1/settings/icon/{id}"
 		};
 	}
-	rpc ListIcon(ListIconRequest) returns (ListIconReply) {
+	rpc ListCameraAttr(ListCameraAttrRequest) returns (ListCameraAttrReply) {
 		option(google.api.http) = {
 			get: "/api/v1/settings/icons"
 		};
@@ -81,8 +81,7 @@ service Settings {
 			get: "/api/v1/settings/parameters"
 		};
 	}
-
-
+	
 }
 
 message GeneralParameters {
@@ -125,30 +124,33 @@ message CreateGeneralParametersRequest {
 }
 message CreateGeneralParametersReply {}
 
-message CreateIconRequest {
-	bytes src = 1;
+message CreateCameraAttrRequest {
+	string name = 1;
+	bytes src = 2;
 }
-message CreateIconReply {}
+message CreateCameraAttrReply {}
 
-message DeleteIconRequest {
+message DeleteCameraAttrRequest {
 	uint32 id = 1;
 }
-message DeleteIconReply {}
+message DeleteCameraAttrReply {}
 
-message GetIconRequest {
+message GetCameraAttrRequest {
 	uint32 id = 1;
 }
-message GetIconReply {
-	bytes image = 1;
+message CameraAttr {
+	uint32 id = 1;
+	string created = 2;
+	string name = 3;
+	bytes image = 4;
+}
+message GetCameraAttrReply {
+		CameraAttr attr = 1;
 }
 
-message ListIconRequest {}
-message ListIconReply {
-	message Image {
-		uint32 id = 1;
-		bytes src = 2;
-	}
-	repeated Image images = 1;
+message ListCameraAttrRequest {}
+message ListCameraAttrReply {
+	repeated CameraAttr attrs = 1;
 }
 
 message CreateModuleRequest {
