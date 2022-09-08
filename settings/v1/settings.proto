@@ -140,7 +140,7 @@ message GetCameraAttrRequest {
 }
 message CameraAttr {
 	uint32 id = 1;
-	string created = 2;
+	google.protobuf.Timestamp created = 2;
 	string name = 3;
 	bytes image = 4;
 }
