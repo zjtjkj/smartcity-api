@@ -161,7 +161,7 @@ message FindChannelsByIdRequest {
   string device_id = 2;
 }
 message FindChannelsByIdReply {
-  repeated Channel channel = 1;
+  Channel channel = 1;
 }
 
 message FindGroupsByChannelsRequest {
