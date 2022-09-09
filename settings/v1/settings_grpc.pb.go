@@ -22,6 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SettingsClient interface {
+	CreateSystemInfo(ctx context.Context, in *CreateSystemInfoRequest, opts ...grpc.CallOption) (*CreateSystemInfoReply, error)
+	GetSystemInfo(ctx context.Context, in *GetSystemInfoRequest, opts ...grpc.CallOption) (*GetSystemInfoReply, error)
 	CreateModule(ctx context.Context, in *CreateModuleRequest, opts ...grpc.CallOption) (*CreateModuleReply, error)
 	DeleteModule(ctx context.Context, in *DeleteModuleRequest, opts ...grpc.CallOption) (*DeleteModuleReply, error)
 	UpdateModule(ctx context.Context, in *UpdateModuleRequest, opts ...grpc.CallOption) (*UpdateModuleReply, error)
@@ -43,6 +45,24 @@ type settingsClient struct {
 
 func NewSettingsClient(cc grpc.ClientConnInterface) SettingsClient {
 	return &settingsClient{cc}
+}
+
+func (c *settingsClient) CreateSystemInfo(ctx context.Context, in *CreateSystemInfoRequest, opts ...grpc.CallOption) (*CreateSystemInfoReply, error) {
+	out := new(CreateSystemInfoReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateSystemInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) GetSystemInfo(ctx context.Context, in *GetSystemInfoRequest, opts ...grpc.CallOption) (*GetSystemInfoReply, error) {
+	out := new(GetSystemInfoReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetSystemInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *settingsClient) CreateModule(ctx context.Context, in *CreateModuleRequest, opts ...grpc.CallOption) (*CreateModuleReply, error) {
@@ -166,6 +186,8 @@ func (c *settingsClient) ListGeneralParameters(ctx context.Context, in *ListGene
 // All implementations must embed UnimplementedSettingsServer
 // for forward compatibility
 type SettingsServer interface {
+	CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error)
+	GetSystemInfo(context.Context, *GetSystemInfoRequest) (*GetSystemInfoReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
 	DeleteModule(context.Context, *DeleteModuleRequest) (*DeleteModuleReply, error)
 	UpdateModule(context.Context, *UpdateModuleRequest) (*UpdateModuleReply, error)
@@ -186,6 +208,12 @@ type SettingsServer interface {
 type UnimplementedSettingsServer struct {
 }
 
+func (UnimplementedSettingsServer) CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSystemInfo not implemented")
+}
+func (UnimplementedSettingsServer) GetSystemInfo(context.Context, *GetSystemInfoRequest) (*GetSystemInfoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSystemInfo not implemented")
+}
 func (UnimplementedSettingsServer) CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateModule not implemented")
 }
@@ -236,6 +264,42 @@ type UnsafeSettingsServer interface {
 
 func RegisterSettingsServer(s grpc.ServiceRegistrar, srv SettingsServer) {
 	s.RegisterService(&Settings_ServiceDesc, srv)
+}
+
+func _Settings_CreateSystemInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSystemInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreateSystemInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreateSystemInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreateSystemInfo(ctx, req.(*CreateSystemInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_GetSystemInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSystemInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetSystemInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/GetSystemInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetSystemInfo(ctx, req.(*GetSystemInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Settings_CreateModule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -479,6 +543,14 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.settings.v1.Settings",
 	HandlerType: (*SettingsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateSystemInfo",
+			Handler:    _Settings_CreateSystemInfo_Handler,
+		},
+		{
+			MethodName: "GetSystemInfo",
+			Handler:    _Settings_GetSystemInfo_Handler,
+		},
 		{
 			MethodName: "CreateModule",
 			Handler:    _Settings_CreateModule_Handler,

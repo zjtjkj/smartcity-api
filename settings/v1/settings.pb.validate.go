@@ -35,6 +35,422 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on GetSystemInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSystemInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSystemInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSystemInfoRequestMultiError, or nil if none found.
+func (m *GetSystemInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSystemInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetSystemInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSystemInfoRequestMultiError is an error wrapping multiple validation
+// errors returned by GetSystemInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetSystemInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSystemInfoRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSystemInfoRequestMultiError) AllErrors() []error { return m }
+
+// GetSystemInfoRequestValidationError is the validation error returned by
+// GetSystemInfoRequest.Validate if the designated constraints aren't met.
+type GetSystemInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSystemInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSystemInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSystemInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSystemInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSystemInfoRequestValidationError) ErrorName() string {
+	return "GetSystemInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSystemInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSystemInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSystemInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSystemInfoRequestValidationError{}
+
+// Validate checks the field values on GetSystemInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetSystemInfoReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetSystemInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetSystemInfoReplyMultiError, or nil if none found.
+func (m *GetSystemInfoReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetSystemInfoReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Title
+
+	// no validation rules for Icon
+
+	if len(errors) > 0 {
+		return GetSystemInfoReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetSystemInfoReplyMultiError is an error wrapping multiple validation errors
+// returned by GetSystemInfoReply.ValidateAll() if the designated constraints
+// aren't met.
+type GetSystemInfoReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetSystemInfoReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetSystemInfoReplyMultiError) AllErrors() []error { return m }
+
+// GetSystemInfoReplyValidationError is the validation error returned by
+// GetSystemInfoReply.Validate if the designated constraints aren't met.
+type GetSystemInfoReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetSystemInfoReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetSystemInfoReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetSystemInfoReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetSystemInfoReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetSystemInfoReplyValidationError) ErrorName() string {
+	return "GetSystemInfoReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetSystemInfoReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetSystemInfoReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetSystemInfoReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetSystemInfoReplyValidationError{}
+
+// Validate checks the field values on CreateSystemInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateSystemInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateSystemInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateSystemInfoRequestMultiError, or nil if none found.
+func (m *CreateSystemInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateSystemInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Title
+
+	// no validation rules for Icon
+
+	if len(errors) > 0 {
+		return CreateSystemInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateSystemInfoRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateSystemInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateSystemInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateSystemInfoRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateSystemInfoRequestMultiError) AllErrors() []error { return m }
+
+// CreateSystemInfoRequestValidationError is the validation error returned by
+// CreateSystemInfoRequest.Validate if the designated constraints aren't met.
+type CreateSystemInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateSystemInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateSystemInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateSystemInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateSystemInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateSystemInfoRequestValidationError) ErrorName() string {
+	return "CreateSystemInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateSystemInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateSystemInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateSystemInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateSystemInfoRequestValidationError{}
+
+// Validate checks the field values on CreateSystemInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateSystemInfoReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateSystemInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateSystemInfoReplyMultiError, or nil if none found.
+func (m *CreateSystemInfoReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateSystemInfoReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateSystemInfoReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateSystemInfoReplyMultiError is an error wrapping multiple validation
+// errors returned by CreateSystemInfoReply.ValidateAll() if the designated
+// constraints aren't met.
+type CreateSystemInfoReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateSystemInfoReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateSystemInfoReplyMultiError) AllErrors() []error { return m }
+
+// CreateSystemInfoReplyValidationError is the validation error returned by
+// CreateSystemInfoReply.Validate if the designated constraints aren't met.
+type CreateSystemInfoReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateSystemInfoReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateSystemInfoReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateSystemInfoReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateSystemInfoReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateSystemInfoReplyValidationError) ErrorName() string {
+	return "CreateSystemInfoReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateSystemInfoReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateSystemInfoReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateSystemInfoReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateSystemInfoReplyValidationError{}
+
 // Validate checks the field values on GeneralParameters with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.

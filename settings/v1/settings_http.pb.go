@@ -22,11 +22,13 @@ const _ = http.SupportPackageIsVersion1
 const OperationSettingsCreateCameraAttr = "/api.settings.v1.Settings/CreateCameraAttr"
 const OperationSettingsCreateGeneralParameters = "/api.settings.v1.Settings/CreateGeneralParameters"
 const OperationSettingsCreateModule = "/api.settings.v1.Settings/CreateModule"
+const OperationSettingsCreateSystemInfo = "/api.settings.v1.Settings/CreateSystemInfo"
 const OperationSettingsDeleteCameraAttr = "/api.settings.v1.Settings/DeleteCameraAttr"
 const OperationSettingsDeleteGeneralParameters = "/api.settings.v1.Settings/DeleteGeneralParameters"
 const OperationSettingsDeleteModule = "/api.settings.v1.Settings/DeleteModule"
 const OperationSettingsGetCameraAttr = "/api.settings.v1.Settings/GetCameraAttr"
 const OperationSettingsGetModule = "/api.settings.v1.Settings/GetModule"
+const OperationSettingsGetSystemInfo = "/api.settings.v1.Settings/GetSystemInfo"
 const OperationSettingsListCameraAttr = "/api.settings.v1.Settings/ListCameraAttr"
 const OperationSettingsListGeneralParameters = "/api.settings.v1.Settings/ListGeneralParameters"
 const OperationSettingsListModules = "/api.settings.v1.Settings/ListModules"
@@ -37,11 +39,13 @@ type SettingsHTTPServer interface {
 	CreateCameraAttr(context.Context, *CreateCameraAttrRequest) (*CreateCameraAttrReply, error)
 	CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
+	CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error)
 	DeleteCameraAttr(context.Context, *DeleteCameraAttrRequest) (*DeleteCameraAttrReply, error)
 	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
 	DeleteModule(context.Context, *DeleteModuleRequest) (*DeleteModuleReply, error)
 	GetCameraAttr(context.Context, *GetCameraAttrRequest) (*GetCameraAttrReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
+	GetSystemInfo(context.Context, *GetSystemInfoRequest) (*GetSystemInfoReply, error)
 	ListCameraAttr(context.Context, *ListCameraAttrRequest) (*ListCameraAttrReply, error)
 	ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error)
 	ListModules(context.Context, *ListModulesRequest) (*ListModulesReply, error)
@@ -51,6 +55,8 @@ type SettingsHTTPServer interface {
 
 func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r := s.Route("/")
+	r.PUT("/api/v1/settings/system", _Settings_CreateSystemInfo0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/system", _Settings_GetSystemInfo0_HTTP_Handler(srv))
 	r.PUT("/api/v1/settings/module", _Settings_CreateModule0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/settings/module/{id}", _Settings_DeleteModule0_HTTP_Handler(srv))
 	r.POST("/api/v1/setting/module/{id}", _Settings_UpdateModule0_HTTP_Handler(srv))
@@ -64,6 +70,44 @@ func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r.POST("/api/v1/settings/parameter/{id}", _Settings_UpdateGeneralParameters0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/settings/parameter/{id}", _Settings_DeleteGeneralParameters0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/parameters", _Settings_ListGeneralParameters0_HTTP_Handler(srv))
+}
+
+func _Settings_CreateSystemInfo0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateSystemInfoRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsCreateSystemInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateSystemInfo(ctx, req.(*CreateSystemInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateSystemInfoReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_GetSystemInfo0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetSystemInfoRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsGetSystemInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetSystemInfo(ctx, req.(*GetSystemInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetSystemInfoReply)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _Settings_CreateModule0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
@@ -338,11 +382,13 @@ type SettingsHTTPClient interface {
 	CreateCameraAttr(ctx context.Context, req *CreateCameraAttrRequest, opts ...http.CallOption) (rsp *CreateCameraAttrReply, err error)
 	CreateGeneralParameters(ctx context.Context, req *CreateGeneralParametersRequest, opts ...http.CallOption) (rsp *CreateGeneralParametersReply, err error)
 	CreateModule(ctx context.Context, req *CreateModuleRequest, opts ...http.CallOption) (rsp *CreateModuleReply, err error)
+	CreateSystemInfo(ctx context.Context, req *CreateSystemInfoRequest, opts ...http.CallOption) (rsp *CreateSystemInfoReply, err error)
 	DeleteCameraAttr(ctx context.Context, req *DeleteCameraAttrRequest, opts ...http.CallOption) (rsp *DeleteCameraAttrReply, err error)
 	DeleteGeneralParameters(ctx context.Context, req *DeleteGeneralParametersRequest, opts ...http.CallOption) (rsp *DeleteGeneralParametersReply, err error)
 	DeleteModule(ctx context.Context, req *DeleteModuleRequest, opts ...http.CallOption) (rsp *DeleteModuleReply, err error)
 	GetCameraAttr(ctx context.Context, req *GetCameraAttrRequest, opts ...http.CallOption) (rsp *GetCameraAttrReply, err error)
 	GetModule(ctx context.Context, req *GetModuleRequest, opts ...http.CallOption) (rsp *GetModuleReply, err error)
+	GetSystemInfo(ctx context.Context, req *GetSystemInfoRequest, opts ...http.CallOption) (rsp *GetSystemInfoReply, err error)
 	ListCameraAttr(ctx context.Context, req *ListCameraAttrRequest, opts ...http.CallOption) (rsp *ListCameraAttrReply, err error)
 	ListGeneralParameters(ctx context.Context, req *ListGeneralParametersRequest, opts ...http.CallOption) (rsp *ListGeneralParametersReply, err error)
 	ListModules(ctx context.Context, req *ListModulesRequest, opts ...http.CallOption) (rsp *ListModulesReply, err error)
@@ -389,6 +435,19 @@ func (c *SettingsHTTPClientImpl) CreateModule(ctx context.Context, in *CreateMod
 	pattern := "/api/v1/settings/module"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSettingsCreateModule))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) CreateSystemInfo(ctx context.Context, in *CreateSystemInfoRequest, opts ...http.CallOption) (*CreateSystemInfoReply, error) {
+	var out CreateSystemInfoReply
+	pattern := "/api/v1/settings/system"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationSettingsCreateSystemInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
@@ -454,6 +513,19 @@ func (c *SettingsHTTPClientImpl) GetModule(ctx context.Context, in *GetModuleReq
 	pattern := "/api/v1/settings/module/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationSettingsGetModule))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) GetSystemInfo(ctx context.Context, in *GetSystemInfoRequest, opts ...http.CallOption) (*GetSystemInfoReply, error) {
+	var out GetSystemInfoReply
+	pattern := "/api/v1/settings/system"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsGetSystemInfo))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

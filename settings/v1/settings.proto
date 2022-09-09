@@ -8,6 +8,19 @@ import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
 service Settings {
+
+	rpc CreateSystemInfo(CreateSystemInfoRequest) returns (CreateSystemInfoReply) {
+		option (google.api.http) = {
+			put: "/api/v1/settings/system"
+			body: "*"
+		};
+	}
+	rpc GetSystemInfo(GetSystemInfoRequest) returns (GetSystemInfoReply) {
+		option (google.api.http) = {
+			get: "/api/v1/settings/system"
+		};
+	}
+
 	rpc CreateModule (CreateModuleRequest) returns (CreateModuleReply) {
 		option (google.api.http) = {
 			put: "/api/v1/settings/module"
@@ -82,6 +95,22 @@ service Settings {
 		};
 	}
 	
+}
+
+message GetSystemInfoRequest {
+
+}
+message GetSystemInfoReply {
+	string title = 1;
+	bytes icon = 2;
+}
+
+message CreateSystemInfoRequest {
+	string title = 1;
+	bytes icon = 2;
+}
+message CreateSystemInfoReply {
+
 }
 
 message GeneralParameters {
