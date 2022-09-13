@@ -20,6 +20,12 @@ service Settings {
 			get: "/api/v1/settings/system"
 		};
 	}
+	rpc DeleteSystemInfo(DeleteSystemInfoRequest) returns (DeleteSystemInfoReply) {
+		option (google.api.http) = {
+			delete: "/api/v1/settings/system"
+		};
+	}
+
 
 	rpc CreateModule (CreateModuleRequest) returns (CreateModuleReply) {
 		option (google.api.http) = {
@@ -95,6 +101,13 @@ service Settings {
 		};
 	}
 	
+}
+
+message DeleteSystemInfoRequest {
+
+}
+message DeleteSystemInfoReply {
+
 }
 
 message GetSystemInfoRequest {
