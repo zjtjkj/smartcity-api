@@ -92,8 +92,6 @@ func (m *Instance) validate(all bool) error {
 
 	// no validation rules for Region
 
-	// no validation rules for Icon
-
 	// no validation rules for Source
 
 	// no validation rules for Manufacture

@@ -63,7 +63,6 @@ message Instance {
 	google.protobuf.Timestamp created = 2; // 创建时间
 	string name = 3;  // 点位名称
 	uint32 region = 4; // 区域ID
-	uint32 icon = 5;
 	Source source = 6; // 点位来源
 	Manufacture manufacture = 7;  // 生产厂商
 	bool movable = 8; // 是否可以遥控移动
