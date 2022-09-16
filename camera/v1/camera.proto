@@ -43,7 +43,8 @@ service Camera {
 	}
 	rpc ListCameraByKey (ListCameraByKeyRequest) returns (ListCameraByKeyReply) {
 		option (google.api.http) = {
-			get: "/api/v1/cameras/key/{key}"
+			post: "/api/v1/cameras"
+			body: "*"
 		};
 	}
 }

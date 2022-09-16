@@ -45,7 +45,7 @@ func RegisterCameraHTTPServer(s *http.Server, srv CameraHTTPServer) {
 	r.GET("/api/v1/camera/{id}", _Camera_GetCamera0_HTTP_Handler(srv))
 	r.POST("/api/v1/camera/gb", _Camera_GetCameraByGBInfo0_HTTP_Handler(srv))
 	r.GET("/api/v1/cameras/{id}", _Camera_ListCameraByRegion0_HTTP_Handler(srv))
-	r.GET("/api/v1/cameras/key/{key}", _Camera_ListCameraByKey0_HTTP_Handler(srv))
+	r.POST("/api/v1/cameras", _Camera_ListCameraByKey0_HTTP_Handler(srv))
 }
 
 func _Camera_CreateCamera0_HTTP_Handler(srv CameraHTTPServer) func(ctx http.Context) error {
@@ -177,10 +177,7 @@ func _Camera_ListCameraByRegion0_HTTP_Handler(srv CameraHTTPServer) func(ctx htt
 func _Camera_ListCameraByKey0_HTTP_Handler(srv CameraHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in ListCameraByKeyRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationCameraListCameraByKey)
@@ -268,11 +265,11 @@ func (c *CameraHTTPClientImpl) GetCameraByGBInfo(ctx context.Context, in *GetCam
 
 func (c *CameraHTTPClientImpl) ListCameraByKey(ctx context.Context, in *ListCameraByKeyRequest, opts ...http.CallOption) (*ListCameraByKeyReply, error) {
 	var out ListCameraByKeyReply
-	pattern := "/api/v1/cameras/key/{key}"
-	path := binding.EncodeURL(pattern, in, true)
+	pattern := "/api/v1/cameras"
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationCameraListCameraByKey))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
