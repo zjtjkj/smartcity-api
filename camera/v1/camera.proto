@@ -86,7 +86,6 @@ message Instance {
 message CreateCameraRequest {
 	string name = 1 [(validate.rules).string = {min_len: 1}]; // 点位唯一ID // 点位中文名称
 	uint32 region = 2;
-	uint32 icon = 3;
 	Source source = 4;
 	Manufacture manufacture = 5;
 	float longitude = 6;
