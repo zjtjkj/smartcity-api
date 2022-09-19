@@ -59,6 +59,8 @@ enum Manufacture {
 	Hik = 2;      // 海康
 	DaHua = 3;    // 大华
 }
+
+
 message Instance {
 	string id = 1; // 点位ID
 	google.protobuf.Timestamp created = 2; // 创建时间
