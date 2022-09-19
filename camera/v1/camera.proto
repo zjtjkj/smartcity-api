@@ -116,6 +116,7 @@ message UpdateCameraRequest {
 	string ip = 10;
 	uint32 port = 11;
 	string rtsp = 12;
+	uint32 attr = 13;
 }
 message UpdateCameraReply {}
 

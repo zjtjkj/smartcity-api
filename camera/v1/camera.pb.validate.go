@@ -488,6 +488,8 @@ func (m *UpdateCameraRequest) validate(all bool) error {
 
 	// no validation rules for Rtsp
 
+	// no validation rules for Attr
+
 	if len(errors) > 0 {
 		return UpdateCameraRequestMultiError(errors)
 	}
