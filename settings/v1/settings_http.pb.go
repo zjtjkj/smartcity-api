@@ -21,12 +21,15 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationSettingsCreateCameraAttr = "/api.settings.v1.Settings/CreateCameraAttr"
 const OperationSettingsCreateGeneralParameters = "/api.settings.v1.Settings/CreateGeneralParameters"
+const OperationSettingsCreateMapConfig = "/api.settings.v1.Settings/CreateMapConfig"
 const OperationSettingsCreateModule = "/api.settings.v1.Settings/CreateModule"
 const OperationSettingsCreateSystemInfo = "/api.settings.v1.Settings/CreateSystemInfo"
 const OperationSettingsDeleteCameraAttr = "/api.settings.v1.Settings/DeleteCameraAttr"
 const OperationSettingsDeleteGeneralParameters = "/api.settings.v1.Settings/DeleteGeneralParameters"
 const OperationSettingsDeleteModule = "/api.settings.v1.Settings/DeleteModule"
+const OperationSettingsDeleteSystemInfo = "/api.settings.v1.Settings/DeleteSystemInfo"
 const OperationSettingsGetCameraAttr = "/api.settings.v1.Settings/GetCameraAttr"
+const OperationSettingsGetMapConfig = "/api.settings.v1.Settings/GetMapConfig"
 const OperationSettingsGetModule = "/api.settings.v1.Settings/GetModule"
 const OperationSettingsGetSystemInfo = "/api.settings.v1.Settings/GetSystemInfo"
 const OperationSettingsListCameraAttr = "/api.settings.v1.Settings/ListCameraAttr"
@@ -38,12 +41,15 @@ const OperationSettingsUpdateModule = "/api.settings.v1.Settings/UpdateModule"
 type SettingsHTTPServer interface {
 	CreateCameraAttr(context.Context, *CreateCameraAttrRequest) (*CreateCameraAttrReply, error)
 	CreateGeneralParameters(context.Context, *CreateGeneralParametersRequest) (*CreateGeneralParametersReply, error)
+	CreateMapConfig(context.Context, *CreateMapConfigRequest) (*CreateMapConfigReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
 	CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error)
 	DeleteCameraAttr(context.Context, *DeleteCameraAttrRequest) (*DeleteCameraAttrReply, error)
 	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
 	DeleteModule(context.Context, *DeleteModuleRequest) (*DeleteModuleReply, error)
+	DeleteSystemInfo(context.Context, *DeleteSystemInfoRequest) (*DeleteSystemInfoReply, error)
 	GetCameraAttr(context.Context, *GetCameraAttrRequest) (*GetCameraAttrReply, error)
+	GetMapConfig(context.Context, *GetMapConfigRequest) (*GetMapConfigReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
 	GetSystemInfo(context.Context, *GetSystemInfoRequest) (*GetSystemInfoReply, error)
 	ListCameraAttr(context.Context, *ListCameraAttrRequest) (*ListCameraAttrReply, error)
@@ -55,8 +61,11 @@ type SettingsHTTPServer interface {
 
 func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r := s.Route("/")
+	r.PUT("/api/v1/settings/center", _Settings_CreateMapConfig0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/center", _Settings_GetMapConfig0_HTTP_Handler(srv))
 	r.PUT("/api/v1/settings/system", _Settings_CreateSystemInfo0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/system", _Settings_GetSystemInfo0_HTTP_Handler(srv))
+	r.DELETE("/api/v1/settings/system", _Settings_DeleteSystemInfo0_HTTP_Handler(srv))
 	r.PUT("/api/v1/settings/module", _Settings_CreateModule0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/settings/module/{id}", _Settings_DeleteModule0_HTTP_Handler(srv))
 	r.POST("/api/v1/setting/module/{id}", _Settings_UpdateModule0_HTTP_Handler(srv))
@@ -70,6 +79,44 @@ func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r.POST("/api/v1/settings/parameter/{id}", _Settings_UpdateGeneralParameters0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/settings/parameter/{id}", _Settings_DeleteGeneralParameters0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/parameters", _Settings_ListGeneralParameters0_HTTP_Handler(srv))
+}
+
+func _Settings_CreateMapConfig0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreateMapConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsCreateMapConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreateMapConfig(ctx, req.(*CreateMapConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreateMapConfigReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_GetMapConfig0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetMapConfigRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsGetMapConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetMapConfig(ctx, req.(*GetMapConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetMapConfigReply)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _Settings_CreateSystemInfo0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
@@ -106,6 +153,25 @@ func _Settings_GetSystemInfo0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http
 			return err
 		}
 		reply := out.(*GetSystemInfoReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_DeleteSystemInfo0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteSystemInfoRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsDeleteSystemInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteSystemInfo(ctx, req.(*DeleteSystemInfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteSystemInfoReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -381,12 +447,15 @@ func _Settings_ListGeneralParameters0_HTTP_Handler(srv SettingsHTTPServer) func(
 type SettingsHTTPClient interface {
 	CreateCameraAttr(ctx context.Context, req *CreateCameraAttrRequest, opts ...http.CallOption) (rsp *CreateCameraAttrReply, err error)
 	CreateGeneralParameters(ctx context.Context, req *CreateGeneralParametersRequest, opts ...http.CallOption) (rsp *CreateGeneralParametersReply, err error)
+	CreateMapConfig(ctx context.Context, req *CreateMapConfigRequest, opts ...http.CallOption) (rsp *CreateMapConfigReply, err error)
 	CreateModule(ctx context.Context, req *CreateModuleRequest, opts ...http.CallOption) (rsp *CreateModuleReply, err error)
 	CreateSystemInfo(ctx context.Context, req *CreateSystemInfoRequest, opts ...http.CallOption) (rsp *CreateSystemInfoReply, err error)
 	DeleteCameraAttr(ctx context.Context, req *DeleteCameraAttrRequest, opts ...http.CallOption) (rsp *DeleteCameraAttrReply, err error)
 	DeleteGeneralParameters(ctx context.Context, req *DeleteGeneralParametersRequest, opts ...http.CallOption) (rsp *DeleteGeneralParametersReply, err error)
 	DeleteModule(ctx context.Context, req *DeleteModuleRequest, opts ...http.CallOption) (rsp *DeleteModuleReply, err error)
+	DeleteSystemInfo(ctx context.Context, req *DeleteSystemInfoRequest, opts ...http.CallOption) (rsp *DeleteSystemInfoReply, err error)
 	GetCameraAttr(ctx context.Context, req *GetCameraAttrRequest, opts ...http.CallOption) (rsp *GetCameraAttrReply, err error)
+	GetMapConfig(ctx context.Context, req *GetMapConfigRequest, opts ...http.CallOption) (rsp *GetMapConfigReply, err error)
 	GetModule(ctx context.Context, req *GetModuleRequest, opts ...http.CallOption) (rsp *GetModuleReply, err error)
 	GetSystemInfo(ctx context.Context, req *GetSystemInfoRequest, opts ...http.CallOption) (rsp *GetSystemInfoReply, err error)
 	ListCameraAttr(ctx context.Context, req *ListCameraAttrRequest, opts ...http.CallOption) (rsp *ListCameraAttrReply, err error)
@@ -422,6 +491,19 @@ func (c *SettingsHTTPClientImpl) CreateGeneralParameters(ctx context.Context, in
 	pattern := "/api/v1/settings/parameter"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSettingsCreateGeneralParameters))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) CreateMapConfig(ctx context.Context, in *CreateMapConfigRequest, opts ...http.CallOption) (*CreateMapConfigReply, error) {
+	var out CreateMapConfigReply
+	pattern := "/api/v1/settings/center"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationSettingsCreateMapConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
@@ -495,11 +577,37 @@ func (c *SettingsHTTPClientImpl) DeleteModule(ctx context.Context, in *DeleteMod
 	return &out, err
 }
 
+func (c *SettingsHTTPClientImpl) DeleteSystemInfo(ctx context.Context, in *DeleteSystemInfoRequest, opts ...http.CallOption) (*DeleteSystemInfoReply, error) {
+	var out DeleteSystemInfoReply
+	pattern := "/api/v1/settings/system"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsDeleteSystemInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
 func (c *SettingsHTTPClientImpl) GetCameraAttr(ctx context.Context, in *GetCameraAttrRequest, opts ...http.CallOption) (*GetCameraAttrReply, error) {
 	var out GetCameraAttrReply
 	pattern := "/api/v1/settings/icon/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationSettingsGetCameraAttr))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) GetMapConfig(ctx context.Context, in *GetMapConfigRequest, opts ...http.CallOption) (*GetMapConfigReply, error) {
+	var out GetMapConfigReply
+	pattern := "/api/v1/settings/center"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsGetMapConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

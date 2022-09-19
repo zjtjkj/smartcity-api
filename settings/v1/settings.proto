@@ -8,6 +8,17 @@ import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
 service Settings {
+	rpc CreateMapConfig(CreateMapConfigRequest) returns (CreateMapConfigReply) {
+		option (google.api.http) = {
+			put: "/api/v1/settings/center"
+			body: "*"
+		};
+	}
+	rpc GetMapConfig(GetMapConfigRequest) returns (GetMapConfigReply) {
+		option (google.api.http) = {
+			get: "/api/v1/settings/center"
+		};
+	}
 
 	rpc CreateSystemInfo(CreateSystemInfoRequest) returns (CreateSystemInfoReply) {
 		option (google.api.http) = {
@@ -102,6 +113,22 @@ service Settings {
 	}
 	
 }
+
+message GetMapConfigRequest {}
+message GetMapConfigReply {
+	float x = 1;
+	float y = 2;
+	uint32 zoom = 3;
+}
+
+
+message CreateMapConfigRequest {
+	float x = 1;
+	float y = 2;
+	uint32 zoom = 3;
+}
+message CreateMapConfigReply {}
+
 
 message DeleteSystemInfoRequest {
 

@@ -22,8 +22,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SettingsClient interface {
+	CreateMapConfig(ctx context.Context, in *CreateMapConfigRequest, opts ...grpc.CallOption) (*CreateMapConfigReply, error)
+	GetMapConfig(ctx context.Context, in *GetMapConfigRequest, opts ...grpc.CallOption) (*GetMapConfigReply, error)
 	CreateSystemInfo(ctx context.Context, in *CreateSystemInfoRequest, opts ...grpc.CallOption) (*CreateSystemInfoReply, error)
 	GetSystemInfo(ctx context.Context, in *GetSystemInfoRequest, opts ...grpc.CallOption) (*GetSystemInfoReply, error)
+	DeleteSystemInfo(ctx context.Context, in *DeleteSystemInfoRequest, opts ...grpc.CallOption) (*DeleteSystemInfoReply, error)
 	CreateModule(ctx context.Context, in *CreateModuleRequest, opts ...grpc.CallOption) (*CreateModuleReply, error)
 	DeleteModule(ctx context.Context, in *DeleteModuleRequest, opts ...grpc.CallOption) (*DeleteModuleReply, error)
 	UpdateModule(ctx context.Context, in *UpdateModuleRequest, opts ...grpc.CallOption) (*UpdateModuleReply, error)
@@ -47,6 +50,24 @@ func NewSettingsClient(cc grpc.ClientConnInterface) SettingsClient {
 	return &settingsClient{cc}
 }
 
+func (c *settingsClient) CreateMapConfig(ctx context.Context, in *CreateMapConfigRequest, opts ...grpc.CallOption) (*CreateMapConfigReply, error) {
+	out := new(CreateMapConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateMapConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) GetMapConfig(ctx context.Context, in *GetMapConfigRequest, opts ...grpc.CallOption) (*GetMapConfigReply, error) {
+	out := new(GetMapConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetMapConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *settingsClient) CreateSystemInfo(ctx context.Context, in *CreateSystemInfoRequest, opts ...grpc.CallOption) (*CreateSystemInfoReply, error) {
 	out := new(CreateSystemInfoReply)
 	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateSystemInfo", in, out, opts...)
@@ -59,6 +80,15 @@ func (c *settingsClient) CreateSystemInfo(ctx context.Context, in *CreateSystemI
 func (c *settingsClient) GetSystemInfo(ctx context.Context, in *GetSystemInfoRequest, opts ...grpc.CallOption) (*GetSystemInfoReply, error) {
 	out := new(GetSystemInfoReply)
 	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetSystemInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) DeleteSystemInfo(ctx context.Context, in *DeleteSystemInfoRequest, opts ...grpc.CallOption) (*DeleteSystemInfoReply, error) {
+	out := new(DeleteSystemInfoReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/DeleteSystemInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -186,8 +216,11 @@ func (c *settingsClient) ListGeneralParameters(ctx context.Context, in *ListGene
 // All implementations must embed UnimplementedSettingsServer
 // for forward compatibility
 type SettingsServer interface {
+	CreateMapConfig(context.Context, *CreateMapConfigRequest) (*CreateMapConfigReply, error)
+	GetMapConfig(context.Context, *GetMapConfigRequest) (*GetMapConfigReply, error)
 	CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error)
 	GetSystemInfo(context.Context, *GetSystemInfoRequest) (*GetSystemInfoReply, error)
+	DeleteSystemInfo(context.Context, *DeleteSystemInfoRequest) (*DeleteSystemInfoReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
 	DeleteModule(context.Context, *DeleteModuleRequest) (*DeleteModuleReply, error)
 	UpdateModule(context.Context, *UpdateModuleRequest) (*UpdateModuleReply, error)
@@ -208,11 +241,20 @@ type SettingsServer interface {
 type UnimplementedSettingsServer struct {
 }
 
+func (UnimplementedSettingsServer) CreateMapConfig(context.Context, *CreateMapConfigRequest) (*CreateMapConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMapConfig not implemented")
+}
+func (UnimplementedSettingsServer) GetMapConfig(context.Context, *GetMapConfigRequest) (*GetMapConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMapConfig not implemented")
+}
 func (UnimplementedSettingsServer) CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSystemInfo not implemented")
 }
 func (UnimplementedSettingsServer) GetSystemInfo(context.Context, *GetSystemInfoRequest) (*GetSystemInfoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSystemInfo not implemented")
+}
+func (UnimplementedSettingsServer) DeleteSystemInfo(context.Context, *DeleteSystemInfoRequest) (*DeleteSystemInfoReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSystemInfo not implemented")
 }
 func (UnimplementedSettingsServer) CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateModule not implemented")
@@ -266,6 +308,42 @@ func RegisterSettingsServer(s grpc.ServiceRegistrar, srv SettingsServer) {
 	s.RegisterService(&Settings_ServiceDesc, srv)
 }
 
+func _Settings_CreateMapConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMapConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreateMapConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreateMapConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreateMapConfig(ctx, req.(*CreateMapConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_GetMapConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMapConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetMapConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/GetMapConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetMapConfig(ctx, req.(*GetMapConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Settings_CreateSystemInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateSystemInfoRequest)
 	if err := dec(in); err != nil {
@@ -298,6 +376,24 @@ func _Settings_GetSystemInfo_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SettingsServer).GetSystemInfo(ctx, req.(*GetSystemInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_DeleteSystemInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSystemInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).DeleteSystemInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/DeleteSystemInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).DeleteSystemInfo(ctx, req.(*DeleteSystemInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -544,12 +640,24 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*SettingsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "CreateMapConfig",
+			Handler:    _Settings_CreateMapConfig_Handler,
+		},
+		{
+			MethodName: "GetMapConfig",
+			Handler:    _Settings_GetMapConfig_Handler,
+		},
+		{
 			MethodName: "CreateSystemInfo",
 			Handler:    _Settings_CreateSystemInfo_Handler,
 		},
 		{
 			MethodName: "GetSystemInfo",
 			Handler:    _Settings_GetSystemInfo_Handler,
+		},
+		{
+			MethodName: "DeleteSystemInfo",
+			Handler:    _Settings_DeleteSystemInfo_Handler,
 		},
 		{
 			MethodName: "CreateModule",

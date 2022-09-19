@@ -35,6 +35,630 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on GetMapConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetMapConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetMapConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetMapConfigRequestMultiError, or nil if none found.
+func (m *GetMapConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetMapConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetMapConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetMapConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by GetMapConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetMapConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetMapConfigRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetMapConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetMapConfigRequestValidationError is the validation error returned by
+// GetMapConfigRequest.Validate if the designated constraints aren't met.
+type GetMapConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetMapConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetMapConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetMapConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetMapConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetMapConfigRequestValidationError) ErrorName() string {
+	return "GetMapConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetMapConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetMapConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetMapConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetMapConfigRequestValidationError{}
+
+// Validate checks the field values on GetMapConfigReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetMapConfigReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetMapConfigReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetMapConfigReplyMultiError, or nil if none found.
+func (m *GetMapConfigReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetMapConfigReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for X
+
+	// no validation rules for Y
+
+	// no validation rules for Zoom
+
+	if len(errors) > 0 {
+		return GetMapConfigReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetMapConfigReplyMultiError is an error wrapping multiple validation errors
+// returned by GetMapConfigReply.ValidateAll() if the designated constraints
+// aren't met.
+type GetMapConfigReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetMapConfigReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetMapConfigReplyMultiError) AllErrors() []error { return m }
+
+// GetMapConfigReplyValidationError is the validation error returned by
+// GetMapConfigReply.Validate if the designated constraints aren't met.
+type GetMapConfigReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetMapConfigReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetMapConfigReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetMapConfigReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetMapConfigReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetMapConfigReplyValidationError) ErrorName() string {
+	return "GetMapConfigReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetMapConfigReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetMapConfigReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetMapConfigReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetMapConfigReplyValidationError{}
+
+// Validate checks the field values on CreateMapConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateMapConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateMapConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateMapConfigRequestMultiError, or nil if none found.
+func (m *CreateMapConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateMapConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for X
+
+	// no validation rules for Y
+
+	// no validation rules for Zoom
+
+	if len(errors) > 0 {
+		return CreateMapConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateMapConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateMapConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateMapConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateMapConfigRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateMapConfigRequestMultiError) AllErrors() []error { return m }
+
+// CreateMapConfigRequestValidationError is the validation error returned by
+// CreateMapConfigRequest.Validate if the designated constraints aren't met.
+type CreateMapConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateMapConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateMapConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateMapConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateMapConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateMapConfigRequestValidationError) ErrorName() string {
+	return "CreateMapConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateMapConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateMapConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateMapConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateMapConfigRequestValidationError{}
+
+// Validate checks the field values on CreateMapConfigReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateMapConfigReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateMapConfigReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateMapConfigReplyMultiError, or nil if none found.
+func (m *CreateMapConfigReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateMapConfigReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateMapConfigReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateMapConfigReplyMultiError is an error wrapping multiple validation
+// errors returned by CreateMapConfigReply.ValidateAll() if the designated
+// constraints aren't met.
+type CreateMapConfigReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateMapConfigReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateMapConfigReplyMultiError) AllErrors() []error { return m }
+
+// CreateMapConfigReplyValidationError is the validation error returned by
+// CreateMapConfigReply.Validate if the designated constraints aren't met.
+type CreateMapConfigReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateMapConfigReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateMapConfigReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateMapConfigReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateMapConfigReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateMapConfigReplyValidationError) ErrorName() string {
+	return "CreateMapConfigReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateMapConfigReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateMapConfigReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateMapConfigReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateMapConfigReplyValidationError{}
+
+// Validate checks the field values on DeleteSystemInfoRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteSystemInfoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteSystemInfoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteSystemInfoRequestMultiError, or nil if none found.
+func (m *DeleteSystemInfoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteSystemInfoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteSystemInfoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteSystemInfoRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteSystemInfoRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteSystemInfoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteSystemInfoRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteSystemInfoRequestMultiError) AllErrors() []error { return m }
+
+// DeleteSystemInfoRequestValidationError is the validation error returned by
+// DeleteSystemInfoRequest.Validate if the designated constraints aren't met.
+type DeleteSystemInfoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteSystemInfoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteSystemInfoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteSystemInfoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteSystemInfoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteSystemInfoRequestValidationError) ErrorName() string {
+	return "DeleteSystemInfoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteSystemInfoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteSystemInfoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteSystemInfoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteSystemInfoRequestValidationError{}
+
+// Validate checks the field values on DeleteSystemInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteSystemInfoReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteSystemInfoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteSystemInfoReplyMultiError, or nil if none found.
+func (m *DeleteSystemInfoReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteSystemInfoReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteSystemInfoReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteSystemInfoReplyMultiError is an error wrapping multiple validation
+// errors returned by DeleteSystemInfoReply.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteSystemInfoReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteSystemInfoReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteSystemInfoReplyMultiError) AllErrors() []error { return m }
+
+// DeleteSystemInfoReplyValidationError is the validation error returned by
+// DeleteSystemInfoReply.Validate if the designated constraints aren't met.
+type DeleteSystemInfoReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteSystemInfoReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteSystemInfoReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteSystemInfoReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteSystemInfoReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteSystemInfoReplyValidationError) ErrorName() string {
+	return "DeleteSystemInfoReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteSystemInfoReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteSystemInfoReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteSystemInfoReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteSystemInfoReplyValidationError{}
+
 // Validate checks the field values on GetSystemInfoRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
