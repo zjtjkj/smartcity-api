@@ -19,38 +19,38 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationEventsReceiveEvent = "/api.events.v1.Events/ReceiveEvent"
+const OperationEventsCreateEvent = "/api.events.v1.Events/CreateEvent"
 
 type EventsHTTPServer interface {
-	ReceiveEvent(context.Context, *ReceiveEventRequest) (*ReceiveEventReply, error)
+	CreateEvent(context.Context, *CreateEventRequest) (*CreateEventReply, error)
 }
 
 func RegisterEventsHTTPServer(s *http.Server, srv EventsHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/v1/events", _Events_ReceiveEvent0_HTTP_Handler(srv))
+	r.POST("/api/v1/events", _Events_CreateEvent0_HTTP_Handler(srv))
 }
 
-func _Events_ReceiveEvent0_HTTP_Handler(srv EventsHTTPServer) func(ctx http.Context) error {
+func _Events_CreateEvent0_HTTP_Handler(srv EventsHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ReceiveEventRequest
+		var in CreateEventRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationEventsReceiveEvent)
+		http.SetOperation(ctx, OperationEventsCreateEvent)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ReceiveEvent(ctx, req.(*ReceiveEventRequest))
+			return srv.CreateEvent(ctx, req.(*CreateEventRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ReceiveEventReply)
+		reply := out.(*CreateEventReply)
 		return ctx.Result(200, reply)
 	}
 }
 
 type EventsHTTPClient interface {
-	ReceiveEvent(ctx context.Context, req *ReceiveEventRequest, opts ...http.CallOption) (rsp *ReceiveEventReply, err error)
+	CreateEvent(ctx context.Context, req *CreateEventRequest, opts ...http.CallOption) (rsp *CreateEventReply, err error)
 }
 
 type EventsHTTPClientImpl struct {
@@ -61,11 +61,11 @@ func NewEventsHTTPClient(client *http.Client) EventsHTTPClient {
 	return &EventsHTTPClientImpl{client}
 }
 
-func (c *EventsHTTPClientImpl) ReceiveEvent(ctx context.Context, in *ReceiveEventRequest, opts ...http.CallOption) (*ReceiveEventReply, error) {
-	var out ReceiveEventReply
+func (c *EventsHTTPClientImpl) CreateEvent(ctx context.Context, in *CreateEventRequest, opts ...http.CallOption) (*CreateEventReply, error) {
+	var out CreateEventReply
 	pattern := "/api/v1/events"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationEventsReceiveEvent))
+	opts = append(opts, http.Operation(OperationEventsCreateEvent))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

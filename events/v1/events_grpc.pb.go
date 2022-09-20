@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EventsClient interface {
-	ReceiveEvent(ctx context.Context, in *ReceiveEventRequest, opts ...grpc.CallOption) (*ReceiveEventReply, error)
+	CreateEvent(ctx context.Context, in *CreateEventRequest, opts ...grpc.CallOption) (*CreateEventReply, error)
 }
 
 type eventsClient struct {
@@ -33,9 +33,9 @@ func NewEventsClient(cc grpc.ClientConnInterface) EventsClient {
 	return &eventsClient{cc}
 }
 
-func (c *eventsClient) ReceiveEvent(ctx context.Context, in *ReceiveEventRequest, opts ...grpc.CallOption) (*ReceiveEventReply, error) {
-	out := new(ReceiveEventReply)
-	err := c.cc.Invoke(ctx, "/api.events.v1.Events/ReceiveEvent", in, out, opts...)
+func (c *eventsClient) CreateEvent(ctx context.Context, in *CreateEventRequest, opts ...grpc.CallOption) (*CreateEventReply, error) {
+	out := new(CreateEventReply)
+	err := c.cc.Invoke(ctx, "/api.events.v1.Events/CreateEvent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *eventsClient) ReceiveEvent(ctx context.Context, in *ReceiveEventRequest
 // All implementations must embed UnimplementedEventsServer
 // for forward compatibility
 type EventsServer interface {
-	ReceiveEvent(context.Context, *ReceiveEventRequest) (*ReceiveEventReply, error)
+	CreateEvent(context.Context, *CreateEventRequest) (*CreateEventReply, error)
 	mustEmbedUnimplementedEventsServer()
 }
 
@@ -54,8 +54,8 @@ type EventsServer interface {
 type UnimplementedEventsServer struct {
 }
 
-func (UnimplementedEventsServer) ReceiveEvent(context.Context, *ReceiveEventRequest) (*ReceiveEventReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReceiveEvent not implemented")
+func (UnimplementedEventsServer) CreateEvent(context.Context, *CreateEventRequest) (*CreateEventReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateEvent not implemented")
 }
 func (UnimplementedEventsServer) mustEmbedUnimplementedEventsServer() {}
 
@@ -70,20 +70,20 @@ func RegisterEventsServer(s grpc.ServiceRegistrar, srv EventsServer) {
 	s.RegisterService(&Events_ServiceDesc, srv)
 }
 
-func _Events_ReceiveEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReceiveEventRequest)
+func _Events_CreateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EventsServer).ReceiveEvent(ctx, in)
+		return srv.(EventsServer).CreateEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.events.v1.Events/ReceiveEvent",
+		FullMethod: "/api.events.v1.Events/CreateEvent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EventsServer).ReceiveEvent(ctx, req.(*ReceiveEventRequest))
+		return srv.(EventsServer).CreateEvent(ctx, req.(*CreateEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +96,8 @@ var Events_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*EventsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ReceiveEvent",
-			Handler:    _Events_ReceiveEvent_Handler,
+			MethodName: "CreateEvent",
+			Handler:    _Events_CreateEvent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
