@@ -35,6 +35,437 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on Point with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Point) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Point with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in PointMultiError, or nil if none found.
+func (m *Point) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Point) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if val := m.GetX(); val < 0 || val > 10000 {
+		err := PointValidationError{
+			field:  "X",
+			reason: "value must be inside range [0, 10000]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if val := m.GetY(); val < 0 || val > 10000 {
+		err := PointValidationError{
+			field:  "Y",
+			reason: "value must be inside range [0, 10000]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return PointMultiError(errors)
+	}
+
+	return nil
+}
+
+// PointMultiError is an error wrapping multiple validation errors returned by
+// Point.ValidateAll() if the designated constraints aren't met.
+type PointMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PointMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PointMultiError) AllErrors() []error { return m }
+
+// PointValidationError is the validation error returned by Point.Validate if
+// the designated constraints aren't met.
+type PointValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PointValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PointValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PointValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PointValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PointValidationError) ErrorName() string { return "PointValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PointValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPoint.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PointValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PointValidationError{}
+
+// Validate checks the field values on Property with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Property) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Property with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in PropertyMultiError, or nil
+// if none found.
+func (m *Property) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Property) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetKey()) < 1 {
+		err := PropertyValidationError{
+			field:  "Key",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetValue()) < 1 {
+		err := PropertyValidationError{
+			field:  "Value",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return PropertyMultiError(errors)
+	}
+
+	return nil
+}
+
+// PropertyMultiError is an error wrapping multiple validation errors returned
+// by Property.ValidateAll() if the designated constraints aren't met.
+type PropertyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m PropertyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m PropertyMultiError) AllErrors() []error { return m }
+
+// PropertyValidationError is the validation error returned by
+// Property.Validate if the designated constraints aren't met.
+type PropertyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PropertyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PropertyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PropertyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PropertyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PropertyValidationError) ErrorName() string { return "PropertyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PropertyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sProperty.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PropertyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PropertyValidationError{}
+
+// Validate checks the field values on Object with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Object) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Object with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in ObjectMultiError, or nil if none found.
+func (m *Object) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Object) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetId()) < 1 {
+		err := ObjectValidationError{
+			field:  "Id",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Aid
+
+	if len(m.GetPoints()) != 2 {
+		err := ObjectValidationError{
+			field:  "Points",
+			reason: "value must contain exactly 2 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetPoints() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ObjectValidationError{
+						field:  fmt.Sprintf("Points[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ObjectValidationError{
+						field:  fmt.Sprintf("Points[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ObjectValidationError{
+					field:  fmt.Sprintf("Points[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetProperties() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ObjectValidationError{
+						field:  fmt.Sprintf("Properties[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ObjectValidationError{
+						field:  fmt.Sprintf("Properties[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ObjectValidationError{
+					field:  fmt.Sprintf("Properties[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ObjectMultiError(errors)
+	}
+
+	return nil
+}
+
+// ObjectMultiError is an error wrapping multiple validation errors returned by
+// Object.ValidateAll() if the designated constraints aren't met.
+type ObjectMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ObjectMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ObjectMultiError) AllErrors() []error { return m }
+
+// ObjectValidationError is the validation error returned by Object.Validate if
+// the designated constraints aren't met.
+type ObjectValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ObjectValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ObjectValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ObjectValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ObjectValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ObjectValidationError) ErrorName() string { return "ObjectValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ObjectValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sObject.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ObjectValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ObjectValidationError{}
+
 // Validate checks the field values on CreateEventRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -338,446 +769,3 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CreateEventReplyValidationError{}
-
-// Validate checks the field values on CreateEventRequest_Point with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateEventRequest_Point) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on CreateEventRequest_Point with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CreateEventRequest_PointMultiError, or nil if none found.
-func (m *CreateEventRequest_Point) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *CreateEventRequest_Point) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if val := m.GetX(); val < 0 || val > 10000 {
-		err := CreateEventRequest_PointValidationError{
-			field:  "X",
-			reason: "value must be inside range [0, 10000]",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if val := m.GetY(); val < 0 || val > 10000 {
-		err := CreateEventRequest_PointValidationError{
-			field:  "Y",
-			reason: "value must be inside range [0, 10000]",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return CreateEventRequest_PointMultiError(errors)
-	}
-
-	return nil
-}
-
-// CreateEventRequest_PointMultiError is an error wrapping multiple validation
-// errors returned by CreateEventRequest_Point.ValidateAll() if the designated
-// constraints aren't met.
-type CreateEventRequest_PointMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m CreateEventRequest_PointMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m CreateEventRequest_PointMultiError) AllErrors() []error { return m }
-
-// CreateEventRequest_PointValidationError is the validation error returned by
-// CreateEventRequest_Point.Validate if the designated constraints aren't met.
-type CreateEventRequest_PointValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e CreateEventRequest_PointValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e CreateEventRequest_PointValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e CreateEventRequest_PointValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e CreateEventRequest_PointValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e CreateEventRequest_PointValidationError) ErrorName() string {
-	return "CreateEventRequest_PointValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e CreateEventRequest_PointValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sCreateEventRequest_Point.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = CreateEventRequest_PointValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = CreateEventRequest_PointValidationError{}
-
-// Validate checks the field values on CreateEventRequest_Property with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateEventRequest_Property) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on CreateEventRequest_Property with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CreateEventRequest_PropertyMultiError, or nil if none found.
-func (m *CreateEventRequest_Property) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *CreateEventRequest_Property) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if utf8.RuneCountInString(m.GetKey()) < 1 {
-		err := CreateEventRequest_PropertyValidationError{
-			field:  "Key",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if utf8.RuneCountInString(m.GetValue()) < 1 {
-		err := CreateEventRequest_PropertyValidationError{
-			field:  "Value",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return CreateEventRequest_PropertyMultiError(errors)
-	}
-
-	return nil
-}
-
-// CreateEventRequest_PropertyMultiError is an error wrapping multiple
-// validation errors returned by CreateEventRequest_Property.ValidateAll() if
-// the designated constraints aren't met.
-type CreateEventRequest_PropertyMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m CreateEventRequest_PropertyMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m CreateEventRequest_PropertyMultiError) AllErrors() []error { return m }
-
-// CreateEventRequest_PropertyValidationError is the validation error returned
-// by CreateEventRequest_Property.Validate if the designated constraints
-// aren't met.
-type CreateEventRequest_PropertyValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e CreateEventRequest_PropertyValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e CreateEventRequest_PropertyValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e CreateEventRequest_PropertyValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e CreateEventRequest_PropertyValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e CreateEventRequest_PropertyValidationError) ErrorName() string {
-	return "CreateEventRequest_PropertyValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e CreateEventRequest_PropertyValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sCreateEventRequest_Property.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = CreateEventRequest_PropertyValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = CreateEventRequest_PropertyValidationError{}
-
-// Validate checks the field values on CreateEventRequest_Object with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateEventRequest_Object) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on CreateEventRequest_Object with the
-// rules defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CreateEventRequest_ObjectMultiError, or nil if none found.
-func (m *CreateEventRequest_Object) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *CreateEventRequest_Object) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if utf8.RuneCountInString(m.GetId()) < 1 {
-		err := CreateEventRequest_ObjectValidationError{
-			field:  "Id",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	// no validation rules for Aid
-
-	if len(m.GetPoints()) != 2 {
-		err := CreateEventRequest_ObjectValidationError{
-			field:  "Points",
-			reason: "value must contain exactly 2 item(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	for idx, item := range m.GetPoints() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, CreateEventRequest_ObjectValidationError{
-						field:  fmt.Sprintf("Points[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, CreateEventRequest_ObjectValidationError{
-						field:  fmt.Sprintf("Points[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return CreateEventRequest_ObjectValidationError{
-					field:  fmt.Sprintf("Points[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	for idx, item := range m.GetProperties() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, CreateEventRequest_ObjectValidationError{
-						field:  fmt.Sprintf("Properties[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, CreateEventRequest_ObjectValidationError{
-						field:  fmt.Sprintf("Properties[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return CreateEventRequest_ObjectValidationError{
-					field:  fmt.Sprintf("Properties[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	if len(errors) > 0 {
-		return CreateEventRequest_ObjectMultiError(errors)
-	}
-
-	return nil
-}
-
-// CreateEventRequest_ObjectMultiError is an error wrapping multiple validation
-// errors returned by CreateEventRequest_Object.ValidateAll() if the
-// designated constraints aren't met.
-type CreateEventRequest_ObjectMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m CreateEventRequest_ObjectMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m CreateEventRequest_ObjectMultiError) AllErrors() []error { return m }
-
-// CreateEventRequest_ObjectValidationError is the validation error returned by
-// CreateEventRequest_Object.Validate if the designated constraints aren't met.
-type CreateEventRequest_ObjectValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e CreateEventRequest_ObjectValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e CreateEventRequest_ObjectValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e CreateEventRequest_ObjectValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e CreateEventRequest_ObjectValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e CreateEventRequest_ObjectValidationError) ErrorName() string {
-	return "CreateEventRequest_ObjectValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e CreateEventRequest_ObjectValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sCreateEventRequest_Object.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = CreateEventRequest_ObjectValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = CreateEventRequest_ObjectValidationError{}
