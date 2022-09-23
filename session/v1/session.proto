@@ -50,8 +50,6 @@ message User {
 	uint64 id = 1;
 	string username = 2;
 	bool is_root = 3;
-	repeated uint64 regions = 4;
-	repeated uint64 features = 5;
 }
 
 message CreateSessionRequest {
