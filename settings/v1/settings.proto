@@ -8,15 +8,27 @@ import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
 service Settings {
+	rpc CreateOperatorConfig(CreateOperatorConfigRequest) returns (CreateOperatorConfigReply) {
+		option (google.api.http) = {
+			put: "/api/v1/settings/operator"
+			body: "*"
+		};
+	}
+	rpc GetOperatorConfig (GetOperatorConfigRequest) returns (GetOperatorConfigReply) {
+		option (google.api.http) = {
+			get: "/api/v1/settings/operator"
+		};
+	}
+
 	rpc CreateMapConfig(CreateMapConfigRequest) returns (CreateMapConfigReply) {
 		option (google.api.http) = {
-			put: "/api/v1/settings/center"
+			put: "/api/v1/settings/map"
 			body: "*"
 		};
 	}
 	rpc GetMapConfig(GetMapConfigRequest) returns (GetMapConfigReply) {
 		option (google.api.http) = {
-			get: "/api/v1/settings/center"
+			get: "/api/v1/settings/map"
 		};
 	}
 
@@ -112,6 +124,24 @@ service Settings {
 		};
 	}
 	
+}
+
+
+
+message GetOperatorConfigRequest {
+
+}
+message GetOperatorConfigReply {
+	message OperatorConfig {
+		bool full_channel_block = 1;
+	}
+	OperatorConfig operator_config = 1;
+}
+
+message CreateOperatorConfigRequest {
+	bool full_channel_block = 1;
+}
+message CreateOperatorConfigReply {
 }
 
 message GetMapConfigRequest {}

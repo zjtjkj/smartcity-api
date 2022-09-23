@@ -22,6 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SettingsClient interface {
+	CreateOperatorConfig(ctx context.Context, in *CreateOperatorConfigRequest, opts ...grpc.CallOption) (*CreateOperatorConfigReply, error)
+	GetOperatorConfig(ctx context.Context, in *GetOperatorConfigRequest, opts ...grpc.CallOption) (*GetOperatorConfigReply, error)
 	CreateMapConfig(ctx context.Context, in *CreateMapConfigRequest, opts ...grpc.CallOption) (*CreateMapConfigReply, error)
 	GetMapConfig(ctx context.Context, in *GetMapConfigRequest, opts ...grpc.CallOption) (*GetMapConfigReply, error)
 	CreateSystemInfo(ctx context.Context, in *CreateSystemInfoRequest, opts ...grpc.CallOption) (*CreateSystemInfoReply, error)
@@ -48,6 +50,24 @@ type settingsClient struct {
 
 func NewSettingsClient(cc grpc.ClientConnInterface) SettingsClient {
 	return &settingsClient{cc}
+}
+
+func (c *settingsClient) CreateOperatorConfig(ctx context.Context, in *CreateOperatorConfigRequest, opts ...grpc.CallOption) (*CreateOperatorConfigReply, error) {
+	out := new(CreateOperatorConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateOperatorConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) GetOperatorConfig(ctx context.Context, in *GetOperatorConfigRequest, opts ...grpc.CallOption) (*GetOperatorConfigReply, error) {
+	out := new(GetOperatorConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetOperatorConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *settingsClient) CreateMapConfig(ctx context.Context, in *CreateMapConfigRequest, opts ...grpc.CallOption) (*CreateMapConfigReply, error) {
@@ -216,6 +236,8 @@ func (c *settingsClient) ListGeneralParameters(ctx context.Context, in *ListGene
 // All implementations must embed UnimplementedSettingsServer
 // for forward compatibility
 type SettingsServer interface {
+	CreateOperatorConfig(context.Context, *CreateOperatorConfigRequest) (*CreateOperatorConfigReply, error)
+	GetOperatorConfig(context.Context, *GetOperatorConfigRequest) (*GetOperatorConfigReply, error)
 	CreateMapConfig(context.Context, *CreateMapConfigRequest) (*CreateMapConfigReply, error)
 	GetMapConfig(context.Context, *GetMapConfigRequest) (*GetMapConfigReply, error)
 	CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error)
@@ -241,6 +263,12 @@ type SettingsServer interface {
 type UnimplementedSettingsServer struct {
 }
 
+func (UnimplementedSettingsServer) CreateOperatorConfig(context.Context, *CreateOperatorConfigRequest) (*CreateOperatorConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOperatorConfig not implemented")
+}
+func (UnimplementedSettingsServer) GetOperatorConfig(context.Context, *GetOperatorConfigRequest) (*GetOperatorConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOperatorConfig not implemented")
+}
 func (UnimplementedSettingsServer) CreateMapConfig(context.Context, *CreateMapConfigRequest) (*CreateMapConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMapConfig not implemented")
 }
@@ -306,6 +334,42 @@ type UnsafeSettingsServer interface {
 
 func RegisterSettingsServer(s grpc.ServiceRegistrar, srv SettingsServer) {
 	s.RegisterService(&Settings_ServiceDesc, srv)
+}
+
+func _Settings_CreateOperatorConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOperatorConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreateOperatorConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreateOperatorConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreateOperatorConfig(ctx, req.(*CreateOperatorConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_GetOperatorConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOperatorConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetOperatorConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/GetOperatorConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetOperatorConfig(ctx, req.(*GetOperatorConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Settings_CreateMapConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -639,6 +703,14 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.settings.v1.Settings",
 	HandlerType: (*SettingsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateOperatorConfig",
+			Handler:    _Settings_CreateOperatorConfig_Handler,
+		},
+		{
+			MethodName: "GetOperatorConfig",
+			Handler:    _Settings_GetOperatorConfig_Handler,
+		},
 		{
 			MethodName: "CreateMapConfig",
 			Handler:    _Settings_CreateMapConfig_Handler,
