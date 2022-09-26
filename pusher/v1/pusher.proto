@@ -15,6 +15,12 @@ service Pusher {
 		};
 	}
 
+	rpc ListController(ListControllerRequest) returns (ListControllerReply) {
+		option (google.api.http) = {
+			get: "/api/v1/pushers"
+		};
+	}
+
 	rpc CreatePusher (CreatePusherRequest) returns (CreatePusherReply) {
 		option (google.api.http) = {
 			put: "/api/v1/pusher"
@@ -42,13 +48,6 @@ service Pusher {
 			get: "/api/v1/pushers"
 		};
 	}
-
-	rpc ListController(ListControllerRequest) returns (ListControllerReply) {
-		option (google.api.http) = {
-			get: "/api/v1/pushers"
-		};
-	}
-
 
 
 	rpc CreateReceiver (CreateReceiverRequest) returns (CreateReceiverReply) {
@@ -80,34 +79,92 @@ service Pusher {
 	}
 
 
-	rpc CreateTimeFilter (CreateTimeFilterRequest) returns (CreateTimeFilterReply) {
-		option (google.api.http) = {
-			put: "/api/v1/pusher/timeFilter"
-			body: "*"
-		};
-	}
-	rpc DeleteTimeFilter(DeleteTimeFilterRequest) returns (DeleteTimeFilterReply) {
-		option (google.api.http) = {
-			delete: "/api/v1/pusher/timeFilter/{id}"
-		};
-	}
-	rpc CreateKindFilter (CreateKindFilterRequest) returns (CreateKindFilterReply) {
-		option (google.api.http) = {
-			put: "/api/v1/pusher/timeFilter"
-			body: "*"
-		};
-	}
-	rpc DeleteKindFilter(DeleteKindFilterRequest) returns (DeleteKindFilterReply) {
-		option (google.api.http) = {
-			delete: "/api/v1/pusher/timeFilter/{id}"
-		};
-	}
-	rpc ListGlobalFilter(ListFilterRequest) returns (ListFilterReply) {
-		option (google.api.http) = {
-			get: "/api/v1/pusher/filters"
-		};
-	}
+	rpc CreateGlobalTimeFilter (CreateGlobalTimeFilterRequest) returns (CreateGlobalTimeFilterReply) {}
+	rpc DeleteGlobalTimeFilter(DeleteGlobalTimeFilterRequest) returns (DeleteGlobalTimeFilterReply) {}
+	rpc UpdateGlobalTimeFilter(UpdateGlobalTimeFilterRequest) returns (UpdateGlobalTimeFilterReply) {}
+	rpc ListGlobalTimeFilter(ListGlobalTimeFilterRequest) returns (ListGlobalTimeFilterReply) {}
+
+	rpc CreateGlobalModuleFilter (CreateGlobalModuleFilterRequest) returns (CreateGlobalModuleFilterReply) {}
+	rpc DeleteGlobalModuleFilter(DeleteGlobalModuleFilterRequest) returns (DeleteGlobalModuleFilterReply) {}
+	rpc UpdateGlobalModuleFilter(UpdateGlobalModuleFilterRequest) returns (UpdateGlobalModuleFilterReply) {}
+	rpc ListGlobalModuleFilter(ListGlobalModuleFilterRequest) returns (ListGlobalModuleFilterReply) {}
 }
+
+message ListGlobalModuleFilterRequest {}
+message ListGlobalModuleFilterReply {
+	message GlobalModuleFilter {
+		uint32 id = 1;
+		google.protobuf.Timestamp created = 2;
+		string name = 3;
+		bool enable = 4;
+		uint32 module = 5;
+		uint32 count = 6;
+	}
+	repeated GlobalModuleFilter filters = 1;
+}
+
+message UpdateGlobalModuleFilterRequest {
+	uint32 id = 1;
+	string name = 2;
+	bool enable = 3;
+	uint32 module = 4;
+	bool clear = 5;
+}
+message UpdateGlobalModuleFilterReply {
+
+}
+
+message DeleteGlobalModuleFilterRequest {
+	uint32 id = 1;
+}
+message DeleteGlobalModuleFilterReply {}
+
+message CreateGlobalModuleFilterRequest {
+	string name = 1;
+	bool enable = 2;
+	uint32 module = 3;
+}
+message CreateGlobalModuleFilterReply {}
+
+message ListGlobalTimeFilterRequest {}
+message ListGlobalTimeFilterReply {
+	message GlobalTimeFilter {
+		uint32 id = 1;
+		google.protobuf.Timestamp created = 2;
+		string name = 3;
+		bool enable = 4;
+		uint32 start = 5;
+		uint32 end = 6;
+		uint32 count = 7;
+	}
+	repeated GlobalTimeFilter filters = 1;
+}
+
+message UpdateGlobalTimeFilterRequest {
+	uint32 id = 1;
+	string name = 2;
+	bool enable = 3;
+	uint32 start = 4;
+	uint32 end = 5;
+	bool clear = 6;
+}
+message UpdateGlobalTimeFilterReply {
+
+}
+
+message DeleteGlobalTimeFilterRequest {
+	uint32 id = 1;
+}
+message DeleteGlobalTimeFilterReply {}
+
+message CreateGlobalTimeFilterRequest {
+	string name = 1;
+	bool enable = 2;
+	uint32 start = 3;
+	uint32 end = 4;
+}
+message CreateGlobalTimeFilterReply {}
+
 
 
 message CreatePusherRequest {
@@ -144,32 +201,7 @@ message ListControllerReply {
 }
 
 
-message CreateKindFilterRequest {
-	uint32 kind = 1;
-	bool global = 2;
-}
-message CreateKindFilterReply {}
 
-message DeleteKindFilterRequest {
-	uint32 id = 1;
-}
-message DeleteTimeFilterReply {
-
-}
-
-message CreateTimeFilterRequest {
-	string start = 1;
-	string end = 2;
-	bool global = 3;
-}
-message CreateTimeFilterReply {
-
-}
-
-message DeleteTimeFilterRequest {
-	uint32 id = 1;
-}
-message DeleteKindFilterReply {}
 
 message Point {
 	uint32 x = 1 [(validate.rules).uint32 = {gte: 0, lte: 10000}];
@@ -206,7 +238,6 @@ message ReportReply {}
 enum Type {
 	grpc = 0;
 	http = 1;
-	https = 2;
 }
 
 message CreateReceiverRequest {
@@ -250,11 +281,5 @@ message ListReceiverReply {
 	uint32 id = 1;
 	string name = 2;
 	string target = 3;
-}
-
-message ListFilterRequest {
-
-}
-message ListFilterReply {
-
+	Type type = 4;
 }

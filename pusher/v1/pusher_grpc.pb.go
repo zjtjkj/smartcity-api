@@ -23,22 +23,25 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PusherClient interface {
 	Report(ctx context.Context, in *ReportRequest, opts ...grpc.CallOption) (*ReportReply, error)
+	ListController(ctx context.Context, in *ListControllerRequest, opts ...grpc.CallOption) (*ListControllerReply, error)
 	CreatePusher(ctx context.Context, in *CreatePusherRequest, opts ...grpc.CallOption) (*CreatePusherReply, error)
 	UpdatePusher(ctx context.Context, in *UpdatePusherRequest, opts ...grpc.CallOption) (*UpdatePusherReply, error)
 	DeletePusher(ctx context.Context, in *DeletePusherRequest, opts ...grpc.CallOption) (*DeletePusherReply, error)
 	GetPusher(ctx context.Context, in *GetPusherRequest, opts ...grpc.CallOption) (*GetPusherReply, error)
 	ListPusher(ctx context.Context, in *ListPusherRequest, opts ...grpc.CallOption) (*ListPushRequest, error)
-	ListController(ctx context.Context, in *ListControllerRequest, opts ...grpc.CallOption) (*ListControllerReply, error)
 	CreateReceiver(ctx context.Context, in *CreateReceiverRequest, opts ...grpc.CallOption) (*CreateReceiverReply, error)
 	UpdateReceiver(ctx context.Context, in *UpdateReceiverRequest, opts ...grpc.CallOption) (*UpdateReceiverReply, error)
 	DeleteReceiver(ctx context.Context, in *DeleteReceiverRequest, opts ...grpc.CallOption) (*DeleteReceiverReply, error)
 	GetReceiver(ctx context.Context, in *GetReceiverRequest, opts ...grpc.CallOption) (*GetReceiverReply, error)
 	ListReceiver(ctx context.Context, in *ListReceiverRequest, opts ...grpc.CallOption) (*ListReceiverReply, error)
-	CreateTimeFilter(ctx context.Context, in *CreateTimeFilterRequest, opts ...grpc.CallOption) (*CreateTimeFilterReply, error)
-	DeleteTimeFilter(ctx context.Context, in *DeleteTimeFilterRequest, opts ...grpc.CallOption) (*DeleteTimeFilterReply, error)
-	CreateKindFilter(ctx context.Context, in *CreateKindFilterRequest, opts ...grpc.CallOption) (*CreateKindFilterReply, error)
-	DeleteKindFilter(ctx context.Context, in *DeleteKindFilterRequest, opts ...grpc.CallOption) (*DeleteKindFilterReply, error)
-	ListGlobalFilter(ctx context.Context, in *ListFilterRequest, opts ...grpc.CallOption) (*ListFilterReply, error)
+	CreateGlobalTimeFilter(ctx context.Context, in *CreateGlobalTimeFilterRequest, opts ...grpc.CallOption) (*CreateGlobalTimeFilterReply, error)
+	DeleteGlobalTimeFilter(ctx context.Context, in *DeleteGlobalTimeFilterRequest, opts ...grpc.CallOption) (*DeleteGlobalTimeFilterReply, error)
+	UpdateGlobalTimeFilter(ctx context.Context, in *UpdateGlobalTimeFilterRequest, opts ...grpc.CallOption) (*UpdateGlobalTimeFilterReply, error)
+	ListGlobalTimeFilter(ctx context.Context, in *ListGlobalTimeFilterRequest, opts ...grpc.CallOption) (*ListGlobalTimeFilterReply, error)
+	CreateGlobalModuleFilter(ctx context.Context, in *CreateGlobalModuleFilterRequest, opts ...grpc.CallOption) (*CreateGlobalModuleFilterReply, error)
+	DeleteGlobalModuleFilter(ctx context.Context, in *DeleteGlobalModuleFilterRequest, opts ...grpc.CallOption) (*DeleteGlobalModuleFilterReply, error)
+	UpdateGlobalModuleFilter(ctx context.Context, in *UpdateGlobalModuleFilterRequest, opts ...grpc.CallOption) (*UpdateGlobalModuleFilterReply, error)
+	ListGlobalModuleFilter(ctx context.Context, in *ListGlobalModuleFilterRequest, opts ...grpc.CallOption) (*ListGlobalModuleFilterReply, error)
 }
 
 type pusherClient struct {
@@ -52,6 +55,15 @@ func NewPusherClient(cc grpc.ClientConnInterface) PusherClient {
 func (c *pusherClient) Report(ctx context.Context, in *ReportRequest, opts ...grpc.CallOption) (*ReportReply, error) {
 	out := new(ReportReply)
 	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/Report", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pusherClient) ListController(ctx context.Context, in *ListControllerRequest, opts ...grpc.CallOption) (*ListControllerReply, error) {
+	out := new(ListControllerReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListController", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -103,15 +115,6 @@ func (c *pusherClient) ListPusher(ctx context.Context, in *ListPusherRequest, op
 	return out, nil
 }
 
-func (c *pusherClient) ListController(ctx context.Context, in *ListControllerRequest, opts ...grpc.CallOption) (*ListControllerReply, error) {
-	out := new(ListControllerReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListController", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *pusherClient) CreateReceiver(ctx context.Context, in *CreateReceiverRequest, opts ...grpc.CallOption) (*CreateReceiverReply, error) {
 	out := new(CreateReceiverReply)
 	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/CreateReceiver", in, out, opts...)
@@ -157,45 +160,72 @@ func (c *pusherClient) ListReceiver(ctx context.Context, in *ListReceiverRequest
 	return out, nil
 }
 
-func (c *pusherClient) CreateTimeFilter(ctx context.Context, in *CreateTimeFilterRequest, opts ...grpc.CallOption) (*CreateTimeFilterReply, error) {
-	out := new(CreateTimeFilterReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/CreateTimeFilter", in, out, opts...)
+func (c *pusherClient) CreateGlobalTimeFilter(ctx context.Context, in *CreateGlobalTimeFilterRequest, opts ...grpc.CallOption) (*CreateGlobalTimeFilterReply, error) {
+	out := new(CreateGlobalTimeFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/CreateGlobalTimeFilter", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) DeleteTimeFilter(ctx context.Context, in *DeleteTimeFilterRequest, opts ...grpc.CallOption) (*DeleteTimeFilterReply, error) {
-	out := new(DeleteTimeFilterReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/DeleteTimeFilter", in, out, opts...)
+func (c *pusherClient) DeleteGlobalTimeFilter(ctx context.Context, in *DeleteGlobalTimeFilterRequest, opts ...grpc.CallOption) (*DeleteGlobalTimeFilterReply, error) {
+	out := new(DeleteGlobalTimeFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/DeleteGlobalTimeFilter", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) CreateKindFilter(ctx context.Context, in *CreateKindFilterRequest, opts ...grpc.CallOption) (*CreateKindFilterReply, error) {
-	out := new(CreateKindFilterReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/CreateKindFilter", in, out, opts...)
+func (c *pusherClient) UpdateGlobalTimeFilter(ctx context.Context, in *UpdateGlobalTimeFilterRequest, opts ...grpc.CallOption) (*UpdateGlobalTimeFilterReply, error) {
+	out := new(UpdateGlobalTimeFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/UpdateGlobalTimeFilter", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) DeleteKindFilter(ctx context.Context, in *DeleteKindFilterRequest, opts ...grpc.CallOption) (*DeleteKindFilterReply, error) {
-	out := new(DeleteKindFilterReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/DeleteKindFilter", in, out, opts...)
+func (c *pusherClient) ListGlobalTimeFilter(ctx context.Context, in *ListGlobalTimeFilterRequest, opts ...grpc.CallOption) (*ListGlobalTimeFilterReply, error) {
+	out := new(ListGlobalTimeFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListGlobalTimeFilter", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) ListGlobalFilter(ctx context.Context, in *ListFilterRequest, opts ...grpc.CallOption) (*ListFilterReply, error) {
-	out := new(ListFilterReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListGlobalFilter", in, out, opts...)
+func (c *pusherClient) CreateGlobalModuleFilter(ctx context.Context, in *CreateGlobalModuleFilterRequest, opts ...grpc.CallOption) (*CreateGlobalModuleFilterReply, error) {
+	out := new(CreateGlobalModuleFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/CreateGlobalModuleFilter", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pusherClient) DeleteGlobalModuleFilter(ctx context.Context, in *DeleteGlobalModuleFilterRequest, opts ...grpc.CallOption) (*DeleteGlobalModuleFilterReply, error) {
+	out := new(DeleteGlobalModuleFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/DeleteGlobalModuleFilter", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pusherClient) UpdateGlobalModuleFilter(ctx context.Context, in *UpdateGlobalModuleFilterRequest, opts ...grpc.CallOption) (*UpdateGlobalModuleFilterReply, error) {
+	out := new(UpdateGlobalModuleFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/UpdateGlobalModuleFilter", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pusherClient) ListGlobalModuleFilter(ctx context.Context, in *ListGlobalModuleFilterRequest, opts ...grpc.CallOption) (*ListGlobalModuleFilterReply, error) {
+	out := new(ListGlobalModuleFilterReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListGlobalModuleFilter", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -207,22 +237,25 @@ func (c *pusherClient) ListGlobalFilter(ctx context.Context, in *ListFilterReque
 // for forward compatibility
 type PusherServer interface {
 	Report(context.Context, *ReportRequest) (*ReportReply, error)
+	ListController(context.Context, *ListControllerRequest) (*ListControllerReply, error)
 	CreatePusher(context.Context, *CreatePusherRequest) (*CreatePusherReply, error)
 	UpdatePusher(context.Context, *UpdatePusherRequest) (*UpdatePusherReply, error)
 	DeletePusher(context.Context, *DeletePusherRequest) (*DeletePusherReply, error)
 	GetPusher(context.Context, *GetPusherRequest) (*GetPusherReply, error)
 	ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error)
-	ListController(context.Context, *ListControllerRequest) (*ListControllerReply, error)
 	CreateReceiver(context.Context, *CreateReceiverRequest) (*CreateReceiverReply, error)
 	UpdateReceiver(context.Context, *UpdateReceiverRequest) (*UpdateReceiverReply, error)
 	DeleteReceiver(context.Context, *DeleteReceiverRequest) (*DeleteReceiverReply, error)
 	GetReceiver(context.Context, *GetReceiverRequest) (*GetReceiverReply, error)
 	ListReceiver(context.Context, *ListReceiverRequest) (*ListReceiverReply, error)
-	CreateTimeFilter(context.Context, *CreateTimeFilterRequest) (*CreateTimeFilterReply, error)
-	DeleteTimeFilter(context.Context, *DeleteTimeFilterRequest) (*DeleteTimeFilterReply, error)
-	CreateKindFilter(context.Context, *CreateKindFilterRequest) (*CreateKindFilterReply, error)
-	DeleteKindFilter(context.Context, *DeleteKindFilterRequest) (*DeleteKindFilterReply, error)
-	ListGlobalFilter(context.Context, *ListFilterRequest) (*ListFilterReply, error)
+	CreateGlobalTimeFilter(context.Context, *CreateGlobalTimeFilterRequest) (*CreateGlobalTimeFilterReply, error)
+	DeleteGlobalTimeFilter(context.Context, *DeleteGlobalTimeFilterRequest) (*DeleteGlobalTimeFilterReply, error)
+	UpdateGlobalTimeFilter(context.Context, *UpdateGlobalTimeFilterRequest) (*UpdateGlobalTimeFilterReply, error)
+	ListGlobalTimeFilter(context.Context, *ListGlobalTimeFilterRequest) (*ListGlobalTimeFilterReply, error)
+	CreateGlobalModuleFilter(context.Context, *CreateGlobalModuleFilterRequest) (*CreateGlobalModuleFilterReply, error)
+	DeleteGlobalModuleFilter(context.Context, *DeleteGlobalModuleFilterRequest) (*DeleteGlobalModuleFilterReply, error)
+	UpdateGlobalModuleFilter(context.Context, *UpdateGlobalModuleFilterRequest) (*UpdateGlobalModuleFilterReply, error)
+	ListGlobalModuleFilter(context.Context, *ListGlobalModuleFilterRequest) (*ListGlobalModuleFilterReply, error)
 	mustEmbedUnimplementedPusherServer()
 }
 
@@ -232,6 +265,9 @@ type UnimplementedPusherServer struct {
 
 func (UnimplementedPusherServer) Report(context.Context, *ReportRequest) (*ReportReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Report not implemented")
+}
+func (UnimplementedPusherServer) ListController(context.Context, *ListControllerRequest) (*ListControllerReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListController not implemented")
 }
 func (UnimplementedPusherServer) CreatePusher(context.Context, *CreatePusherRequest) (*CreatePusherReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePusher not implemented")
@@ -248,9 +284,6 @@ func (UnimplementedPusherServer) GetPusher(context.Context, *GetPusherRequest) (
 func (UnimplementedPusherServer) ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPusher not implemented")
 }
-func (UnimplementedPusherServer) ListController(context.Context, *ListControllerRequest) (*ListControllerReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListController not implemented")
-}
 func (UnimplementedPusherServer) CreateReceiver(context.Context, *CreateReceiverRequest) (*CreateReceiverReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateReceiver not implemented")
 }
@@ -266,20 +299,29 @@ func (UnimplementedPusherServer) GetReceiver(context.Context, *GetReceiverReques
 func (UnimplementedPusherServer) ListReceiver(context.Context, *ListReceiverRequest) (*ListReceiverReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListReceiver not implemented")
 }
-func (UnimplementedPusherServer) CreateTimeFilter(context.Context, *CreateTimeFilterRequest) (*CreateTimeFilterReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateTimeFilter not implemented")
+func (UnimplementedPusherServer) CreateGlobalTimeFilter(context.Context, *CreateGlobalTimeFilterRequest) (*CreateGlobalTimeFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGlobalTimeFilter not implemented")
 }
-func (UnimplementedPusherServer) DeleteTimeFilter(context.Context, *DeleteTimeFilterRequest) (*DeleteTimeFilterReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTimeFilter not implemented")
+func (UnimplementedPusherServer) DeleteGlobalTimeFilter(context.Context, *DeleteGlobalTimeFilterRequest) (*DeleteGlobalTimeFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGlobalTimeFilter not implemented")
 }
-func (UnimplementedPusherServer) CreateKindFilter(context.Context, *CreateKindFilterRequest) (*CreateKindFilterReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateKindFilter not implemented")
+func (UnimplementedPusherServer) UpdateGlobalTimeFilter(context.Context, *UpdateGlobalTimeFilterRequest) (*UpdateGlobalTimeFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGlobalTimeFilter not implemented")
 }
-func (UnimplementedPusherServer) DeleteKindFilter(context.Context, *DeleteKindFilterRequest) (*DeleteKindFilterReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteKindFilter not implemented")
+func (UnimplementedPusherServer) ListGlobalTimeFilter(context.Context, *ListGlobalTimeFilterRequest) (*ListGlobalTimeFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalTimeFilter not implemented")
 }
-func (UnimplementedPusherServer) ListGlobalFilter(context.Context, *ListFilterRequest) (*ListFilterReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalFilter not implemented")
+func (UnimplementedPusherServer) CreateGlobalModuleFilter(context.Context, *CreateGlobalModuleFilterRequest) (*CreateGlobalModuleFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGlobalModuleFilter not implemented")
+}
+func (UnimplementedPusherServer) DeleteGlobalModuleFilter(context.Context, *DeleteGlobalModuleFilterRequest) (*DeleteGlobalModuleFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGlobalModuleFilter not implemented")
+}
+func (UnimplementedPusherServer) UpdateGlobalModuleFilter(context.Context, *UpdateGlobalModuleFilterRequest) (*UpdateGlobalModuleFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGlobalModuleFilter not implemented")
+}
+func (UnimplementedPusherServer) ListGlobalModuleFilter(context.Context, *ListGlobalModuleFilterRequest) (*ListGlobalModuleFilterReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGlobalModuleFilter not implemented")
 }
 func (UnimplementedPusherServer) mustEmbedUnimplementedPusherServer() {}
 
@@ -308,6 +350,24 @@ func _Pusher_Report_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PusherServer).Report(ctx, req.(*ReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pusher_ListController_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListControllerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PusherServer).ListController(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pusher.v1.Pusher/ListController",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PusherServer).ListController(ctx, req.(*ListControllerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -402,24 +462,6 @@ func _Pusher_ListPusher_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_ListController_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListControllerRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PusherServer).ListController(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/ListController",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).ListController(ctx, req.(*ListControllerRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Pusher_CreateReceiver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateReceiverRequest)
 	if err := dec(in); err != nil {
@@ -510,92 +552,146 @@ func _Pusher_ListReceiver_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_CreateTimeFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateTimeFilterRequest)
+func _Pusher_CreateGlobalTimeFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGlobalTimeFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).CreateTimeFilter(ctx, in)
+		return srv.(PusherServer).CreateGlobalTimeFilter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/CreateTimeFilter",
+		FullMethod: "/api.pusher.v1.Pusher/CreateGlobalTimeFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).CreateTimeFilter(ctx, req.(*CreateTimeFilterRequest))
+		return srv.(PusherServer).CreateGlobalTimeFilter(ctx, req.(*CreateGlobalTimeFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_DeleteTimeFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteTimeFilterRequest)
+func _Pusher_DeleteGlobalTimeFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteGlobalTimeFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).DeleteTimeFilter(ctx, in)
+		return srv.(PusherServer).DeleteGlobalTimeFilter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/DeleteTimeFilter",
+		FullMethod: "/api.pusher.v1.Pusher/DeleteGlobalTimeFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).DeleteTimeFilter(ctx, req.(*DeleteTimeFilterRequest))
+		return srv.(PusherServer).DeleteGlobalTimeFilter(ctx, req.(*DeleteGlobalTimeFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_CreateKindFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateKindFilterRequest)
+func _Pusher_UpdateGlobalTimeFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGlobalTimeFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).CreateKindFilter(ctx, in)
+		return srv.(PusherServer).UpdateGlobalTimeFilter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/CreateKindFilter",
+		FullMethod: "/api.pusher.v1.Pusher/UpdateGlobalTimeFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).CreateKindFilter(ctx, req.(*CreateKindFilterRequest))
+		return srv.(PusherServer).UpdateGlobalTimeFilter(ctx, req.(*UpdateGlobalTimeFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_DeleteKindFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteKindFilterRequest)
+func _Pusher_ListGlobalTimeFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalTimeFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).DeleteKindFilter(ctx, in)
+		return srv.(PusherServer).ListGlobalTimeFilter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/DeleteKindFilter",
+		FullMethod: "/api.pusher.v1.Pusher/ListGlobalTimeFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).DeleteKindFilter(ctx, req.(*DeleteKindFilterRequest))
+		return srv.(PusherServer).ListGlobalTimeFilter(ctx, req.(*ListGlobalTimeFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_ListGlobalFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListFilterRequest)
+func _Pusher_CreateGlobalModuleFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGlobalModuleFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).ListGlobalFilter(ctx, in)
+		return srv.(PusherServer).CreateGlobalModuleFilter(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/ListGlobalFilter",
+		FullMethod: "/api.pusher.v1.Pusher/CreateGlobalModuleFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).ListGlobalFilter(ctx, req.(*ListFilterRequest))
+		return srv.(PusherServer).CreateGlobalModuleFilter(ctx, req.(*CreateGlobalModuleFilterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pusher_DeleteGlobalModuleFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteGlobalModuleFilterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PusherServer).DeleteGlobalModuleFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pusher.v1.Pusher/DeleteGlobalModuleFilter",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PusherServer).DeleteGlobalModuleFilter(ctx, req.(*DeleteGlobalModuleFilterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pusher_UpdateGlobalModuleFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateGlobalModuleFilterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PusherServer).UpdateGlobalModuleFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pusher.v1.Pusher/UpdateGlobalModuleFilter",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PusherServer).UpdateGlobalModuleFilter(ctx, req.(*UpdateGlobalModuleFilterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pusher_ListGlobalModuleFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListGlobalModuleFilterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PusherServer).ListGlobalModuleFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.pusher.v1.Pusher/ListGlobalModuleFilter",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PusherServer).ListGlobalModuleFilter(ctx, req.(*ListGlobalModuleFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -610,6 +706,10 @@ var Pusher_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Report",
 			Handler:    _Pusher_Report_Handler,
+		},
+		{
+			MethodName: "ListController",
+			Handler:    _Pusher_ListController_Handler,
 		},
 		{
 			MethodName: "CreatePusher",
@@ -632,10 +732,6 @@ var Pusher_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Pusher_ListPusher_Handler,
 		},
 		{
-			MethodName: "ListController",
-			Handler:    _Pusher_ListController_Handler,
-		},
-		{
 			MethodName: "CreateReceiver",
 			Handler:    _Pusher_CreateReceiver_Handler,
 		},
@@ -656,24 +752,36 @@ var Pusher_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Pusher_ListReceiver_Handler,
 		},
 		{
-			MethodName: "CreateTimeFilter",
-			Handler:    _Pusher_CreateTimeFilter_Handler,
+			MethodName: "CreateGlobalTimeFilter",
+			Handler:    _Pusher_CreateGlobalTimeFilter_Handler,
 		},
 		{
-			MethodName: "DeleteTimeFilter",
-			Handler:    _Pusher_DeleteTimeFilter_Handler,
+			MethodName: "DeleteGlobalTimeFilter",
+			Handler:    _Pusher_DeleteGlobalTimeFilter_Handler,
 		},
 		{
-			MethodName: "CreateKindFilter",
-			Handler:    _Pusher_CreateKindFilter_Handler,
+			MethodName: "UpdateGlobalTimeFilter",
+			Handler:    _Pusher_UpdateGlobalTimeFilter_Handler,
 		},
 		{
-			MethodName: "DeleteKindFilter",
-			Handler:    _Pusher_DeleteKindFilter_Handler,
+			MethodName: "ListGlobalTimeFilter",
+			Handler:    _Pusher_ListGlobalTimeFilter_Handler,
 		},
 		{
-			MethodName: "ListGlobalFilter",
-			Handler:    _Pusher_ListGlobalFilter_Handler,
+			MethodName: "CreateGlobalModuleFilter",
+			Handler:    _Pusher_CreateGlobalModuleFilter_Handler,
+		},
+		{
+			MethodName: "DeleteGlobalModuleFilter",
+			Handler:    _Pusher_DeleteGlobalModuleFilter_Handler,
+		},
+		{
+			MethodName: "UpdateGlobalModuleFilter",
+			Handler:    _Pusher_UpdateGlobalModuleFilter_Handler,
+		},
+		{
+			MethodName: "ListGlobalModuleFilter",
+			Handler:    _Pusher_ListGlobalModuleFilter_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
