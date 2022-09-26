@@ -521,17 +521,6 @@ func (m *CreateEventRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetCreated()) < 1 {
-		err := CreateEventRequestValidationError{
-			field:  "Created",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if len(m.GetImage()) < 1 {
 		err := CreateEventRequestValidationError{
 			field:  "Image",
@@ -542,6 +531,8 @@ func (m *CreateEventRequest) validate(all bool) error {
 		}
 		errors = append(errors, err)
 	}
+
+	// no validation rules for Start
 
 	// no validation rules for Finished
 

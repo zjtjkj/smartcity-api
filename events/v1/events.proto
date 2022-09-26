@@ -36,8 +36,8 @@ message CreateEventRequest {
 	string id = 1 [(validate.rules).string = {len_bytes: 36}];
 	uint32 mid = 2 [(validate.rules).uint32 = {gt: 0}];
 	string type = 3 [(validate.rules).string = {min_len: 1}];
-	string created = 4 [(validate.rules).string = {min_len: 1}];
-	bytes image = 5 [(validate.rules).bytes = {min_len: 1}];
+	bytes image = 4 [(validate.rules).bytes = {min_len: 1}];
+	bool start = 5;
 	bool finished = 6;
 	repeated Object objects = 7 [(validate.rules).repeated = {min_items: 1}];
 }
