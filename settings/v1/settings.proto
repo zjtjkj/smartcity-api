@@ -8,6 +8,18 @@ import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
 service Settings {
+	rpc CreatePusherConfig(CreatePusherConfigRequest) returns (CreatePusherConfigReply) {
+		option (google.api.http) = {
+			put: "/api/v1/settings/pusher"
+			body: "*"
+		};
+	}
+	rpc GetPusherConfig (GetPusherConfigRequest) returns (GetPusherConfigReply) {
+		option (google.api.http) = {
+			get: "/api/v1/settings/pusher"
+		};
+	}
+
 	rpc CreateOperatorConfig(CreateOperatorConfigRequest) returns (CreateOperatorConfigReply) {
 		option (google.api.http) = {
 			put: "/api/v1/settings/operator"
@@ -126,8 +138,21 @@ service Settings {
 	
 }
 
+message CreatePusherConfigRequest {
+	bool push_start = 1;
+	bool push_chain = 2;
+	bool push_end = 3;
+	bool push_single = 4;
+}
+message CreatePusherConfigReply {}
 
-
+message GetPusherConfigRequest {}
+message GetPusherConfigReply {
+	bool push_start = 1;
+	bool push_chain = 2;
+	bool push_end = 3;
+	bool push_single = 4;
+}
 message GetOperatorConfigRequest {
 
 }

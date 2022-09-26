@@ -23,6 +23,224 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type CreatePusherConfigRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PushStart  bool `protobuf:"varint,1,opt,name=push_start,json=pushStart,proto3" json:"push_start,omitempty"`
+	PushChain  bool `protobuf:"varint,2,opt,name=push_chain,json=pushChain,proto3" json:"push_chain,omitempty"`
+	PushEnd    bool `protobuf:"varint,3,opt,name=push_end,json=pushEnd,proto3" json:"push_end,omitempty"`
+	PushSingle bool `protobuf:"varint,4,opt,name=push_single,json=pushSingle,proto3" json:"push_single,omitempty"`
+}
+
+func (x *CreatePusherConfigRequest) Reset() {
+	*x = CreatePusherConfigRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_settings_v1_settings_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreatePusherConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePusherConfigRequest) ProtoMessage() {}
+
+func (x *CreatePusherConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_settings_v1_settings_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePusherConfigRequest.ProtoReflect.Descriptor instead.
+func (*CreatePusherConfigRequest) Descriptor() ([]byte, []int) {
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CreatePusherConfigRequest) GetPushStart() bool {
+	if x != nil {
+		return x.PushStart
+	}
+	return false
+}
+
+func (x *CreatePusherConfigRequest) GetPushChain() bool {
+	if x != nil {
+		return x.PushChain
+	}
+	return false
+}
+
+func (x *CreatePusherConfigRequest) GetPushEnd() bool {
+	if x != nil {
+		return x.PushEnd
+	}
+	return false
+}
+
+func (x *CreatePusherConfigRequest) GetPushSingle() bool {
+	if x != nil {
+		return x.PushSingle
+	}
+	return false
+}
+
+type CreatePusherConfigReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CreatePusherConfigReply) Reset() {
+	*x = CreatePusherConfigReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_settings_v1_settings_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreatePusherConfigReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePusherConfigReply) ProtoMessage() {}
+
+func (x *CreatePusherConfigReply) ProtoReflect() protoreflect.Message {
+	mi := &file_settings_v1_settings_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePusherConfigReply.ProtoReflect.Descriptor instead.
+func (*CreatePusherConfigReply) Descriptor() ([]byte, []int) {
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{1}
+}
+
+type GetPusherConfigRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GetPusherConfigRequest) Reset() {
+	*x = GetPusherConfigRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_settings_v1_settings_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPusherConfigRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPusherConfigRequest) ProtoMessage() {}
+
+func (x *GetPusherConfigRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_settings_v1_settings_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPusherConfigRequest.ProtoReflect.Descriptor instead.
+func (*GetPusherConfigRequest) Descriptor() ([]byte, []int) {
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{2}
+}
+
+type GetPusherConfigReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PushStart  bool `protobuf:"varint,1,opt,name=push_start,json=pushStart,proto3" json:"push_start,omitempty"`
+	PushChain  bool `protobuf:"varint,2,opt,name=push_chain,json=pushChain,proto3" json:"push_chain,omitempty"`
+	PushEnd    bool `protobuf:"varint,3,opt,name=push_end,json=pushEnd,proto3" json:"push_end,omitempty"`
+	PushSingle bool `protobuf:"varint,4,opt,name=push_single,json=pushSingle,proto3" json:"push_single,omitempty"`
+}
+
+func (x *GetPusherConfigReply) Reset() {
+	*x = GetPusherConfigReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_settings_v1_settings_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPusherConfigReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPusherConfigReply) ProtoMessage() {}
+
+func (x *GetPusherConfigReply) ProtoReflect() protoreflect.Message {
+	mi := &file_settings_v1_settings_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPusherConfigReply.ProtoReflect.Descriptor instead.
+func (*GetPusherConfigReply) Descriptor() ([]byte, []int) {
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetPusherConfigReply) GetPushStart() bool {
+	if x != nil {
+		return x.PushStart
+	}
+	return false
+}
+
+func (x *GetPusherConfigReply) GetPushChain() bool {
+	if x != nil {
+		return x.PushChain
+	}
+	return false
+}
+
+func (x *GetPusherConfigReply) GetPushEnd() bool {
+	if x != nil {
+		return x.PushEnd
+	}
+	return false
+}
+
+func (x *GetPusherConfigReply) GetPushSingle() bool {
+	if x != nil {
+		return x.PushSingle
+	}
+	return false
+}
+
 type GetOperatorConfigRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -32,7 +250,7 @@ type GetOperatorConfigRequest struct {
 func (x *GetOperatorConfigRequest) Reset() {
 	*x = GetOperatorConfigRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[0]
+		mi := &file_settings_v1_settings_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -45,7 +263,7 @@ func (x *GetOperatorConfigRequest) String() string {
 func (*GetOperatorConfigRequest) ProtoMessage() {}
 
 func (x *GetOperatorConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[0]
+	mi := &file_settings_v1_settings_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +276,7 @@ func (x *GetOperatorConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetOperatorConfigRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{0}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{4}
 }
 
 type GetOperatorConfigReply struct {
@@ -72,7 +290,7 @@ type GetOperatorConfigReply struct {
 func (x *GetOperatorConfigReply) Reset() {
 	*x = GetOperatorConfigReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[1]
+		mi := &file_settings_v1_settings_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -85,7 +303,7 @@ func (x *GetOperatorConfigReply) String() string {
 func (*GetOperatorConfigReply) ProtoMessage() {}
 
 func (x *GetOperatorConfigReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[1]
+	mi := &file_settings_v1_settings_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -98,7 +316,7 @@ func (x *GetOperatorConfigReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOperatorConfigReply.ProtoReflect.Descriptor instead.
 func (*GetOperatorConfigReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{1}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetOperatorConfigReply) GetOperatorConfig() *GetOperatorConfigReply_OperatorConfig {
@@ -119,7 +337,7 @@ type CreateOperatorConfigRequest struct {
 func (x *CreateOperatorConfigRequest) Reset() {
 	*x = CreateOperatorConfigRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[2]
+		mi := &file_settings_v1_settings_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -132,7 +350,7 @@ func (x *CreateOperatorConfigRequest) String() string {
 func (*CreateOperatorConfigRequest) ProtoMessage() {}
 
 func (x *CreateOperatorConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[2]
+	mi := &file_settings_v1_settings_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -145,7 +363,7 @@ func (x *CreateOperatorConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOperatorConfigRequest.ProtoReflect.Descriptor instead.
 func (*CreateOperatorConfigRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{2}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateOperatorConfigRequest) GetFullChannelBlock() bool {
@@ -164,7 +382,7 @@ type CreateOperatorConfigReply struct {
 func (x *CreateOperatorConfigReply) Reset() {
 	*x = CreateOperatorConfigReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[3]
+		mi := &file_settings_v1_settings_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -177,7 +395,7 @@ func (x *CreateOperatorConfigReply) String() string {
 func (*CreateOperatorConfigReply) ProtoMessage() {}
 
 func (x *CreateOperatorConfigReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[3]
+	mi := &file_settings_v1_settings_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -190,7 +408,7 @@ func (x *CreateOperatorConfigReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOperatorConfigReply.ProtoReflect.Descriptor instead.
 func (*CreateOperatorConfigReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{3}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{7}
 }
 
 type GetMapConfigRequest struct {
@@ -202,7 +420,7 @@ type GetMapConfigRequest struct {
 func (x *GetMapConfigRequest) Reset() {
 	*x = GetMapConfigRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[4]
+		mi := &file_settings_v1_settings_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -215,7 +433,7 @@ func (x *GetMapConfigRequest) String() string {
 func (*GetMapConfigRequest) ProtoMessage() {}
 
 func (x *GetMapConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[4]
+	mi := &file_settings_v1_settings_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -228,7 +446,7 @@ func (x *GetMapConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMapConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetMapConfigRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{4}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{8}
 }
 
 type GetMapConfigReply struct {
@@ -244,7 +462,7 @@ type GetMapConfigReply struct {
 func (x *GetMapConfigReply) Reset() {
 	*x = GetMapConfigReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[5]
+		mi := &file_settings_v1_settings_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -257,7 +475,7 @@ func (x *GetMapConfigReply) String() string {
 func (*GetMapConfigReply) ProtoMessage() {}
 
 func (x *GetMapConfigReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[5]
+	mi := &file_settings_v1_settings_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -270,7 +488,7 @@ func (x *GetMapConfigReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMapConfigReply.ProtoReflect.Descriptor instead.
 func (*GetMapConfigReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{5}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetMapConfigReply) GetX() float32 {
@@ -307,7 +525,7 @@ type CreateMapConfigRequest struct {
 func (x *CreateMapConfigRequest) Reset() {
 	*x = CreateMapConfigRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[6]
+		mi := &file_settings_v1_settings_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -320,7 +538,7 @@ func (x *CreateMapConfigRequest) String() string {
 func (*CreateMapConfigRequest) ProtoMessage() {}
 
 func (x *CreateMapConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[6]
+	mi := &file_settings_v1_settings_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -333,7 +551,7 @@ func (x *CreateMapConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMapConfigRequest.ProtoReflect.Descriptor instead.
 func (*CreateMapConfigRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{6}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateMapConfigRequest) GetX() float32 {
@@ -366,7 +584,7 @@ type CreateMapConfigReply struct {
 func (x *CreateMapConfigReply) Reset() {
 	*x = CreateMapConfigReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[7]
+		mi := &file_settings_v1_settings_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -379,7 +597,7 @@ func (x *CreateMapConfigReply) String() string {
 func (*CreateMapConfigReply) ProtoMessage() {}
 
 func (x *CreateMapConfigReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[7]
+	mi := &file_settings_v1_settings_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -392,7 +610,7 @@ func (x *CreateMapConfigReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateMapConfigReply.ProtoReflect.Descriptor instead.
 func (*CreateMapConfigReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{7}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{11}
 }
 
 type DeleteSystemInfoRequest struct {
@@ -404,7 +622,7 @@ type DeleteSystemInfoRequest struct {
 func (x *DeleteSystemInfoRequest) Reset() {
 	*x = DeleteSystemInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[8]
+		mi := &file_settings_v1_settings_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -417,7 +635,7 @@ func (x *DeleteSystemInfoRequest) String() string {
 func (*DeleteSystemInfoRequest) ProtoMessage() {}
 
 func (x *DeleteSystemInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[8]
+	mi := &file_settings_v1_settings_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -430,7 +648,7 @@ func (x *DeleteSystemInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSystemInfoRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSystemInfoRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{8}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{12}
 }
 
 type DeleteSystemInfoReply struct {
@@ -442,7 +660,7 @@ type DeleteSystemInfoReply struct {
 func (x *DeleteSystemInfoReply) Reset() {
 	*x = DeleteSystemInfoReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[9]
+		mi := &file_settings_v1_settings_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -455,7 +673,7 @@ func (x *DeleteSystemInfoReply) String() string {
 func (*DeleteSystemInfoReply) ProtoMessage() {}
 
 func (x *DeleteSystemInfoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[9]
+	mi := &file_settings_v1_settings_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -468,7 +686,7 @@ func (x *DeleteSystemInfoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSystemInfoReply.ProtoReflect.Descriptor instead.
 func (*DeleteSystemInfoReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{9}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{13}
 }
 
 type GetSystemInfoRequest struct {
@@ -480,7 +698,7 @@ type GetSystemInfoRequest struct {
 func (x *GetSystemInfoRequest) Reset() {
 	*x = GetSystemInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[10]
+		mi := &file_settings_v1_settings_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -493,7 +711,7 @@ func (x *GetSystemInfoRequest) String() string {
 func (*GetSystemInfoRequest) ProtoMessage() {}
 
 func (x *GetSystemInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[10]
+	mi := &file_settings_v1_settings_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -506,7 +724,7 @@ func (x *GetSystemInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSystemInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetSystemInfoRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{10}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{14}
 }
 
 type GetSystemInfoReply struct {
@@ -521,7 +739,7 @@ type GetSystemInfoReply struct {
 func (x *GetSystemInfoReply) Reset() {
 	*x = GetSystemInfoReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[11]
+		mi := &file_settings_v1_settings_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -534,7 +752,7 @@ func (x *GetSystemInfoReply) String() string {
 func (*GetSystemInfoReply) ProtoMessage() {}
 
 func (x *GetSystemInfoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[11]
+	mi := &file_settings_v1_settings_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -547,7 +765,7 @@ func (x *GetSystemInfoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSystemInfoReply.ProtoReflect.Descriptor instead.
 func (*GetSystemInfoReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{11}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetSystemInfoReply) GetTitle() string {
@@ -576,7 +794,7 @@ type CreateSystemInfoRequest struct {
 func (x *CreateSystemInfoRequest) Reset() {
 	*x = CreateSystemInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[12]
+		mi := &file_settings_v1_settings_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -589,7 +807,7 @@ func (x *CreateSystemInfoRequest) String() string {
 func (*CreateSystemInfoRequest) ProtoMessage() {}
 
 func (x *CreateSystemInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[12]
+	mi := &file_settings_v1_settings_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -602,7 +820,7 @@ func (x *CreateSystemInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSystemInfoRequest.ProtoReflect.Descriptor instead.
 func (*CreateSystemInfoRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{12}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *CreateSystemInfoRequest) GetTitle() string {
@@ -628,7 +846,7 @@ type CreateSystemInfoReply struct {
 func (x *CreateSystemInfoReply) Reset() {
 	*x = CreateSystemInfoReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[13]
+		mi := &file_settings_v1_settings_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -641,7 +859,7 @@ func (x *CreateSystemInfoReply) String() string {
 func (*CreateSystemInfoReply) ProtoMessage() {}
 
 func (x *CreateSystemInfoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[13]
+	mi := &file_settings_v1_settings_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -654,7 +872,7 @@ func (x *CreateSystemInfoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSystemInfoReply.ProtoReflect.Descriptor instead.
 func (*CreateSystemInfoReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{13}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{17}
 }
 
 type GeneralParameters struct {
@@ -674,7 +892,7 @@ type GeneralParameters struct {
 func (x *GeneralParameters) Reset() {
 	*x = GeneralParameters{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[14]
+		mi := &file_settings_v1_settings_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -687,7 +905,7 @@ func (x *GeneralParameters) String() string {
 func (*GeneralParameters) ProtoMessage() {}
 
 func (x *GeneralParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[14]
+	mi := &file_settings_v1_settings_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -700,7 +918,7 @@ func (x *GeneralParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GeneralParameters.ProtoReflect.Descriptor instead.
 func (*GeneralParameters) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{14}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GeneralParameters) GetId() uint32 {
@@ -761,7 +979,7 @@ type ListGeneralParametersRequest struct {
 func (x *ListGeneralParametersRequest) Reset() {
 	*x = ListGeneralParametersRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[15]
+		mi := &file_settings_v1_settings_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -774,7 +992,7 @@ func (x *ListGeneralParametersRequest) String() string {
 func (*ListGeneralParametersRequest) ProtoMessage() {}
 
 func (x *ListGeneralParametersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[15]
+	mi := &file_settings_v1_settings_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -787,7 +1005,7 @@ func (x *ListGeneralParametersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGeneralParametersRequest.ProtoReflect.Descriptor instead.
 func (*ListGeneralParametersRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{15}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{19}
 }
 
 type ListGeneralParametersReply struct {
@@ -801,7 +1019,7 @@ type ListGeneralParametersReply struct {
 func (x *ListGeneralParametersReply) Reset() {
 	*x = ListGeneralParametersReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[16]
+		mi := &file_settings_v1_settings_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -814,7 +1032,7 @@ func (x *ListGeneralParametersReply) String() string {
 func (*ListGeneralParametersReply) ProtoMessage() {}
 
 func (x *ListGeneralParametersReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[16]
+	mi := &file_settings_v1_settings_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -827,7 +1045,7 @@ func (x *ListGeneralParametersReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListGeneralParametersReply.ProtoReflect.Descriptor instead.
 func (*ListGeneralParametersReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{16}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListGeneralParametersReply) GetParameters() []*GeneralParameters {
@@ -848,7 +1066,7 @@ type DeleteGeneralParametersRequest struct {
 func (x *DeleteGeneralParametersRequest) Reset() {
 	*x = DeleteGeneralParametersRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[17]
+		mi := &file_settings_v1_settings_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -861,7 +1079,7 @@ func (x *DeleteGeneralParametersRequest) String() string {
 func (*DeleteGeneralParametersRequest) ProtoMessage() {}
 
 func (x *DeleteGeneralParametersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[17]
+	mi := &file_settings_v1_settings_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -874,7 +1092,7 @@ func (x *DeleteGeneralParametersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGeneralParametersRequest.ProtoReflect.Descriptor instead.
 func (*DeleteGeneralParametersRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{17}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *DeleteGeneralParametersRequest) GetId() uint32 {
@@ -893,7 +1111,7 @@ type DeleteGeneralParametersReply struct {
 func (x *DeleteGeneralParametersReply) Reset() {
 	*x = DeleteGeneralParametersReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[18]
+		mi := &file_settings_v1_settings_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -906,7 +1124,7 @@ func (x *DeleteGeneralParametersReply) String() string {
 func (*DeleteGeneralParametersReply) ProtoMessage() {}
 
 func (x *DeleteGeneralParametersReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[18]
+	mi := &file_settings_v1_settings_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -919,7 +1137,7 @@ func (x *DeleteGeneralParametersReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteGeneralParametersReply.ProtoReflect.Descriptor instead.
 func (*DeleteGeneralParametersReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{18}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{22}
 }
 
 type UpdateGeneralParametersRequest struct {
@@ -938,7 +1156,7 @@ type UpdateGeneralParametersRequest struct {
 func (x *UpdateGeneralParametersRequest) Reset() {
 	*x = UpdateGeneralParametersRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[19]
+		mi := &file_settings_v1_settings_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -951,7 +1169,7 @@ func (x *UpdateGeneralParametersRequest) String() string {
 func (*UpdateGeneralParametersRequest) ProtoMessage() {}
 
 func (x *UpdateGeneralParametersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[19]
+	mi := &file_settings_v1_settings_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -964,7 +1182,7 @@ func (x *UpdateGeneralParametersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGeneralParametersRequest.ProtoReflect.Descriptor instead.
 func (*UpdateGeneralParametersRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{19}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UpdateGeneralParametersRequest) GetId() uint32 {
@@ -1018,7 +1236,7 @@ type UpdateGeneralParametersReply struct {
 func (x *UpdateGeneralParametersReply) Reset() {
 	*x = UpdateGeneralParametersReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[20]
+		mi := &file_settings_v1_settings_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1031,7 +1249,7 @@ func (x *UpdateGeneralParametersReply) String() string {
 func (*UpdateGeneralParametersReply) ProtoMessage() {}
 
 func (x *UpdateGeneralParametersReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[20]
+	mi := &file_settings_v1_settings_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1044,7 +1262,7 @@ func (x *UpdateGeneralParametersReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateGeneralParametersReply.ProtoReflect.Descriptor instead.
 func (*UpdateGeneralParametersReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{20}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{24}
 }
 
 type CreateGeneralParametersRequest struct {
@@ -1062,7 +1280,7 @@ type CreateGeneralParametersRequest struct {
 func (x *CreateGeneralParametersRequest) Reset() {
 	*x = CreateGeneralParametersRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[21]
+		mi := &file_settings_v1_settings_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1075,7 +1293,7 @@ func (x *CreateGeneralParametersRequest) String() string {
 func (*CreateGeneralParametersRequest) ProtoMessage() {}
 
 func (x *CreateGeneralParametersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[21]
+	mi := &file_settings_v1_settings_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1088,7 +1306,7 @@ func (x *CreateGeneralParametersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGeneralParametersRequest.ProtoReflect.Descriptor instead.
 func (*CreateGeneralParametersRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{21}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *CreateGeneralParametersRequest) GetName() string {
@@ -1135,7 +1353,7 @@ type CreateGeneralParametersReply struct {
 func (x *CreateGeneralParametersReply) Reset() {
 	*x = CreateGeneralParametersReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[22]
+		mi := &file_settings_v1_settings_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1148,7 +1366,7 @@ func (x *CreateGeneralParametersReply) String() string {
 func (*CreateGeneralParametersReply) ProtoMessage() {}
 
 func (x *CreateGeneralParametersReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[22]
+	mi := &file_settings_v1_settings_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1161,7 +1379,7 @@ func (x *CreateGeneralParametersReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateGeneralParametersReply.ProtoReflect.Descriptor instead.
 func (*CreateGeneralParametersReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{22}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{26}
 }
 
 type CreateCameraAttrRequest struct {
@@ -1176,7 +1394,7 @@ type CreateCameraAttrRequest struct {
 func (x *CreateCameraAttrRequest) Reset() {
 	*x = CreateCameraAttrRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[23]
+		mi := &file_settings_v1_settings_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1189,7 +1407,7 @@ func (x *CreateCameraAttrRequest) String() string {
 func (*CreateCameraAttrRequest) ProtoMessage() {}
 
 func (x *CreateCameraAttrRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[23]
+	mi := &file_settings_v1_settings_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1202,7 +1420,7 @@ func (x *CreateCameraAttrRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCameraAttrRequest.ProtoReflect.Descriptor instead.
 func (*CreateCameraAttrRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{23}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *CreateCameraAttrRequest) GetName() string {
@@ -1228,7 +1446,7 @@ type CreateCameraAttrReply struct {
 func (x *CreateCameraAttrReply) Reset() {
 	*x = CreateCameraAttrReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[24]
+		mi := &file_settings_v1_settings_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1241,7 +1459,7 @@ func (x *CreateCameraAttrReply) String() string {
 func (*CreateCameraAttrReply) ProtoMessage() {}
 
 func (x *CreateCameraAttrReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[24]
+	mi := &file_settings_v1_settings_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1254,7 +1472,7 @@ func (x *CreateCameraAttrReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCameraAttrReply.ProtoReflect.Descriptor instead.
 func (*CreateCameraAttrReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{24}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{28}
 }
 
 type DeleteCameraAttrRequest struct {
@@ -1268,7 +1486,7 @@ type DeleteCameraAttrRequest struct {
 func (x *DeleteCameraAttrRequest) Reset() {
 	*x = DeleteCameraAttrRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[25]
+		mi := &file_settings_v1_settings_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1281,7 +1499,7 @@ func (x *DeleteCameraAttrRequest) String() string {
 func (*DeleteCameraAttrRequest) ProtoMessage() {}
 
 func (x *DeleteCameraAttrRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[25]
+	mi := &file_settings_v1_settings_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1294,7 +1512,7 @@ func (x *DeleteCameraAttrRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCameraAttrRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCameraAttrRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{25}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *DeleteCameraAttrRequest) GetId() uint32 {
@@ -1313,7 +1531,7 @@ type DeleteCameraAttrReply struct {
 func (x *DeleteCameraAttrReply) Reset() {
 	*x = DeleteCameraAttrReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[26]
+		mi := &file_settings_v1_settings_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1326,7 +1544,7 @@ func (x *DeleteCameraAttrReply) String() string {
 func (*DeleteCameraAttrReply) ProtoMessage() {}
 
 func (x *DeleteCameraAttrReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[26]
+	mi := &file_settings_v1_settings_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1339,7 +1557,7 @@ func (x *DeleteCameraAttrReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCameraAttrReply.ProtoReflect.Descriptor instead.
 func (*DeleteCameraAttrReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{26}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{30}
 }
 
 type GetCameraAttrRequest struct {
@@ -1353,7 +1571,7 @@ type GetCameraAttrRequest struct {
 func (x *GetCameraAttrRequest) Reset() {
 	*x = GetCameraAttrRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[27]
+		mi := &file_settings_v1_settings_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1366,7 +1584,7 @@ func (x *GetCameraAttrRequest) String() string {
 func (*GetCameraAttrRequest) ProtoMessage() {}
 
 func (x *GetCameraAttrRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[27]
+	mi := &file_settings_v1_settings_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1379,7 +1597,7 @@ func (x *GetCameraAttrRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCameraAttrRequest.ProtoReflect.Descriptor instead.
 func (*GetCameraAttrRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{27}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetCameraAttrRequest) GetId() uint32 {
@@ -1403,7 +1621,7 @@ type CameraAttr struct {
 func (x *CameraAttr) Reset() {
 	*x = CameraAttr{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[28]
+		mi := &file_settings_v1_settings_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1416,7 +1634,7 @@ func (x *CameraAttr) String() string {
 func (*CameraAttr) ProtoMessage() {}
 
 func (x *CameraAttr) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[28]
+	mi := &file_settings_v1_settings_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1429,7 +1647,7 @@ func (x *CameraAttr) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CameraAttr.ProtoReflect.Descriptor instead.
 func (*CameraAttr) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{28}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *CameraAttr) GetId() uint32 {
@@ -1471,7 +1689,7 @@ type GetCameraAttrReply struct {
 func (x *GetCameraAttrReply) Reset() {
 	*x = GetCameraAttrReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[29]
+		mi := &file_settings_v1_settings_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1484,7 +1702,7 @@ func (x *GetCameraAttrReply) String() string {
 func (*GetCameraAttrReply) ProtoMessage() {}
 
 func (x *GetCameraAttrReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[29]
+	mi := &file_settings_v1_settings_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1497,7 +1715,7 @@ func (x *GetCameraAttrReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCameraAttrReply.ProtoReflect.Descriptor instead.
 func (*GetCameraAttrReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{29}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetCameraAttrReply) GetAttr() *CameraAttr {
@@ -1516,7 +1734,7 @@ type ListCameraAttrRequest struct {
 func (x *ListCameraAttrRequest) Reset() {
 	*x = ListCameraAttrRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[30]
+		mi := &file_settings_v1_settings_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1529,7 +1747,7 @@ func (x *ListCameraAttrRequest) String() string {
 func (*ListCameraAttrRequest) ProtoMessage() {}
 
 func (x *ListCameraAttrRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[30]
+	mi := &file_settings_v1_settings_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1542,7 +1760,7 @@ func (x *ListCameraAttrRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCameraAttrRequest.ProtoReflect.Descriptor instead.
 func (*ListCameraAttrRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{30}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{34}
 }
 
 type ListCameraAttrReply struct {
@@ -1556,7 +1774,7 @@ type ListCameraAttrReply struct {
 func (x *ListCameraAttrReply) Reset() {
 	*x = ListCameraAttrReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[31]
+		mi := &file_settings_v1_settings_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1569,7 +1787,7 @@ func (x *ListCameraAttrReply) String() string {
 func (*ListCameraAttrReply) ProtoMessage() {}
 
 func (x *ListCameraAttrReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[31]
+	mi := &file_settings_v1_settings_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1582,7 +1800,7 @@ func (x *ListCameraAttrReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCameraAttrReply.ProtoReflect.Descriptor instead.
 func (*ListCameraAttrReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{31}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListCameraAttrReply) GetAttrs() []*CameraAttr {
@@ -1605,7 +1823,7 @@ type CreateModuleRequest struct {
 func (x *CreateModuleRequest) Reset() {
 	*x = CreateModuleRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[32]
+		mi := &file_settings_v1_settings_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1618,7 +1836,7 @@ func (x *CreateModuleRequest) String() string {
 func (*CreateModuleRequest) ProtoMessage() {}
 
 func (x *CreateModuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[32]
+	mi := &file_settings_v1_settings_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1631,7 +1849,7 @@ func (x *CreateModuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateModuleRequest.ProtoReflect.Descriptor instead.
 func (*CreateModuleRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{32}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CreateModuleRequest) GetCode() string {
@@ -1664,7 +1882,7 @@ type CreateModuleReply struct {
 func (x *CreateModuleReply) Reset() {
 	*x = CreateModuleReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[33]
+		mi := &file_settings_v1_settings_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1677,7 +1895,7 @@ func (x *CreateModuleReply) String() string {
 func (*CreateModuleReply) ProtoMessage() {}
 
 func (x *CreateModuleReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[33]
+	mi := &file_settings_v1_settings_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1690,7 +1908,7 @@ func (x *CreateModuleReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateModuleReply.ProtoReflect.Descriptor instead.
 func (*CreateModuleReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{33}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{37}
 }
 
 type DeleteModuleRequest struct {
@@ -1704,7 +1922,7 @@ type DeleteModuleRequest struct {
 func (x *DeleteModuleRequest) Reset() {
 	*x = DeleteModuleRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[34]
+		mi := &file_settings_v1_settings_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1717,7 +1935,7 @@ func (x *DeleteModuleRequest) String() string {
 func (*DeleteModuleRequest) ProtoMessage() {}
 
 func (x *DeleteModuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[34]
+	mi := &file_settings_v1_settings_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1730,7 +1948,7 @@ func (x *DeleteModuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteModuleRequest.ProtoReflect.Descriptor instead.
 func (*DeleteModuleRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{34}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *DeleteModuleRequest) GetId() uint32 {
@@ -1749,7 +1967,7 @@ type DeleteModuleReply struct {
 func (x *DeleteModuleReply) Reset() {
 	*x = DeleteModuleReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[35]
+		mi := &file_settings_v1_settings_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1762,7 +1980,7 @@ func (x *DeleteModuleReply) String() string {
 func (*DeleteModuleReply) ProtoMessage() {}
 
 func (x *DeleteModuleReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[35]
+	mi := &file_settings_v1_settings_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1775,7 +1993,7 @@ func (x *DeleteModuleReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteModuleReply.ProtoReflect.Descriptor instead.
 func (*DeleteModuleReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{35}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{39}
 }
 
 type UpdateModuleRequest struct {
@@ -1792,7 +2010,7 @@ type UpdateModuleRequest struct {
 func (x *UpdateModuleRequest) Reset() {
 	*x = UpdateModuleRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[36]
+		mi := &file_settings_v1_settings_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1805,7 +2023,7 @@ func (x *UpdateModuleRequest) String() string {
 func (*UpdateModuleRequest) ProtoMessage() {}
 
 func (x *UpdateModuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[36]
+	mi := &file_settings_v1_settings_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1818,7 +2036,7 @@ func (x *UpdateModuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateModuleRequest.ProtoReflect.Descriptor instead.
 func (*UpdateModuleRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{36}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *UpdateModuleRequest) GetId() uint32 {
@@ -1858,7 +2076,7 @@ type UpdateModuleReply struct {
 func (x *UpdateModuleReply) Reset() {
 	*x = UpdateModuleReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[37]
+		mi := &file_settings_v1_settings_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1871,7 +2089,7 @@ func (x *UpdateModuleReply) String() string {
 func (*UpdateModuleReply) ProtoMessage() {}
 
 func (x *UpdateModuleReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[37]
+	mi := &file_settings_v1_settings_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1884,7 +2102,7 @@ func (x *UpdateModuleReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateModuleReply.ProtoReflect.Descriptor instead.
 func (*UpdateModuleReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{37}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{41}
 }
 
 type Module struct {
@@ -1902,7 +2120,7 @@ type Module struct {
 func (x *Module) Reset() {
 	*x = Module{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[38]
+		mi := &file_settings_v1_settings_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1915,7 +2133,7 @@ func (x *Module) String() string {
 func (*Module) ProtoMessage() {}
 
 func (x *Module) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[38]
+	mi := &file_settings_v1_settings_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1928,7 +2146,7 @@ func (x *Module) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Module.ProtoReflect.Descriptor instead.
 func (*Module) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{38}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *Module) GetId() uint32 {
@@ -1977,7 +2195,7 @@ type GetModuleRequest struct {
 func (x *GetModuleRequest) Reset() {
 	*x = GetModuleRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[39]
+		mi := &file_settings_v1_settings_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1990,7 +2208,7 @@ func (x *GetModuleRequest) String() string {
 func (*GetModuleRequest) ProtoMessage() {}
 
 func (x *GetModuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[39]
+	mi := &file_settings_v1_settings_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2003,7 +2221,7 @@ func (x *GetModuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetModuleRequest.ProtoReflect.Descriptor instead.
 func (*GetModuleRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{39}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *GetModuleRequest) GetId() uint32 {
@@ -2024,7 +2242,7 @@ type GetModuleReply struct {
 func (x *GetModuleReply) Reset() {
 	*x = GetModuleReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[40]
+		mi := &file_settings_v1_settings_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2037,7 +2255,7 @@ func (x *GetModuleReply) String() string {
 func (*GetModuleReply) ProtoMessage() {}
 
 func (x *GetModuleReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[40]
+	mi := &file_settings_v1_settings_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2050,7 +2268,7 @@ func (x *GetModuleReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetModuleReply.ProtoReflect.Descriptor instead.
 func (*GetModuleReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{40}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *GetModuleReply) GetModule() *Module {
@@ -2069,7 +2287,7 @@ type ListModulesRequest struct {
 func (x *ListModulesRequest) Reset() {
 	*x = ListModulesRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[41]
+		mi := &file_settings_v1_settings_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2082,7 +2300,7 @@ func (x *ListModulesRequest) String() string {
 func (*ListModulesRequest) ProtoMessage() {}
 
 func (x *ListModulesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[41]
+	mi := &file_settings_v1_settings_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2095,7 +2313,7 @@ func (x *ListModulesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListModulesRequest.ProtoReflect.Descriptor instead.
 func (*ListModulesRequest) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{41}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{45}
 }
 
 type ListModulesReply struct {
@@ -2109,7 +2327,7 @@ type ListModulesReply struct {
 func (x *ListModulesReply) Reset() {
 	*x = ListModulesReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[42]
+		mi := &file_settings_v1_settings_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2122,7 +2340,7 @@ func (x *ListModulesReply) String() string {
 func (*ListModulesReply) ProtoMessage() {}
 
 func (x *ListModulesReply) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[42]
+	mi := &file_settings_v1_settings_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2135,7 +2353,7 @@ func (x *ListModulesReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListModulesReply.ProtoReflect.Descriptor instead.
 func (*ListModulesReply) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{42}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *ListModulesReply) GetModules() []*Module {
@@ -2156,7 +2374,7 @@ type GetOperatorConfigReply_OperatorConfig struct {
 func (x *GetOperatorConfigReply_OperatorConfig) Reset() {
 	*x = GetOperatorConfigReply_OperatorConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_settings_v1_settings_proto_msgTypes[43]
+		mi := &file_settings_v1_settings_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2169,7 +2387,7 @@ func (x *GetOperatorConfigReply_OperatorConfig) String() string {
 func (*GetOperatorConfigReply_OperatorConfig) ProtoMessage() {}
 
 func (x *GetOperatorConfigReply_OperatorConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_settings_v1_settings_proto_msgTypes[43]
+	mi := &file_settings_v1_settings_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2182,7 +2400,7 @@ func (x *GetOperatorConfigReply_OperatorConfig) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use GetOperatorConfigReply_OperatorConfig.ProtoReflect.Descriptor instead.
 func (*GetOperatorConfigReply_OperatorConfig) Descriptor() ([]byte, []int) {
-	return file_settings_v1_settings_proto_rawDescGZIP(), []int{1, 0}
+	return file_settings_v1_settings_proto_rawDescGZIP(), []int{5, 0}
 }
 
 func (x *GetOperatorConfigReply_OperatorConfig) GetFullChannelBlock() bool {
@@ -2203,7 +2421,29 @@ var file_settings_v1_settings_proto_rawDesc = []byte{
 	0x69, 0x64, 0x61, 0x74, 0x65, 0x2f, 0x76, 0x61, 0x6c, 0x69, 0x64, 0x61, 0x74, 0x65, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x1a, 0x0a, 0x18, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x65, 0x72,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x95, 0x01, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x50, 0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x75, 0x73, 0x68, 0x5f, 0x73, 0x74, 0x61, 0x72,
+	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x70, 0x75, 0x73, 0x68, 0x53, 0x74, 0x61,
+	0x72, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x75, 0x73, 0x68, 0x5f, 0x63, 0x68, 0x61, 0x69, 0x6e,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x70, 0x75, 0x73, 0x68, 0x43, 0x68, 0x61, 0x69,
+	0x6e, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x75, 0x73, 0x68, 0x5f, 0x65, 0x6e, 0x64, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x07, 0x70, 0x75, 0x73, 0x68, 0x45, 0x6e, 0x64, 0x12, 0x1f, 0x0a, 0x0b,
+	0x70, 0x75, 0x73, 0x68, 0x5f, 0x73, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x0a, 0x70, 0x75, 0x73, 0x68, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x22, 0x19, 0x0a,
+	0x17, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x18, 0x0a, 0x16, 0x47, 0x65, 0x74, 0x50,
+	0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x22, 0x90, 0x01, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x50, 0x75, 0x73, 0x68, 0x65, 0x72,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x1d, 0x0a, 0x0a, 0x70,
+	0x75, 0x73, 0x68, 0x5f, 0x73, 0x74, 0x61, 0x72, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x09, 0x70, 0x75, 0x73, 0x68, 0x53, 0x74, 0x61, 0x72, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x75,
+	0x73, 0x68, 0x5f, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09,
+	0x70, 0x75, 0x73, 0x68, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x75, 0x73,
+	0x68, 0x5f, 0x65, 0x6e, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x70, 0x75, 0x73,
+	0x68, 0x45, 0x6e, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x70, 0x75, 0x73, 0x68, 0x5f, 0x73, 0x69, 0x6e,
+	0x67, 0x6c, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x70, 0x75, 0x73, 0x68, 0x53,
+	0x69, 0x6e, 0x67, 0x6c, 0x65, 0x22, 0x1a, 0x0a, 0x18, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x65, 0x72,
 	0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x22, 0xb9, 0x01, 0x0a, 0x16, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f,
 	0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x5f, 0x0a, 0x0f,
@@ -2370,183 +2610,200 @@ var file_settings_v1_settings_proto_rawDesc = []byte{
 	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x31, 0x0a, 0x07, 0x6d,
 	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x61,
 	0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4d,
-	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x07, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x32, 0xce,
-	0x15, 0x0a, 0x08, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x96, 0x01, 0x0a, 0x14,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f,
-	0x6e, 0x66, 0x69, 0x67, 0x12, 0x2c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
-	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x70, 0x65,
-	0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
-	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x24,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x1a, 0x19, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
-	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f,
-	0x72, 0x3a, 0x01, 0x2a, 0x12, 0x8a, 0x01, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x65, 0x72,
-	0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x29, 0x2e, 0x61, 0x70, 0x69,
-	0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74,
-	0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74,
-	0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x21,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1b, 0x12, 0x19, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
-	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f,
-	0x72, 0x12, 0x82, 0x01, 0x0a, 0x0f, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x61, 0x70, 0x43,
-	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x27, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74,
-	0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x61,
-	0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25,
+	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x07, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x32, 0xe4,
+	0x17, 0x0a, 0x08, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x8e, 0x01, 0x0a, 0x12,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x12, 0x2a, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x75, 0x73, 0x68, 0x65,
+	0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28,
 	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31,
-	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x61, 0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
-	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x1a, 0x14, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f,
-	0x6d, 0x61, 0x70, 0x3a, 0x01, 0x2a, 0x12, 0x76, 0x0a, 0x0c, 0x47, 0x65, 0x74, 0x4d, 0x61, 0x70,
-	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x61, 0x70, 0x43,
-	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61,
+	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c,
+	0x1a, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x67, 0x73, 0x2f, 0x70, 0x75, 0x73, 0x68, 0x65, 0x72, 0x3a, 0x01, 0x2a, 0x12, 0x82, 0x01, 0x0a,
+	0x0f, 0x47, 0x65, 0x74, 0x50, 0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x12, 0x27, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66,
+	0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x50,
+	0x75, 0x73, 0x68, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x12, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76,
+	0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x70, 0x75, 0x73, 0x68, 0x65,
+	0x72, 0x12, 0x96, 0x01, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x2c, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69,
+	0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73,
+	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x24, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x1a, 0x19, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x3a, 0x01, 0x2a, 0x12, 0x8a, 0x01, 0x0a, 0x11, 0x47,
+	0x65, 0x74, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x12, 0x29, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65,
+	0x74, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x21, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1b, 0x12, 0x19, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x82, 0x01, 0x0a, 0x0f, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x4d, 0x61, 0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x27, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x4d, 0x61, 0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x61, 0x70,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3, 0xe4,
+	0x93, 0x02, 0x19, 0x1a, 0x14, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74,
+	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6d, 0x61, 0x70, 0x3a, 0x01, 0x2a, 0x12, 0x76, 0x0a, 0x0c,
+	0x47, 0x65, 0x74, 0x4d, 0x61, 0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x24, 0x2e, 0x61,
 	0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47,
-	0x65, 0x74, 0x4d, 0x61, 0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79,
-	0x22, 0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x12, 0x14, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76,
-	0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6d, 0x61, 0x70, 0x12, 0x88,
-	0x01, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49,
-	0x6e, 0x66, 0x6f, 0x12, 0x28, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
-	0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x79, 0x73, 0x74,
-	0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f,
-	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x1a, 0x17, 0x2f,
-	0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f,
-	0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x3a, 0x01, 0x2a, 0x12, 0x7c, 0x0a, 0x0d, 0x47, 0x65, 0x74,
-	0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x25, 0x2e, 0x61, 0x70, 0x69,
-	0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74,
-	0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x23, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66,
-	0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x12, 0x17,
+	0x65, 0x74, 0x4d, 0x61, 0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x61, 0x70, 0x43, 0x6f, 0x6e, 0x66, 0x69,
+	0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x12, 0x14,
 	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x12, 0x85, 0x01, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x28, 0x2e, 0x61,
+	0x2f, 0x6d, 0x61, 0x70, 0x12, 0x88, 0x01, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53,
+	0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x28, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x53, 0x79, 0x73, 0x74,
+	0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x22, 0x82, 0xd3, 0xe4,
+	0x93, 0x02, 0x1c, 0x1a, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74,
+	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x3a, 0x01, 0x2a, 0x12,
+	0x7c, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f,
+	0x12, 0x25, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65,
+	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x79, 0x73,
+	0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x19, 0x12, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65,
+	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x12, 0x85, 0x01,
+	0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e,
+	0x66, 0x6f, 0x12, 0x28, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65,
+	0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x61,
 	0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44,
 	0x65, 0x6c, 0x65, 0x74, 0x65, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x53,
-	0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x2a, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
-	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x12,
-	0x7c, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12,
-	0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76,
-	0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x2a, 0x17, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x73,
+	0x79, 0x73, 0x74, 0x65, 0x6d, 0x12, 0x7c, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d,
+	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74,
 	0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x6f,
-	0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02,
-	0x1c, 0x1a, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69,
-	0x6e, 0x67, 0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x3a, 0x01, 0x2a, 0x12, 0x7e, 0x0a,
-	0x0c, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x24, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
+	0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x1a, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31,
+	0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65,
+	0x3a, 0x01, 0x2a, 0x12, 0x7e, 0x0a, 0x0c, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4d, 0x6f, 0x64,
+	0x75, 0x6c, 0x65, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
 	0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75,
-	0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x24, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x2a,
-	0x1c, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
-	0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x80, 0x01,
-	0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x24,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31,
-	0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x24, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x2a, 0x1c, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73,
+	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2f, 0x7b,
+	0x69, 0x64, 0x7d, 0x12, 0x80, 0x01, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f,
+	0x64, 0x75, 0x6c, 0x65, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
 	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x64,
-	0x75, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x26, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x20,
-	0x22, 0x1b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
-	0x67, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x3a, 0x01, 0x2a,
-	0x12, 0x75, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x21, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e,
-	0x47, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e,
-	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c,
-	0x79, 0x22, 0x24, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x12, 0x1c, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75,
-	0x6c, 0x65, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x76, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x4d,
-	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x23, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x6f, 0x64,
-	0x75, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69,
-	0x73, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f,
-	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x12, 0x17, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
-	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12,
-	0x86, 0x01, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61,
-	0x41, 0x74, 0x74, 0x72, 0x12, 0x28, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x26,
+	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x20, 0x22, 0x1b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f,
+	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2f, 0x7b,
+	0x69, 0x64, 0x7d, 0x3a, 0x01, 0x2a, 0x12, 0x75, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x4d, 0x6f, 0x64,
+	0x75, 0x6c, 0x65, 0x12, 0x21, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74,
+	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x6f, 0x64, 0x75,
+	0x6c, 0x65, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x24, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1e, 0x12,
+	0x1c, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x2f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x76, 0x0a,
+	0x0b, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x23, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x21, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
+	0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x73, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x12, 0x17, 0x2f, 0x61,
+	0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x6d,
+	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x86, 0x01, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x12, 0x28, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
 	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x6d,
-	0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31,
-	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74,
-	0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x1a, 0x15,
-	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x2f, 0x69, 0x63, 0x6f, 0x6e, 0x3a, 0x01, 0x2a, 0x12, 0x88, 0x01, 0x0a, 0x10, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x12, 0x28, 0x2e,
+	0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x20, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x1a, 0x1a, 0x15, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65,
+	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x69, 0x63, 0x6f, 0x6e, 0x3a, 0x01, 0x2a, 0x12, 0x88,
+	0x01, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41,
+	0x74, 0x74, 0x72, 0x12, 0x28, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x6d, 0x65,
+	0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e,
 	0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e,
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65,
-	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
-	0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
-	0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x2a, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31,
-	0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x69, 0x63, 0x6f, 0x6e, 0x2f, 0x7b,
-	0x69, 0x64, 0x7d, 0x12, 0x7f, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61,
-	0x41, 0x74, 0x74, 0x72, 0x12, 0x25, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
-	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61,
-	0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65,
-	0x74, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79,
-	0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x12, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76,
-	0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x69, 0x63, 0x6f, 0x6e, 0x2f,
-	0x7b, 0x69, 0x64, 0x7d, 0x12, 0x7e, 0x0a, 0x0e, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x61, 0x6d, 0x65,
-	0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x12, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x61, 0x6d,
-	0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31,
-	0x2e, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52,
-	0x65, 0x70, 0x6c, 0x79, 0x22, 0x1e, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x18, 0x12, 0x16, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x69,
-	0x63, 0x6f, 0x6e, 0x73, 0x12, 0xa0, 0x01, 0x0a, 0x17, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x2a, 0x1a, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f,
+	0x69, 0x63, 0x6f, 0x6e, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x7f, 0x0a, 0x0d, 0x47, 0x65, 0x74,
+	0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x12, 0x25, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74,
+	0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x23, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
+	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74,
+	0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x12, 0x1a,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
+	0x2f, 0x69, 0x63, 0x6f, 0x6e, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x7e, 0x0a, 0x0e, 0x4c, 0x69,
+	0x73, 0x74, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x12, 0x26, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x61, 0x6d, 0x65, 0x72,
+	0x61, 0x41, 0x74, 0x74, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1e, 0x82, 0xd3, 0xe4, 0x93,
+	0x02, 0x18, 0x12, 0x16, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74,
+	0x69, 0x6e, 0x67, 0x73, 0x2f, 0x69, 0x63, 0x6f, 0x6e, 0x73, 0x12, 0xa0, 0x01, 0x0a, 0x17, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61,
+	0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x2f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74,
+	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47,
 	0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73,
-	0x12, 0x2f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e,
-	0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c,
-	0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x2d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61,
-	0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79,
-	0x22, 0x25, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1f, 0x1a, 0x1a, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76,
-	0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d,
-	0x65, 0x74, 0x65, 0x72, 0x3a, 0x01, 0x2a, 0x12, 0xa5, 0x01, 0x0a, 0x17, 0x55, 0x70, 0x64, 0x61,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65,
+	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72,
+	0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x25, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1f, 0x1a, 0x1a,
+	0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
+	0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x3a, 0x01, 0x2a, 0x12, 0xa5, 0x01,
+	0x0a, 0x17, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x2f, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61,
 	0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74,
-	0x65, 0x72, 0x73, 0x12, 0x2f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
-	0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65,
-	0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
-	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x65, 0x6e,
-	0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65,
-	0x70, 0x6c, 0x79, 0x22, 0x2a, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x24, 0x22, 0x1f, 0x2f, 0x61, 0x70,
-	0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x70, 0x61,
-	0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x3a, 0x01, 0x2a, 0x12,
-	0xa2, 0x01, 0x0a, 0x17, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61,
-	0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x2f, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65,
-	0x6c, 0x65, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x61,
-	0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61,
-	0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x27, 0x82, 0xd3, 0xe4,
-	0x93, 0x02, 0x21, 0x2a, 0x1f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x2f,
-	0x7b, 0x69, 0x64, 0x7d, 0x12, 0x98, 0x01, 0x0a, 0x15, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x65, 0x6e,
-	0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x2d,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31,
-	0x2e, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61,
-	0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e,
-	0x4c, 0x69, 0x73, 0x74, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93,
-	0x02, 0x1d, 0x12, 0x1b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74,
-	0x69, 0x6e, 0x67, 0x73, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x42,
-	0x1d, 0x5a, 0x1b, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f,
-	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x75, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65,
+	0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x2a, 0x82, 0xd3, 0xe4, 0x93, 0x02,
+	0x24, 0x22, 0x1f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x2f, 0x7b, 0x69,
+	0x64, 0x7d, 0x3a, 0x01, 0x2a, 0x12, 0xa2, 0x01, 0x0a, 0x17, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72,
+	0x73, 0x12, 0x2f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
+	0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61,
+	0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x2d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x65, 0x6e, 0x65, 0x72,
+	0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x22, 0x27, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x21, 0x2a, 0x1f, 0x2f, 0x61, 0x70, 0x69, 0x2f,
+	0x76, 0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x70, 0x61, 0x72, 0x61,
+	0x6d, 0x65, 0x74, 0x65, 0x72, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x98, 0x01, 0x0a, 0x15, 0x4c,
+	0x69, 0x73, 0x74, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65,
+	0x74, 0x65, 0x72, 0x73, 0x12, 0x2d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x65, 0x6e, 0x65, 0x72,
+	0x61, 0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x67, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61,
+	0x6c, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x12, 0x1b, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76,
+	0x31, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d,
+	0x65, 0x74, 0x65, 0x72, 0x73, 0x42, 0x1d, 0x5a, 0x1b, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2f, 0x76,
+	0x31, 0x3b, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2561,106 +2818,114 @@ func file_settings_v1_settings_proto_rawDescGZIP() []byte {
 	return file_settings_v1_settings_proto_rawDescData
 }
 
-var file_settings_v1_settings_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
+var file_settings_v1_settings_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_settings_v1_settings_proto_goTypes = []interface{}{
-	(*GetOperatorConfigRequest)(nil),              // 0: api.settings.v1.GetOperatorConfigRequest
-	(*GetOperatorConfigReply)(nil),                // 1: api.settings.v1.GetOperatorConfigReply
-	(*CreateOperatorConfigRequest)(nil),           // 2: api.settings.v1.CreateOperatorConfigRequest
-	(*CreateOperatorConfigReply)(nil),             // 3: api.settings.v1.CreateOperatorConfigReply
-	(*GetMapConfigRequest)(nil),                   // 4: api.settings.v1.GetMapConfigRequest
-	(*GetMapConfigReply)(nil),                     // 5: api.settings.v1.GetMapConfigReply
-	(*CreateMapConfigRequest)(nil),                // 6: api.settings.v1.CreateMapConfigRequest
-	(*CreateMapConfigReply)(nil),                  // 7: api.settings.v1.CreateMapConfigReply
-	(*DeleteSystemInfoRequest)(nil),               // 8: api.settings.v1.DeleteSystemInfoRequest
-	(*DeleteSystemInfoReply)(nil),                 // 9: api.settings.v1.DeleteSystemInfoReply
-	(*GetSystemInfoRequest)(nil),                  // 10: api.settings.v1.GetSystemInfoRequest
-	(*GetSystemInfoReply)(nil),                    // 11: api.settings.v1.GetSystemInfoReply
-	(*CreateSystemInfoRequest)(nil),               // 12: api.settings.v1.CreateSystemInfoRequest
-	(*CreateSystemInfoReply)(nil),                 // 13: api.settings.v1.CreateSystemInfoReply
-	(*GeneralParameters)(nil),                     // 14: api.settings.v1.GeneralParameters
-	(*ListGeneralParametersRequest)(nil),          // 15: api.settings.v1.ListGeneralParametersRequest
-	(*ListGeneralParametersReply)(nil),            // 16: api.settings.v1.ListGeneralParametersReply
-	(*DeleteGeneralParametersRequest)(nil),        // 17: api.settings.v1.DeleteGeneralParametersRequest
-	(*DeleteGeneralParametersReply)(nil),          // 18: api.settings.v1.DeleteGeneralParametersReply
-	(*UpdateGeneralParametersRequest)(nil),        // 19: api.settings.v1.UpdateGeneralParametersRequest
-	(*UpdateGeneralParametersReply)(nil),          // 20: api.settings.v1.updateGeneralParametersReply
-	(*CreateGeneralParametersRequest)(nil),        // 21: api.settings.v1.CreateGeneralParametersRequest
-	(*CreateGeneralParametersReply)(nil),          // 22: api.settings.v1.CreateGeneralParametersReply
-	(*CreateCameraAttrRequest)(nil),               // 23: api.settings.v1.CreateCameraAttrRequest
-	(*CreateCameraAttrReply)(nil),                 // 24: api.settings.v1.CreateCameraAttrReply
-	(*DeleteCameraAttrRequest)(nil),               // 25: api.settings.v1.DeleteCameraAttrRequest
-	(*DeleteCameraAttrReply)(nil),                 // 26: api.settings.v1.DeleteCameraAttrReply
-	(*GetCameraAttrRequest)(nil),                  // 27: api.settings.v1.GetCameraAttrRequest
-	(*CameraAttr)(nil),                            // 28: api.settings.v1.CameraAttr
-	(*GetCameraAttrReply)(nil),                    // 29: api.settings.v1.GetCameraAttrReply
-	(*ListCameraAttrRequest)(nil),                 // 30: api.settings.v1.ListCameraAttrRequest
-	(*ListCameraAttrReply)(nil),                   // 31: api.settings.v1.ListCameraAttrReply
-	(*CreateModuleRequest)(nil),                   // 32: api.settings.v1.CreateModuleRequest
-	(*CreateModuleReply)(nil),                     // 33: api.settings.v1.CreateModuleReply
-	(*DeleteModuleRequest)(nil),                   // 34: api.settings.v1.DeleteModuleRequest
-	(*DeleteModuleReply)(nil),                     // 35: api.settings.v1.DeleteModuleReply
-	(*UpdateModuleRequest)(nil),                   // 36: api.settings.v1.UpdateModuleRequest
-	(*UpdateModuleReply)(nil),                     // 37: api.settings.v1.UpdateModuleReply
-	(*Module)(nil),                                // 38: api.settings.v1.Module
-	(*GetModuleRequest)(nil),                      // 39: api.settings.v1.GetModuleRequest
-	(*GetModuleReply)(nil),                        // 40: api.settings.v1.GetModuleReply
-	(*ListModulesRequest)(nil),                    // 41: api.settings.v1.ListModulesRequest
-	(*ListModulesReply)(nil),                      // 42: api.settings.v1.ListModulesReply
-	(*GetOperatorConfigReply_OperatorConfig)(nil), // 43: api.settings.v1.GetOperatorConfigReply.OperatorConfig
-	(*timestamppb.Timestamp)(nil),                 // 44: google.protobuf.Timestamp
+	(*CreatePusherConfigRequest)(nil),             // 0: api.settings.v1.CreatePusherConfigRequest
+	(*CreatePusherConfigReply)(nil),               // 1: api.settings.v1.CreatePusherConfigReply
+	(*GetPusherConfigRequest)(nil),                // 2: api.settings.v1.GetPusherConfigRequest
+	(*GetPusherConfigReply)(nil),                  // 3: api.settings.v1.GetPusherConfigReply
+	(*GetOperatorConfigRequest)(nil),              // 4: api.settings.v1.GetOperatorConfigRequest
+	(*GetOperatorConfigReply)(nil),                // 5: api.settings.v1.GetOperatorConfigReply
+	(*CreateOperatorConfigRequest)(nil),           // 6: api.settings.v1.CreateOperatorConfigRequest
+	(*CreateOperatorConfigReply)(nil),             // 7: api.settings.v1.CreateOperatorConfigReply
+	(*GetMapConfigRequest)(nil),                   // 8: api.settings.v1.GetMapConfigRequest
+	(*GetMapConfigReply)(nil),                     // 9: api.settings.v1.GetMapConfigReply
+	(*CreateMapConfigRequest)(nil),                // 10: api.settings.v1.CreateMapConfigRequest
+	(*CreateMapConfigReply)(nil),                  // 11: api.settings.v1.CreateMapConfigReply
+	(*DeleteSystemInfoRequest)(nil),               // 12: api.settings.v1.DeleteSystemInfoRequest
+	(*DeleteSystemInfoReply)(nil),                 // 13: api.settings.v1.DeleteSystemInfoReply
+	(*GetSystemInfoRequest)(nil),                  // 14: api.settings.v1.GetSystemInfoRequest
+	(*GetSystemInfoReply)(nil),                    // 15: api.settings.v1.GetSystemInfoReply
+	(*CreateSystemInfoRequest)(nil),               // 16: api.settings.v1.CreateSystemInfoRequest
+	(*CreateSystemInfoReply)(nil),                 // 17: api.settings.v1.CreateSystemInfoReply
+	(*GeneralParameters)(nil),                     // 18: api.settings.v1.GeneralParameters
+	(*ListGeneralParametersRequest)(nil),          // 19: api.settings.v1.ListGeneralParametersRequest
+	(*ListGeneralParametersReply)(nil),            // 20: api.settings.v1.ListGeneralParametersReply
+	(*DeleteGeneralParametersRequest)(nil),        // 21: api.settings.v1.DeleteGeneralParametersRequest
+	(*DeleteGeneralParametersReply)(nil),          // 22: api.settings.v1.DeleteGeneralParametersReply
+	(*UpdateGeneralParametersRequest)(nil),        // 23: api.settings.v1.UpdateGeneralParametersRequest
+	(*UpdateGeneralParametersReply)(nil),          // 24: api.settings.v1.updateGeneralParametersReply
+	(*CreateGeneralParametersRequest)(nil),        // 25: api.settings.v1.CreateGeneralParametersRequest
+	(*CreateGeneralParametersReply)(nil),          // 26: api.settings.v1.CreateGeneralParametersReply
+	(*CreateCameraAttrRequest)(nil),               // 27: api.settings.v1.CreateCameraAttrRequest
+	(*CreateCameraAttrReply)(nil),                 // 28: api.settings.v1.CreateCameraAttrReply
+	(*DeleteCameraAttrRequest)(nil),               // 29: api.settings.v1.DeleteCameraAttrRequest
+	(*DeleteCameraAttrReply)(nil),                 // 30: api.settings.v1.DeleteCameraAttrReply
+	(*GetCameraAttrRequest)(nil),                  // 31: api.settings.v1.GetCameraAttrRequest
+	(*CameraAttr)(nil),                            // 32: api.settings.v1.CameraAttr
+	(*GetCameraAttrReply)(nil),                    // 33: api.settings.v1.GetCameraAttrReply
+	(*ListCameraAttrRequest)(nil),                 // 34: api.settings.v1.ListCameraAttrRequest
+	(*ListCameraAttrReply)(nil),                   // 35: api.settings.v1.ListCameraAttrReply
+	(*CreateModuleRequest)(nil),                   // 36: api.settings.v1.CreateModuleRequest
+	(*CreateModuleReply)(nil),                     // 37: api.settings.v1.CreateModuleReply
+	(*DeleteModuleRequest)(nil),                   // 38: api.settings.v1.DeleteModuleRequest
+	(*DeleteModuleReply)(nil),                     // 39: api.settings.v1.DeleteModuleReply
+	(*UpdateModuleRequest)(nil),                   // 40: api.settings.v1.UpdateModuleRequest
+	(*UpdateModuleReply)(nil),                     // 41: api.settings.v1.UpdateModuleReply
+	(*Module)(nil),                                // 42: api.settings.v1.Module
+	(*GetModuleRequest)(nil),                      // 43: api.settings.v1.GetModuleRequest
+	(*GetModuleReply)(nil),                        // 44: api.settings.v1.GetModuleReply
+	(*ListModulesRequest)(nil),                    // 45: api.settings.v1.ListModulesRequest
+	(*ListModulesReply)(nil),                      // 46: api.settings.v1.ListModulesReply
+	(*GetOperatorConfigReply_OperatorConfig)(nil), // 47: api.settings.v1.GetOperatorConfigReply.OperatorConfig
+	(*timestamppb.Timestamp)(nil),                 // 48: google.protobuf.Timestamp
 }
 var file_settings_v1_settings_proto_depIdxs = []int32{
-	43, // 0: api.settings.v1.GetOperatorConfigReply.operator_config:type_name -> api.settings.v1.GetOperatorConfigReply.OperatorConfig
-	44, // 1: api.settings.v1.GeneralParameters.created:type_name -> google.protobuf.Timestamp
-	14, // 2: api.settings.v1.ListGeneralParametersReply.parameters:type_name -> api.settings.v1.GeneralParameters
-	44, // 3: api.settings.v1.CameraAttr.created:type_name -> google.protobuf.Timestamp
-	28, // 4: api.settings.v1.GetCameraAttrReply.attr:type_name -> api.settings.v1.CameraAttr
-	28, // 5: api.settings.v1.ListCameraAttrReply.attrs:type_name -> api.settings.v1.CameraAttr
-	44, // 6: api.settings.v1.Module.created:type_name -> google.protobuf.Timestamp
-	38, // 7: api.settings.v1.GetModuleReply.module:type_name -> api.settings.v1.Module
-	38, // 8: api.settings.v1.ListModulesReply.modules:type_name -> api.settings.v1.Module
-	2,  // 9: api.settings.v1.Settings.CreateOperatorConfig:input_type -> api.settings.v1.CreateOperatorConfigRequest
-	0,  // 10: api.settings.v1.Settings.GetOperatorConfig:input_type -> api.settings.v1.GetOperatorConfigRequest
-	6,  // 11: api.settings.v1.Settings.CreateMapConfig:input_type -> api.settings.v1.CreateMapConfigRequest
-	4,  // 12: api.settings.v1.Settings.GetMapConfig:input_type -> api.settings.v1.GetMapConfigRequest
-	12, // 13: api.settings.v1.Settings.CreateSystemInfo:input_type -> api.settings.v1.CreateSystemInfoRequest
-	10, // 14: api.settings.v1.Settings.GetSystemInfo:input_type -> api.settings.v1.GetSystemInfoRequest
-	8,  // 15: api.settings.v1.Settings.DeleteSystemInfo:input_type -> api.settings.v1.DeleteSystemInfoRequest
-	32, // 16: api.settings.v1.Settings.CreateModule:input_type -> api.settings.v1.CreateModuleRequest
-	34, // 17: api.settings.v1.Settings.DeleteModule:input_type -> api.settings.v1.DeleteModuleRequest
-	36, // 18: api.settings.v1.Settings.UpdateModule:input_type -> api.settings.v1.UpdateModuleRequest
-	39, // 19: api.settings.v1.Settings.GetModule:input_type -> api.settings.v1.GetModuleRequest
-	41, // 20: api.settings.v1.Settings.ListModules:input_type -> api.settings.v1.ListModulesRequest
-	23, // 21: api.settings.v1.Settings.CreateCameraAttr:input_type -> api.settings.v1.CreateCameraAttrRequest
-	25, // 22: api.settings.v1.Settings.DeleteCameraAttr:input_type -> api.settings.v1.DeleteCameraAttrRequest
-	27, // 23: api.settings.v1.Settings.GetCameraAttr:input_type -> api.settings.v1.GetCameraAttrRequest
-	30, // 24: api.settings.v1.Settings.ListCameraAttr:input_type -> api.settings.v1.ListCameraAttrRequest
-	21, // 25: api.settings.v1.Settings.CreateGeneralParameters:input_type -> api.settings.v1.CreateGeneralParametersRequest
-	19, // 26: api.settings.v1.Settings.UpdateGeneralParameters:input_type -> api.settings.v1.UpdateGeneralParametersRequest
-	17, // 27: api.settings.v1.Settings.DeleteGeneralParameters:input_type -> api.settings.v1.DeleteGeneralParametersRequest
-	15, // 28: api.settings.v1.Settings.ListGeneralParameters:input_type -> api.settings.v1.ListGeneralParametersRequest
-	3,  // 29: api.settings.v1.Settings.CreateOperatorConfig:output_type -> api.settings.v1.CreateOperatorConfigReply
-	1,  // 30: api.settings.v1.Settings.GetOperatorConfig:output_type -> api.settings.v1.GetOperatorConfigReply
-	7,  // 31: api.settings.v1.Settings.CreateMapConfig:output_type -> api.settings.v1.CreateMapConfigReply
-	5,  // 32: api.settings.v1.Settings.GetMapConfig:output_type -> api.settings.v1.GetMapConfigReply
-	13, // 33: api.settings.v1.Settings.CreateSystemInfo:output_type -> api.settings.v1.CreateSystemInfoReply
-	11, // 34: api.settings.v1.Settings.GetSystemInfo:output_type -> api.settings.v1.GetSystemInfoReply
-	9,  // 35: api.settings.v1.Settings.DeleteSystemInfo:output_type -> api.settings.v1.DeleteSystemInfoReply
-	33, // 36: api.settings.v1.Settings.CreateModule:output_type -> api.settings.v1.CreateModuleReply
-	35, // 37: api.settings.v1.Settings.DeleteModule:output_type -> api.settings.v1.DeleteModuleReply
-	37, // 38: api.settings.v1.Settings.UpdateModule:output_type -> api.settings.v1.UpdateModuleReply
-	40, // 39: api.settings.v1.Settings.GetModule:output_type -> api.settings.v1.GetModuleReply
-	42, // 40: api.settings.v1.Settings.ListModules:output_type -> api.settings.v1.ListModulesReply
-	24, // 41: api.settings.v1.Settings.CreateCameraAttr:output_type -> api.settings.v1.CreateCameraAttrReply
-	26, // 42: api.settings.v1.Settings.DeleteCameraAttr:output_type -> api.settings.v1.DeleteCameraAttrReply
-	29, // 43: api.settings.v1.Settings.GetCameraAttr:output_type -> api.settings.v1.GetCameraAttrReply
-	31, // 44: api.settings.v1.Settings.ListCameraAttr:output_type -> api.settings.v1.ListCameraAttrReply
-	22, // 45: api.settings.v1.Settings.CreateGeneralParameters:output_type -> api.settings.v1.CreateGeneralParametersReply
-	20, // 46: api.settings.v1.Settings.UpdateGeneralParameters:output_type -> api.settings.v1.updateGeneralParametersReply
-	18, // 47: api.settings.v1.Settings.DeleteGeneralParameters:output_type -> api.settings.v1.DeleteGeneralParametersReply
-	16, // 48: api.settings.v1.Settings.ListGeneralParameters:output_type -> api.settings.v1.ListGeneralParametersReply
-	29, // [29:49] is the sub-list for method output_type
-	9,  // [9:29] is the sub-list for method input_type
+	47, // 0: api.settings.v1.GetOperatorConfigReply.operator_config:type_name -> api.settings.v1.GetOperatorConfigReply.OperatorConfig
+	48, // 1: api.settings.v1.GeneralParameters.created:type_name -> google.protobuf.Timestamp
+	18, // 2: api.settings.v1.ListGeneralParametersReply.parameters:type_name -> api.settings.v1.GeneralParameters
+	48, // 3: api.settings.v1.CameraAttr.created:type_name -> google.protobuf.Timestamp
+	32, // 4: api.settings.v1.GetCameraAttrReply.attr:type_name -> api.settings.v1.CameraAttr
+	32, // 5: api.settings.v1.ListCameraAttrReply.attrs:type_name -> api.settings.v1.CameraAttr
+	48, // 6: api.settings.v1.Module.created:type_name -> google.protobuf.Timestamp
+	42, // 7: api.settings.v1.GetModuleReply.module:type_name -> api.settings.v1.Module
+	42, // 8: api.settings.v1.ListModulesReply.modules:type_name -> api.settings.v1.Module
+	0,  // 9: api.settings.v1.Settings.CreatePusherConfig:input_type -> api.settings.v1.CreatePusherConfigRequest
+	2,  // 10: api.settings.v1.Settings.GetPusherConfig:input_type -> api.settings.v1.GetPusherConfigRequest
+	6,  // 11: api.settings.v1.Settings.CreateOperatorConfig:input_type -> api.settings.v1.CreateOperatorConfigRequest
+	4,  // 12: api.settings.v1.Settings.GetOperatorConfig:input_type -> api.settings.v1.GetOperatorConfigRequest
+	10, // 13: api.settings.v1.Settings.CreateMapConfig:input_type -> api.settings.v1.CreateMapConfigRequest
+	8,  // 14: api.settings.v1.Settings.GetMapConfig:input_type -> api.settings.v1.GetMapConfigRequest
+	16, // 15: api.settings.v1.Settings.CreateSystemInfo:input_type -> api.settings.v1.CreateSystemInfoRequest
+	14, // 16: api.settings.v1.Settings.GetSystemInfo:input_type -> api.settings.v1.GetSystemInfoRequest
+	12, // 17: api.settings.v1.Settings.DeleteSystemInfo:input_type -> api.settings.v1.DeleteSystemInfoRequest
+	36, // 18: api.settings.v1.Settings.CreateModule:input_type -> api.settings.v1.CreateModuleRequest
+	38, // 19: api.settings.v1.Settings.DeleteModule:input_type -> api.settings.v1.DeleteModuleRequest
+	40, // 20: api.settings.v1.Settings.UpdateModule:input_type -> api.settings.v1.UpdateModuleRequest
+	43, // 21: api.settings.v1.Settings.GetModule:input_type -> api.settings.v1.GetModuleRequest
+	45, // 22: api.settings.v1.Settings.ListModules:input_type -> api.settings.v1.ListModulesRequest
+	27, // 23: api.settings.v1.Settings.CreateCameraAttr:input_type -> api.settings.v1.CreateCameraAttrRequest
+	29, // 24: api.settings.v1.Settings.DeleteCameraAttr:input_type -> api.settings.v1.DeleteCameraAttrRequest
+	31, // 25: api.settings.v1.Settings.GetCameraAttr:input_type -> api.settings.v1.GetCameraAttrRequest
+	34, // 26: api.settings.v1.Settings.ListCameraAttr:input_type -> api.settings.v1.ListCameraAttrRequest
+	25, // 27: api.settings.v1.Settings.CreateGeneralParameters:input_type -> api.settings.v1.CreateGeneralParametersRequest
+	23, // 28: api.settings.v1.Settings.UpdateGeneralParameters:input_type -> api.settings.v1.UpdateGeneralParametersRequest
+	21, // 29: api.settings.v1.Settings.DeleteGeneralParameters:input_type -> api.settings.v1.DeleteGeneralParametersRequest
+	19, // 30: api.settings.v1.Settings.ListGeneralParameters:input_type -> api.settings.v1.ListGeneralParametersRequest
+	1,  // 31: api.settings.v1.Settings.CreatePusherConfig:output_type -> api.settings.v1.CreatePusherConfigReply
+	3,  // 32: api.settings.v1.Settings.GetPusherConfig:output_type -> api.settings.v1.GetPusherConfigReply
+	7,  // 33: api.settings.v1.Settings.CreateOperatorConfig:output_type -> api.settings.v1.CreateOperatorConfigReply
+	5,  // 34: api.settings.v1.Settings.GetOperatorConfig:output_type -> api.settings.v1.GetOperatorConfigReply
+	11, // 35: api.settings.v1.Settings.CreateMapConfig:output_type -> api.settings.v1.CreateMapConfigReply
+	9,  // 36: api.settings.v1.Settings.GetMapConfig:output_type -> api.settings.v1.GetMapConfigReply
+	17, // 37: api.settings.v1.Settings.CreateSystemInfo:output_type -> api.settings.v1.CreateSystemInfoReply
+	15, // 38: api.settings.v1.Settings.GetSystemInfo:output_type -> api.settings.v1.GetSystemInfoReply
+	13, // 39: api.settings.v1.Settings.DeleteSystemInfo:output_type -> api.settings.v1.DeleteSystemInfoReply
+	37, // 40: api.settings.v1.Settings.CreateModule:output_type -> api.settings.v1.CreateModuleReply
+	39, // 41: api.settings.v1.Settings.DeleteModule:output_type -> api.settings.v1.DeleteModuleReply
+	41, // 42: api.settings.v1.Settings.UpdateModule:output_type -> api.settings.v1.UpdateModuleReply
+	44, // 43: api.settings.v1.Settings.GetModule:output_type -> api.settings.v1.GetModuleReply
+	46, // 44: api.settings.v1.Settings.ListModules:output_type -> api.settings.v1.ListModulesReply
+	28, // 45: api.settings.v1.Settings.CreateCameraAttr:output_type -> api.settings.v1.CreateCameraAttrReply
+	30, // 46: api.settings.v1.Settings.DeleteCameraAttr:output_type -> api.settings.v1.DeleteCameraAttrReply
+	33, // 47: api.settings.v1.Settings.GetCameraAttr:output_type -> api.settings.v1.GetCameraAttrReply
+	35, // 48: api.settings.v1.Settings.ListCameraAttr:output_type -> api.settings.v1.ListCameraAttrReply
+	26, // 49: api.settings.v1.Settings.CreateGeneralParameters:output_type -> api.settings.v1.CreateGeneralParametersReply
+	24, // 50: api.settings.v1.Settings.UpdateGeneralParameters:output_type -> api.settings.v1.updateGeneralParametersReply
+	22, // 51: api.settings.v1.Settings.DeleteGeneralParameters:output_type -> api.settings.v1.DeleteGeneralParametersReply
+	20, // 52: api.settings.v1.Settings.ListGeneralParameters:output_type -> api.settings.v1.ListGeneralParametersReply
+	31, // [31:53] is the sub-list for method output_type
+	9,  // [9:31] is the sub-list for method input_type
 	9,  // [9:9] is the sub-list for extension type_name
 	9,  // [9:9] is the sub-list for extension extendee
 	0,  // [0:9] is the sub-list for field type_name
@@ -2673,7 +2938,7 @@ func file_settings_v1_settings_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_settings_v1_settings_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetOperatorConfigRequest); i {
+			switch v := v.(*CreatePusherConfigRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2685,7 +2950,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetOperatorConfigReply); i {
+			switch v := v.(*CreatePusherConfigReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2697,7 +2962,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateOperatorConfigRequest); i {
+			switch v := v.(*GetPusherConfigRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2709,7 +2974,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateOperatorConfigReply); i {
+			switch v := v.(*GetPusherConfigReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2721,7 +2986,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetMapConfigRequest); i {
+			switch v := v.(*GetOperatorConfigRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2733,7 +2998,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetMapConfigReply); i {
+			switch v := v.(*GetOperatorConfigReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2745,7 +3010,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMapConfigRequest); i {
+			switch v := v.(*CreateOperatorConfigRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2757,7 +3022,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMapConfigReply); i {
+			switch v := v.(*CreateOperatorConfigReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2769,7 +3034,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteSystemInfoRequest); i {
+			switch v := v.(*GetMapConfigRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2781,7 +3046,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteSystemInfoReply); i {
+			switch v := v.(*GetMapConfigReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2793,7 +3058,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetSystemInfoRequest); i {
+			switch v := v.(*CreateMapConfigRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2805,7 +3070,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetSystemInfoReply); i {
+			switch v := v.(*CreateMapConfigReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2817,7 +3082,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateSystemInfoRequest); i {
+			switch v := v.(*DeleteSystemInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2829,7 +3094,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateSystemInfoReply); i {
+			switch v := v.(*DeleteSystemInfoReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2841,7 +3106,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GeneralParameters); i {
+			switch v := v.(*GetSystemInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2853,7 +3118,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListGeneralParametersRequest); i {
+			switch v := v.(*GetSystemInfoReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2865,7 +3130,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListGeneralParametersReply); i {
+			switch v := v.(*CreateSystemInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2877,7 +3142,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteGeneralParametersRequest); i {
+			switch v := v.(*CreateSystemInfoReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2889,7 +3154,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteGeneralParametersReply); i {
+			switch v := v.(*GeneralParameters); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2901,7 +3166,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateGeneralParametersRequest); i {
+			switch v := v.(*ListGeneralParametersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2913,7 +3178,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateGeneralParametersReply); i {
+			switch v := v.(*ListGeneralParametersReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2925,7 +3190,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateGeneralParametersRequest); i {
+			switch v := v.(*DeleteGeneralParametersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2937,7 +3202,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateGeneralParametersReply); i {
+			switch v := v.(*DeleteGeneralParametersReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2949,7 +3214,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateCameraAttrRequest); i {
+			switch v := v.(*UpdateGeneralParametersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2961,7 +3226,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateCameraAttrReply); i {
+			switch v := v.(*UpdateGeneralParametersReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2973,7 +3238,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteCameraAttrRequest); i {
+			switch v := v.(*CreateGeneralParametersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2985,7 +3250,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteCameraAttrReply); i {
+			switch v := v.(*CreateGeneralParametersReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2997,7 +3262,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetCameraAttrRequest); i {
+			switch v := v.(*CreateCameraAttrRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3009,7 +3274,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CameraAttr); i {
+			switch v := v.(*CreateCameraAttrReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3021,7 +3286,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetCameraAttrReply); i {
+			switch v := v.(*DeleteCameraAttrRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3033,7 +3298,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListCameraAttrRequest); i {
+			switch v := v.(*DeleteCameraAttrReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3045,7 +3310,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListCameraAttrReply); i {
+			switch v := v.(*GetCameraAttrRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3057,7 +3322,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateModuleRequest); i {
+			switch v := v.(*CameraAttr); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3069,7 +3334,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateModuleReply); i {
+			switch v := v.(*GetCameraAttrReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3081,7 +3346,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteModuleRequest); i {
+			switch v := v.(*ListCameraAttrRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3093,7 +3358,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteModuleReply); i {
+			switch v := v.(*ListCameraAttrReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3105,7 +3370,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateModuleRequest); i {
+			switch v := v.(*CreateModuleRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3117,7 +3382,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateModuleReply); i {
+			switch v := v.(*CreateModuleReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3129,7 +3394,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Module); i {
+			switch v := v.(*DeleteModuleRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3141,7 +3406,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetModuleRequest); i {
+			switch v := v.(*DeleteModuleReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3153,7 +3418,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetModuleReply); i {
+			switch v := v.(*UpdateModuleRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3165,7 +3430,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListModulesRequest); i {
+			switch v := v.(*UpdateModuleReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3177,7 +3442,7 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListModulesReply); i {
+			switch v := v.(*Module); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3189,6 +3454,54 @@ func file_settings_v1_settings_proto_init() {
 			}
 		}
 		file_settings_v1_settings_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetModuleRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_settings_v1_settings_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetModuleReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_settings_v1_settings_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListModulesRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_settings_v1_settings_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListModulesReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_settings_v1_settings_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetOperatorConfigReply_OperatorConfig); i {
 			case 0:
 				return &v.state
@@ -3207,7 +3520,7 @@ func file_settings_v1_settings_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_settings_v1_settings_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   44,
+			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

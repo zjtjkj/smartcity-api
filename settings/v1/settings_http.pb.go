@@ -24,6 +24,7 @@ const OperationSettingsCreateGeneralParameters = "/api.settings.v1.Settings/Crea
 const OperationSettingsCreateMapConfig = "/api.settings.v1.Settings/CreateMapConfig"
 const OperationSettingsCreateModule = "/api.settings.v1.Settings/CreateModule"
 const OperationSettingsCreateOperatorConfig = "/api.settings.v1.Settings/CreateOperatorConfig"
+const OperationSettingsCreatePusherConfig = "/api.settings.v1.Settings/CreatePusherConfig"
 const OperationSettingsCreateSystemInfo = "/api.settings.v1.Settings/CreateSystemInfo"
 const OperationSettingsDeleteCameraAttr = "/api.settings.v1.Settings/DeleteCameraAttr"
 const OperationSettingsDeleteGeneralParameters = "/api.settings.v1.Settings/DeleteGeneralParameters"
@@ -33,6 +34,7 @@ const OperationSettingsGetCameraAttr = "/api.settings.v1.Settings/GetCameraAttr"
 const OperationSettingsGetMapConfig = "/api.settings.v1.Settings/GetMapConfig"
 const OperationSettingsGetModule = "/api.settings.v1.Settings/GetModule"
 const OperationSettingsGetOperatorConfig = "/api.settings.v1.Settings/GetOperatorConfig"
+const OperationSettingsGetPusherConfig = "/api.settings.v1.Settings/GetPusherConfig"
 const OperationSettingsGetSystemInfo = "/api.settings.v1.Settings/GetSystemInfo"
 const OperationSettingsListCameraAttr = "/api.settings.v1.Settings/ListCameraAttr"
 const OperationSettingsListGeneralParameters = "/api.settings.v1.Settings/ListGeneralParameters"
@@ -46,6 +48,7 @@ type SettingsHTTPServer interface {
 	CreateMapConfig(context.Context, *CreateMapConfigRequest) (*CreateMapConfigReply, error)
 	CreateModule(context.Context, *CreateModuleRequest) (*CreateModuleReply, error)
 	CreateOperatorConfig(context.Context, *CreateOperatorConfigRequest) (*CreateOperatorConfigReply, error)
+	CreatePusherConfig(context.Context, *CreatePusherConfigRequest) (*CreatePusherConfigReply, error)
 	CreateSystemInfo(context.Context, *CreateSystemInfoRequest) (*CreateSystemInfoReply, error)
 	DeleteCameraAttr(context.Context, *DeleteCameraAttrRequest) (*DeleteCameraAttrReply, error)
 	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
@@ -55,6 +58,7 @@ type SettingsHTTPServer interface {
 	GetMapConfig(context.Context, *GetMapConfigRequest) (*GetMapConfigReply, error)
 	GetModule(context.Context, *GetModuleRequest) (*GetModuleReply, error)
 	GetOperatorConfig(context.Context, *GetOperatorConfigRequest) (*GetOperatorConfigReply, error)
+	GetPusherConfig(context.Context, *GetPusherConfigRequest) (*GetPusherConfigReply, error)
 	GetSystemInfo(context.Context, *GetSystemInfoRequest) (*GetSystemInfoReply, error)
 	ListCameraAttr(context.Context, *ListCameraAttrRequest) (*ListCameraAttrReply, error)
 	ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error)
@@ -65,6 +69,8 @@ type SettingsHTTPServer interface {
 
 func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r := s.Route("/")
+	r.PUT("/api/v1/settings/pusher", _Settings_CreatePusherConfig0_HTTP_Handler(srv))
+	r.GET("/api/v1/settings/pusher", _Settings_GetPusherConfig0_HTTP_Handler(srv))
 	r.PUT("/api/v1/settings/operator", _Settings_CreateOperatorConfig0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/operator", _Settings_GetOperatorConfig0_HTTP_Handler(srv))
 	r.PUT("/api/v1/settings/map", _Settings_CreateMapConfig0_HTTP_Handler(srv))
@@ -85,6 +91,44 @@ func RegisterSettingsHTTPServer(s *http.Server, srv SettingsHTTPServer) {
 	r.POST("/api/v1/settings/parameter/{id}", _Settings_UpdateGeneralParameters0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/settings/parameter/{id}", _Settings_DeleteGeneralParameters0_HTTP_Handler(srv))
 	r.GET("/api/v1/settings/parameters", _Settings_ListGeneralParameters0_HTTP_Handler(srv))
+}
+
+func _Settings_CreatePusherConfig0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in CreatePusherConfigRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsCreatePusherConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.CreatePusherConfig(ctx, req.(*CreatePusherConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*CreatePusherConfigReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Settings_GetPusherConfig0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetPusherConfigRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationSettingsGetPusherConfig)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetPusherConfig(ctx, req.(*GetPusherConfigRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetPusherConfigReply)
+		return ctx.Result(200, reply)
+	}
 }
 
 func _Settings_CreateOperatorConfig0_HTTP_Handler(srv SettingsHTTPServer) func(ctx http.Context) error {
@@ -494,6 +538,7 @@ type SettingsHTTPClient interface {
 	CreateMapConfig(ctx context.Context, req *CreateMapConfigRequest, opts ...http.CallOption) (rsp *CreateMapConfigReply, err error)
 	CreateModule(ctx context.Context, req *CreateModuleRequest, opts ...http.CallOption) (rsp *CreateModuleReply, err error)
 	CreateOperatorConfig(ctx context.Context, req *CreateOperatorConfigRequest, opts ...http.CallOption) (rsp *CreateOperatorConfigReply, err error)
+	CreatePusherConfig(ctx context.Context, req *CreatePusherConfigRequest, opts ...http.CallOption) (rsp *CreatePusherConfigReply, err error)
 	CreateSystemInfo(ctx context.Context, req *CreateSystemInfoRequest, opts ...http.CallOption) (rsp *CreateSystemInfoReply, err error)
 	DeleteCameraAttr(ctx context.Context, req *DeleteCameraAttrRequest, opts ...http.CallOption) (rsp *DeleteCameraAttrReply, err error)
 	DeleteGeneralParameters(ctx context.Context, req *DeleteGeneralParametersRequest, opts ...http.CallOption) (rsp *DeleteGeneralParametersReply, err error)
@@ -503,6 +548,7 @@ type SettingsHTTPClient interface {
 	GetMapConfig(ctx context.Context, req *GetMapConfigRequest, opts ...http.CallOption) (rsp *GetMapConfigReply, err error)
 	GetModule(ctx context.Context, req *GetModuleRequest, opts ...http.CallOption) (rsp *GetModuleReply, err error)
 	GetOperatorConfig(ctx context.Context, req *GetOperatorConfigRequest, opts ...http.CallOption) (rsp *GetOperatorConfigReply, err error)
+	GetPusherConfig(ctx context.Context, req *GetPusherConfigRequest, opts ...http.CallOption) (rsp *GetPusherConfigReply, err error)
 	GetSystemInfo(ctx context.Context, req *GetSystemInfoRequest, opts ...http.CallOption) (rsp *GetSystemInfoReply, err error)
 	ListCameraAttr(ctx context.Context, req *ListCameraAttrRequest, opts ...http.CallOption) (rsp *ListCameraAttrReply, err error)
 	ListGeneralParameters(ctx context.Context, req *ListGeneralParametersRequest, opts ...http.CallOption) (rsp *ListGeneralParametersReply, err error)
@@ -576,6 +622,19 @@ func (c *SettingsHTTPClientImpl) CreateOperatorConfig(ctx context.Context, in *C
 	pattern := "/api/v1/settings/operator"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationSettingsCreateOperatorConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) CreatePusherConfig(ctx context.Context, in *CreatePusherConfigRequest, opts ...http.CallOption) (*CreatePusherConfigReply, error) {
+	var out CreatePusherConfigReply
+	pattern := "/api/v1/settings/pusher"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationSettingsCreatePusherConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
@@ -693,6 +752,19 @@ func (c *SettingsHTTPClientImpl) GetOperatorConfig(ctx context.Context, in *GetO
 	pattern := "/api/v1/settings/operator"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationSettingsGetOperatorConfig))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *SettingsHTTPClientImpl) GetPusherConfig(ctx context.Context, in *GetPusherConfigRequest, opts ...http.CallOption) (*GetPusherConfigReply, error) {
+	var out GetPusherConfigReply
+	pattern := "/api/v1/settings/pusher"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationSettingsGetPusherConfig))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {

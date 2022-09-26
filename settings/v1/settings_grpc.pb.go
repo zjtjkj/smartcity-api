@@ -22,6 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SettingsClient interface {
+	CreatePusherConfig(ctx context.Context, in *CreatePusherConfigRequest, opts ...grpc.CallOption) (*CreatePusherConfigReply, error)
+	GetPusherConfig(ctx context.Context, in *GetPusherConfigRequest, opts ...grpc.CallOption) (*GetPusherConfigReply, error)
 	CreateOperatorConfig(ctx context.Context, in *CreateOperatorConfigRequest, opts ...grpc.CallOption) (*CreateOperatorConfigReply, error)
 	GetOperatorConfig(ctx context.Context, in *GetOperatorConfigRequest, opts ...grpc.CallOption) (*GetOperatorConfigReply, error)
 	CreateMapConfig(ctx context.Context, in *CreateMapConfigRequest, opts ...grpc.CallOption) (*CreateMapConfigReply, error)
@@ -50,6 +52,24 @@ type settingsClient struct {
 
 func NewSettingsClient(cc grpc.ClientConnInterface) SettingsClient {
 	return &settingsClient{cc}
+}
+
+func (c *settingsClient) CreatePusherConfig(ctx context.Context, in *CreatePusherConfigRequest, opts ...grpc.CallOption) (*CreatePusherConfigReply, error) {
+	out := new(CreatePusherConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreatePusherConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) GetPusherConfig(ctx context.Context, in *GetPusherConfigRequest, opts ...grpc.CallOption) (*GetPusherConfigReply, error) {
+	out := new(GetPusherConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetPusherConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *settingsClient) CreateOperatorConfig(ctx context.Context, in *CreateOperatorConfigRequest, opts ...grpc.CallOption) (*CreateOperatorConfigReply, error) {
@@ -236,6 +256,8 @@ func (c *settingsClient) ListGeneralParameters(ctx context.Context, in *ListGene
 // All implementations must embed UnimplementedSettingsServer
 // for forward compatibility
 type SettingsServer interface {
+	CreatePusherConfig(context.Context, *CreatePusherConfigRequest) (*CreatePusherConfigReply, error)
+	GetPusherConfig(context.Context, *GetPusherConfigRequest) (*GetPusherConfigReply, error)
 	CreateOperatorConfig(context.Context, *CreateOperatorConfigRequest) (*CreateOperatorConfigReply, error)
 	GetOperatorConfig(context.Context, *GetOperatorConfigRequest) (*GetOperatorConfigReply, error)
 	CreateMapConfig(context.Context, *CreateMapConfigRequest) (*CreateMapConfigReply, error)
@@ -263,6 +285,12 @@ type SettingsServer interface {
 type UnimplementedSettingsServer struct {
 }
 
+func (UnimplementedSettingsServer) CreatePusherConfig(context.Context, *CreatePusherConfigRequest) (*CreatePusherConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePusherConfig not implemented")
+}
+func (UnimplementedSettingsServer) GetPusherConfig(context.Context, *GetPusherConfigRequest) (*GetPusherConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPusherConfig not implemented")
+}
 func (UnimplementedSettingsServer) CreateOperatorConfig(context.Context, *CreateOperatorConfigRequest) (*CreateOperatorConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOperatorConfig not implemented")
 }
@@ -334,6 +362,42 @@ type UnsafeSettingsServer interface {
 
 func RegisterSettingsServer(s grpc.ServiceRegistrar, srv SettingsServer) {
 	s.RegisterService(&Settings_ServiceDesc, srv)
+}
+
+func _Settings_CreatePusherConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePusherConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreatePusherConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreatePusherConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreatePusherConfig(ctx, req.(*CreatePusherConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_GetPusherConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPusherConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetPusherConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/GetPusherConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetPusherConfig(ctx, req.(*GetPusherConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Settings_CreateOperatorConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -703,6 +767,14 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.settings.v1.Settings",
 	HandlerType: (*SettingsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreatePusherConfig",
+			Handler:    _Settings_CreatePusherConfig_Handler,
+		},
+		{
+			MethodName: "GetPusherConfig",
+			Handler:    _Settings_GetPusherConfig_Handler,
+		},
 		{
 			MethodName: "CreateOperatorConfig",
 			Handler:    _Settings_CreateOperatorConfig_Handler,

@@ -35,6 +35,430 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on CreatePusherConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreatePusherConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreatePusherConfigRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreatePusherConfigRequestMultiError, or nil if none found.
+func (m *CreatePusherConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreatePusherConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PushStart
+
+	// no validation rules for PushChain
+
+	// no validation rules for PushEnd
+
+	// no validation rules for PushSingle
+
+	if len(errors) > 0 {
+		return CreatePusherConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreatePusherConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by CreatePusherConfigRequest.ValidateAll() if the
+// designated constraints aren't met.
+type CreatePusherConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreatePusherConfigRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreatePusherConfigRequestMultiError) AllErrors() []error { return m }
+
+// CreatePusherConfigRequestValidationError is the validation error returned by
+// CreatePusherConfigRequest.Validate if the designated constraints aren't met.
+type CreatePusherConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreatePusherConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreatePusherConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreatePusherConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreatePusherConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreatePusherConfigRequestValidationError) ErrorName() string {
+	return "CreatePusherConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreatePusherConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreatePusherConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreatePusherConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreatePusherConfigRequestValidationError{}
+
+// Validate checks the field values on CreatePusherConfigReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreatePusherConfigReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreatePusherConfigReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreatePusherConfigReplyMultiError, or nil if none found.
+func (m *CreatePusherConfigReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreatePusherConfigReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreatePusherConfigReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreatePusherConfigReplyMultiError is an error wrapping multiple validation
+// errors returned by CreatePusherConfigReply.ValidateAll() if the designated
+// constraints aren't met.
+type CreatePusherConfigReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreatePusherConfigReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreatePusherConfigReplyMultiError) AllErrors() []error { return m }
+
+// CreatePusherConfigReplyValidationError is the validation error returned by
+// CreatePusherConfigReply.Validate if the designated constraints aren't met.
+type CreatePusherConfigReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreatePusherConfigReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreatePusherConfigReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreatePusherConfigReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreatePusherConfigReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreatePusherConfigReplyValidationError) ErrorName() string {
+	return "CreatePusherConfigReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreatePusherConfigReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreatePusherConfigReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreatePusherConfigReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreatePusherConfigReplyValidationError{}
+
+// Validate checks the field values on GetPusherConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPusherConfigRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPusherConfigRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPusherConfigRequestMultiError, or nil if none found.
+func (m *GetPusherConfigRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPusherConfigRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetPusherConfigRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPusherConfigRequestMultiError is an error wrapping multiple validation
+// errors returned by GetPusherConfigRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetPusherConfigRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPusherConfigRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPusherConfigRequestMultiError) AllErrors() []error { return m }
+
+// GetPusherConfigRequestValidationError is the validation error returned by
+// GetPusherConfigRequest.Validate if the designated constraints aren't met.
+type GetPusherConfigRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPusherConfigRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPusherConfigRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPusherConfigRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPusherConfigRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPusherConfigRequestValidationError) ErrorName() string {
+	return "GetPusherConfigRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPusherConfigRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPusherConfigRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPusherConfigRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPusherConfigRequestValidationError{}
+
+// Validate checks the field values on GetPusherConfigReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPusherConfigReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPusherConfigReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPusherConfigReplyMultiError, or nil if none found.
+func (m *GetPusherConfigReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPusherConfigReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for PushStart
+
+	// no validation rules for PushChain
+
+	// no validation rules for PushEnd
+
+	// no validation rules for PushSingle
+
+	if len(errors) > 0 {
+		return GetPusherConfigReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPusherConfigReplyMultiError is an error wrapping multiple validation
+// errors returned by GetPusherConfigReply.ValidateAll() if the designated
+// constraints aren't met.
+type GetPusherConfigReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPusherConfigReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPusherConfigReplyMultiError) AllErrors() []error { return m }
+
+// GetPusherConfigReplyValidationError is the validation error returned by
+// GetPusherConfigReply.Validate if the designated constraints aren't met.
+type GetPusherConfigReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPusherConfigReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPusherConfigReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPusherConfigReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPusherConfigReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPusherConfigReplyValidationError) ErrorName() string {
+	return "GetPusherConfigReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPusherConfigReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPusherConfigReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPusherConfigReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPusherConfigReplyValidationError{}
+
 // Validate checks the field values on GetOperatorConfigRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
