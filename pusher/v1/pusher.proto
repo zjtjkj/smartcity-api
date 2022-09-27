@@ -43,7 +43,7 @@ service Pusher {
 			get: "/api/v1/pusher/{id}"
 		};
 	}
-	rpc ListPusher (ListPusherRequest) returns (ListPushRequest) {
+	rpc ListPusher (ListPusherRequest) returns (ListPusherReply) {
 		option (google.api.http) = {
 			get: "/api/v1/pushers"
 		};
@@ -169,29 +169,52 @@ message CreateGlobalTimeFilterReply {}
 
 message CreatePusherRequest {
 	string name = 1;
-	uint32 controller = 2;
+	bool enable = 2;
+	uint32 start = 3;
+	uint32 end = 4;
+	repeated uint32 cares = 5;
+	repeated uint32 endpoints = 6;
 }
 message CreatePusherReply {}
 
 message UpdatePusherRequest {
 	uint32 id = 1;
+	string name = 2;
+	bool enable = 3;
+	uint32 start = 4;
+	uint32 end = 5;
+	repeated uint32 cares = 6;
+	repeated uint32 endpoints = 7;
 }
 message UpdatePusherReply {}
 
 message DeletePusherRequest {
-
+	uint32 id = 1;
 }
 message DeletePusherReply {}
 
+
+message Instance {
+	uint32 id = 1;
+	google.protobuf.Timestamp created = 2;
+	string name = 3;
+	bool enable = 4;
+	uint32 start = 5;
+	uint32 end = 6;
+	repeated uint32 cares = 7;
+	repeated uint32 endpoints = 8;
+}
 message GetPusherRequest {
 	uint32 id = 1;
 }
 message GetPusherReply {
-
+	Instance pusher = 1;
 }
 
 message ListPusherRequest {}
-message ListPushRequest {}
+message ListPusherReply {
+	repeated Instance pushers = 1;
+}
 
 message ListControllerRequest {}
 message ListControllerReply {

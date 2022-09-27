@@ -41,7 +41,7 @@ type PusherHTTPServer interface {
 	GetPusher(context.Context, *GetPusherRequest) (*GetPusherReply, error)
 	ListController(context.Context, *ListControllerRequest) (*ListControllerReply, error)
 	ListEndpoint(context.Context, *ListEndpointRequest) (*ListEndpointReply, error)
-	ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error)
+	ListPusher(context.Context, *ListPusherRequest) (*ListPusherReply, error)
 	Report(context.Context, *ReportRequest) (*ReportReply, error)
 	UpdateEndpoint(context.Context, *UpdateEndpointRequest) (*UpdateEndpointReply, error)
 	UpdatePusher(context.Context, *UpdatePusherRequest) (*UpdatePusherReply, error)
@@ -197,7 +197,7 @@ func _Pusher_ListPusher0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Contex
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListPushRequest)
+		reply := out.(*ListPusherReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -315,7 +315,7 @@ type PusherHTTPClient interface {
 	GetPusher(ctx context.Context, req *GetPusherRequest, opts ...http.CallOption) (rsp *GetPusherReply, err error)
 	ListController(ctx context.Context, req *ListControllerRequest, opts ...http.CallOption) (rsp *ListControllerReply, err error)
 	ListEndpoint(ctx context.Context, req *ListEndpointRequest, opts ...http.CallOption) (rsp *ListEndpointReply, err error)
-	ListPusher(ctx context.Context, req *ListPusherRequest, opts ...http.CallOption) (rsp *ListPushRequest, err error)
+	ListPusher(ctx context.Context, req *ListPusherRequest, opts ...http.CallOption) (rsp *ListPusherReply, err error)
 	Report(ctx context.Context, req *ReportRequest, opts ...http.CallOption) (rsp *ReportReply, err error)
 	UpdateEndpoint(ctx context.Context, req *UpdateEndpointRequest, opts ...http.CallOption) (rsp *UpdateEndpointReply, err error)
 	UpdatePusher(ctx context.Context, req *UpdatePusherRequest, opts ...http.CallOption) (rsp *UpdatePusherReply, err error)
@@ -433,8 +433,8 @@ func (c *PusherHTTPClientImpl) ListEndpoint(ctx context.Context, in *ListEndpoin
 	return &out, err
 }
 
-func (c *PusherHTTPClientImpl) ListPusher(ctx context.Context, in *ListPusherRequest, opts ...http.CallOption) (*ListPushRequest, error) {
-	var out ListPushRequest
+func (c *PusherHTTPClientImpl) ListPusher(ctx context.Context, in *ListPusherRequest, opts ...http.CallOption) (*ListPusherReply, error) {
+	var out ListPusherReply
 	pattern := "/api/v1/pushers"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationPusherListPusher))

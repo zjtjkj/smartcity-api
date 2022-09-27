@@ -28,7 +28,7 @@ type PusherClient interface {
 	UpdatePusher(ctx context.Context, in *UpdatePusherRequest, opts ...grpc.CallOption) (*UpdatePusherReply, error)
 	DeletePusher(ctx context.Context, in *DeletePusherRequest, opts ...grpc.CallOption) (*DeletePusherReply, error)
 	GetPusher(ctx context.Context, in *GetPusherRequest, opts ...grpc.CallOption) (*GetPusherReply, error)
-	ListPusher(ctx context.Context, in *ListPusherRequest, opts ...grpc.CallOption) (*ListPushRequest, error)
+	ListPusher(ctx context.Context, in *ListPusherRequest, opts ...grpc.CallOption) (*ListPusherReply, error)
 	CreateEndpoint(ctx context.Context, in *CreateEndpointRequest, opts ...grpc.CallOption) (*CreateEndpointReply, error)
 	UpdateEndpoint(ctx context.Context, in *UpdateEndpointRequest, opts ...grpc.CallOption) (*UpdateEndpointReply, error)
 	DeleteEndpoint(ctx context.Context, in *DeleteEndpointRequest, opts ...grpc.CallOption) (*DeleteEndpointReply, error)
@@ -106,8 +106,8 @@ func (c *pusherClient) GetPusher(ctx context.Context, in *GetPusherRequest, opts
 	return out, nil
 }
 
-func (c *pusherClient) ListPusher(ctx context.Context, in *ListPusherRequest, opts ...grpc.CallOption) (*ListPushRequest, error) {
-	out := new(ListPushRequest)
+func (c *pusherClient) ListPusher(ctx context.Context, in *ListPusherRequest, opts ...grpc.CallOption) (*ListPusherReply, error) {
+	out := new(ListPusherReply)
 	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListPusher", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -242,7 +242,7 @@ type PusherServer interface {
 	UpdatePusher(context.Context, *UpdatePusherRequest) (*UpdatePusherReply, error)
 	DeletePusher(context.Context, *DeletePusherRequest) (*DeletePusherReply, error)
 	GetPusher(context.Context, *GetPusherRequest) (*GetPusherReply, error)
-	ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error)
+	ListPusher(context.Context, *ListPusherRequest) (*ListPusherReply, error)
 	CreateEndpoint(context.Context, *CreateEndpointRequest) (*CreateEndpointReply, error)
 	UpdateEndpoint(context.Context, *UpdateEndpointRequest) (*UpdateEndpointReply, error)
 	DeleteEndpoint(context.Context, *DeleteEndpointRequest) (*DeleteEndpointReply, error)
@@ -281,7 +281,7 @@ func (UnimplementedPusherServer) DeletePusher(context.Context, *DeletePusherRequ
 func (UnimplementedPusherServer) GetPusher(context.Context, *GetPusherRequest) (*GetPusherReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPusher not implemented")
 }
-func (UnimplementedPusherServer) ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error) {
+func (UnimplementedPusherServer) ListPusher(context.Context, *ListPusherRequest) (*ListPusherReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPusher not implemented")
 }
 func (UnimplementedPusherServer) CreateEndpoint(context.Context, *CreateEndpointRequest) (*CreateEndpointReply, error) {
