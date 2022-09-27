@@ -258,6 +258,7 @@ message UpdateEndpointRequest {
 	string addr = 3;
 	string controller = 4;
 	string cert = 5;
+	bool enable = 6;
 }
 
 message UpdateEndpointReply {}
@@ -280,6 +281,7 @@ message Endpoint {
 	bool insecure = 7;
 	string cert = 8;
 	string controller = 9;
+	bool enable = 10;
 }
 message GetEndpointReply {
 
