@@ -1319,9 +1319,7 @@ type ListControllerReply struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id   uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Desc string `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
+	Controllers []*ListControllerReply_Controller `protobuf:"bytes,1,rep,name=controllers,proto3" json:"controllers,omitempty"`
 }
 
 func (x *ListControllerReply) Reset() {
@@ -1356,25 +1354,11 @@ func (*ListControllerReply) Descriptor() ([]byte, []int) {
 	return file_pusher_v1_pusher_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *ListControllerReply) GetId() uint32 {
+func (x *ListControllerReply) GetControllers() []*ListControllerReply_Controller {
 	if x != nil {
-		return x.Id
+		return x.Controllers
 	}
-	return 0
-}
-
-func (x *ListControllerReply) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *ListControllerReply) GetDesc() string {
-	if x != nil {
-		return x.Desc
-	}
-	return ""
+	return nil
 }
 
 type Point struct {
@@ -2467,6 +2451,61 @@ func (x *ListGlobalTimeFilterReply_GlobalTimeFilter) GetCount() uint32 {
 	return 0
 }
 
+type ListControllerReply_Controller struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Desc string `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
+}
+
+func (x *ListControllerReply_Controller) Reset() {
+	*x = ListControllerReply_Controller{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_pusher_v1_pusher_proto_msgTypes[45]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListControllerReply_Controller) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListControllerReply_Controller) ProtoMessage() {}
+
+func (x *ListControllerReply_Controller) ProtoReflect() protoreflect.Message {
+	mi := &file_pusher_v1_pusher_proto_msgTypes[45]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListControllerReply_Controller.ProtoReflect.Descriptor instead.
+func (*ListControllerReply_Controller) Descriptor() ([]byte, []int) {
+	return file_pusher_v1_pusher_proto_rawDescGZIP(), []int{27, 0}
+}
+
+func (x *ListControllerReply_Controller) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ListControllerReply_Controller) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
 var File_pusher_v1_pusher_proto protoreflect.FileDescriptor
 
 var file_pusher_v1_pusher_proto_rawDesc = []byte{
@@ -2591,9 +2630,14 @@ var file_pusher_v1_pusher_proto_rawDesc = []byte{
 	0x75, 0x65, 0x73, 0x74, 0x22, 0x11, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x75, 0x73, 0x68,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x17, 0x0a, 0x15, 0x4c, 0x69, 0x73, 0x74, 0x43,
 	0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x22, 0x4d, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c,
-	0x65, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x22, 0x9c, 0x01, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c,
+	0x6c, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x4f, 0x0a, 0x0b, 0x63, 0x6f, 0x6e, 0x74,
+	0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x70, 0x75, 0x73, 0x68, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69,
+	0x73, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6c,
+	0x79, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x52, 0x0b, 0x63, 0x6f,
+	0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x73, 0x1a, 0x34, 0x0a, 0x0a, 0x43, 0x6f, 0x6e,
+	0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64,
 	0x65, 0x73, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x22,
 	0x3b, 0x0a, 0x05, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x18, 0x0a, 0x01, 0x78, 0x18, 0x01, 0x20,
@@ -2854,7 +2898,7 @@ func file_pusher_v1_pusher_proto_rawDescGZIP() []byte {
 }
 
 var file_pusher_v1_pusher_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_pusher_v1_pusher_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
+var file_pusher_v1_pusher_proto_msgTypes = make([]protoimpl.MessageInfo, 46)
 var file_pusher_v1_pusher_proto_goTypes = []interface{}{
 	(Type)(0),                                              // 0: api.pusher.v1.Type
 	(*ListGlobalModuleFilterRequest)(nil),                  // 1: api.pusher.v1.ListGlobalModuleFilterRequest
@@ -2902,67 +2946,69 @@ var file_pusher_v1_pusher_proto_goTypes = []interface{}{
 	(*ListReceiverReply)(nil),                              // 43: api.pusher.v1.ListReceiverReply
 	(*ListGlobalModuleFilterReply_GlobalModuleFilter)(nil), // 44: api.pusher.v1.ListGlobalModuleFilterReply.GlobalModuleFilter
 	(*ListGlobalTimeFilterReply_GlobalTimeFilter)(nil),     // 45: api.pusher.v1.ListGlobalTimeFilterReply.GlobalTimeFilter
-	(*timestamppb.Timestamp)(nil),                          // 46: google.protobuf.Timestamp
+	(*ListControllerReply_Controller)(nil),                 // 46: api.pusher.v1.ListControllerReply.Controller
+	(*timestamppb.Timestamp)(nil),                          // 47: google.protobuf.Timestamp
 }
 var file_pusher_v1_pusher_proto_depIdxs = []int32{
 	44, // 0: api.pusher.v1.ListGlobalModuleFilterReply.filters:type_name -> api.pusher.v1.ListGlobalModuleFilterReply.GlobalModuleFilter
 	45, // 1: api.pusher.v1.ListGlobalTimeFilterReply.filters:type_name -> api.pusher.v1.ListGlobalTimeFilterReply.GlobalTimeFilter
-	29, // 2: api.pusher.v1.Object.points:type_name -> api.pusher.v1.Point
-	30, // 3: api.pusher.v1.Object.properties:type_name -> api.pusher.v1.Property
-	46, // 4: api.pusher.v1.ReportRequest.created:type_name -> google.protobuf.Timestamp
-	31, // 5: api.pusher.v1.ReportRequest.objects:type_name -> api.pusher.v1.Object
-	0,  // 6: api.pusher.v1.CreateReceiverRequest.type:type_name -> api.pusher.v1.Type
-	46, // 7: api.pusher.v1.GetReceiverReply.created:type_name -> google.protobuf.Timestamp
-	46, // 8: api.pusher.v1.GetReceiverReply.updated:type_name -> google.protobuf.Timestamp
-	0,  // 9: api.pusher.v1.GetReceiverReply.type:type_name -> api.pusher.v1.Type
-	0,  // 10: api.pusher.v1.ListReceiverReply.type:type_name -> api.pusher.v1.Type
-	46, // 11: api.pusher.v1.ListGlobalModuleFilterReply.GlobalModuleFilter.created:type_name -> google.protobuf.Timestamp
-	46, // 12: api.pusher.v1.ListGlobalTimeFilterReply.GlobalTimeFilter.created:type_name -> google.protobuf.Timestamp
-	32, // 13: api.pusher.v1.Pusher.Report:input_type -> api.pusher.v1.ReportRequest
-	27, // 14: api.pusher.v1.Pusher.ListController:input_type -> api.pusher.v1.ListControllerRequest
-	17, // 15: api.pusher.v1.Pusher.CreatePusher:input_type -> api.pusher.v1.CreatePusherRequest
-	19, // 16: api.pusher.v1.Pusher.UpdatePusher:input_type -> api.pusher.v1.UpdatePusherRequest
-	21, // 17: api.pusher.v1.Pusher.DeletePusher:input_type -> api.pusher.v1.DeletePusherRequest
-	23, // 18: api.pusher.v1.Pusher.GetPusher:input_type -> api.pusher.v1.GetPusherRequest
-	25, // 19: api.pusher.v1.Pusher.ListPusher:input_type -> api.pusher.v1.ListPusherRequest
-	34, // 20: api.pusher.v1.Pusher.CreateReceiver:input_type -> api.pusher.v1.CreateReceiverRequest
-	36, // 21: api.pusher.v1.Pusher.UpdateReceiver:input_type -> api.pusher.v1.UpdateReceiverRequest
-	38, // 22: api.pusher.v1.Pusher.DeleteReceiver:input_type -> api.pusher.v1.DeleteReceiverRequest
-	40, // 23: api.pusher.v1.Pusher.GetReceiver:input_type -> api.pusher.v1.GetReceiverRequest
-	42, // 24: api.pusher.v1.Pusher.ListReceiver:input_type -> api.pusher.v1.ListReceiverRequest
-	15, // 25: api.pusher.v1.Pusher.CreateGlobalTimeFilter:input_type -> api.pusher.v1.CreateGlobalTimeFilterRequest
-	13, // 26: api.pusher.v1.Pusher.DeleteGlobalTimeFilter:input_type -> api.pusher.v1.DeleteGlobalTimeFilterRequest
-	11, // 27: api.pusher.v1.Pusher.UpdateGlobalTimeFilter:input_type -> api.pusher.v1.UpdateGlobalTimeFilterRequest
-	9,  // 28: api.pusher.v1.Pusher.ListGlobalTimeFilter:input_type -> api.pusher.v1.ListGlobalTimeFilterRequest
-	7,  // 29: api.pusher.v1.Pusher.CreateGlobalModuleFilter:input_type -> api.pusher.v1.CreateGlobalModuleFilterRequest
-	5,  // 30: api.pusher.v1.Pusher.DeleteGlobalModuleFilter:input_type -> api.pusher.v1.DeleteGlobalModuleFilterRequest
-	3,  // 31: api.pusher.v1.Pusher.UpdateGlobalModuleFilter:input_type -> api.pusher.v1.UpdateGlobalModuleFilterRequest
-	1,  // 32: api.pusher.v1.Pusher.ListGlobalModuleFilter:input_type -> api.pusher.v1.ListGlobalModuleFilterRequest
-	33, // 33: api.pusher.v1.Pusher.Report:output_type -> api.pusher.v1.ReportReply
-	28, // 34: api.pusher.v1.Pusher.ListController:output_type -> api.pusher.v1.ListControllerReply
-	18, // 35: api.pusher.v1.Pusher.CreatePusher:output_type -> api.pusher.v1.CreatePusherReply
-	20, // 36: api.pusher.v1.Pusher.UpdatePusher:output_type -> api.pusher.v1.UpdatePusherReply
-	22, // 37: api.pusher.v1.Pusher.DeletePusher:output_type -> api.pusher.v1.DeletePusherReply
-	24, // 38: api.pusher.v1.Pusher.GetPusher:output_type -> api.pusher.v1.GetPusherReply
-	26, // 39: api.pusher.v1.Pusher.ListPusher:output_type -> api.pusher.v1.ListPushRequest
-	35, // 40: api.pusher.v1.Pusher.CreateReceiver:output_type -> api.pusher.v1.CreateReceiverReply
-	37, // 41: api.pusher.v1.Pusher.UpdateReceiver:output_type -> api.pusher.v1.UpdateReceiverReply
-	39, // 42: api.pusher.v1.Pusher.DeleteReceiver:output_type -> api.pusher.v1.DeleteReceiverReply
-	41, // 43: api.pusher.v1.Pusher.GetReceiver:output_type -> api.pusher.v1.GetReceiverReply
-	43, // 44: api.pusher.v1.Pusher.ListReceiver:output_type -> api.pusher.v1.ListReceiverReply
-	16, // 45: api.pusher.v1.Pusher.CreateGlobalTimeFilter:output_type -> api.pusher.v1.CreateGlobalTimeFilterReply
-	14, // 46: api.pusher.v1.Pusher.DeleteGlobalTimeFilter:output_type -> api.pusher.v1.DeleteGlobalTimeFilterReply
-	12, // 47: api.pusher.v1.Pusher.UpdateGlobalTimeFilter:output_type -> api.pusher.v1.UpdateGlobalTimeFilterReply
-	10, // 48: api.pusher.v1.Pusher.ListGlobalTimeFilter:output_type -> api.pusher.v1.ListGlobalTimeFilterReply
-	8,  // 49: api.pusher.v1.Pusher.CreateGlobalModuleFilter:output_type -> api.pusher.v1.CreateGlobalModuleFilterReply
-	6,  // 50: api.pusher.v1.Pusher.DeleteGlobalModuleFilter:output_type -> api.pusher.v1.DeleteGlobalModuleFilterReply
-	4,  // 51: api.pusher.v1.Pusher.UpdateGlobalModuleFilter:output_type -> api.pusher.v1.UpdateGlobalModuleFilterReply
-	2,  // 52: api.pusher.v1.Pusher.ListGlobalModuleFilter:output_type -> api.pusher.v1.ListGlobalModuleFilterReply
-	33, // [33:53] is the sub-list for method output_type
-	13, // [13:33] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	46, // 2: api.pusher.v1.ListControllerReply.controllers:type_name -> api.pusher.v1.ListControllerReply.Controller
+	29, // 3: api.pusher.v1.Object.points:type_name -> api.pusher.v1.Point
+	30, // 4: api.pusher.v1.Object.properties:type_name -> api.pusher.v1.Property
+	47, // 5: api.pusher.v1.ReportRequest.created:type_name -> google.protobuf.Timestamp
+	31, // 6: api.pusher.v1.ReportRequest.objects:type_name -> api.pusher.v1.Object
+	0,  // 7: api.pusher.v1.CreateReceiverRequest.type:type_name -> api.pusher.v1.Type
+	47, // 8: api.pusher.v1.GetReceiverReply.created:type_name -> google.protobuf.Timestamp
+	47, // 9: api.pusher.v1.GetReceiverReply.updated:type_name -> google.protobuf.Timestamp
+	0,  // 10: api.pusher.v1.GetReceiverReply.type:type_name -> api.pusher.v1.Type
+	0,  // 11: api.pusher.v1.ListReceiverReply.type:type_name -> api.pusher.v1.Type
+	47, // 12: api.pusher.v1.ListGlobalModuleFilterReply.GlobalModuleFilter.created:type_name -> google.protobuf.Timestamp
+	47, // 13: api.pusher.v1.ListGlobalTimeFilterReply.GlobalTimeFilter.created:type_name -> google.protobuf.Timestamp
+	32, // 14: api.pusher.v1.Pusher.Report:input_type -> api.pusher.v1.ReportRequest
+	27, // 15: api.pusher.v1.Pusher.ListController:input_type -> api.pusher.v1.ListControllerRequest
+	17, // 16: api.pusher.v1.Pusher.CreatePusher:input_type -> api.pusher.v1.CreatePusherRequest
+	19, // 17: api.pusher.v1.Pusher.UpdatePusher:input_type -> api.pusher.v1.UpdatePusherRequest
+	21, // 18: api.pusher.v1.Pusher.DeletePusher:input_type -> api.pusher.v1.DeletePusherRequest
+	23, // 19: api.pusher.v1.Pusher.GetPusher:input_type -> api.pusher.v1.GetPusherRequest
+	25, // 20: api.pusher.v1.Pusher.ListPusher:input_type -> api.pusher.v1.ListPusherRequest
+	34, // 21: api.pusher.v1.Pusher.CreateReceiver:input_type -> api.pusher.v1.CreateReceiverRequest
+	36, // 22: api.pusher.v1.Pusher.UpdateReceiver:input_type -> api.pusher.v1.UpdateReceiverRequest
+	38, // 23: api.pusher.v1.Pusher.DeleteReceiver:input_type -> api.pusher.v1.DeleteReceiverRequest
+	40, // 24: api.pusher.v1.Pusher.GetReceiver:input_type -> api.pusher.v1.GetReceiverRequest
+	42, // 25: api.pusher.v1.Pusher.ListReceiver:input_type -> api.pusher.v1.ListReceiverRequest
+	15, // 26: api.pusher.v1.Pusher.CreateGlobalTimeFilter:input_type -> api.pusher.v1.CreateGlobalTimeFilterRequest
+	13, // 27: api.pusher.v1.Pusher.DeleteGlobalTimeFilter:input_type -> api.pusher.v1.DeleteGlobalTimeFilterRequest
+	11, // 28: api.pusher.v1.Pusher.UpdateGlobalTimeFilter:input_type -> api.pusher.v1.UpdateGlobalTimeFilterRequest
+	9,  // 29: api.pusher.v1.Pusher.ListGlobalTimeFilter:input_type -> api.pusher.v1.ListGlobalTimeFilterRequest
+	7,  // 30: api.pusher.v1.Pusher.CreateGlobalModuleFilter:input_type -> api.pusher.v1.CreateGlobalModuleFilterRequest
+	5,  // 31: api.pusher.v1.Pusher.DeleteGlobalModuleFilter:input_type -> api.pusher.v1.DeleteGlobalModuleFilterRequest
+	3,  // 32: api.pusher.v1.Pusher.UpdateGlobalModuleFilter:input_type -> api.pusher.v1.UpdateGlobalModuleFilterRequest
+	1,  // 33: api.pusher.v1.Pusher.ListGlobalModuleFilter:input_type -> api.pusher.v1.ListGlobalModuleFilterRequest
+	33, // 34: api.pusher.v1.Pusher.Report:output_type -> api.pusher.v1.ReportReply
+	28, // 35: api.pusher.v1.Pusher.ListController:output_type -> api.pusher.v1.ListControllerReply
+	18, // 36: api.pusher.v1.Pusher.CreatePusher:output_type -> api.pusher.v1.CreatePusherReply
+	20, // 37: api.pusher.v1.Pusher.UpdatePusher:output_type -> api.pusher.v1.UpdatePusherReply
+	22, // 38: api.pusher.v1.Pusher.DeletePusher:output_type -> api.pusher.v1.DeletePusherReply
+	24, // 39: api.pusher.v1.Pusher.GetPusher:output_type -> api.pusher.v1.GetPusherReply
+	26, // 40: api.pusher.v1.Pusher.ListPusher:output_type -> api.pusher.v1.ListPushRequest
+	35, // 41: api.pusher.v1.Pusher.CreateReceiver:output_type -> api.pusher.v1.CreateReceiverReply
+	37, // 42: api.pusher.v1.Pusher.UpdateReceiver:output_type -> api.pusher.v1.UpdateReceiverReply
+	39, // 43: api.pusher.v1.Pusher.DeleteReceiver:output_type -> api.pusher.v1.DeleteReceiverReply
+	41, // 44: api.pusher.v1.Pusher.GetReceiver:output_type -> api.pusher.v1.GetReceiverReply
+	43, // 45: api.pusher.v1.Pusher.ListReceiver:output_type -> api.pusher.v1.ListReceiverReply
+	16, // 46: api.pusher.v1.Pusher.CreateGlobalTimeFilter:output_type -> api.pusher.v1.CreateGlobalTimeFilterReply
+	14, // 47: api.pusher.v1.Pusher.DeleteGlobalTimeFilter:output_type -> api.pusher.v1.DeleteGlobalTimeFilterReply
+	12, // 48: api.pusher.v1.Pusher.UpdateGlobalTimeFilter:output_type -> api.pusher.v1.UpdateGlobalTimeFilterReply
+	10, // 49: api.pusher.v1.Pusher.ListGlobalTimeFilter:output_type -> api.pusher.v1.ListGlobalTimeFilterReply
+	8,  // 50: api.pusher.v1.Pusher.CreateGlobalModuleFilter:output_type -> api.pusher.v1.CreateGlobalModuleFilterReply
+	6,  // 51: api.pusher.v1.Pusher.DeleteGlobalModuleFilter:output_type -> api.pusher.v1.DeleteGlobalModuleFilterReply
+	4,  // 52: api.pusher.v1.Pusher.UpdateGlobalModuleFilter:output_type -> api.pusher.v1.UpdateGlobalModuleFilterReply
+	2,  // 53: api.pusher.v1.Pusher.ListGlobalModuleFilter:output_type -> api.pusher.v1.ListGlobalModuleFilterReply
+	34, // [34:54] is the sub-list for method output_type
+	14, // [14:34] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_pusher_v1_pusher_proto_init() }
@@ -3511,6 +3557,18 @@ func file_pusher_v1_pusher_proto_init() {
 				return nil
 			}
 		}
+		file_pusher_v1_pusher_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListControllerReply_Controller); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3518,7 +3576,7 @@ func file_pusher_v1_pusher_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_pusher_v1_pusher_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   45,
+			NumMessages:   46,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

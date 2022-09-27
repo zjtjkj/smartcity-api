@@ -195,9 +195,11 @@ message ListPushRequest {}
 
 message ListControllerRequest {}
 message ListControllerReply {
-	uint32 id = 1;
-	string name = 2;
-	string desc = 3;
+	message Controller {
+		string name = 2;
+		string desc = 3;
+	}
+	repeated Controller controllers = 1;
 }
 
 
