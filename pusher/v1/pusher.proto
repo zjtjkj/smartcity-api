@@ -237,7 +237,7 @@ message ReportRequest {
 }
 message ReportReply {}
 
-enum Type {
+enum Method {
 	grpc = 0;
 	http = 1;
 }
@@ -245,7 +245,7 @@ enum Type {
 message CreateEndpointRequest {
 	string name = 1;
 	string addr = 2;
-	Type type = 3;
+	Method method = 3;
 	bool insecure = 4;
 	string cert = 5;
 	string controller = 6;
@@ -276,7 +276,7 @@ message Endpoint {
 	google.protobuf.Timestamp updated = 3;
 	string name = 4;
 	string addr = 5;
-	Type type = 6;
+	Method method = 6;
 	bool insecure = 7;
 	string cert = 8;
 	string controller = 9;
