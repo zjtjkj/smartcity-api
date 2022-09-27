@@ -29,11 +29,11 @@ type PusherClient interface {
 	DeletePusher(ctx context.Context, in *DeletePusherRequest, opts ...grpc.CallOption) (*DeletePusherReply, error)
 	GetPusher(ctx context.Context, in *GetPusherRequest, opts ...grpc.CallOption) (*GetPusherReply, error)
 	ListPusher(ctx context.Context, in *ListPusherRequest, opts ...grpc.CallOption) (*ListPushRequest, error)
-	CreateReceiver(ctx context.Context, in *CreateReceiverRequest, opts ...grpc.CallOption) (*CreateReceiverReply, error)
-	UpdateReceiver(ctx context.Context, in *UpdateReceiverRequest, opts ...grpc.CallOption) (*UpdateReceiverReply, error)
-	DeleteReceiver(ctx context.Context, in *DeleteReceiverRequest, opts ...grpc.CallOption) (*DeleteReceiverReply, error)
-	GetReceiver(ctx context.Context, in *GetReceiverRequest, opts ...grpc.CallOption) (*GetReceiverReply, error)
-	ListReceiver(ctx context.Context, in *ListReceiverRequest, opts ...grpc.CallOption) (*ListReceiverReply, error)
+	CreateEndpoint(ctx context.Context, in *CreateEndpointRequest, opts ...grpc.CallOption) (*CreateEndpointReply, error)
+	UpdateEndpoint(ctx context.Context, in *UpdateEndpointRequest, opts ...grpc.CallOption) (*UpdateEndpointReply, error)
+	DeleteEndpoint(ctx context.Context, in *DeleteEndpointRequest, opts ...grpc.CallOption) (*DeleteEndpointReply, error)
+	GetEndpoint(ctx context.Context, in *GetEndpointRequest, opts ...grpc.CallOption) (*GetEndpointReply, error)
+	ListEndpoint(ctx context.Context, in *ListEndpointRequest, opts ...grpc.CallOption) (*ListEndpointReply, error)
 	CreateGlobalTimeFilter(ctx context.Context, in *CreateGlobalTimeFilterRequest, opts ...grpc.CallOption) (*CreateGlobalTimeFilterReply, error)
 	DeleteGlobalTimeFilter(ctx context.Context, in *DeleteGlobalTimeFilterRequest, opts ...grpc.CallOption) (*DeleteGlobalTimeFilterReply, error)
 	UpdateGlobalTimeFilter(ctx context.Context, in *UpdateGlobalTimeFilterRequest, opts ...grpc.CallOption) (*UpdateGlobalTimeFilterReply, error)
@@ -115,45 +115,45 @@ func (c *pusherClient) ListPusher(ctx context.Context, in *ListPusherRequest, op
 	return out, nil
 }
 
-func (c *pusherClient) CreateReceiver(ctx context.Context, in *CreateReceiverRequest, opts ...grpc.CallOption) (*CreateReceiverReply, error) {
-	out := new(CreateReceiverReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/CreateReceiver", in, out, opts...)
+func (c *pusherClient) CreateEndpoint(ctx context.Context, in *CreateEndpointRequest, opts ...grpc.CallOption) (*CreateEndpointReply, error) {
+	out := new(CreateEndpointReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/CreateEndpoint", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) UpdateReceiver(ctx context.Context, in *UpdateReceiverRequest, opts ...grpc.CallOption) (*UpdateReceiverReply, error) {
-	out := new(UpdateReceiverReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/UpdateReceiver", in, out, opts...)
+func (c *pusherClient) UpdateEndpoint(ctx context.Context, in *UpdateEndpointRequest, opts ...grpc.CallOption) (*UpdateEndpointReply, error) {
+	out := new(UpdateEndpointReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/UpdateEndpoint", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) DeleteReceiver(ctx context.Context, in *DeleteReceiverRequest, opts ...grpc.CallOption) (*DeleteReceiverReply, error) {
-	out := new(DeleteReceiverReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/DeleteReceiver", in, out, opts...)
+func (c *pusherClient) DeleteEndpoint(ctx context.Context, in *DeleteEndpointRequest, opts ...grpc.CallOption) (*DeleteEndpointReply, error) {
+	out := new(DeleteEndpointReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/DeleteEndpoint", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) GetReceiver(ctx context.Context, in *GetReceiverRequest, opts ...grpc.CallOption) (*GetReceiverReply, error) {
-	out := new(GetReceiverReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/GetReceiver", in, out, opts...)
+func (c *pusherClient) GetEndpoint(ctx context.Context, in *GetEndpointRequest, opts ...grpc.CallOption) (*GetEndpointReply, error) {
+	out := new(GetEndpointReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/GetEndpoint", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pusherClient) ListReceiver(ctx context.Context, in *ListReceiverRequest, opts ...grpc.CallOption) (*ListReceiverReply, error) {
-	out := new(ListReceiverReply)
-	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListReceiver", in, out, opts...)
+func (c *pusherClient) ListEndpoint(ctx context.Context, in *ListEndpointRequest, opts ...grpc.CallOption) (*ListEndpointReply, error) {
+	out := new(ListEndpointReply)
+	err := c.cc.Invoke(ctx, "/api.pusher.v1.Pusher/ListEndpoint", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -243,11 +243,11 @@ type PusherServer interface {
 	DeletePusher(context.Context, *DeletePusherRequest) (*DeletePusherReply, error)
 	GetPusher(context.Context, *GetPusherRequest) (*GetPusherReply, error)
 	ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error)
-	CreateReceiver(context.Context, *CreateReceiverRequest) (*CreateReceiverReply, error)
-	UpdateReceiver(context.Context, *UpdateReceiverRequest) (*UpdateReceiverReply, error)
-	DeleteReceiver(context.Context, *DeleteReceiverRequest) (*DeleteReceiverReply, error)
-	GetReceiver(context.Context, *GetReceiverRequest) (*GetReceiverReply, error)
-	ListReceiver(context.Context, *ListReceiverRequest) (*ListReceiverReply, error)
+	CreateEndpoint(context.Context, *CreateEndpointRequest) (*CreateEndpointReply, error)
+	UpdateEndpoint(context.Context, *UpdateEndpointRequest) (*UpdateEndpointReply, error)
+	DeleteEndpoint(context.Context, *DeleteEndpointRequest) (*DeleteEndpointReply, error)
+	GetEndpoint(context.Context, *GetEndpointRequest) (*GetEndpointReply, error)
+	ListEndpoint(context.Context, *ListEndpointRequest) (*ListEndpointReply, error)
 	CreateGlobalTimeFilter(context.Context, *CreateGlobalTimeFilterRequest) (*CreateGlobalTimeFilterReply, error)
 	DeleteGlobalTimeFilter(context.Context, *DeleteGlobalTimeFilterRequest) (*DeleteGlobalTimeFilterReply, error)
 	UpdateGlobalTimeFilter(context.Context, *UpdateGlobalTimeFilterRequest) (*UpdateGlobalTimeFilterReply, error)
@@ -284,20 +284,20 @@ func (UnimplementedPusherServer) GetPusher(context.Context, *GetPusherRequest) (
 func (UnimplementedPusherServer) ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPusher not implemented")
 }
-func (UnimplementedPusherServer) CreateReceiver(context.Context, *CreateReceiverRequest) (*CreateReceiverReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateReceiver not implemented")
+func (UnimplementedPusherServer) CreateEndpoint(context.Context, *CreateEndpointRequest) (*CreateEndpointReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateEndpoint not implemented")
 }
-func (UnimplementedPusherServer) UpdateReceiver(context.Context, *UpdateReceiverRequest) (*UpdateReceiverReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateReceiver not implemented")
+func (UnimplementedPusherServer) UpdateEndpoint(context.Context, *UpdateEndpointRequest) (*UpdateEndpointReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEndpoint not implemented")
 }
-func (UnimplementedPusherServer) DeleteReceiver(context.Context, *DeleteReceiverRequest) (*DeleteReceiverReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteReceiver not implemented")
+func (UnimplementedPusherServer) DeleteEndpoint(context.Context, *DeleteEndpointRequest) (*DeleteEndpointReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteEndpoint not implemented")
 }
-func (UnimplementedPusherServer) GetReceiver(context.Context, *GetReceiverRequest) (*GetReceiverReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReceiver not implemented")
+func (UnimplementedPusherServer) GetEndpoint(context.Context, *GetEndpointRequest) (*GetEndpointReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEndpoint not implemented")
 }
-func (UnimplementedPusherServer) ListReceiver(context.Context, *ListReceiverRequest) (*ListReceiverReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListReceiver not implemented")
+func (UnimplementedPusherServer) ListEndpoint(context.Context, *ListEndpointRequest) (*ListEndpointReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEndpoint not implemented")
 }
 func (UnimplementedPusherServer) CreateGlobalTimeFilter(context.Context, *CreateGlobalTimeFilterRequest) (*CreateGlobalTimeFilterReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateGlobalTimeFilter not implemented")
@@ -462,92 +462,92 @@ func _Pusher_ListPusher_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_CreateReceiver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateReceiverRequest)
+func _Pusher_CreateEndpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateEndpointRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).CreateReceiver(ctx, in)
+		return srv.(PusherServer).CreateEndpoint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/CreateReceiver",
+		FullMethod: "/api.pusher.v1.Pusher/CreateEndpoint",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).CreateReceiver(ctx, req.(*CreateReceiverRequest))
+		return srv.(PusherServer).CreateEndpoint(ctx, req.(*CreateEndpointRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_UpdateReceiver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateReceiverRequest)
+func _Pusher_UpdateEndpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateEndpointRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).UpdateReceiver(ctx, in)
+		return srv.(PusherServer).UpdateEndpoint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/UpdateReceiver",
+		FullMethod: "/api.pusher.v1.Pusher/UpdateEndpoint",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).UpdateReceiver(ctx, req.(*UpdateReceiverRequest))
+		return srv.(PusherServer).UpdateEndpoint(ctx, req.(*UpdateEndpointRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_DeleteReceiver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteReceiverRequest)
+func _Pusher_DeleteEndpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteEndpointRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).DeleteReceiver(ctx, in)
+		return srv.(PusherServer).DeleteEndpoint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/DeleteReceiver",
+		FullMethod: "/api.pusher.v1.Pusher/DeleteEndpoint",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).DeleteReceiver(ctx, req.(*DeleteReceiverRequest))
+		return srv.(PusherServer).DeleteEndpoint(ctx, req.(*DeleteEndpointRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_GetReceiver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetReceiverRequest)
+func _Pusher_GetEndpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEndpointRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).GetReceiver(ctx, in)
+		return srv.(PusherServer).GetEndpoint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/GetReceiver",
+		FullMethod: "/api.pusher.v1.Pusher/GetEndpoint",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).GetReceiver(ctx, req.(*GetReceiverRequest))
+		return srv.(PusherServer).GetEndpoint(ctx, req.(*GetEndpointRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pusher_ListReceiver_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListReceiverRequest)
+func _Pusher_ListEndpoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEndpointRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PusherServer).ListReceiver(ctx, in)
+		return srv.(PusherServer).ListEndpoint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.pusher.v1.Pusher/ListReceiver",
+		FullMethod: "/api.pusher.v1.Pusher/ListEndpoint",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PusherServer).ListReceiver(ctx, req.(*ListReceiverRequest))
+		return srv.(PusherServer).ListEndpoint(ctx, req.(*ListEndpointRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -732,24 +732,24 @@ var Pusher_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Pusher_ListPusher_Handler,
 		},
 		{
-			MethodName: "CreateReceiver",
-			Handler:    _Pusher_CreateReceiver_Handler,
+			MethodName: "CreateEndpoint",
+			Handler:    _Pusher_CreateEndpoint_Handler,
 		},
 		{
-			MethodName: "UpdateReceiver",
-			Handler:    _Pusher_UpdateReceiver_Handler,
+			MethodName: "UpdateEndpoint",
+			Handler:    _Pusher_UpdateEndpoint_Handler,
 		},
 		{
-			MethodName: "DeleteReceiver",
-			Handler:    _Pusher_DeleteReceiver_Handler,
+			MethodName: "DeleteEndpoint",
+			Handler:    _Pusher_DeleteEndpoint_Handler,
 		},
 		{
-			MethodName: "GetReceiver",
-			Handler:    _Pusher_GetReceiver_Handler,
+			MethodName: "GetEndpoint",
+			Handler:    _Pusher_GetEndpoint_Handler,
 		},
 		{
-			MethodName: "ListReceiver",
-			Handler:    _Pusher_ListReceiver_Handler,
+			MethodName: "ListEndpoint",
+			Handler:    _Pusher_ListEndpoint_Handler,
 		},
 		{
 			MethodName: "CreateGlobalTimeFilter",

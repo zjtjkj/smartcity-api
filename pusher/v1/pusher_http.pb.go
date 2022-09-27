@@ -19,32 +19,32 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
+const OperationPusherCreateEndpoint = "/api.pusher.v1.Pusher/CreateEndpoint"
 const OperationPusherCreatePusher = "/api.pusher.v1.Pusher/CreatePusher"
-const OperationPusherCreateReceiver = "/api.pusher.v1.Pusher/CreateReceiver"
+const OperationPusherDeleteEndpoint = "/api.pusher.v1.Pusher/DeleteEndpoint"
 const OperationPusherDeletePusher = "/api.pusher.v1.Pusher/DeletePusher"
-const OperationPusherDeleteReceiver = "/api.pusher.v1.Pusher/DeleteReceiver"
+const OperationPusherGetEndpoint = "/api.pusher.v1.Pusher/GetEndpoint"
 const OperationPusherGetPusher = "/api.pusher.v1.Pusher/GetPusher"
-const OperationPusherGetReceiver = "/api.pusher.v1.Pusher/GetReceiver"
 const OperationPusherListController = "/api.pusher.v1.Pusher/ListController"
+const OperationPusherListEndpoint = "/api.pusher.v1.Pusher/ListEndpoint"
 const OperationPusherListPusher = "/api.pusher.v1.Pusher/ListPusher"
-const OperationPusherListReceiver = "/api.pusher.v1.Pusher/ListReceiver"
 const OperationPusherReport = "/api.pusher.v1.Pusher/Report"
+const OperationPusherUpdateEndpoint = "/api.pusher.v1.Pusher/UpdateEndpoint"
 const OperationPusherUpdatePusher = "/api.pusher.v1.Pusher/UpdatePusher"
-const OperationPusherUpdateReceiver = "/api.pusher.v1.Pusher/UpdateReceiver"
 
 type PusherHTTPServer interface {
+	CreateEndpoint(context.Context, *CreateEndpointRequest) (*CreateEndpointReply, error)
 	CreatePusher(context.Context, *CreatePusherRequest) (*CreatePusherReply, error)
-	CreateReceiver(context.Context, *CreateReceiverRequest) (*CreateReceiverReply, error)
+	DeleteEndpoint(context.Context, *DeleteEndpointRequest) (*DeleteEndpointReply, error)
 	DeletePusher(context.Context, *DeletePusherRequest) (*DeletePusherReply, error)
-	DeleteReceiver(context.Context, *DeleteReceiverRequest) (*DeleteReceiverReply, error)
+	GetEndpoint(context.Context, *GetEndpointRequest) (*GetEndpointReply, error)
 	GetPusher(context.Context, *GetPusherRequest) (*GetPusherReply, error)
-	GetReceiver(context.Context, *GetReceiverRequest) (*GetReceiverReply, error)
 	ListController(context.Context, *ListControllerRequest) (*ListControllerReply, error)
+	ListEndpoint(context.Context, *ListEndpointRequest) (*ListEndpointReply, error)
 	ListPusher(context.Context, *ListPusherRequest) (*ListPushRequest, error)
-	ListReceiver(context.Context, *ListReceiverRequest) (*ListReceiverReply, error)
 	Report(context.Context, *ReportRequest) (*ReportReply, error)
+	UpdateEndpoint(context.Context, *UpdateEndpointRequest) (*UpdateEndpointReply, error)
 	UpdatePusher(context.Context, *UpdatePusherRequest) (*UpdatePusherReply, error)
-	UpdateReceiver(context.Context, *UpdateReceiverRequest) (*UpdateReceiverReply, error)
 }
 
 func RegisterPusherHTTPServer(s *http.Server, srv PusherHTTPServer) {
@@ -56,11 +56,11 @@ func RegisterPusherHTTPServer(s *http.Server, srv PusherHTTPServer) {
 	r.DELETE("/api/v1/pusher", _Pusher_DeletePusher0_HTTP_Handler(srv))
 	r.GET("/api/v1/pusher/{id}", _Pusher_GetPusher0_HTTP_Handler(srv))
 	r.GET("/api/v1/pushers", _Pusher_ListPusher0_HTTP_Handler(srv))
-	r.PUT("/api/v1/pusher/receiver", _Pusher_CreateReceiver0_HTTP_Handler(srv))
-	r.POST("/api/v1/push/receiver/{id}", _Pusher_UpdateReceiver0_HTTP_Handler(srv))
-	r.DELETE("/api/v1/push/receiver/{id}", _Pusher_DeleteReceiver0_HTTP_Handler(srv))
-	r.GET("/api/v1/push/receiver/{id}", _Pusher_GetReceiver0_HTTP_Handler(srv))
-	r.GET("/api/v1/push/receivers", _Pusher_ListReceiver0_HTTP_Handler(srv))
+	r.PUT("/api/v1/pusher/receiver", _Pusher_CreateEndpoint0_HTTP_Handler(srv))
+	r.POST("/api/v1/push/receiver/{id}", _Pusher_UpdateEndpoint0_HTTP_Handler(srv))
+	r.DELETE("/api/v1/push/receiver/{id}", _Pusher_DeleteEndpoint0_HTTP_Handler(srv))
+	r.GET("/api/v1/push/receiver/{id}", _Pusher_GetEndpoint0_HTTP_Handler(srv))
+	r.GET("/api/v1/push/receivers", _Pusher_ListEndpoint0_HTTP_Handler(srv))
 }
 
 func _Pusher_Report0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
@@ -202,123 +202,123 @@ func _Pusher_ListPusher0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Contex
 	}
 }
 
-func _Pusher_CreateReceiver0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
+func _Pusher_CreateEndpoint0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in CreateReceiverRequest
+		var in CreateEndpointRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationPusherCreateReceiver)
+		http.SetOperation(ctx, OperationPusherCreateEndpoint)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateReceiver(ctx, req.(*CreateReceiverRequest))
+			return srv.CreateEndpoint(ctx, req.(*CreateEndpointRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*CreateReceiverReply)
+		reply := out.(*CreateEndpointReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Pusher_UpdateReceiver0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
+func _Pusher_UpdateEndpoint0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in UpdateReceiverRequest
+		var in UpdateEndpointRequest
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationPusherUpdateReceiver)
+		http.SetOperation(ctx, OperationPusherUpdateEndpoint)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.UpdateReceiver(ctx, req.(*UpdateReceiverRequest))
+			return srv.UpdateEndpoint(ctx, req.(*UpdateEndpointRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*UpdateReceiverReply)
+		reply := out.(*UpdateEndpointReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Pusher_DeleteReceiver0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
+func _Pusher_DeleteEndpoint0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in DeleteReceiverRequest
+		var in DeleteEndpointRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationPusherDeleteReceiver)
+		http.SetOperation(ctx, OperationPusherDeleteEndpoint)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteReceiver(ctx, req.(*DeleteReceiverRequest))
+			return srv.DeleteEndpoint(ctx, req.(*DeleteEndpointRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*DeleteReceiverReply)
+		reply := out.(*DeleteEndpointReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Pusher_GetReceiver0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
+func _Pusher_GetEndpoint0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetReceiverRequest
+		var in GetEndpointRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationPusherGetReceiver)
+		http.SetOperation(ctx, OperationPusherGetEndpoint)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetReceiver(ctx, req.(*GetReceiverRequest))
+			return srv.GetEndpoint(ctx, req.(*GetEndpointRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetReceiverReply)
+		reply := out.(*GetEndpointReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _Pusher_ListReceiver0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
+func _Pusher_ListEndpoint0_HTTP_Handler(srv PusherHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListReceiverRequest
+		var in ListEndpointRequest
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationPusherListReceiver)
+		http.SetOperation(ctx, OperationPusherListEndpoint)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListReceiver(ctx, req.(*ListReceiverRequest))
+			return srv.ListEndpoint(ctx, req.(*ListEndpointRequest))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListReceiverReply)
+		reply := out.(*ListEndpointReply)
 		return ctx.Result(200, reply)
 	}
 }
 
 type PusherHTTPClient interface {
+	CreateEndpoint(ctx context.Context, req *CreateEndpointRequest, opts ...http.CallOption) (rsp *CreateEndpointReply, err error)
 	CreatePusher(ctx context.Context, req *CreatePusherRequest, opts ...http.CallOption) (rsp *CreatePusherReply, err error)
-	CreateReceiver(ctx context.Context, req *CreateReceiverRequest, opts ...http.CallOption) (rsp *CreateReceiverReply, err error)
+	DeleteEndpoint(ctx context.Context, req *DeleteEndpointRequest, opts ...http.CallOption) (rsp *DeleteEndpointReply, err error)
 	DeletePusher(ctx context.Context, req *DeletePusherRequest, opts ...http.CallOption) (rsp *DeletePusherReply, err error)
-	DeleteReceiver(ctx context.Context, req *DeleteReceiverRequest, opts ...http.CallOption) (rsp *DeleteReceiverReply, err error)
+	GetEndpoint(ctx context.Context, req *GetEndpointRequest, opts ...http.CallOption) (rsp *GetEndpointReply, err error)
 	GetPusher(ctx context.Context, req *GetPusherRequest, opts ...http.CallOption) (rsp *GetPusherReply, err error)
-	GetReceiver(ctx context.Context, req *GetReceiverRequest, opts ...http.CallOption) (rsp *GetReceiverReply, err error)
 	ListController(ctx context.Context, req *ListControllerRequest, opts ...http.CallOption) (rsp *ListControllerReply, err error)
+	ListEndpoint(ctx context.Context, req *ListEndpointRequest, opts ...http.CallOption) (rsp *ListEndpointReply, err error)
 	ListPusher(ctx context.Context, req *ListPusherRequest, opts ...http.CallOption) (rsp *ListPushRequest, err error)
-	ListReceiver(ctx context.Context, req *ListReceiverRequest, opts ...http.CallOption) (rsp *ListReceiverReply, err error)
 	Report(ctx context.Context, req *ReportRequest, opts ...http.CallOption) (rsp *ReportReply, err error)
+	UpdateEndpoint(ctx context.Context, req *UpdateEndpointRequest, opts ...http.CallOption) (rsp *UpdateEndpointReply, err error)
 	UpdatePusher(ctx context.Context, req *UpdatePusherRequest, opts ...http.CallOption) (rsp *UpdatePusherReply, err error)
-	UpdateReceiver(ctx context.Context, req *UpdateReceiverRequest, opts ...http.CallOption) (rsp *UpdateReceiverReply, err error)
 }
 
 type PusherHTTPClientImpl struct {
@@ -327,6 +327,19 @@ type PusherHTTPClientImpl struct {
 
 func NewPusherHTTPClient(client *http.Client) PusherHTTPClient {
 	return &PusherHTTPClientImpl{client}
+}
+
+func (c *PusherHTTPClientImpl) CreateEndpoint(ctx context.Context, in *CreateEndpointRequest, opts ...http.CallOption) (*CreateEndpointReply, error) {
+	var out CreateEndpointReply
+	pattern := "/api/v1/pusher/receiver"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPusherCreateEndpoint))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
 }
 
 func (c *PusherHTTPClientImpl) CreatePusher(ctx context.Context, in *CreatePusherRequest, opts ...http.CallOption) (*CreatePusherReply, error) {
@@ -342,13 +355,13 @@ func (c *PusherHTTPClientImpl) CreatePusher(ctx context.Context, in *CreatePushe
 	return &out, err
 }
 
-func (c *PusherHTTPClientImpl) CreateReceiver(ctx context.Context, in *CreateReceiverRequest, opts ...http.CallOption) (*CreateReceiverReply, error) {
-	var out CreateReceiverReply
-	pattern := "/api/v1/pusher/receiver"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationPusherCreateReceiver))
+func (c *PusherHTTPClientImpl) DeleteEndpoint(ctx context.Context, in *DeleteEndpointRequest, opts ...http.CallOption) (*DeleteEndpointReply, error) {
+	var out DeleteEndpointReply
+	pattern := "/api/v1/push/receiver/{id}"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationPusherDeleteEndpoint))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -368,13 +381,13 @@ func (c *PusherHTTPClientImpl) DeletePusher(ctx context.Context, in *DeletePushe
 	return &out, err
 }
 
-func (c *PusherHTTPClientImpl) DeleteReceiver(ctx context.Context, in *DeleteReceiverRequest, opts ...http.CallOption) (*DeleteReceiverReply, error) {
-	var out DeleteReceiverReply
+func (c *PusherHTTPClientImpl) GetEndpoint(ctx context.Context, in *GetEndpointRequest, opts ...http.CallOption) (*GetEndpointReply, error) {
+	var out GetEndpointReply
 	pattern := "/api/v1/push/receiver/{id}"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationPusherDeleteReceiver))
+	opts = append(opts, http.Operation(OperationPusherGetEndpoint))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -386,19 +399,6 @@ func (c *PusherHTTPClientImpl) GetPusher(ctx context.Context, in *GetPusherReque
 	pattern := "/api/v1/pusher/{id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationPusherGetPusher))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *PusherHTTPClientImpl) GetReceiver(ctx context.Context, in *GetReceiverRequest, opts ...http.CallOption) (*GetReceiverReply, error) {
-	var out GetReceiverReply
-	pattern := "/api/v1/push/receiver/{id}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationPusherGetReceiver))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -420,11 +420,11 @@ func (c *PusherHTTPClientImpl) ListController(ctx context.Context, in *ListContr
 	return &out, err
 }
 
-func (c *PusherHTTPClientImpl) ListPusher(ctx context.Context, in *ListPusherRequest, opts ...http.CallOption) (*ListPushRequest, error) {
-	var out ListPushRequest
-	pattern := "/api/v1/pushers"
+func (c *PusherHTTPClientImpl) ListEndpoint(ctx context.Context, in *ListEndpointRequest, opts ...http.CallOption) (*ListEndpointReply, error) {
+	var out ListEndpointReply
+	pattern := "/api/v1/push/receivers"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationPusherListPusher))
+	opts = append(opts, http.Operation(OperationPusherListEndpoint))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -433,11 +433,11 @@ func (c *PusherHTTPClientImpl) ListPusher(ctx context.Context, in *ListPusherReq
 	return &out, err
 }
 
-func (c *PusherHTTPClientImpl) ListReceiver(ctx context.Context, in *ListReceiverRequest, opts ...http.CallOption) (*ListReceiverReply, error) {
-	var out ListReceiverReply
-	pattern := "/api/v1/push/receivers"
+func (c *PusherHTTPClientImpl) ListPusher(ctx context.Context, in *ListPusherRequest, opts ...http.CallOption) (*ListPushRequest, error) {
+	var out ListPushRequest
+	pattern := "/api/v1/pushers"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationPusherListReceiver))
+	opts = append(opts, http.Operation(OperationPusherListPusher))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -459,11 +459,11 @@ func (c *PusherHTTPClientImpl) Report(ctx context.Context, in *ReportRequest, op
 	return &out, err
 }
 
-func (c *PusherHTTPClientImpl) UpdatePusher(ctx context.Context, in *UpdatePusherRequest, opts ...http.CallOption) (*UpdatePusherReply, error) {
-	var out UpdatePusherReply
-	pattern := "/api/v1/pusher/{id}"
+func (c *PusherHTTPClientImpl) UpdateEndpoint(ctx context.Context, in *UpdateEndpointRequest, opts ...http.CallOption) (*UpdateEndpointReply, error) {
+	var out UpdateEndpointReply
+	pattern := "/api/v1/push/receiver/{id}"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationPusherUpdatePusher))
+	opts = append(opts, http.Operation(OperationPusherUpdateEndpoint))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -472,11 +472,11 @@ func (c *PusherHTTPClientImpl) UpdatePusher(ctx context.Context, in *UpdatePushe
 	return &out, err
 }
 
-func (c *PusherHTTPClientImpl) UpdateReceiver(ctx context.Context, in *UpdateReceiverRequest, opts ...http.CallOption) (*UpdateReceiverReply, error) {
-	var out UpdateReceiverReply
-	pattern := "/api/v1/push/receiver/{id}"
+func (c *PusherHTTPClientImpl) UpdatePusher(ctx context.Context, in *UpdatePusherRequest, opts ...http.CallOption) (*UpdatePusherReply, error) {
+	var out UpdatePusherReply
+	pattern := "/api/v1/pusher/{id}"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationPusherUpdateReceiver))
+	opts = append(opts, http.Operation(OperationPusherUpdatePusher))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

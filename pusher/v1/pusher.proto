@@ -50,29 +50,29 @@ service Pusher {
 	}
 
 
-	rpc CreateReceiver (CreateReceiverRequest) returns (CreateReceiverReply) {
+	rpc CreateEndpoint (CreateEndpointRequest) returns (CreateEndpointReply) {
 		option (google.api.http) = {
 			put: "/api/v1/pusher/receiver"
 			body: "*"
 		};
 	}
-	rpc UpdateReceiver (UpdateReceiverRequest) returns (UpdateReceiverReply) {
+	rpc UpdateEndpoint (UpdateEndpointRequest) returns (UpdateEndpointReply) {
 		option (google.api.http) = {
 			post: "/api/v1/push/receiver/{id}"
 			body: "*"
 		};
 	}
-	rpc DeleteReceiver (DeleteReceiverRequest) returns (DeleteReceiverReply) {
+	rpc DeleteEndpoint (DeleteEndpointRequest) returns (DeleteEndpointReply) {
 		option (google.api.http) = {
 			delete: "/api/v1/push/receiver/{id}"
 		};
 	}
-	rpc GetReceiver (GetReceiverRequest) returns (GetReceiverReply) {
+	rpc GetEndpoint (GetEndpointRequest) returns (GetEndpointReply) {
 		option (google.api.http) = {
 			get: "/api/v1/push/receiver/{id}"
 		};
 	}
-	rpc ListReceiver (ListReceiverRequest) returns (ListReceiverReply) {
+	rpc ListEndpoint (ListEndpointRequest) returns (ListEndpointReply) {
 		option (google.api.http) = {
 			get: "/api/v1/push/receivers"
 		};
@@ -242,46 +242,51 @@ enum Type {
 	http = 1;
 }
 
-message CreateReceiverRequest {
+message CreateEndpointRequest {
 	string name = 1;
-	string target = 2;
+	string addr = 2;
 	Type type = 3;
 	bool insecure = 4;
 	string cert = 5;
+	string controller = 6;
 }
-message CreateReceiverReply {}
+message CreateEndpointReply {}
 
-message UpdateReceiverRequest {
-	string id = 1;
+message UpdateEndpointRequest {
+	uint32 id = 1;
 	string name = 2;
-	string target = 3;
+	string addr = 3;
+	string controller = 4;
+	string cert = 5;
 }
 
-message UpdateReceiverReply {}
+message UpdateEndpointReply {}
 
-message DeleteReceiverRequest {
+message DeleteEndpointRequest {
 	uint32 id = 1;
 }
-message DeleteReceiverReply {}
+message DeleteEndpointReply {}
 
-message GetReceiverRequest {
+message GetEndpointRequest {
 	uint32 id = 1;
 }
-message GetReceiverReply {
+message Endpoint {
 	uint32 id = 1;
 	google.protobuf.Timestamp created = 2;
 	google.protobuf.Timestamp updated = 3;
 	string name = 4;
-	string target = 5;
+	string addr = 5;
 	Type type = 6;
 	bool insecure = 7;
 	string cert = 8;
+	string controller = 9;
+}
+message GetEndpointReply {
+
+	Endpoint endpoint = 1;
 }
 
-message ListReceiverRequest {}
-message ListReceiverReply {
-	uint32 id = 1;
-	string name = 2;
-	string target = 3;
-	Type type = 4;
+message ListEndpointRequest {}
+message ListEndpointReply {
+	repeated Endpoint endpoints = 1;
 }
