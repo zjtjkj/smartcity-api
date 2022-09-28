@@ -258,7 +258,13 @@ message ReportRequest {
 	bool finished = 10;
 	repeated Object objects = 11;
 }
-message ReportReply {}
+message ReportReply {
+	message Response{
+		bool err = 1;
+		bytes body = 2;
+	}
+	map<uint32, Response> responses = 1;
+}
 
 enum Method {
 	grpc = 0;
@@ -270,8 +276,10 @@ message CreateEndpointRequest {
 	string addr = 2;
 	Method method = 3;
 	bool insecure = 4;
-	string cert = 5;
+	bytes cert = 5;
 	string controller = 6;
+	bytes key = 7;
+	bytes ca = 8;
 }
 message CreateEndpointReply {}
 
@@ -280,8 +288,10 @@ message UpdateEndpointRequest {
 	string name = 2;
 	string addr = 3;
 	string controller = 4;
-	string cert = 5;
+	bytes cert = 5;
 	bool enable = 6;
+	bytes key = 7;
+	bytes ca = 8;
 }
 
 message UpdateEndpointReply {}
@@ -302,9 +312,11 @@ message Endpoint {
 	string addr = 5;
 	Method method = 6;
 	bool insecure = 7;
-	string cert = 8;
+	bytes cert = 8;
 	string controller = 9;
 	bool enable = 10;
+	bytes ca = 11;
+	bytes key = 12;
 }
 message GetEndpointReply {
 
