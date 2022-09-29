@@ -136,8 +136,9 @@ message StartPlayReply {
   string device_id = 3;
   string channel_id = 4;
   string flv = 5;
-  string rtsp = 6;
-  string media_server_id = 7;
+  string https_flv = 6;
+  string rtsp = 7;
+  string media_server_id = 8;
 }
 
 message StopPlayRequest {
@@ -156,8 +157,9 @@ message StartProxyReply {
   string app = 1;
   string stream = 2;
   string flv = 3;
-  string rtsp = 4;
-  string media_server_id = 5;
+  string https_flv = 4;
+  string rtsp = 5;
+  string media_server_id = 6;
 }
 
 message StopProxyRequest {
