@@ -39,6 +39,18 @@ service Retrieval {
 			body: "*"
 		};
 	}
+	rpc CreateUnfinishedEvent(CreateUnfinishedEventRequest) returns (CreateUnfinishedEventReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/unfinished/create"
+			body: "*"
+		};
+	}
+	rpc DeleteUnfinishedEvent(DeleteUnfinishedEventRequest) returns (DeleteUnfinishedEventReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/unfinished/delete"
+			body: "*"
+		};
+	}
 }
 
 message Event {
@@ -124,3 +136,13 @@ message MissionLatestInfoReply {
 	int32 unfinished = 3;
 	repeated string events = 4;
 }
+
+message CreateUnfinishedEventRequest {
+	string event_id = 1;
+}
+message CreateUnfinishedEventReply {}
+
+message DeleteUnfinishedEventRequest {
+	string event_id = 1;
+}
+message DeleteUnfinishedEventReply {}
