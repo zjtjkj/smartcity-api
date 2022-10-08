@@ -89,6 +89,7 @@ message FindEventsRequest {
   repeated State states = 6;
 	repeated uint32 regions = 7;
 	repeated string cameras = 8;
+	repeated string tags = 9;
 }
 message FindEventsReply {
 	int64 index = 1;
