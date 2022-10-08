@@ -69,11 +69,12 @@ message Event {
 	int32 region = 7;
 	string type = 8;
 	bool finished = 9;
+	repeated string tags = 10;
 	message Alert {
 		string id = 1;
 		int64 created_at = 2;
 	}
-	repeated Alert alerts = 10;
+	repeated Alert alerts = 11;
 }
 
 message FindEventsRequest {
