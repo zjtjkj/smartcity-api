@@ -26,6 +26,7 @@ const OperationRetrievalFindEvents = "/api.retrieval.Retrieval/FindEvents"
 const OperationRetrievalGetEvent = "/api.retrieval.Retrieval/GetEvent"
 const OperationRetrievalGetImage = "/api.retrieval.Retrieval/GetImage"
 const OperationRetrievalMissionLatestInfo = "/api.retrieval.Retrieval/MissionLatestInfo"
+const OperationRetrievalSetTags = "/api.retrieval.Retrieval/SetTags"
 
 type RetrievalHTTPServer interface {
 	CreateUnfinishedEvent(context.Context, *CreateUnfinishedEventRequest) (*CreateUnfinishedEventReply, error)
@@ -35,6 +36,7 @@ type RetrievalHTTPServer interface {
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
 	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
+	SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error)
 }
 
 func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
@@ -46,6 +48,7 @@ func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r.POST("/api/v1/event/delete", _Retrieval_MissionLatestInfo0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/unfinished/create", _Retrieval_CreateUnfinishedEvent0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/unfinished/delete", _Retrieval_DeleteUnfinishedEvent0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/tags", _Retrieval_SetTags0_HTTP_Handler(srv))
 }
 
 func _Retrieval_FindEvents0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
@@ -181,6 +184,25 @@ func _Retrieval_DeleteUnfinishedEvent0_HTTP_Handler(srv RetrievalHTTPServer) fun
 	}
 }
 
+func _Retrieval_SetTags0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SetTagsRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRetrievalSetTags)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SetTags(ctx, req.(*SetTagsRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SetTagReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type RetrievalHTTPClient interface {
 	CreateUnfinishedEvent(ctx context.Context, req *CreateUnfinishedEventRequest, opts ...http.CallOption) (rsp *CreateUnfinishedEventReply, err error)
 	DeleteEvent(ctx context.Context, req *DeleteEventRequest, opts ...http.CallOption) (rsp *DeleteEventReply, err error)
@@ -189,6 +211,7 @@ type RetrievalHTTPClient interface {
 	GetEvent(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
 	GetImage(ctx context.Context, req *GetImageRequest, opts ...http.CallOption) (rsp *GetImageReply, err error)
 	MissionLatestInfo(ctx context.Context, req *MissionLatestInfoRequest, opts ...http.CallOption) (rsp *MissionLatestInfoReply, err error)
+	SetTags(ctx context.Context, req *SetTagsRequest, opts ...http.CallOption) (rsp *SetTagReply, err error)
 }
 
 type RetrievalHTTPClientImpl struct {
@@ -282,6 +305,19 @@ func (c *RetrievalHTTPClientImpl) MissionLatestInfo(ctx context.Context, in *Mis
 	pattern := "/api/v1/event/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalMissionLatestInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RetrievalHTTPClientImpl) SetTags(ctx context.Context, in *SetTagsRequest, opts ...http.CallOption) (*SetTagReply, error) {
+	var out SetTagReply
+	pattern := "/api/v1/event/tags"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationRetrievalSetTags))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

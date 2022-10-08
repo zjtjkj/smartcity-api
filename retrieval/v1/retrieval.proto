@@ -51,6 +51,12 @@ service Retrieval {
 			body: "*"
 		};
 	}
+	rpc SetTags(SetTagsRequest) returns (SetTagReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/tags"
+			body: "*"
+		};
+	}
 }
 
 message Event {
@@ -146,3 +152,9 @@ message DeleteUnfinishedEventRequest {
 	string event_id = 1;
 }
 message DeleteUnfinishedEventReply {}
+
+message SetTagsRequest {
+	string event_id = 1;
+	repeated string tags = 2;
+}
+message SetTagReply {}

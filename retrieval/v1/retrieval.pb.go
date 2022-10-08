@@ -953,6 +953,99 @@ func (*DeleteUnfinishedEventReply) Descriptor() ([]byte, []int) {
 	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{14}
 }
 
+type SetTagsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	EventId string   `protobuf:"bytes,1,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	Tags    []string `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
+}
+
+func (x *SetTagsRequest) Reset() {
+	*x = SetTagsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetTagsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTagsRequest) ProtoMessage() {}
+
+func (x *SetTagsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTagsRequest.ProtoReflect.Descriptor instead.
+func (*SetTagsRequest) Descriptor() ([]byte, []int) {
+	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *SetTagsRequest) GetEventId() string {
+	if x != nil {
+		return x.EventId
+	}
+	return ""
+}
+
+func (x *SetTagsRequest) GetTags() []string {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+type SetTagReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SetTagReply) Reset() {
+	*x = SetTagReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SetTagReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetTagReply) ProtoMessage() {}
+
+func (x *SetTagReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetTagReply.ProtoReflect.Descriptor instead.
+func (*SetTagReply) Descriptor() ([]byte, []int) {
+	return file_api_retrieval_v1_retrieval_proto_rawDescGZIP(), []int{16}
+}
+
 type Event_Alert struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -965,7 +1058,7 @@ type Event_Alert struct {
 func (x *Event_Alert) Reset() {
 	*x = Event_Alert{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[15]
+		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -978,7 +1071,7 @@ func (x *Event_Alert) String() string {
 func (*Event_Alert) ProtoMessage() {}
 
 func (x *Event_Alert) ProtoReflect() protoreflect.Message {
-	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[15]
+	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1021,7 +1114,7 @@ type GetImageReply_Object struct {
 func (x *GetImageReply_Object) Reset() {
 	*x = GetImageReply_Object{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[16]
+		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1034,7 +1127,7 @@ func (x *GetImageReply_Object) String() string {
 func (*GetImageReply_Object) ProtoMessage() {}
 
 func (x *GetImageReply_Object) ProtoReflect() protoreflect.Message {
-	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[16]
+	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1083,7 +1176,7 @@ type GetImageReply_Property struct {
 func (x *GetImageReply_Property) Reset() {
 	*x = GetImageReply_Property{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[17]
+		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1096,7 +1189,7 @@ func (x *GetImageReply_Property) String() string {
 func (*GetImageReply_Property) ProtoMessage() {}
 
 func (x *GetImageReply_Property) ProtoReflect() protoreflect.Message {
-	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[17]
+	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1138,7 +1231,7 @@ type GetImageReply_Point struct {
 func (x *GetImageReply_Point) Reset() {
 	*x = GetImageReply_Point{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[18]
+		mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1151,7 +1244,7 @@ func (x *GetImageReply_Point) String() string {
 func (*GetImageReply_Point) ProtoMessage() {}
 
 func (x *GetImageReply_Point) ProtoReflect() protoreflect.Message {
-	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[18]
+	mi := &file_api_retrieval_v1_retrieval_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1296,7 +1389,12 @@ var file_api_retrieval_v1_retrieval_proto_rawDesc = []byte{
 	0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x65, 0x76, 0x65,
 	0x6e, 0x74, 0x49, 0x64, 0x22, 0x1c, 0x0a, 0x1a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x6e,
 	0x66, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x70,
-	0x6c, 0x79, 0x32, 0x81, 0x07, 0x0a, 0x09, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c,
+	0x6c, 0x79, 0x22, 0x3f, 0x0a, 0x0e, 0x53, 0x65, 0x74, 0x54, 0x61, 0x67, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12,
+	0x12, 0x0a, 0x04, 0x74, 0x61, 0x67, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x04, 0x74,
+	0x61, 0x67, 0x73, 0x22, 0x0d, 0x0a, 0x0b, 0x53, 0x65, 0x74, 0x54, 0x61, 0x67, 0x52, 0x65, 0x70,
+	0x6c, 0x79, 0x32, 0xe6, 0x07, 0x0a, 0x09, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c,
 	0x12, 0x6d, 0x0a, 0x0a, 0x46, 0x69, 0x6e, 0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x20,
 	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2e, 0x46,
 	0x69, 0x6e, 0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
@@ -1352,10 +1450,17 @@ var file_api_retrieval_v1_retrieval_proto_rawDesc = []byte{
 	0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x2a, 0x82, 0xd3, 0xe4, 0x93,
 	0x02, 0x24, 0x22, 0x1f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x76, 0x65, 0x6e,
 	0x74, 0x2f, 0x75, 0x6e, 0x66, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x65, 0x64, 0x2f, 0x64, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x3a, 0x01, 0x2a, 0x42, 0x30, 0x0a, 0x0d, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x65,
-	0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x50, 0x01, 0x5a, 0x1d, 0x72, 0x65, 0x74, 0x72, 0x69,
-	0x65, 0x76, 0x61, 0x6c, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76,
-	0x61, 0x6c, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x74, 0x65, 0x3a, 0x01, 0x2a, 0x12, 0x63, 0x0a, 0x07, 0x53, 0x65, 0x74, 0x54, 0x61, 0x67,
+	0x73, 0x12, 0x1d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61,
+	0x6c, 0x2e, 0x53, 0x65, 0x74, 0x54, 0x61, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1a, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c,
+	0x2e, 0x53, 0x65, 0x74, 0x54, 0x61, 0x67, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1d, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x17, 0x22, 0x12, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x76,
+	0x65, 0x6e, 0x74, 0x2f, 0x74, 0x61, 0x67, 0x73, 0x3a, 0x01, 0x2a, 0x42, 0x30, 0x0a, 0x0d, 0x61,
+	0x70, 0x69, 0x2e, 0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x50, 0x01, 0x5a, 0x1d,
+	0x72, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x72, 0x65,
+	0x74, 0x72, 0x69, 0x65, 0x76, 0x61, 0x6c, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1371,7 +1476,7 @@ func file_api_retrieval_v1_retrieval_proto_rawDescGZIP() []byte {
 }
 
 var file_api_retrieval_v1_retrieval_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_api_retrieval_v1_retrieval_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_api_retrieval_v1_retrieval_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_api_retrieval_v1_retrieval_proto_goTypes = []interface{}{
 	(FindEventsRequest_State)(0),         // 0: api.retrieval.FindEventsRequest.State
 	(*Event)(nil),                        // 1: api.retrieval.Event
@@ -1389,19 +1494,21 @@ var file_api_retrieval_v1_retrieval_proto_goTypes = []interface{}{
 	(*CreateUnfinishedEventReply)(nil),   // 13: api.retrieval.CreateUnfinishedEventReply
 	(*DeleteUnfinishedEventRequest)(nil), // 14: api.retrieval.DeleteUnfinishedEventRequest
 	(*DeleteUnfinishedEventReply)(nil),   // 15: api.retrieval.DeleteUnfinishedEventReply
-	(*Event_Alert)(nil),                  // 16: api.retrieval.Event.Alert
-	(*GetImageReply_Object)(nil),         // 17: api.retrieval.GetImageReply.Object
-	(*GetImageReply_Property)(nil),       // 18: api.retrieval.GetImageReply.Property
-	(*GetImageReply_Point)(nil),          // 19: api.retrieval.GetImageReply.Point
+	(*SetTagsRequest)(nil),               // 16: api.retrieval.SetTagsRequest
+	(*SetTagReply)(nil),                  // 17: api.retrieval.SetTagReply
+	(*Event_Alert)(nil),                  // 18: api.retrieval.Event.Alert
+	(*GetImageReply_Object)(nil),         // 19: api.retrieval.GetImageReply.Object
+	(*GetImageReply_Property)(nil),       // 20: api.retrieval.GetImageReply.Property
+	(*GetImageReply_Point)(nil),          // 21: api.retrieval.GetImageReply.Point
 }
 var file_api_retrieval_v1_retrieval_proto_depIdxs = []int32{
-	16, // 0: api.retrieval.Event.alerts:type_name -> api.retrieval.Event.Alert
+	18, // 0: api.retrieval.Event.alerts:type_name -> api.retrieval.Event.Alert
 	0,  // 1: api.retrieval.FindEventsRequest.states:type_name -> api.retrieval.FindEventsRequest.State
 	1,  // 2: api.retrieval.FindEventsReply.events:type_name -> api.retrieval.Event
 	1,  // 3: api.retrieval.GetEventReply.event:type_name -> api.retrieval.Event
-	17, // 4: api.retrieval.GetImageReply.objs:type_name -> api.retrieval.GetImageReply.Object
-	18, // 5: api.retrieval.GetImageReply.Object.properties:type_name -> api.retrieval.GetImageReply.Property
-	19, // 6: api.retrieval.GetImageReply.Object.points:type_name -> api.retrieval.GetImageReply.Point
+	19, // 4: api.retrieval.GetImageReply.objs:type_name -> api.retrieval.GetImageReply.Object
+	20, // 5: api.retrieval.GetImageReply.Object.properties:type_name -> api.retrieval.GetImageReply.Property
+	21, // 6: api.retrieval.GetImageReply.Object.points:type_name -> api.retrieval.GetImageReply.Point
 	2,  // 7: api.retrieval.Retrieval.FindEvents:input_type -> api.retrieval.FindEventsRequest
 	4,  // 8: api.retrieval.Retrieval.GetEvent:input_type -> api.retrieval.GetEventRequest
 	6,  // 9: api.retrieval.Retrieval.GetImage:input_type -> api.retrieval.GetImageRequest
@@ -1409,15 +1516,17 @@ var file_api_retrieval_v1_retrieval_proto_depIdxs = []int32{
 	10, // 11: api.retrieval.Retrieval.MissionLatestInfo:input_type -> api.retrieval.MissionLatestInfoRequest
 	12, // 12: api.retrieval.Retrieval.CreateUnfinishedEvent:input_type -> api.retrieval.CreateUnfinishedEventRequest
 	14, // 13: api.retrieval.Retrieval.DeleteUnfinishedEvent:input_type -> api.retrieval.DeleteUnfinishedEventRequest
-	3,  // 14: api.retrieval.Retrieval.FindEvents:output_type -> api.retrieval.FindEventsReply
-	5,  // 15: api.retrieval.Retrieval.GetEvent:output_type -> api.retrieval.GetEventReply
-	7,  // 16: api.retrieval.Retrieval.GetImage:output_type -> api.retrieval.GetImageReply
-	9,  // 17: api.retrieval.Retrieval.DeleteEvent:output_type -> api.retrieval.DeleteEventReply
-	11, // 18: api.retrieval.Retrieval.MissionLatestInfo:output_type -> api.retrieval.MissionLatestInfoReply
-	13, // 19: api.retrieval.Retrieval.CreateUnfinishedEvent:output_type -> api.retrieval.CreateUnfinishedEventReply
-	15, // 20: api.retrieval.Retrieval.DeleteUnfinishedEvent:output_type -> api.retrieval.DeleteUnfinishedEventReply
-	14, // [14:21] is the sub-list for method output_type
-	7,  // [7:14] is the sub-list for method input_type
+	16, // 14: api.retrieval.Retrieval.SetTags:input_type -> api.retrieval.SetTagsRequest
+	3,  // 15: api.retrieval.Retrieval.FindEvents:output_type -> api.retrieval.FindEventsReply
+	5,  // 16: api.retrieval.Retrieval.GetEvent:output_type -> api.retrieval.GetEventReply
+	7,  // 17: api.retrieval.Retrieval.GetImage:output_type -> api.retrieval.GetImageReply
+	9,  // 18: api.retrieval.Retrieval.DeleteEvent:output_type -> api.retrieval.DeleteEventReply
+	11, // 19: api.retrieval.Retrieval.MissionLatestInfo:output_type -> api.retrieval.MissionLatestInfoReply
+	13, // 20: api.retrieval.Retrieval.CreateUnfinishedEvent:output_type -> api.retrieval.CreateUnfinishedEventReply
+	15, // 21: api.retrieval.Retrieval.DeleteUnfinishedEvent:output_type -> api.retrieval.DeleteUnfinishedEventReply
+	17, // 22: api.retrieval.Retrieval.SetTags:output_type -> api.retrieval.SetTagReply
+	15, // [15:23] is the sub-list for method output_type
+	7,  // [7:15] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name
@@ -1610,7 +1719,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Event_Alert); i {
+			switch v := v.(*SetTagsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1622,7 +1731,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetImageReply_Object); i {
+			switch v := v.(*SetTagReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1634,7 +1743,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetImageReply_Property); i {
+			switch v := v.(*Event_Alert); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1646,6 +1755,30 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			}
 		}
 		file_api_retrieval_v1_retrieval_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetImageReply_Object); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_retrieval_v1_retrieval_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetImageReply_Property); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_retrieval_v1_retrieval_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetImageReply_Point); i {
 			case 0:
 				return &v.state
@@ -1664,7 +1797,7 @@ func file_api_retrieval_v1_retrieval_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_retrieval_v1_retrieval_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   19,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

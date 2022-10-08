@@ -29,6 +29,7 @@ type RetrievalClient interface {
 	MissionLatestInfo(ctx context.Context, in *MissionLatestInfoRequest, opts ...grpc.CallOption) (*MissionLatestInfoReply, error)
 	CreateUnfinishedEvent(ctx context.Context, in *CreateUnfinishedEventRequest, opts ...grpc.CallOption) (*CreateUnfinishedEventReply, error)
 	DeleteUnfinishedEvent(ctx context.Context, in *DeleteUnfinishedEventRequest, opts ...grpc.CallOption) (*DeleteUnfinishedEventReply, error)
+	SetTags(ctx context.Context, in *SetTagsRequest, opts ...grpc.CallOption) (*SetTagReply, error)
 }
 
 type retrievalClient struct {
@@ -102,6 +103,15 @@ func (c *retrievalClient) DeleteUnfinishedEvent(ctx context.Context, in *DeleteU
 	return out, nil
 }
 
+func (c *retrievalClient) SetTags(ctx context.Context, in *SetTagsRequest, opts ...grpc.CallOption) (*SetTagReply, error) {
+	out := new(SetTagReply)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/SetTags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RetrievalServer is the server API for Retrieval service.
 // All implementations must embed UnimplementedRetrievalServer
 // for forward compatibility
@@ -113,6 +123,7 @@ type RetrievalServer interface {
 	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
 	CreateUnfinishedEvent(context.Context, *CreateUnfinishedEventRequest) (*CreateUnfinishedEventReply, error)
 	DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error)
+	SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error)
 	mustEmbedUnimplementedRetrievalServer()
 }
 
@@ -140,6 +151,9 @@ func (UnimplementedRetrievalServer) CreateUnfinishedEvent(context.Context, *Crea
 }
 func (UnimplementedRetrievalServer) DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUnfinishedEvent not implemented")
+}
+func (UnimplementedRetrievalServer) SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetTags not implemented")
 }
 func (UnimplementedRetrievalServer) mustEmbedUnimplementedRetrievalServer() {}
 
@@ -280,6 +294,24 @@ func _Retrieval_DeleteUnfinishedEvent_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Retrieval_SetTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RetrievalServer).SetTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.retrieval.Retrieval/SetTags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RetrievalServer).SetTags(ctx, req.(*SetTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Retrieval_ServiceDesc is the grpc.ServiceDesc for Retrieval service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -314,6 +346,10 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUnfinishedEvent",
 			Handler:    _Retrieval_DeleteUnfinishedEvent_Handler,
+		},
+		{
+			MethodName: "SetTags",
+			Handler:    _Retrieval_SetTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
