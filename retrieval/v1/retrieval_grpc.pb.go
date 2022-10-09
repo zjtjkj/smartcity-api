@@ -30,6 +30,8 @@ type RetrievalClient interface {
 	CreateUnfinishedEvent(ctx context.Context, in *CreateUnfinishedEventRequest, opts ...grpc.CallOption) (*CreateUnfinishedEventReply, error)
 	DeleteUnfinishedEvent(ctx context.Context, in *DeleteUnfinishedEventRequest, opts ...grpc.CallOption) (*DeleteUnfinishedEventReply, error)
 	SetTags(ctx context.Context, in *SetTagsRequest, opts ...grpc.CallOption) (*SetTagReply, error)
+	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagReply, error)
+	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagReply, error)
 }
 
 type retrievalClient struct {
@@ -112,6 +114,24 @@ func (c *retrievalClient) SetTags(ctx context.Context, in *SetTagsRequest, opts 
 	return out, nil
 }
 
+func (c *retrievalClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagReply, error) {
+	out := new(DeleteTagReply)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/DeleteTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *retrievalClient) ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagReply, error) {
+	out := new(ListTagReply)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/ListTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RetrievalServer is the server API for Retrieval service.
 // All implementations must embed UnimplementedRetrievalServer
 // for forward compatibility
@@ -124,6 +144,8 @@ type RetrievalServer interface {
 	CreateUnfinishedEvent(context.Context, *CreateUnfinishedEventRequest) (*CreateUnfinishedEventReply, error)
 	DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error)
 	SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error)
+	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagReply, error)
+	ListTag(context.Context, *ListTagRequest) (*ListTagReply, error)
 	mustEmbedUnimplementedRetrievalServer()
 }
 
@@ -154,6 +176,12 @@ func (UnimplementedRetrievalServer) DeleteUnfinishedEvent(context.Context, *Dele
 }
 func (UnimplementedRetrievalServer) SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetTags not implemented")
+}
+func (UnimplementedRetrievalServer) DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
+}
+func (UnimplementedRetrievalServer) ListTag(context.Context, *ListTagRequest) (*ListTagReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTag not implemented")
 }
 func (UnimplementedRetrievalServer) mustEmbedUnimplementedRetrievalServer() {}
 
@@ -312,6 +340,42 @@ func _Retrieval_SetTags_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Retrieval_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RetrievalServer).DeleteTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.retrieval.Retrieval/DeleteTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RetrievalServer).DeleteTag(ctx, req.(*DeleteTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Retrieval_ListTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RetrievalServer).ListTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.retrieval.Retrieval/ListTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RetrievalServer).ListTag(ctx, req.(*ListTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Retrieval_ServiceDesc is the grpc.ServiceDesc for Retrieval service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -350,6 +414,14 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetTags",
 			Handler:    _Retrieval_SetTags_Handler,
+		},
+		{
+			MethodName: "DeleteTag",
+			Handler:    _Retrieval_DeleteTag_Handler,
+		},
+		{
+			MethodName: "ListTag",
+			Handler:    _Retrieval_ListTag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -57,6 +57,18 @@ service Retrieval {
 			body: "*"
 		};
 	}
+	rpc DeleteTag(DeleteTagRequest) returns (DeleteTagReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/tags/delete"
+			body: "*"
+		};
+	}
+	rpc ListTag(ListTagRequest) returns (ListTagReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/tags/list"
+			body: "*"
+		};
+	}
 }
 
 message Event {
@@ -160,3 +172,13 @@ message SetTagsRequest {
 	repeated string tags = 2;
 }
 message SetTagReply {}
+
+message DeleteTagRequest {
+	string name = 1;
+}
+message DeleteTagReply {}
+
+message ListTagRequest {}
+message ListTagReply {
+	repeated string tags = 1;
+}

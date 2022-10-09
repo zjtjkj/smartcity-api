@@ -21,20 +21,24 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationRetrievalCreateUnfinishedEvent = "/api.retrieval.Retrieval/CreateUnfinishedEvent"
 const OperationRetrievalDeleteEvent = "/api.retrieval.Retrieval/DeleteEvent"
+const OperationRetrievalDeleteTag = "/api.retrieval.Retrieval/DeleteTag"
 const OperationRetrievalDeleteUnfinishedEvent = "/api.retrieval.Retrieval/DeleteUnfinishedEvent"
 const OperationRetrievalFindEvents = "/api.retrieval.Retrieval/FindEvents"
 const OperationRetrievalGetEvent = "/api.retrieval.Retrieval/GetEvent"
 const OperationRetrievalGetImage = "/api.retrieval.Retrieval/GetImage"
+const OperationRetrievalListTag = "/api.retrieval.Retrieval/ListTag"
 const OperationRetrievalMissionLatestInfo = "/api.retrieval.Retrieval/MissionLatestInfo"
 const OperationRetrievalSetTags = "/api.retrieval.Retrieval/SetTags"
 
 type RetrievalHTTPServer interface {
 	CreateUnfinishedEvent(context.Context, *CreateUnfinishedEventRequest) (*CreateUnfinishedEventReply, error)
 	DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
+	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagReply, error)
 	DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
+	ListTag(context.Context, *ListTagRequest) (*ListTagReply, error)
 	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
 	SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error)
 }
@@ -49,6 +53,8 @@ func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r.POST("/api/v1/event/unfinished/create", _Retrieval_CreateUnfinishedEvent0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/unfinished/delete", _Retrieval_DeleteUnfinishedEvent0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/tags", _Retrieval_SetTags0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/tags/delete", _Retrieval_DeleteTag0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/tags/list", _Retrieval_ListTag0_HTTP_Handler(srv))
 }
 
 func _Retrieval_FindEvents0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
@@ -203,13 +209,53 @@ func _Retrieval_SetTags0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Con
 	}
 }
 
+func _Retrieval_DeleteTag0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteTagRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRetrievalDeleteTag)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteTag(ctx, req.(*DeleteTagRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteTagReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Retrieval_ListTag0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in ListTagRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRetrievalListTag)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.ListTag(ctx, req.(*ListTagRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*ListTagReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type RetrievalHTTPClient interface {
 	CreateUnfinishedEvent(ctx context.Context, req *CreateUnfinishedEventRequest, opts ...http.CallOption) (rsp *CreateUnfinishedEventReply, err error)
 	DeleteEvent(ctx context.Context, req *DeleteEventRequest, opts ...http.CallOption) (rsp *DeleteEventReply, err error)
+	DeleteTag(ctx context.Context, req *DeleteTagRequest, opts ...http.CallOption) (rsp *DeleteTagReply, err error)
 	DeleteUnfinishedEvent(ctx context.Context, req *DeleteUnfinishedEventRequest, opts ...http.CallOption) (rsp *DeleteUnfinishedEventReply, err error)
 	FindEvents(ctx context.Context, req *FindEventsRequest, opts ...http.CallOption) (rsp *FindEventsReply, err error)
 	GetEvent(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
 	GetImage(ctx context.Context, req *GetImageRequest, opts ...http.CallOption) (rsp *GetImageReply, err error)
+	ListTag(ctx context.Context, req *ListTagRequest, opts ...http.CallOption) (rsp *ListTagReply, err error)
 	MissionLatestInfo(ctx context.Context, req *MissionLatestInfoRequest, opts ...http.CallOption) (rsp *MissionLatestInfoReply, err error)
 	SetTags(ctx context.Context, req *SetTagsRequest, opts ...http.CallOption) (rsp *SetTagReply, err error)
 }
@@ -240,6 +286,19 @@ func (c *RetrievalHTTPClientImpl) DeleteEvent(ctx context.Context, in *DeleteEve
 	pattern := "/api/v1/event/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalDeleteEvent))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RetrievalHTTPClientImpl) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...http.CallOption) (*DeleteTagReply, error) {
+	var out DeleteTagReply
+	pattern := "/api/v1/event/tags/delete"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationRetrievalDeleteTag))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -292,6 +351,19 @@ func (c *RetrievalHTTPClientImpl) GetImage(ctx context.Context, in *GetImageRequ
 	pattern := "/api/v1/image/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalGetImage))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RetrievalHTTPClientImpl) ListTag(ctx context.Context, in *ListTagRequest, opts ...http.CallOption) (*ListTagReply, error) {
+	var out ListTagReply
+	pattern := "/api/v1/event/tags/list"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationRetrievalListTag))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
