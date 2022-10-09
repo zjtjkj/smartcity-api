@@ -103,6 +103,7 @@ message FindEventsRequest {
 	repeated uint32 regions = 7;
 	repeated string cameras = 8;
 	repeated string tags = 9;
+	int64 after = 10;
 }
 message FindEventsReply {
 	int64 index = 1;
