@@ -104,6 +104,7 @@ message FindEventsRequest {
 	repeated string cameras = 8;
 	repeated string tags = 9;
 	int64 after = 10;
+	int64 before = 11;
 }
 message FindEventsReply {
 	int64 index = 1;
