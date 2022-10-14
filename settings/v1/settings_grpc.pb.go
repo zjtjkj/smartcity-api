@@ -22,6 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SettingsClient interface {
+	CreateComputingUnit(ctx context.Context, in *CreateComputingUnitRequest, opts ...grpc.CallOption) (*CreateComputingUnitReply, error)
+	UpdateComputingUnit(ctx context.Context, in *UpdateComputingUnitRequest, opts ...grpc.CallOption) (*UpdateComputingUnitReply, error)
+	DeleteComputingUnit(ctx context.Context, in *DeleteComputingUnitRequest, opts ...grpc.CallOption) (*DeleteComputingUnitReply, error)
+	ListComputingUnit(ctx context.Context, in *ListComputingUnitRequest, opts ...grpc.CallOption) (*ListComputingUnitReply, error)
 	CreatePusherConfig(ctx context.Context, in *CreatePusherConfigRequest, opts ...grpc.CallOption) (*CreatePusherConfigReply, error)
 	GetPusherConfig(ctx context.Context, in *GetPusherConfigRequest, opts ...grpc.CallOption) (*GetPusherConfigReply, error)
 	CreateOperatorConfig(ctx context.Context, in *CreateOperatorConfigRequest, opts ...grpc.CallOption) (*CreateOperatorConfigReply, error)
@@ -52,6 +56,42 @@ type settingsClient struct {
 
 func NewSettingsClient(cc grpc.ClientConnInterface) SettingsClient {
 	return &settingsClient{cc}
+}
+
+func (c *settingsClient) CreateComputingUnit(ctx context.Context, in *CreateComputingUnitRequest, opts ...grpc.CallOption) (*CreateComputingUnitReply, error) {
+	out := new(CreateComputingUnitReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateComputingUnit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) UpdateComputingUnit(ctx context.Context, in *UpdateComputingUnitRequest, opts ...grpc.CallOption) (*UpdateComputingUnitReply, error) {
+	out := new(UpdateComputingUnitReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/UpdateComputingUnit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) DeleteComputingUnit(ctx context.Context, in *DeleteComputingUnitRequest, opts ...grpc.CallOption) (*DeleteComputingUnitReply, error) {
+	out := new(DeleteComputingUnitReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/DeleteComputingUnit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) ListComputingUnit(ctx context.Context, in *ListComputingUnitRequest, opts ...grpc.CallOption) (*ListComputingUnitReply, error) {
+	out := new(ListComputingUnitReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/ListComputingUnit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *settingsClient) CreatePusherConfig(ctx context.Context, in *CreatePusherConfigRequest, opts ...grpc.CallOption) (*CreatePusherConfigReply, error) {
@@ -256,6 +296,10 @@ func (c *settingsClient) ListGeneralParameters(ctx context.Context, in *ListGene
 // All implementations must embed UnimplementedSettingsServer
 // for forward compatibility
 type SettingsServer interface {
+	CreateComputingUnit(context.Context, *CreateComputingUnitRequest) (*CreateComputingUnitReply, error)
+	UpdateComputingUnit(context.Context, *UpdateComputingUnitRequest) (*UpdateComputingUnitReply, error)
+	DeleteComputingUnit(context.Context, *DeleteComputingUnitRequest) (*DeleteComputingUnitReply, error)
+	ListComputingUnit(context.Context, *ListComputingUnitRequest) (*ListComputingUnitReply, error)
 	CreatePusherConfig(context.Context, *CreatePusherConfigRequest) (*CreatePusherConfigReply, error)
 	GetPusherConfig(context.Context, *GetPusherConfigRequest) (*GetPusherConfigReply, error)
 	CreateOperatorConfig(context.Context, *CreateOperatorConfigRequest) (*CreateOperatorConfigReply, error)
@@ -285,6 +329,18 @@ type SettingsServer interface {
 type UnimplementedSettingsServer struct {
 }
 
+func (UnimplementedSettingsServer) CreateComputingUnit(context.Context, *CreateComputingUnitRequest) (*CreateComputingUnitReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateComputingUnit not implemented")
+}
+func (UnimplementedSettingsServer) UpdateComputingUnit(context.Context, *UpdateComputingUnitRequest) (*UpdateComputingUnitReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateComputingUnit not implemented")
+}
+func (UnimplementedSettingsServer) DeleteComputingUnit(context.Context, *DeleteComputingUnitRequest) (*DeleteComputingUnitReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteComputingUnit not implemented")
+}
+func (UnimplementedSettingsServer) ListComputingUnit(context.Context, *ListComputingUnitRequest) (*ListComputingUnitReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListComputingUnit not implemented")
+}
 func (UnimplementedSettingsServer) CreatePusherConfig(context.Context, *CreatePusherConfigRequest) (*CreatePusherConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePusherConfig not implemented")
 }
@@ -362,6 +418,78 @@ type UnsafeSettingsServer interface {
 
 func RegisterSettingsServer(s grpc.ServiceRegistrar, srv SettingsServer) {
 	s.RegisterService(&Settings_ServiceDesc, srv)
+}
+
+func _Settings_CreateComputingUnit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateComputingUnitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreateComputingUnit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreateComputingUnit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreateComputingUnit(ctx, req.(*CreateComputingUnitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_UpdateComputingUnit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateComputingUnitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).UpdateComputingUnit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/UpdateComputingUnit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).UpdateComputingUnit(ctx, req.(*UpdateComputingUnitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_DeleteComputingUnit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteComputingUnitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).DeleteComputingUnit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/DeleteComputingUnit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).DeleteComputingUnit(ctx, req.(*DeleteComputingUnitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_ListComputingUnit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListComputingUnitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).ListComputingUnit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/ListComputingUnit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).ListComputingUnit(ctx, req.(*ListComputingUnitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Settings_CreatePusherConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -767,6 +895,22 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.settings.v1.Settings",
 	HandlerType: (*SettingsServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateComputingUnit",
+			Handler:    _Settings_CreateComputingUnit_Handler,
+		},
+		{
+			MethodName: "UpdateComputingUnit",
+			Handler:    _Settings_UpdateComputingUnit_Handler,
+		},
+		{
+			MethodName: "DeleteComputingUnit",
+			Handler:    _Settings_DeleteComputingUnit_Handler,
+		},
+		{
+			MethodName: "ListComputingUnit",
+			Handler:    _Settings_ListComputingUnit_Handler,
+		},
 		{
 			MethodName: "CreatePusherConfig",
 			Handler:    _Settings_CreatePusherConfig_Handler,

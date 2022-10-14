@@ -35,6 +35,870 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ListComputingUnitRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListComputingUnitRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListComputingUnitRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListComputingUnitRequestMultiError, or nil if none found.
+func (m *ListComputingUnitRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListComputingUnitRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ListComputingUnitRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListComputingUnitRequestMultiError is an error wrapping multiple validation
+// errors returned by ListComputingUnitRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListComputingUnitRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListComputingUnitRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListComputingUnitRequestMultiError) AllErrors() []error { return m }
+
+// ListComputingUnitRequestValidationError is the validation error returned by
+// ListComputingUnitRequest.Validate if the designated constraints aren't met.
+type ListComputingUnitRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListComputingUnitRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListComputingUnitRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListComputingUnitRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListComputingUnitRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListComputingUnitRequestValidationError) ErrorName() string {
+	return "ListComputingUnitRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListComputingUnitRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListComputingUnitRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListComputingUnitRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListComputingUnitRequestValidationError{}
+
+// Validate checks the field values on ListComputingUnitReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListComputingUnitReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListComputingUnitReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListComputingUnitReplyMultiError, or nil if none found.
+func (m *ListComputingUnitReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListComputingUnitReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetUnits() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListComputingUnitReplyValidationError{
+						field:  fmt.Sprintf("Units[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListComputingUnitReplyValidationError{
+						field:  fmt.Sprintf("Units[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListComputingUnitReplyValidationError{
+					field:  fmt.Sprintf("Units[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListComputingUnitReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListComputingUnitReplyMultiError is an error wrapping multiple validation
+// errors returned by ListComputingUnitReply.ValidateAll() if the designated
+// constraints aren't met.
+type ListComputingUnitReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListComputingUnitReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListComputingUnitReplyMultiError) AllErrors() []error { return m }
+
+// ListComputingUnitReplyValidationError is the validation error returned by
+// ListComputingUnitReply.Validate if the designated constraints aren't met.
+type ListComputingUnitReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListComputingUnitReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListComputingUnitReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListComputingUnitReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListComputingUnitReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListComputingUnitReplyValidationError) ErrorName() string {
+	return "ListComputingUnitReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListComputingUnitReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListComputingUnitReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListComputingUnitReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListComputingUnitReplyValidationError{}
+
+// Validate checks the field values on DeleteComputingUnitRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteComputingUnitRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteComputingUnitRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteComputingUnitRequestMultiError, or nil if none found.
+func (m *DeleteComputingUnitRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteComputingUnitRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteComputingUnitRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteComputingUnitRequestMultiError is an error wrapping multiple
+// validation errors returned by DeleteComputingUnitRequest.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteComputingUnitRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteComputingUnitRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteComputingUnitRequestMultiError) AllErrors() []error { return m }
+
+// DeleteComputingUnitRequestValidationError is the validation error returned
+// by DeleteComputingUnitRequest.Validate if the designated constraints aren't met.
+type DeleteComputingUnitRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteComputingUnitRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteComputingUnitRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteComputingUnitRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteComputingUnitRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteComputingUnitRequestValidationError) ErrorName() string {
+	return "DeleteComputingUnitRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteComputingUnitRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteComputingUnitRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteComputingUnitRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteComputingUnitRequestValidationError{}
+
+// Validate checks the field values on DeleteComputingUnitReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteComputingUnitReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteComputingUnitReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteComputingUnitReplyMultiError, or nil if none found.
+func (m *DeleteComputingUnitReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteComputingUnitReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteComputingUnitReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteComputingUnitReplyMultiError is an error wrapping multiple validation
+// errors returned by DeleteComputingUnitReply.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteComputingUnitReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteComputingUnitReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteComputingUnitReplyMultiError) AllErrors() []error { return m }
+
+// DeleteComputingUnitReplyValidationError is the validation error returned by
+// DeleteComputingUnitReply.Validate if the designated constraints aren't met.
+type DeleteComputingUnitReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteComputingUnitReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteComputingUnitReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteComputingUnitReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteComputingUnitReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteComputingUnitReplyValidationError) ErrorName() string {
+	return "DeleteComputingUnitReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteComputingUnitReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteComputingUnitReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteComputingUnitReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteComputingUnitReplyValidationError{}
+
+// Validate checks the field values on UpdateComputingUnitRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateComputingUnitRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateComputingUnitRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateComputingUnitRequestMultiError, or nil if none found.
+func (m *UpdateComputingUnitRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateComputingUnitRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return UpdateComputingUnitRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateComputingUnitRequestMultiError is an error wrapping multiple
+// validation errors returned by UpdateComputingUnitRequest.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateComputingUnitRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateComputingUnitRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateComputingUnitRequestMultiError) AllErrors() []error { return m }
+
+// UpdateComputingUnitRequestValidationError is the validation error returned
+// by UpdateComputingUnitRequest.Validate if the designated constraints aren't met.
+type UpdateComputingUnitRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateComputingUnitRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateComputingUnitRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateComputingUnitRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateComputingUnitRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateComputingUnitRequestValidationError) ErrorName() string {
+	return "UpdateComputingUnitRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateComputingUnitRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateComputingUnitRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateComputingUnitRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateComputingUnitRequestValidationError{}
+
+// Validate checks the field values on UpdateComputingUnitReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateComputingUnitReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateComputingUnitReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateComputingUnitReplyMultiError, or nil if none found.
+func (m *UpdateComputingUnitReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateComputingUnitReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return UpdateComputingUnitReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateComputingUnitReplyMultiError is an error wrapping multiple validation
+// errors returned by UpdateComputingUnitReply.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateComputingUnitReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateComputingUnitReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateComputingUnitReplyMultiError) AllErrors() []error { return m }
+
+// UpdateComputingUnitReplyValidationError is the validation error returned by
+// UpdateComputingUnitReply.Validate if the designated constraints aren't met.
+type UpdateComputingUnitReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateComputingUnitReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateComputingUnitReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateComputingUnitReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateComputingUnitReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateComputingUnitReplyValidationError) ErrorName() string {
+	return "UpdateComputingUnitReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateComputingUnitReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateComputingUnitReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateComputingUnitReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateComputingUnitReplyValidationError{}
+
+// Validate checks the field values on CreateComputingUnitRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateComputingUnitRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateComputingUnitRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateComputingUnitRequestMultiError, or nil if none found.
+func (m *CreateComputingUnitRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateComputingUnitRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Ip
+
+	// no validation rules for Port
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return CreateComputingUnitRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateComputingUnitRequestMultiError is an error wrapping multiple
+// validation errors returned by CreateComputingUnitRequest.ValidateAll() if
+// the designated constraints aren't met.
+type CreateComputingUnitRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateComputingUnitRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateComputingUnitRequestMultiError) AllErrors() []error { return m }
+
+// CreateComputingUnitRequestValidationError is the validation error returned
+// by CreateComputingUnitRequest.Validate if the designated constraints aren't met.
+type CreateComputingUnitRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateComputingUnitRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateComputingUnitRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateComputingUnitRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateComputingUnitRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateComputingUnitRequestValidationError) ErrorName() string {
+	return "CreateComputingUnitRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateComputingUnitRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateComputingUnitRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateComputingUnitRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateComputingUnitRequestValidationError{}
+
+// Validate checks the field values on CreateComputingUnitReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateComputingUnitReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateComputingUnitReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateComputingUnitReplyMultiError, or nil if none found.
+func (m *CreateComputingUnitReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateComputingUnitReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return CreateComputingUnitReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateComputingUnitReplyMultiError is an error wrapping multiple validation
+// errors returned by CreateComputingUnitReply.ValidateAll() if the designated
+// constraints aren't met.
+type CreateComputingUnitReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateComputingUnitReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateComputingUnitReplyMultiError) AllErrors() []error { return m }
+
+// CreateComputingUnitReplyValidationError is the validation error returned by
+// CreateComputingUnitReply.Validate if the designated constraints aren't met.
+type CreateComputingUnitReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateComputingUnitReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateComputingUnitReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateComputingUnitReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateComputingUnitReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateComputingUnitReplyValidationError) ErrorName() string {
+	return "CreateComputingUnitReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateComputingUnitReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateComputingUnitReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateComputingUnitReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateComputingUnitReplyValidationError{}
+
 // Validate checks the field values on CreatePusherConfigRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -5249,6 +6113,150 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListModulesReplyValidationError{}
+
+// Validate checks the field values on ListComputingUnitReply_ComputingUnit
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *ListComputingUnitReply_ComputingUnit) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListComputingUnitReply_ComputingUnit
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListComputingUnitReply_ComputingUnitMultiError, or nil if none found.
+func (m *ListComputingUnitReply_ComputingUnit) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListComputingUnitReply_ComputingUnit) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if all {
+		switch v := interface{}(m.GetCreated()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ListComputingUnitReply_ComputingUnitValidationError{
+					field:  "Created",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ListComputingUnitReply_ComputingUnitValidationError{
+					field:  "Created",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreated()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ListComputingUnitReply_ComputingUnitValidationError{
+				field:  "Created",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Name
+
+	// no validation rules for Ip
+
+	// no validation rules for Port
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return ListComputingUnitReply_ComputingUnitMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListComputingUnitReply_ComputingUnitMultiError is an error wrapping multiple
+// validation errors returned by
+// ListComputingUnitReply_ComputingUnit.ValidateAll() if the designated
+// constraints aren't met.
+type ListComputingUnitReply_ComputingUnitMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListComputingUnitReply_ComputingUnitMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListComputingUnitReply_ComputingUnitMultiError) AllErrors() []error { return m }
+
+// ListComputingUnitReply_ComputingUnitValidationError is the validation error
+// returned by ListComputingUnitReply_ComputingUnit.Validate if the designated
+// constraints aren't met.
+type ListComputingUnitReply_ComputingUnitValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListComputingUnitReply_ComputingUnitValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListComputingUnitReply_ComputingUnitValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListComputingUnitReply_ComputingUnitValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListComputingUnitReply_ComputingUnitValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListComputingUnitReply_ComputingUnitValidationError) ErrorName() string {
+	return "ListComputingUnitReply_ComputingUnitValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListComputingUnitReply_ComputingUnitValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListComputingUnitReply_ComputingUnit.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListComputingUnitReply_ComputingUnitValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListComputingUnitReply_ComputingUnitValidationError{}
 
 // Validate checks the field values on GetOperatorConfigReply_OperatorConfig
 // with the rules defined in the proto definition for this message. If any
