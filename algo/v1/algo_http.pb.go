@@ -24,6 +24,7 @@ const OperationAlgoCreateMission = "/api.algo.v1.Algo/CreateMission"
 const OperationAlgoDebug = "/api.algo.v1.Algo/Debug"
 const OperationAlgoDeleteMission = "/api.algo.v1.Algo/DeleteMission"
 const OperationAlgoDeleteMultiMission = "/api.algo.v1.Algo/DeleteMultiMission"
+const OperationAlgoInfo = "/api.algo.v1.Algo/Info"
 const OperationAlgoListAll = "/api.algo.v1.Algo/ListAll"
 const OperationAlgoListMission = "/api.algo.v1.Algo/ListMission"
 
@@ -33,6 +34,7 @@ type AlgoHTTPServer interface {
 	Debug(context.Context, *DebugRequest) (*DebugResponse, error)
 	DeleteMission(context.Context, *DeleteMissionRequest) (*DeleteMissionReply, error)
 	DeleteMultiMission(context.Context, *DeleteMissionMultiRequest) (*DeleteMissionMultiReply, error)
+	Info(context.Context, *InfoRequest) (*InfoResponse, error)
 	ListAll(context.Context, *ListAllRequest) (*ListAllReply, error)
 	ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error)
 }
@@ -44,6 +46,7 @@ func RegisterAlgoHTTPServer(s *http.Server, srv AlgoHTTPServer) {
 	r.DELETE("/api/v1/algo/missions/{id}", _Algo_DeleteMultiMission0_HTTP_Handler(srv))
 	r.GET("/api/v1/algo/missions/{id}", _Algo_ListMission0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/algo/mission", _Algo_ListAll0_HTTP_Handler(srv))
+	r.GET("/api/v1/algo/info", _Algo_Info0_HTTP_Handler(srv))
 	r.GET("/api/v1/algo/debug", _Algo_Debug0_HTTP_Handler(srv))
 	r.GET("/api/v1/algo/clear", _Algo_Clear0_HTTP_Handler(srv))
 }
@@ -152,6 +155,25 @@ func _Algo_ListAll0_HTTP_Handler(srv AlgoHTTPServer) func(ctx http.Context) erro
 	}
 }
 
+func _Algo_Info0_HTTP_Handler(srv AlgoHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in InfoRequest
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationAlgoInfo)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.Info(ctx, req.(*InfoRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*InfoResponse)
+		return ctx.Result(200, reply)
+	}
+}
+
 func _Algo_Debug0_HTTP_Handler(srv AlgoHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DebugRequest
@@ -196,6 +218,7 @@ type AlgoHTTPClient interface {
 	Debug(ctx context.Context, req *DebugRequest, opts ...http.CallOption) (rsp *DebugResponse, err error)
 	DeleteMission(ctx context.Context, req *DeleteMissionRequest, opts ...http.CallOption) (rsp *DeleteMissionReply, err error)
 	DeleteMultiMission(ctx context.Context, req *DeleteMissionMultiRequest, opts ...http.CallOption) (rsp *DeleteMissionMultiReply, err error)
+	Info(ctx context.Context, req *InfoRequest, opts ...http.CallOption) (rsp *InfoResponse, err error)
 	ListAll(ctx context.Context, req *ListAllRequest, opts ...http.CallOption) (rsp *ListAllReply, err error)
 	ListMission(ctx context.Context, req *ListMissionRequest, opts ...http.CallOption) (rsp *ListMissionReply, err error)
 }
@@ -267,6 +290,19 @@ func (c *AlgoHTTPClientImpl) DeleteMultiMission(ctx context.Context, in *DeleteM
 	opts = append(opts, http.Operation(OperationAlgoDeleteMultiMission))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *AlgoHTTPClientImpl) Info(ctx context.Context, in *InfoRequest, opts ...http.CallOption) (*InfoResponse, error) {
+	var out InfoResponse
+	pattern := "/api/v1/algo/info"
+	path := binding.EncodeURL(pattern, in, true)
+	opts = append(opts, http.Operation(OperationAlgoInfo))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

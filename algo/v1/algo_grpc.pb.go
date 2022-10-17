@@ -27,6 +27,7 @@ type AlgoClient interface {
 	DeleteMultiMission(ctx context.Context, in *DeleteMissionMultiRequest, opts ...grpc.CallOption) (*DeleteMissionMultiReply, error)
 	ListMission(ctx context.Context, in *ListMissionRequest, opts ...grpc.CallOption) (*ListMissionReply, error)
 	ListAll(ctx context.Context, in *ListAllRequest, opts ...grpc.CallOption) (*ListAllReply, error)
+	Info(ctx context.Context, in *InfoRequest, opts ...grpc.CallOption) (*InfoResponse, error)
 	Debug(ctx context.Context, in *DebugRequest, opts ...grpc.CallOption) (*DebugResponse, error)
 	Clear(ctx context.Context, in *ClearRequest, opts ...grpc.CallOption) (*ClearReply, error)
 }
@@ -84,6 +85,15 @@ func (c *algoClient) ListAll(ctx context.Context, in *ListAllRequest, opts ...gr
 	return out, nil
 }
 
+func (c *algoClient) Info(ctx context.Context, in *InfoRequest, opts ...grpc.CallOption) (*InfoResponse, error) {
+	out := new(InfoResponse)
+	err := c.cc.Invoke(ctx, "/api.algo.v1.Algo/Info", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *algoClient) Debug(ctx context.Context, in *DebugRequest, opts ...grpc.CallOption) (*DebugResponse, error) {
 	out := new(DebugResponse)
 	err := c.cc.Invoke(ctx, "/api.algo.v1.Algo/Debug", in, out, opts...)
@@ -111,6 +121,7 @@ type AlgoServer interface {
 	DeleteMultiMission(context.Context, *DeleteMissionMultiRequest) (*DeleteMissionMultiReply, error)
 	ListMission(context.Context, *ListMissionRequest) (*ListMissionReply, error)
 	ListAll(context.Context, *ListAllRequest) (*ListAllReply, error)
+	Info(context.Context, *InfoRequest) (*InfoResponse, error)
 	Debug(context.Context, *DebugRequest) (*DebugResponse, error)
 	Clear(context.Context, *ClearRequest) (*ClearReply, error)
 	mustEmbedUnimplementedAlgoServer()
@@ -134,6 +145,9 @@ func (UnimplementedAlgoServer) ListMission(context.Context, *ListMissionRequest)
 }
 func (UnimplementedAlgoServer) ListAll(context.Context, *ListAllRequest) (*ListAllReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAll not implemented")
+}
+func (UnimplementedAlgoServer) Info(context.Context, *InfoRequest) (*InfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Info not implemented")
 }
 func (UnimplementedAlgoServer) Debug(context.Context, *DebugRequest) (*DebugResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Debug not implemented")
@@ -244,6 +258,24 @@ func _Algo_ListAll_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Algo_Info_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlgoServer).Info(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.algo.v1.Algo/Info",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlgoServer).Info(ctx, req.(*InfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Algo_Debug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DebugRequest)
 	if err := dec(in); err != nil {
@@ -306,6 +338,10 @@ var Algo_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAll",
 			Handler:    _Algo_ListAll_Handler,
+		},
+		{
+			MethodName: "Info",
+			Handler:    _Algo_Info_Handler,
 		},
 		{
 			MethodName: "Debug",

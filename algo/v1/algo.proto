@@ -34,6 +34,12 @@ service Algo {
 		};
 	}
 
+	rpc Info(InfoRequest) returns (InfoResponse) {
+		option (google.api.http) = {
+			get: "/api/v1/algo/info"
+		};
+	}
+
 	rpc Debug(DebugRequest) returns (DebugResponse) {
 		option (google.api.http) = {
 			get: "/api/v1/algo/debug"
@@ -44,6 +50,12 @@ service Algo {
 			get: "/api/v1/algo/clear"
 		};
 	}
+}
+
+message InfoRequest {}
+message InfoResponse {
+	uint32 remaining = 1; // 剩余分析流能力
+	repeated string abilities = 2; // 能力列表
 }
 
 message ClearRequest {
