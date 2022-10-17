@@ -20,16 +20,12 @@ message Point {
 	uint32 y = 2 [(validate.rules).uint32 = {gte: 0, lte: 10000}];
 }
 
-message Property {
-	string key = 1 [(validate.rules).string = {min_len: 1}];
-	string value = 2 [(validate.rules).string = {min_len: 1}];
-}
 
 message Object {
 	string id = 1 [(validate.rules).string = {min_len: 1}];
-	uint32 aid = 2;
+	uint32 area = 2;
 	repeated Point points = 3 [(validate.rules).repeated = {min_items: 2, max_items: 2}];
-	repeated Property properties = 4  [(validate.rules).repeated = {}];
+	map<string, string> properties = 4  [(validate.rules).map = {min_pairs: 1}];
 }
 
 message CreateEventRequest {

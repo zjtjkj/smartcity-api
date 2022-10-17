@@ -155,127 +155,6 @@ var _ interface {
 	ErrorName() string
 } = PointValidationError{}
 
-// Validate checks the field values on Property with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *Property) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on Property with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in PropertyMultiError, or nil
-// if none found.
-func (m *Property) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *Property) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if utf8.RuneCountInString(m.GetKey()) < 1 {
-		err := PropertyValidationError{
-			field:  "Key",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if utf8.RuneCountInString(m.GetValue()) < 1 {
-		err := PropertyValidationError{
-			field:  "Value",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(errors) > 0 {
-		return PropertyMultiError(errors)
-	}
-
-	return nil
-}
-
-// PropertyMultiError is an error wrapping multiple validation errors returned
-// by Property.ValidateAll() if the designated constraints aren't met.
-type PropertyMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m PropertyMultiError) Error() string {
-	var msgs []string
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m PropertyMultiError) AllErrors() []error { return m }
-
-// PropertyValidationError is the validation error returned by
-// Property.Validate if the designated constraints aren't met.
-type PropertyValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e PropertyValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e PropertyValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e PropertyValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e PropertyValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e PropertyValidationError) ErrorName() string { return "PropertyValidationError" }
-
-// Error satisfies the builtin error interface
-func (e PropertyValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sProperty.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = PropertyValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = PropertyValidationError{}
-
 // Validate checks the field values on Object with the rules defined in the
 // proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -308,7 +187,7 @@ func (m *Object) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	// no validation rules for Aid
+	// no validation rules for Area
 
 	if len(m.GetPoints()) != 2 {
 		err := ObjectValidationError{
@@ -355,38 +234,15 @@ func (m *Object) validate(all bool) error {
 
 	}
 
-	for idx, item := range m.GetProperties() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ObjectValidationError{
-						field:  fmt.Sprintf("Properties[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ObjectValidationError{
-						field:  fmt.Sprintf("Properties[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ObjectValidationError{
-					field:  fmt.Sprintf("Properties[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
+	if len(m.GetProperties()) < 1 {
+		err := ObjectValidationError{
+			field:  "Properties",
+			reason: "value must contain at least 1 pair(s)",
 		}
-
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
 	}
 
 	if len(errors) > 0 {
