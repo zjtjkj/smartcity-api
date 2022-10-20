@@ -69,6 +69,12 @@ service Retrieval {
 			body: "*"
 		};
 	}
+	rpc GetEventByIndex(GetEventByIndexRequest) returns (GetEventByIndexReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/get/index"
+			body: "*"
+		};
+	}
 }
 
 message Event {
@@ -180,4 +186,11 @@ message DeleteTagReply {}
 message ListTagRequest {}
 message ListTagReply {
 	repeated string tags = 1;
+}
+
+message GetEventByIndexRequest {
+	string index = 1;
+}
+message GetEventByIndexReply {
+	Event event = 1;
 }

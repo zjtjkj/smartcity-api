@@ -25,6 +25,7 @@ const OperationRetrievalDeleteTag = "/api.retrieval.Retrieval/DeleteTag"
 const OperationRetrievalDeleteUnfinishedEvent = "/api.retrieval.Retrieval/DeleteUnfinishedEvent"
 const OperationRetrievalFindEvents = "/api.retrieval.Retrieval/FindEvents"
 const OperationRetrievalGetEvent = "/api.retrieval.Retrieval/GetEvent"
+const OperationRetrievalGetEventByIndex = "/api.retrieval.Retrieval/GetEventByIndex"
 const OperationRetrievalGetImage = "/api.retrieval.Retrieval/GetImage"
 const OperationRetrievalListTag = "/api.retrieval.Retrieval/ListTag"
 const OperationRetrievalMissionLatestInfo = "/api.retrieval.Retrieval/MissionLatestInfo"
@@ -37,6 +38,7 @@ type RetrievalHTTPServer interface {
 	DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
+	GetEventByIndex(context.Context, *GetEventByIndexRequest) (*GetEventByIndexReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
 	ListTag(context.Context, *ListTagRequest) (*ListTagReply, error)
 	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
@@ -55,6 +57,7 @@ func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r.POST("/api/v1/event/tags", _Retrieval_SetTags0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/tags/delete", _Retrieval_DeleteTag0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/tags/list", _Retrieval_ListTag0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/get/index", _Retrieval_GetEventByIndex0_HTTP_Handler(srv))
 }
 
 func _Retrieval_FindEvents0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
@@ -247,6 +250,25 @@ func _Retrieval_ListTag0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Con
 	}
 }
 
+func _Retrieval_GetEventByIndex0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetEventByIndexRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRetrievalGetEventByIndex)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetEventByIndex(ctx, req.(*GetEventByIndexRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetEventByIndexReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type RetrievalHTTPClient interface {
 	CreateUnfinishedEvent(ctx context.Context, req *CreateUnfinishedEventRequest, opts ...http.CallOption) (rsp *CreateUnfinishedEventReply, err error)
 	DeleteEvent(ctx context.Context, req *DeleteEventRequest, opts ...http.CallOption) (rsp *DeleteEventReply, err error)
@@ -254,6 +276,7 @@ type RetrievalHTTPClient interface {
 	DeleteUnfinishedEvent(ctx context.Context, req *DeleteUnfinishedEventRequest, opts ...http.CallOption) (rsp *DeleteUnfinishedEventReply, err error)
 	FindEvents(ctx context.Context, req *FindEventsRequest, opts ...http.CallOption) (rsp *FindEventsReply, err error)
 	GetEvent(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
+	GetEventByIndex(ctx context.Context, req *GetEventByIndexRequest, opts ...http.CallOption) (rsp *GetEventByIndexReply, err error)
 	GetImage(ctx context.Context, req *GetImageRequest, opts ...http.CallOption) (rsp *GetImageReply, err error)
 	ListTag(ctx context.Context, req *ListTagRequest, opts ...http.CallOption) (rsp *ListTagReply, err error)
 	MissionLatestInfo(ctx context.Context, req *MissionLatestInfoRequest, opts ...http.CallOption) (rsp *MissionLatestInfoReply, err error)
@@ -338,6 +361,19 @@ func (c *RetrievalHTTPClientImpl) GetEvent(ctx context.Context, in *GetEventRequ
 	pattern := "/api/v1/event/get"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalGetEvent))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RetrievalHTTPClientImpl) GetEventByIndex(ctx context.Context, in *GetEventByIndexRequest, opts ...http.CallOption) (*GetEventByIndexReply, error) {
+	var out GetEventByIndexReply
+	pattern := "/api/v1/event/get/index"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationRetrievalGetEventByIndex))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

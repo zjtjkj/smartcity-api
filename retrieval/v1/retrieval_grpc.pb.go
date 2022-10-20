@@ -32,6 +32,7 @@ type RetrievalClient interface {
 	SetTags(ctx context.Context, in *SetTagsRequest, opts ...grpc.CallOption) (*SetTagReply, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagReply, error)
 	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagReply, error)
+	GetEventByIndex(ctx context.Context, in *GetEventByIndexRequest, opts ...grpc.CallOption) (*GetEventByIndexReply, error)
 }
 
 type retrievalClient struct {
@@ -132,6 +133,15 @@ func (c *retrievalClient) ListTag(ctx context.Context, in *ListTagRequest, opts 
 	return out, nil
 }
 
+func (c *retrievalClient) GetEventByIndex(ctx context.Context, in *GetEventByIndexRequest, opts ...grpc.CallOption) (*GetEventByIndexReply, error) {
+	out := new(GetEventByIndexReply)
+	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/GetEventByIndex", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RetrievalServer is the server API for Retrieval service.
 // All implementations must embed UnimplementedRetrievalServer
 // for forward compatibility
@@ -146,6 +156,7 @@ type RetrievalServer interface {
 	SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagReply, error)
 	ListTag(context.Context, *ListTagRequest) (*ListTagReply, error)
+	GetEventByIndex(context.Context, *GetEventByIndexRequest) (*GetEventByIndexReply, error)
 	mustEmbedUnimplementedRetrievalServer()
 }
 
@@ -182,6 +193,9 @@ func (UnimplementedRetrievalServer) DeleteTag(context.Context, *DeleteTagRequest
 }
 func (UnimplementedRetrievalServer) ListTag(context.Context, *ListTagRequest) (*ListTagReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTag not implemented")
+}
+func (UnimplementedRetrievalServer) GetEventByIndex(context.Context, *GetEventByIndexRequest) (*GetEventByIndexReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEventByIndex not implemented")
 }
 func (UnimplementedRetrievalServer) mustEmbedUnimplementedRetrievalServer() {}
 
@@ -376,6 +390,24 @@ func _Retrieval_ListTag_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Retrieval_GetEventByIndex_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEventByIndexRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RetrievalServer).GetEventByIndex(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.retrieval.Retrieval/GetEventByIndex",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RetrievalServer).GetEventByIndex(ctx, req.(*GetEventByIndexRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Retrieval_ServiceDesc is the grpc.ServiceDesc for Retrieval service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -422,6 +454,10 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTag",
 			Handler:    _Retrieval_ListTag_Handler,
+		},
+		{
+			MethodName: "GetEventByIndex",
+			Handler:    _Retrieval_GetEventByIndex_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
