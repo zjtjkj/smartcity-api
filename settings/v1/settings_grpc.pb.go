@@ -49,7 +49,7 @@ type SettingsClient interface {
 	DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...grpc.CallOption) (*DeleteGeneralParametersReply, error)
 	ListGeneralParameters(ctx context.Context, in *ListGeneralParametersRequest, opts ...grpc.CallOption) (*ListGeneralParametersReply, error)
 	CreateDrawingConfig(ctx context.Context, in *CreatDrawingConfigRequest, opts ...grpc.CallOption) (*CreateDrawingConfigReply, error)
-	GetDrawingConfigConfig(ctx context.Context, in *GetDrawingConfigRequest, opts ...grpc.CallOption) (*GetDrawingConfigReply, error)
+	GetDrawingConfig(ctx context.Context, in *GetDrawingConfigRequest, opts ...grpc.CallOption) (*GetDrawingConfigReply, error)
 	DeleteDrawingConfig(ctx context.Context, in *DeleteDrawingConfigRequest, opts ...grpc.CallOption) (*DeleteDrawingConfigReply, error)
 }
 
@@ -304,9 +304,9 @@ func (c *settingsClient) CreateDrawingConfig(ctx context.Context, in *CreatDrawi
 	return out, nil
 }
 
-func (c *settingsClient) GetDrawingConfigConfig(ctx context.Context, in *GetDrawingConfigRequest, opts ...grpc.CallOption) (*GetDrawingConfigReply, error) {
+func (c *settingsClient) GetDrawingConfig(ctx context.Context, in *GetDrawingConfigRequest, opts ...grpc.CallOption) (*GetDrawingConfigReply, error) {
 	out := new(GetDrawingConfigReply)
-	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetDrawingConfigConfig", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetDrawingConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -353,7 +353,7 @@ type SettingsServer interface {
 	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
 	ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error)
 	CreateDrawingConfig(context.Context, *CreatDrawingConfigRequest) (*CreateDrawingConfigReply, error)
-	GetDrawingConfigConfig(context.Context, *GetDrawingConfigRequest) (*GetDrawingConfigReply, error)
+	GetDrawingConfig(context.Context, *GetDrawingConfigRequest) (*GetDrawingConfigReply, error)
 	DeleteDrawingConfig(context.Context, *DeleteDrawingConfigRequest) (*DeleteDrawingConfigReply, error)
 	mustEmbedUnimplementedSettingsServer()
 }
@@ -443,8 +443,8 @@ func (UnimplementedSettingsServer) ListGeneralParameters(context.Context, *ListG
 func (UnimplementedSettingsServer) CreateDrawingConfig(context.Context, *CreatDrawingConfigRequest) (*CreateDrawingConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDrawingConfig not implemented")
 }
-func (UnimplementedSettingsServer) GetDrawingConfigConfig(context.Context, *GetDrawingConfigRequest) (*GetDrawingConfigReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDrawingConfigConfig not implemented")
+func (UnimplementedSettingsServer) GetDrawingConfig(context.Context, *GetDrawingConfigRequest) (*GetDrawingConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDrawingConfig not implemented")
 }
 func (UnimplementedSettingsServer) DeleteDrawingConfig(context.Context, *DeleteDrawingConfigRequest) (*DeleteDrawingConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDrawingConfig not implemented")
@@ -948,20 +948,20 @@ func _Settings_CreateDrawingConfig_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Settings_GetDrawingConfigConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Settings_GetDrawingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetDrawingConfigRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SettingsServer).GetDrawingConfigConfig(ctx, in)
+		return srv.(SettingsServer).GetDrawingConfig(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.settings.v1.Settings/GetDrawingConfigConfig",
+		FullMethod: "/api.settings.v1.Settings/GetDrawingConfig",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SettingsServer).GetDrawingConfigConfig(ctx, req.(*GetDrawingConfigRequest))
+		return srv.(SettingsServer).GetDrawingConfig(ctx, req.(*GetDrawingConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1100,8 +1100,8 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Settings_CreateDrawingConfig_Handler,
 		},
 		{
-			MethodName: "GetDrawingConfigConfig",
-			Handler:    _Settings_GetDrawingConfigConfig_Handler,
+			MethodName: "GetDrawingConfig",
+			Handler:    _Settings_GetDrawingConfig_Handler,
 		},
 		{
 			MethodName: "DeleteDrawingConfig",
