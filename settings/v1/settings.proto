@@ -188,7 +188,7 @@ message GetDrawingConfigReply {
 	uint32 label_background_r = 9;
 	uint32 label_background_g = 10;
 	uint32 label_background_b = 11;
-	uint32 babel_background_a = 12;
+	uint32 label_background_a = 12;
 	uint32 font_size = 13;
 	uint32 border_size = 14;
 	uint32 label_position = 15;
