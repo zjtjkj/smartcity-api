@@ -48,6 +48,9 @@ type SettingsClient interface {
 	UpdateGeneralParameters(ctx context.Context, in *UpdateGeneralParametersRequest, opts ...grpc.CallOption) (*UpdateGeneralParametersReply, error)
 	DeleteGeneralParameters(ctx context.Context, in *DeleteGeneralParametersRequest, opts ...grpc.CallOption) (*DeleteGeneralParametersReply, error)
 	ListGeneralParameters(ctx context.Context, in *ListGeneralParametersRequest, opts ...grpc.CallOption) (*ListGeneralParametersReply, error)
+	CreateDrawingConfig(ctx context.Context, in *CreatDrawingConfigRequest, opts ...grpc.CallOption) (*CreateDrawingConfigReply, error)
+	GetDrawingConfigConfig(ctx context.Context, in *GetDrawingConfigRequest, opts ...grpc.CallOption) (*GetDrawingConfigReply, error)
+	DeleteDrawingConfig(ctx context.Context, in *DeleteDrawingConfigRequest, opts ...grpc.CallOption) (*DeleteDrawingConfigReply, error)
 }
 
 type settingsClient struct {
@@ -292,6 +295,33 @@ func (c *settingsClient) ListGeneralParameters(ctx context.Context, in *ListGene
 	return out, nil
 }
 
+func (c *settingsClient) CreateDrawingConfig(ctx context.Context, in *CreatDrawingConfigRequest, opts ...grpc.CallOption) (*CreateDrawingConfigReply, error) {
+	out := new(CreateDrawingConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/CreateDrawingConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) GetDrawingConfigConfig(ctx context.Context, in *GetDrawingConfigRequest, opts ...grpc.CallOption) (*GetDrawingConfigReply, error) {
+	out := new(GetDrawingConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/GetDrawingConfigConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) DeleteDrawingConfig(ctx context.Context, in *DeleteDrawingConfigRequest, opts ...grpc.CallOption) (*DeleteDrawingConfigReply, error) {
+	out := new(DeleteDrawingConfigReply)
+	err := c.cc.Invoke(ctx, "/api.settings.v1.Settings/DeleteDrawingConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SettingsServer is the server API for Settings service.
 // All implementations must embed UnimplementedSettingsServer
 // for forward compatibility
@@ -322,6 +352,9 @@ type SettingsServer interface {
 	UpdateGeneralParameters(context.Context, *UpdateGeneralParametersRequest) (*UpdateGeneralParametersReply, error)
 	DeleteGeneralParameters(context.Context, *DeleteGeneralParametersRequest) (*DeleteGeneralParametersReply, error)
 	ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error)
+	CreateDrawingConfig(context.Context, *CreatDrawingConfigRequest) (*CreateDrawingConfigReply, error)
+	GetDrawingConfigConfig(context.Context, *GetDrawingConfigRequest) (*GetDrawingConfigReply, error)
+	DeleteDrawingConfig(context.Context, *DeleteDrawingConfigRequest) (*DeleteDrawingConfigReply, error)
 	mustEmbedUnimplementedSettingsServer()
 }
 
@@ -406,6 +439,15 @@ func (UnimplementedSettingsServer) DeleteGeneralParameters(context.Context, *Del
 }
 func (UnimplementedSettingsServer) ListGeneralParameters(context.Context, *ListGeneralParametersRequest) (*ListGeneralParametersReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListGeneralParameters not implemented")
+}
+func (UnimplementedSettingsServer) CreateDrawingConfig(context.Context, *CreatDrawingConfigRequest) (*CreateDrawingConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDrawingConfig not implemented")
+}
+func (UnimplementedSettingsServer) GetDrawingConfigConfig(context.Context, *GetDrawingConfigRequest) (*GetDrawingConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDrawingConfigConfig not implemented")
+}
+func (UnimplementedSettingsServer) DeleteDrawingConfig(context.Context, *DeleteDrawingConfigRequest) (*DeleteDrawingConfigReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDrawingConfig not implemented")
 }
 func (UnimplementedSettingsServer) mustEmbedUnimplementedSettingsServer() {}
 
@@ -888,6 +930,60 @@ func _Settings_ListGeneralParameters_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Settings_CreateDrawingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatDrawingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).CreateDrawingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/CreateDrawingConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).CreateDrawingConfig(ctx, req.(*CreatDrawingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_GetDrawingConfigConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDrawingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetDrawingConfigConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/GetDrawingConfigConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetDrawingConfigConfig(ctx, req.(*GetDrawingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_DeleteDrawingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDrawingConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).DeleteDrawingConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.settings.v1.Settings/DeleteDrawingConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).DeleteDrawingConfig(ctx, req.(*DeleteDrawingConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Settings_ServiceDesc is the grpc.ServiceDesc for Settings service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -998,6 +1094,18 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListGeneralParameters",
 			Handler:    _Settings_ListGeneralParameters_Handler,
+		},
+		{
+			MethodName: "CreateDrawingConfig",
+			Handler:    _Settings_CreateDrawingConfig_Handler,
+		},
+		{
+			MethodName: "GetDrawingConfigConfig",
+			Handler:    _Settings_GetDrawingConfigConfig_Handler,
+		},
+		{
+			MethodName: "DeleteDrawingConfig",
+			Handler:    _Settings_DeleteDrawingConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

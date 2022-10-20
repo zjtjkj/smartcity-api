@@ -141,8 +141,62 @@ service Settings {
 			get: "/api/v1/settings/parameters"
 		};
 	}
-	
+
+	rpc CreateDrawingConfig(CreatDrawingConfigRequest) returns (CreateDrawingConfigReply) {}
+	rpc GetDrawingConfigConfig(GetDrawingConfigRequest) returns (GetDrawingConfigReply) {}
+	rpc DeleteDrawingConfig(DeleteDrawingConfigRequest) returns (DeleteDrawingConfigReply) {}
 }
+
+enum Position {
+	TopLeft = 0;
+	TopCenter = 1;
+	TopRight = 2;
+	BottomLeft = 3;
+	BottomCenter = 4;
+	BottomRight = 5;
+}
+
+message CreatDrawingConfigRequest {
+	uint32 border_r = 1;
+	uint32 border_g = 2;
+	uint32 border_b = 3;
+	uint32 border_a = 4;
+	uint32 label_r = 5;
+	uint32 label_g = 6;
+	uint32 label_b = 7;
+	uint32 label_a = 8;
+	uint32 label_background_r = 9;
+	uint32 label_background_g = 10;
+	uint32 label_background_b = 11;
+	uint32 babel_background_a = 12;
+	uint32 font_size = 13;
+	uint32 border_size = 14;
+	uint32 label_position = 15;
+}
+message CreateDrawingConfigReply {}
+
+message GetDrawingConfigRequest {}
+message GetDrawingConfigReply {
+	uint32 border_r = 1;
+	uint32 border_g = 2;
+	uint32 border_b = 3;
+	uint32 border_a = 4;
+	uint32 label_r = 5;
+	uint32 label_g = 6;
+	uint32 label_b = 7;
+	uint32 label_a = 8;
+	uint32 label_background_r = 9;
+	uint32 label_background_g = 10;
+	uint32 label_background_b = 11;
+	uint32 babel_background_a = 12;
+	uint32 font_size = 13;
+	uint32 border_size = 14;
+	uint32 label_position = 15;
+}
+
+message DeleteDrawingConfigRequest{}
+
+message DeleteDrawingConfigReply {}
 
 message ListComputingUnitRequest {
 
