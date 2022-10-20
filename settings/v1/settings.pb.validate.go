@@ -79,7 +79,7 @@ func (m *CreatDrawingConfigRequest) validate(all bool) error {
 
 	// no validation rules for LabelBackgroundB
 
-	// no validation rules for BabelBackgroundA
+	// no validation rules for LabelBackgroundA
 
 	// no validation rules for FontSize
 
