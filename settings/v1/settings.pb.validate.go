@@ -35,6 +35,247 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on GetDrawingConfigDemoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetDrawingConfigDemoRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetDrawingConfigDemoRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetDrawingConfigDemoRequestMultiError, or nil if none found.
+func (m *GetDrawingConfigDemoRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDrawingConfigDemoRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetDrawingConfigDemoRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDrawingConfigDemoRequestMultiError is an error wrapping multiple
+// validation errors returned by GetDrawingConfigDemoRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetDrawingConfigDemoRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDrawingConfigDemoRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDrawingConfigDemoRequestMultiError) AllErrors() []error { return m }
+
+// GetDrawingConfigDemoRequestValidationError is the validation error returned
+// by GetDrawingConfigDemoRequest.Validate if the designated constraints
+// aren't met.
+type GetDrawingConfigDemoRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDrawingConfigDemoRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDrawingConfigDemoRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDrawingConfigDemoRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDrawingConfigDemoRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDrawingConfigDemoRequestValidationError) ErrorName() string {
+	return "GetDrawingConfigDemoRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDrawingConfigDemoRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDrawingConfigDemoRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDrawingConfigDemoRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDrawingConfigDemoRequestValidationError{}
+
+// Validate checks the field values on GetDrawingConfigDemoReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetDrawingConfigDemoReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetDrawingConfigDemoReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetDrawingConfigDemoReplyMultiError, or nil if none found.
+func (m *GetDrawingConfigDemoReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDrawingConfigDemoReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetObjects() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetDrawingConfigDemoReplyValidationError{
+						field:  fmt.Sprintf("Objects[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetDrawingConfigDemoReplyValidationError{
+						field:  fmt.Sprintf("Objects[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetDrawingConfigDemoReplyValidationError{
+					field:  fmt.Sprintf("Objects[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Src
+
+	if len(errors) > 0 {
+		return GetDrawingConfigDemoReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDrawingConfigDemoReplyMultiError is an error wrapping multiple validation
+// errors returned by GetDrawingConfigDemoReply.ValidateAll() if the
+// designated constraints aren't met.
+type GetDrawingConfigDemoReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDrawingConfigDemoReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDrawingConfigDemoReplyMultiError) AllErrors() []error { return m }
+
+// GetDrawingConfigDemoReplyValidationError is the validation error returned by
+// GetDrawingConfigDemoReply.Validate if the designated constraints aren't met.
+type GetDrawingConfigDemoReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDrawingConfigDemoReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDrawingConfigDemoReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDrawingConfigDemoReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDrawingConfigDemoReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDrawingConfigDemoReplyValidationError) ErrorName() string {
+	return "GetDrawingConfigDemoReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDrawingConfigDemoReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDrawingConfigDemoReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDrawingConfigDemoReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDrawingConfigDemoReplyValidationError{}
+
 // Validate checks the field values on CreatDrawingConfigRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -6785,6 +7026,121 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListModulesReplyValidationError{}
+
+// Validate checks the field values on GetDrawingConfigDemoReply_Object with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *GetDrawingConfigDemoReply_Object) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetDrawingConfigDemoReply_Object with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetDrawingConfigDemoReply_ObjectMultiError, or nil if none found.
+func (m *GetDrawingConfigDemoReply_Object) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetDrawingConfigDemoReply_Object) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Label
+
+	// no validation rules for Point1X
+
+	// no validation rules for Point1Y
+
+	// no validation rules for Point2X
+
+	// no validation rules for Point2Y
+
+	if len(errors) > 0 {
+		return GetDrawingConfigDemoReply_ObjectMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetDrawingConfigDemoReply_ObjectMultiError is an error wrapping multiple
+// validation errors returned by
+// GetDrawingConfigDemoReply_Object.ValidateAll() if the designated
+// constraints aren't met.
+type GetDrawingConfigDemoReply_ObjectMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetDrawingConfigDemoReply_ObjectMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetDrawingConfigDemoReply_ObjectMultiError) AllErrors() []error { return m }
+
+// GetDrawingConfigDemoReply_ObjectValidationError is the validation error
+// returned by GetDrawingConfigDemoReply_Object.Validate if the designated
+// constraints aren't met.
+type GetDrawingConfigDemoReply_ObjectValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetDrawingConfigDemoReply_ObjectValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetDrawingConfigDemoReply_ObjectValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetDrawingConfigDemoReply_ObjectValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetDrawingConfigDemoReply_ObjectValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetDrawingConfigDemoReply_ObjectValidationError) ErrorName() string {
+	return "GetDrawingConfigDemoReply_ObjectValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetDrawingConfigDemoReply_ObjectValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetDrawingConfigDemoReply_Object.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetDrawingConfigDemoReply_ObjectValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetDrawingConfigDemoReply_ObjectValidationError{}
 
 // Validate checks the field values on ListComputingUnitReply_ComputingUnit
 // with the rules defined in the proto definition for this message. If any

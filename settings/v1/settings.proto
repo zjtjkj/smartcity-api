@@ -145,6 +145,20 @@ service Settings {
 	rpc CreateDrawingConfig(CreatDrawingConfigRequest) returns (CreateDrawingConfigReply) {}
 	rpc GetDrawingConfig(GetDrawingConfigRequest) returns (GetDrawingConfigReply) {}
 	rpc DeleteDrawingConfig(DeleteDrawingConfigRequest) returns (DeleteDrawingConfigReply) {}
+	rpc GetDrawingConfigDemo(GetDrawingConfigDemoRequest) returns (GetDrawingConfigDemoReply) {}
+}
+
+message GetDrawingConfigDemoRequest {}
+message GetDrawingConfigDemoReply {
+	message Object {
+		string label = 1;
+		uint32 point1_x = 2;
+		uint32 point1_y = 3;
+		uint32 point2_x = 4;
+		uint32 point2_y = 5;
+	}
+	repeated Object objects = 1;
+	bytes src = 2;
 }
 
 enum Position {
