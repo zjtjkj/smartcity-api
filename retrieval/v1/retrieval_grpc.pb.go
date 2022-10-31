@@ -27,8 +27,6 @@ type RetrievalClient interface {
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*GetImageReply, error)
 	DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*DeleteEventReply, error)
 	MissionLatestInfo(ctx context.Context, in *MissionLatestInfoRequest, opts ...grpc.CallOption) (*MissionLatestInfoReply, error)
-	CreateUnfinishedEvent(ctx context.Context, in *CreateUnfinishedEventRequest, opts ...grpc.CallOption) (*CreateUnfinishedEventReply, error)
-	DeleteUnfinishedEvent(ctx context.Context, in *DeleteUnfinishedEventRequest, opts ...grpc.CallOption) (*DeleteUnfinishedEventReply, error)
 	SetTags(ctx context.Context, in *SetTagsRequest, opts ...grpc.CallOption) (*SetTagReply, error)
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagReply, error)
 	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagReply, error)
@@ -88,24 +86,6 @@ func (c *retrievalClient) MissionLatestInfo(ctx context.Context, in *MissionLate
 	return out, nil
 }
 
-func (c *retrievalClient) CreateUnfinishedEvent(ctx context.Context, in *CreateUnfinishedEventRequest, opts ...grpc.CallOption) (*CreateUnfinishedEventReply, error) {
-	out := new(CreateUnfinishedEventReply)
-	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/CreateUnfinishedEvent", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *retrievalClient) DeleteUnfinishedEvent(ctx context.Context, in *DeleteUnfinishedEventRequest, opts ...grpc.CallOption) (*DeleteUnfinishedEventReply, error) {
-	out := new(DeleteUnfinishedEventReply)
-	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/DeleteUnfinishedEvent", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *retrievalClient) SetTags(ctx context.Context, in *SetTagsRequest, opts ...grpc.CallOption) (*SetTagReply, error) {
 	out := new(SetTagReply)
 	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/SetTags", in, out, opts...)
@@ -151,8 +131,6 @@ type RetrievalServer interface {
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
 	DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
 	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
-	CreateUnfinishedEvent(context.Context, *CreateUnfinishedEventRequest) (*CreateUnfinishedEventReply, error)
-	DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error)
 	SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagReply, error)
 	ListTag(context.Context, *ListTagRequest) (*ListTagReply, error)
@@ -178,12 +156,6 @@ func (UnimplementedRetrievalServer) DeleteEvent(context.Context, *DeleteEventReq
 }
 func (UnimplementedRetrievalServer) MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MissionLatestInfo not implemented")
-}
-func (UnimplementedRetrievalServer) CreateUnfinishedEvent(context.Context, *CreateUnfinishedEventRequest) (*CreateUnfinishedEventReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateUnfinishedEvent not implemented")
-}
-func (UnimplementedRetrievalServer) DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteUnfinishedEvent not implemented")
 }
 func (UnimplementedRetrievalServer) SetTags(context.Context, *SetTagsRequest) (*SetTagReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetTags not implemented")
@@ -300,42 +272,6 @@ func _Retrieval_MissionLatestInfo_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Retrieval_CreateUnfinishedEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateUnfinishedEventRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RetrievalServer).CreateUnfinishedEvent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.retrieval.Retrieval/CreateUnfinishedEvent",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RetrievalServer).CreateUnfinishedEvent(ctx, req.(*CreateUnfinishedEventRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Retrieval_DeleteUnfinishedEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteUnfinishedEventRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RetrievalServer).DeleteUnfinishedEvent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.retrieval.Retrieval/DeleteUnfinishedEvent",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RetrievalServer).DeleteUnfinishedEvent(ctx, req.(*DeleteUnfinishedEventRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Retrieval_SetTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetTagsRequest)
 	if err := dec(in); err != nil {
@@ -434,14 +370,6 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MissionLatestInfo",
 			Handler:    _Retrieval_MissionLatestInfo_Handler,
-		},
-		{
-			MethodName: "CreateUnfinishedEvent",
-			Handler:    _Retrieval_CreateUnfinishedEvent_Handler,
-		},
-		{
-			MethodName: "DeleteUnfinishedEvent",
-			Handler:    _Retrieval_DeleteUnfinishedEvent_Handler,
 		},
 		{
 			MethodName: "SetTags",

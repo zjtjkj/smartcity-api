@@ -19,10 +19,8 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationRetrievalCreateUnfinishedEvent = "/api.retrieval.Retrieval/CreateUnfinishedEvent"
 const OperationRetrievalDeleteEvent = "/api.retrieval.Retrieval/DeleteEvent"
 const OperationRetrievalDeleteTag = "/api.retrieval.Retrieval/DeleteTag"
-const OperationRetrievalDeleteUnfinishedEvent = "/api.retrieval.Retrieval/DeleteUnfinishedEvent"
 const OperationRetrievalFindEvents = "/api.retrieval.Retrieval/FindEvents"
 const OperationRetrievalGetEvent = "/api.retrieval.Retrieval/GetEvent"
 const OperationRetrievalGetEventByIndex = "/api.retrieval.Retrieval/GetEventByIndex"
@@ -32,10 +30,8 @@ const OperationRetrievalMissionLatestInfo = "/api.retrieval.Retrieval/MissionLat
 const OperationRetrievalSetTags = "/api.retrieval.Retrieval/SetTags"
 
 type RetrievalHTTPServer interface {
-	CreateUnfinishedEvent(context.Context, *CreateUnfinishedEventRequest) (*CreateUnfinishedEventReply, error)
 	DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagReply, error)
-	DeleteUnfinishedEvent(context.Context, *DeleteUnfinishedEventRequest) (*DeleteUnfinishedEventReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetEventByIndex(context.Context, *GetEventByIndexRequest) (*GetEventByIndexReply, error)
@@ -52,8 +48,6 @@ func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r.POST("/api/v1/image/get", _Retrieval_GetImage0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/delete", _Retrieval_DeleteEvent0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/delete", _Retrieval_MissionLatestInfo0_HTTP_Handler(srv))
-	r.POST("/api/v1/event/unfinished/create", _Retrieval_CreateUnfinishedEvent0_HTTP_Handler(srv))
-	r.POST("/api/v1/event/unfinished/delete", _Retrieval_DeleteUnfinishedEvent0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/tags", _Retrieval_SetTags0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/tags/delete", _Retrieval_DeleteTag0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/tags/list", _Retrieval_ListTag0_HTTP_Handler(srv))
@@ -155,44 +149,6 @@ func _Retrieval_MissionLatestInfo0_HTTP_Handler(srv RetrievalHTTPServer) func(ct
 	}
 }
 
-func _Retrieval_CreateUnfinishedEvent0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CreateUnfinishedEventRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationRetrievalCreateUnfinishedEvent)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateUnfinishedEvent(ctx, req.(*CreateUnfinishedEventRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CreateUnfinishedEventReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Retrieval_DeleteUnfinishedEvent0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in DeleteUnfinishedEventRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationRetrievalDeleteUnfinishedEvent)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.DeleteUnfinishedEvent(ctx, req.(*DeleteUnfinishedEventRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*DeleteUnfinishedEventReply)
-		return ctx.Result(200, reply)
-	}
-}
-
 func _Retrieval_SetTags0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in SetTagsRequest
@@ -270,10 +226,8 @@ func _Retrieval_GetEventByIndex0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx 
 }
 
 type RetrievalHTTPClient interface {
-	CreateUnfinishedEvent(ctx context.Context, req *CreateUnfinishedEventRequest, opts ...http.CallOption) (rsp *CreateUnfinishedEventReply, err error)
 	DeleteEvent(ctx context.Context, req *DeleteEventRequest, opts ...http.CallOption) (rsp *DeleteEventReply, err error)
 	DeleteTag(ctx context.Context, req *DeleteTagRequest, opts ...http.CallOption) (rsp *DeleteTagReply, err error)
-	DeleteUnfinishedEvent(ctx context.Context, req *DeleteUnfinishedEventRequest, opts ...http.CallOption) (rsp *DeleteUnfinishedEventReply, err error)
 	FindEvents(ctx context.Context, req *FindEventsRequest, opts ...http.CallOption) (rsp *FindEventsReply, err error)
 	GetEvent(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
 	GetEventByIndex(ctx context.Context, req *GetEventByIndexRequest, opts ...http.CallOption) (rsp *GetEventByIndexReply, err error)
@@ -289,19 +243,6 @@ type RetrievalHTTPClientImpl struct {
 
 func NewRetrievalHTTPClient(client *http.Client) RetrievalHTTPClient {
 	return &RetrievalHTTPClientImpl{client}
-}
-
-func (c *RetrievalHTTPClientImpl) CreateUnfinishedEvent(ctx context.Context, in *CreateUnfinishedEventRequest, opts ...http.CallOption) (*CreateUnfinishedEventReply, error) {
-	var out CreateUnfinishedEventReply
-	pattern := "/api/v1/event/unfinished/create"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationRetrievalCreateUnfinishedEvent))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
 }
 
 func (c *RetrievalHTTPClientImpl) DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...http.CallOption) (*DeleteEventReply, error) {
@@ -322,19 +263,6 @@ func (c *RetrievalHTTPClientImpl) DeleteTag(ctx context.Context, in *DeleteTagRe
 	pattern := "/api/v1/event/tags/delete"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalDeleteTag))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *RetrievalHTTPClientImpl) DeleteUnfinishedEvent(ctx context.Context, in *DeleteUnfinishedEventRequest, opts ...http.CallOption) (*DeleteUnfinishedEventReply, error) {
-	var out DeleteUnfinishedEventReply
-	pattern := "/api/v1/event/unfinished/delete"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationRetrievalDeleteUnfinishedEvent))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
