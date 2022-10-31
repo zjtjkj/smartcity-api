@@ -146,6 +146,18 @@ service Settings {
 	rpc GetDrawingConfig(GetDrawingConfigRequest) returns (GetDrawingConfigReply) {}
 	rpc DeleteDrawingConfig(DeleteDrawingConfigRequest) returns (DeleteDrawingConfigReply) {}
 	rpc GetDrawingConfigDemo(GetDrawingConfigDemoRequest) returns (GetDrawingConfigDemoReply) {}
+
+	rpc CreateEventConfig(CreateEventConfigRequest) returns (CreateEventConfigReply){}
+	rpc GetEventConfig(GetEventConfigRequest) returns (GetEventConfigReply){}
+}
+
+message CreateEventConfigRequest{
+	uint32 auto_finish = 1;
+}
+message CreateEventConfigReply {}
+message GetEventConfigRequest{}
+message GetEventConfigReply {
+	uint32 auto_finish = 1;
 }
 
 message GetDrawingConfigDemoRequest {}
