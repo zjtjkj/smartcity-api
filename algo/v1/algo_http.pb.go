@@ -41,11 +41,11 @@ type AlgoHTTPServer interface {
 
 func RegisterAlgoHTTPServer(s *http.Server, srv AlgoHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/v1/algo/mission", _Algo_CreateMission0_HTTP_Handler(srv))
+	r.PUT("/api/v1/algo/mission", _Algo_CreateMission0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/algo/mission/{id}", _Algo_DeleteMission0_HTTP_Handler(srv))
 	r.DELETE("/api/v1/algo/missions/{id}", _Algo_DeleteMultiMission0_HTTP_Handler(srv))
 	r.GET("/api/v1/algo/missions/{id}", _Algo_ListMission0_HTTP_Handler(srv))
-	r.DELETE("/api/v1/algo/mission", _Algo_ListAll0_HTTP_Handler(srv))
+	r.GET("/api/v1/algo/missions", _Algo_ListAll0_HTTP_Handler(srv))
 	r.GET("/api/v1/algo/info", _Algo_Info0_HTTP_Handler(srv))
 	r.GET("/api/v1/algo/debug", _Algo_Debug0_HTTP_Handler(srv))
 	r.GET("/api/v1/algo/clear", _Algo_Clear0_HTTP_Handler(srv))
@@ -250,7 +250,7 @@ func (c *AlgoHTTPClientImpl) CreateMission(ctx context.Context, in *CreateMissio
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationAlgoCreateMission))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -311,11 +311,11 @@ func (c *AlgoHTTPClientImpl) Info(ctx context.Context, in *InfoRequest, opts ...
 
 func (c *AlgoHTTPClientImpl) ListAll(ctx context.Context, in *ListAllRequest, opts ...http.CallOption) (*ListAllReply, error) {
 	var out ListAllReply
-	pattern := "/api/v1/algo/mission"
+	pattern := "/api/v1/algo/missions"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationAlgoListAll))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

@@ -9,7 +9,7 @@ import "validate/validate.proto";
 service Algo {
 	rpc CreateMission (CreateMissionRequest) returns (CreateMissionReply) {
 		option (google.api.http) = {
-			post: "/api/v1/algo/mission"
+			put: "/api/v1/algo/mission"
 			body: "*"
 		};
 	}
@@ -30,7 +30,7 @@ service Algo {
 	}
 	rpc ListAll (ListAllRequest) returns (ListAllReply) {
 		option (google.api.http) = {
-			delete: "/api/v1/algo/mission"
+			get: "/api/v1/algo/missions"
 		};
 	}
 
