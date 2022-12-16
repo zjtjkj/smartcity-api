@@ -25,7 +25,7 @@ message Object {
 	string id = 1 [(validate.rules).string = {min_len: 1}];
 	uint32 area = 2;
 	repeated Point points = 3 [(validate.rules).repeated = {min_items: 2, max_items: 2}];
-	map<string, string> properties = 4  [(validate.rules).map = {min_pairs: 1}];
+	map<string, string> properties = 4;
 }
 
 message CreateEventRequest {

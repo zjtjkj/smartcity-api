@@ -234,16 +234,7 @@ func (m *Object) validate(all bool) error {
 
 	}
 
-	if len(m.GetProperties()) < 1 {
-		err := ObjectValidationError{
-			field:  "Properties",
-			reason: "value must contain at least 1 pair(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Properties
 
 	if len(errors) > 0 {
 		return ObjectMultiError(errors)
