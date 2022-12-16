@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package api.scheduler.v1;
+
+option go_package = "scheduler/api/scheduler/v1;v1";
+
+service Scheduler {
+	rpc GetUnitStatus(GetUnitStatusRequest) returns (GetUnitStatusReply) {}
+}
+
+message GetUnitStatusRequest {
+	uint32 id = 1;
+}
+message GetUnitStatusReply {
+	message Unit {
+		uint32 id = 1;
+		uint32 remaining = 2;
+		repeated string abilities = 3;
+	}
+	Unit uint = 1;
+}
