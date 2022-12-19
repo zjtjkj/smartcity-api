@@ -9,6 +9,7 @@ package v1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -19,6 +20,413 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type Status int32
+
+const (
+	Status_Analyzing Status = 0
+	Status_Scheduled Status = 1
+	Status_Failed    Status = 2
+	Status_Demo      Status = 3
+)
+
+// Enum value maps for Status.
+var (
+	Status_name = map[int32]string{
+		0: "Analyzing",
+		1: "Scheduled",
+		2: "Failed",
+		3: "Demo",
+	}
+	Status_value = map[string]int32{
+		"Analyzing": 0,
+		"Scheduled": 1,
+		"Failed":    2,
+		"Demo":      3,
+	}
+)
+
+func (x Status) Enum() *Status {
+	p := new(Status)
+	*p = x
+	return p
+}
+
+func (x Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_scheduler_v1_scheduler_proto_enumTypes[0].Descriptor()
+}
+
+func (Status) Type() protoreflect.EnumType {
+	return &file_scheduler_v1_scheduler_proto_enumTypes[0]
+}
+
+func (x Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Status.Descriptor instead.
+func (Status) EnumDescriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{0}
+}
+
+type SyncMissionRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *SyncMissionRequest) Reset() {
+	*x = SyncMissionRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncMissionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncMissionRequest) ProtoMessage() {}
+
+func (x *SyncMissionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncMissionRequest.ProtoReflect.Descriptor instead.
+func (*SyncMissionRequest) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *SyncMissionRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type SyncMissionReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SyncMissionReply) Reset() {
+	*x = SyncMissionReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncMissionReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncMissionReply) ProtoMessage() {}
+
+func (x *SyncMissionReply) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncMissionReply.ProtoReflect.Descriptor instead.
+func (*SyncMissionReply) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{1}
+}
+
+type GetMissionStatusRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *GetMissionStatusRequest) Reset() {
+	*x = GetMissionStatusRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetMissionStatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMissionStatusRequest) ProtoMessage() {}
+
+func (x *GetMissionStatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMissionStatusRequest.ProtoReflect.Descriptor instead.
+func (*GetMissionStatusRequest) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetMissionStatusRequest) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetMissionStatusReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id      uint32                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Updated *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=updated,proto3" json:"updated,omitempty"`
+	Status  Status                 `protobuf:"varint,3,opt,name=status,proto3,enum=api.scheduler.v1.Status" json:"status,omitempty"`
+	Info    string                 `protobuf:"bytes,4,opt,name=info,proto3" json:"info,omitempty"`
+}
+
+func (x *GetMissionStatusReply) Reset() {
+	*x = GetMissionStatusReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetMissionStatusReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMissionStatusReply) ProtoMessage() {}
+
+func (x *GetMissionStatusReply) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMissionStatusReply.ProtoReflect.Descriptor instead.
+func (*GetMissionStatusReply) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetMissionStatusReply) GetId() uint32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *GetMissionStatusReply) GetUpdated() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Updated
+	}
+	return nil
+}
+
+func (x *GetMissionStatusReply) GetStatus() Status {
+	if x != nil {
+		return x.Status
+	}
+	return Status_Analyzing
+}
+
+func (x *GetMissionStatusReply) GetInfo() string {
+	if x != nil {
+		return x.Info
+	}
+	return ""
+}
+
+type SyncUnitRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SyncUnitRequest) Reset() {
+	*x = SyncUnitRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncUnitRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncUnitRequest) ProtoMessage() {}
+
+func (x *SyncUnitRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncUnitRequest.ProtoReflect.Descriptor instead.
+func (*SyncUnitRequest) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{4}
+}
+
+type SyncUnitReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SyncUnitReply) Reset() {
+	*x = SyncUnitReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncUnitReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncUnitReply) ProtoMessage() {}
+
+func (x *SyncUnitReply) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncUnitReply.ProtoReflect.Descriptor instead.
+func (*SyncUnitReply) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{5}
+}
+
+type SyncCameraRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SyncCameraRequest) Reset() {
+	*x = SyncCameraRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncCameraRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncCameraRequest) ProtoMessage() {}
+
+func (x *SyncCameraRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncCameraRequest.ProtoReflect.Descriptor instead.
+func (*SyncCameraRequest) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{6}
+}
+
+type SyncCameraReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SyncCameraReply) Reset() {
+	*x = SyncCameraReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncCameraReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncCameraReply) ProtoMessage() {}
+
+func (x *SyncCameraReply) ProtoReflect() protoreflect.Message {
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncCameraReply.ProtoReflect.Descriptor instead.
+func (*SyncCameraReply) Descriptor() ([]byte, []int) {
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{7}
+}
 
 type GetUnitStatusRequest struct {
 	state         protoimpl.MessageState
@@ -31,7 +439,7 @@ type GetUnitStatusRequest struct {
 func (x *GetUnitStatusRequest) Reset() {
 	*x = GetUnitStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_scheduler_v1_scheduler_proto_msgTypes[0]
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -44,7 +452,7 @@ func (x *GetUnitStatusRequest) String() string {
 func (*GetUnitStatusRequest) ProtoMessage() {}
 
 func (x *GetUnitStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_scheduler_v1_scheduler_proto_msgTypes[0]
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +465,7 @@ func (x *GetUnitStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUnitStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetUnitStatusRequest) Descriptor() ([]byte, []int) {
-	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{0}
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetUnitStatusRequest) GetId() uint32 {
@@ -78,7 +486,7 @@ type GetUnitStatusReply struct {
 func (x *GetUnitStatusReply) Reset() {
 	*x = GetUnitStatusReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_scheduler_v1_scheduler_proto_msgTypes[1]
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -91,7 +499,7 @@ func (x *GetUnitStatusReply) String() string {
 func (*GetUnitStatusReply) ProtoMessage() {}
 
 func (x *GetUnitStatusReply) ProtoReflect() protoreflect.Message {
-	mi := &file_scheduler_v1_scheduler_proto_msgTypes[1]
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,7 +512,7 @@ func (x *GetUnitStatusReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUnitStatusReply.ProtoReflect.Descriptor instead.
 func (*GetUnitStatusReply) Descriptor() ([]byte, []int) {
-	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{1}
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetUnitStatusReply) GetUint() *GetUnitStatusReply_Unit {
@@ -127,7 +535,7 @@ type GetUnitStatusReply_Unit struct {
 func (x *GetUnitStatusReply_Unit) Reset() {
 	*x = GetUnitStatusReply_Unit{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_scheduler_v1_scheduler_proto_msgTypes[2]
+		mi := &file_scheduler_v1_scheduler_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -140,7 +548,7 @@ func (x *GetUnitStatusReply_Unit) String() string {
 func (*GetUnitStatusReply_Unit) ProtoMessage() {}
 
 func (x *GetUnitStatusReply_Unit) ProtoReflect() protoreflect.Message {
-	mi := &file_scheduler_v1_scheduler_proto_msgTypes[2]
+	mi := &file_scheduler_v1_scheduler_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +561,7 @@ func (x *GetUnitStatusReply_Unit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUnitStatusReply_Unit.ProtoReflect.Descriptor instead.
 func (*GetUnitStatusReply_Unit) Descriptor() ([]byte, []int) {
-	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{1, 0}
+	return file_scheduler_v1_scheduler_proto_rawDescGZIP(), []int{9, 0}
 }
 
 func (x *GetUnitStatusReply_Unit) GetId() uint32 {
@@ -183,29 +591,79 @@ var file_scheduler_v1_scheduler_proto_rawDesc = []byte{
 	0x0a, 0x1c, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x2f, 0x73,
 	0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x10,
 	0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31,
-	0x22, 0x26, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0xa7, 0x01, 0x0a, 0x12, 0x47, 0x65, 0x74,
-	0x55, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12,
-	0x3d, 0x0a, 0x04, 0x75, 0x69, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x29, 0x2e,
-	0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31,
-	0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65,
-	0x70, 0x6c, 0x79, 0x2e, 0x55, 0x6e, 0x69, 0x74, 0x52, 0x04, 0x75, 0x69, 0x6e, 0x74, 0x1a, 0x52,
-	0x0a, 0x04, 0x55, 0x6e, 0x69, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x6d, 0x61, 0x69, 0x6e,
-	0x69, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x09, 0x72, 0x65, 0x6d, 0x61, 0x69,
-	0x6e, 0x69, 0x6e, 0x67, 0x12, 0x1c, 0x0a, 0x09, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65,
-	0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x69,
-	0x65, 0x73, 0x32, 0x6c, 0x0a, 0x09, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x12,
-	0x5f, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x12, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72,
-	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73,
-	0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x55,
-	0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00,
-	0x42, 0x1f, 0x5a, 0x1d, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2f, 0x61, 0x70,
-	0x69, 0x2f, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x3b, 0x76,
-	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x22, 0x24, 0x0a, 0x12, 0x53, 0x79, 0x6e, 0x63, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x12, 0x0a, 0x10, 0x53, 0x79, 0x6e, 0x63, 0x4d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x29, 0x0a, 0x17, 0x47,
+	0x65, 0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0xa3, 0x01, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x4d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64,
+	0x12, 0x34, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x07, 0x75,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x30, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68,
+	0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x22, 0x11, 0x0a, 0x0f,
+	0x53, 0x79, 0x6e, 0x63, 0x55, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
+	0x0f, 0x0a, 0x0d, 0x53, 0x79, 0x6e, 0x63, 0x55, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79,
+	0x22, 0x13, 0x0a, 0x11, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x11, 0x0a, 0x0f, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x61, 0x6d,
+	0x65, 0x72, 0x61, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x26, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x55,
+	0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64,
+	0x22, 0xa7, 0x01, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x3d, 0x0a, 0x04, 0x75, 0x69, 0x6e, 0x74, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65,
+	0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69, 0x74,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x2e, 0x55, 0x6e, 0x69, 0x74,
+	0x52, 0x04, 0x75, 0x69, 0x6e, 0x74, 0x1a, 0x52, 0x0a, 0x04, 0x55, 0x6e, 0x69, 0x74, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1c,
+	0x0a, 0x09, 0x72, 0x65, 0x6d, 0x61, 0x69, 0x6e, 0x69, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x09, 0x72, 0x65, 0x6d, 0x61, 0x69, 0x6e, 0x69, 0x6e, 0x67, 0x12, 0x1c, 0x0a, 0x09,
+	0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x09, 0x52,
+	0x09, 0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x69, 0x65, 0x73, 0x2a, 0x3c, 0x0a, 0x06, 0x53, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x12, 0x0d, 0x0a, 0x09, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x69, 0x6e,
+	0x67, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x53, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x64,
+	0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x10, 0x02, 0x12, 0x08,
+	0x0a, 0x04, 0x44, 0x65, 0x6d, 0x6f, 0x10, 0x03, 0x32, 0xdb, 0x03, 0x0a, 0x09, 0x53, 0x63, 0x68,
+	0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x12, 0x5f, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69,
+	0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63,
+	0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e,
+	0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x68, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x4d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x29, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x47,
+	0x65, 0x74, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68,
+	0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x69, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
+	0x00, 0x12, 0x56, 0x0a, 0x0a, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x12,
+	0x23, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x61, 0x6d, 0x65, 0x72, 0x61, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64,
+	0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x61, 0x6d, 0x65,
+	0x72, 0x61, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x59, 0x0a, 0x0b, 0x53, 0x79, 0x6e,
+	0x63, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73,
+	0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x79, 0x6e, 0x63,
+	0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72, 0x2e, 0x76,
+	0x31, 0x2e, 0x53, 0x79, 0x6e, 0x63, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x70,
+	0x6c, 0x79, 0x22, 0x00, 0x12, 0x50, 0x0a, 0x08, 0x53, 0x79, 0x6e, 0x63, 0x55, 0x6e, 0x69, 0x74,
+	0x12, 0x21, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65, 0x72,
+	0x2e, 0x76, 0x31, 0x2e, 0x53, 0x79, 0x6e, 0x63, 0x55, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75,
+	0x6c, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x79, 0x6e, 0x63, 0x55, 0x6e, 0x69, 0x74, 0x52,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x1f, 0x5a, 0x1d, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75,
+	0x6c, 0x65, 0x72, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x73, 0x63, 0x68, 0x65, 0x64, 0x75, 0x6c, 0x65,
+	0x72, 0x2f, 0x76, 0x31, 0x3b, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -220,21 +678,42 @@ func file_scheduler_v1_scheduler_proto_rawDescGZIP() []byte {
 	return file_scheduler_v1_scheduler_proto_rawDescData
 }
 
-var file_scheduler_v1_scheduler_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_scheduler_v1_scheduler_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_scheduler_v1_scheduler_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_scheduler_v1_scheduler_proto_goTypes = []interface{}{
-	(*GetUnitStatusRequest)(nil),    // 0: api.scheduler.v1.GetUnitStatusRequest
-	(*GetUnitStatusReply)(nil),      // 1: api.scheduler.v1.GetUnitStatusReply
-	(*GetUnitStatusReply_Unit)(nil), // 2: api.scheduler.v1.GetUnitStatusReply.Unit
+	(Status)(0),                     // 0: api.scheduler.v1.Status
+	(*SyncMissionRequest)(nil),      // 1: api.scheduler.v1.SyncMissionRequest
+	(*SyncMissionReply)(nil),        // 2: api.scheduler.v1.SyncMissionReply
+	(*GetMissionStatusRequest)(nil), // 3: api.scheduler.v1.GetMissionStatusRequest
+	(*GetMissionStatusReply)(nil),   // 4: api.scheduler.v1.GetMissionStatusReply
+	(*SyncUnitRequest)(nil),         // 5: api.scheduler.v1.SyncUnitRequest
+	(*SyncUnitReply)(nil),           // 6: api.scheduler.v1.SyncUnitReply
+	(*SyncCameraRequest)(nil),       // 7: api.scheduler.v1.SyncCameraRequest
+	(*SyncCameraReply)(nil),         // 8: api.scheduler.v1.SyncCameraReply
+	(*GetUnitStatusRequest)(nil),    // 9: api.scheduler.v1.GetUnitStatusRequest
+	(*GetUnitStatusReply)(nil),      // 10: api.scheduler.v1.GetUnitStatusReply
+	(*GetUnitStatusReply_Unit)(nil), // 11: api.scheduler.v1.GetUnitStatusReply.Unit
+	(*timestamppb.Timestamp)(nil),   // 12: google.protobuf.Timestamp
 }
 var file_scheduler_v1_scheduler_proto_depIdxs = []int32{
-	2, // 0: api.scheduler.v1.GetUnitStatusReply.uint:type_name -> api.scheduler.v1.GetUnitStatusReply.Unit
-	0, // 1: api.scheduler.v1.Scheduler.GetUnitStatus:input_type -> api.scheduler.v1.GetUnitStatusRequest
-	1, // 2: api.scheduler.v1.Scheduler.GetUnitStatus:output_type -> api.scheduler.v1.GetUnitStatusReply
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	12, // 0: api.scheduler.v1.GetMissionStatusReply.updated:type_name -> google.protobuf.Timestamp
+	0,  // 1: api.scheduler.v1.GetMissionStatusReply.status:type_name -> api.scheduler.v1.Status
+	11, // 2: api.scheduler.v1.GetUnitStatusReply.uint:type_name -> api.scheduler.v1.GetUnitStatusReply.Unit
+	9,  // 3: api.scheduler.v1.Scheduler.GetUnitStatus:input_type -> api.scheduler.v1.GetUnitStatusRequest
+	3,  // 4: api.scheduler.v1.Scheduler.GetMissionStatus:input_type -> api.scheduler.v1.GetMissionStatusRequest
+	7,  // 5: api.scheduler.v1.Scheduler.SyncCamera:input_type -> api.scheduler.v1.SyncCameraRequest
+	1,  // 6: api.scheduler.v1.Scheduler.SyncMission:input_type -> api.scheduler.v1.SyncMissionRequest
+	5,  // 7: api.scheduler.v1.Scheduler.SyncUnit:input_type -> api.scheduler.v1.SyncUnitRequest
+	10, // 8: api.scheduler.v1.Scheduler.GetUnitStatus:output_type -> api.scheduler.v1.GetUnitStatusReply
+	4,  // 9: api.scheduler.v1.Scheduler.GetMissionStatus:output_type -> api.scheduler.v1.GetMissionStatusReply
+	8,  // 10: api.scheduler.v1.Scheduler.SyncCamera:output_type -> api.scheduler.v1.SyncCameraReply
+	2,  // 11: api.scheduler.v1.Scheduler.SyncMission:output_type -> api.scheduler.v1.SyncMissionReply
+	6,  // 12: api.scheduler.v1.Scheduler.SyncUnit:output_type -> api.scheduler.v1.SyncUnitReply
+	8,  // [8:13] is the sub-list for method output_type
+	3,  // [3:8] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_scheduler_v1_scheduler_proto_init() }
@@ -244,7 +723,7 @@ func file_scheduler_v1_scheduler_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_scheduler_v1_scheduler_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUnitStatusRequest); i {
+			switch v := v.(*SyncMissionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -256,7 +735,7 @@ func file_scheduler_v1_scheduler_proto_init() {
 			}
 		}
 		file_scheduler_v1_scheduler_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUnitStatusReply); i {
+			switch v := v.(*SyncMissionReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -268,6 +747,102 @@ func file_scheduler_v1_scheduler_proto_init() {
 			}
 		}
 		file_scheduler_v1_scheduler_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetMissionStatusRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetMissionStatusReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SyncUnitRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SyncUnitReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SyncCameraRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SyncCameraReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetUnitStatusRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetUnitStatusReply); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_scheduler_v1_scheduler_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetUnitStatusReply_Unit); i {
 			case 0:
 				return &v.state
@@ -285,13 +860,14 @@ func file_scheduler_v1_scheduler_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_scheduler_v1_scheduler_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   3,
+			NumEnums:      1,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_scheduler_v1_scheduler_proto_goTypes,
 		DependencyIndexes: file_scheduler_v1_scheduler_proto_depIdxs,
+		EnumInfos:         file_scheduler_v1_scheduler_proto_enumTypes,
 		MessageInfos:      file_scheduler_v1_scheduler_proto_msgTypes,
 	}.Build()
 	File_scheduler_v1_scheduler_proto = out.File

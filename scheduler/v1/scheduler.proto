@@ -1,12 +1,46 @@
 syntax = "proto3";
 
 package api.scheduler.v1;
-
+import "google/protobuf/timestamp.proto";
 option go_package = "scheduler/api/scheduler/v1;v1";
 
 service Scheduler {
 	rpc GetUnitStatus(GetUnitStatusRequest) returns (GetUnitStatusReply) {}
+	rpc GetMissionStatus(GetMissionStatusRequest) returns (GetMissionStatusReply) {}
+	rpc SyncCamera(SyncCameraRequest) returns (SyncCameraReply) {}
+	rpc SyncMission(SyncMissionRequest) returns (SyncMissionReply){}
+	rpc SyncUnit(SyncUnitRequest) returns (SyncUnitReply) {}
 }
+
+enum Status {
+	Analyzing = 0;
+	Scheduled = 1;
+	Failed = 2;
+	Demo = 3;
+}
+
+message SyncMissionRequest {
+	string id = 1;
+}
+message SyncMissionReply {}
+
+message GetMissionStatusRequest {
+	uint32 id = 1;
+}
+message GetMissionStatusReply {
+	uint32 id = 1;
+	google.protobuf.Timestamp updated = 2;
+	Status status = 3;
+	string info = 4;
+}
+
+message SyncUnitRequest {
+}
+message SyncUnitReply {}
+
+message SyncCameraRequest {
+}
+message SyncCameraReply {}
 
 message GetUnitStatusRequest {
 	uint32 id = 1;

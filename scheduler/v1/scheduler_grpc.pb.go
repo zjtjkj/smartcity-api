@@ -23,6 +23,10 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SchedulerClient interface {
 	GetUnitStatus(ctx context.Context, in *GetUnitStatusRequest, opts ...grpc.CallOption) (*GetUnitStatusReply, error)
+	GetMissionStatus(ctx context.Context, in *GetMissionStatusRequest, opts ...grpc.CallOption) (*GetMissionStatusReply, error)
+	SyncCamera(ctx context.Context, in *SyncCameraRequest, opts ...grpc.CallOption) (*SyncCameraReply, error)
+	SyncMission(ctx context.Context, in *SyncMissionRequest, opts ...grpc.CallOption) (*SyncMissionReply, error)
+	SyncUnit(ctx context.Context, in *SyncUnitRequest, opts ...grpc.CallOption) (*SyncUnitReply, error)
 }
 
 type schedulerClient struct {
@@ -42,11 +46,51 @@ func (c *schedulerClient) GetUnitStatus(ctx context.Context, in *GetUnitStatusRe
 	return out, nil
 }
 
+func (c *schedulerClient) GetMissionStatus(ctx context.Context, in *GetMissionStatusRequest, opts ...grpc.CallOption) (*GetMissionStatusReply, error) {
+	out := new(GetMissionStatusReply)
+	err := c.cc.Invoke(ctx, "/api.scheduler.v1.Scheduler/GetMissionStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *schedulerClient) SyncCamera(ctx context.Context, in *SyncCameraRequest, opts ...grpc.CallOption) (*SyncCameraReply, error) {
+	out := new(SyncCameraReply)
+	err := c.cc.Invoke(ctx, "/api.scheduler.v1.Scheduler/SyncCamera", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *schedulerClient) SyncMission(ctx context.Context, in *SyncMissionRequest, opts ...grpc.CallOption) (*SyncMissionReply, error) {
+	out := new(SyncMissionReply)
+	err := c.cc.Invoke(ctx, "/api.scheduler.v1.Scheduler/SyncMission", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *schedulerClient) SyncUnit(ctx context.Context, in *SyncUnitRequest, opts ...grpc.CallOption) (*SyncUnitReply, error) {
+	out := new(SyncUnitReply)
+	err := c.cc.Invoke(ctx, "/api.scheduler.v1.Scheduler/SyncUnit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SchedulerServer is the server API for Scheduler service.
 // All implementations must embed UnimplementedSchedulerServer
 // for forward compatibility
 type SchedulerServer interface {
 	GetUnitStatus(context.Context, *GetUnitStatusRequest) (*GetUnitStatusReply, error)
+	GetMissionStatus(context.Context, *GetMissionStatusRequest) (*GetMissionStatusReply, error)
+	SyncCamera(context.Context, *SyncCameraRequest) (*SyncCameraReply, error)
+	SyncMission(context.Context, *SyncMissionRequest) (*SyncMissionReply, error)
+	SyncUnit(context.Context, *SyncUnitRequest) (*SyncUnitReply, error)
 	mustEmbedUnimplementedSchedulerServer()
 }
 
@@ -56,6 +100,18 @@ type UnimplementedSchedulerServer struct {
 
 func (UnimplementedSchedulerServer) GetUnitStatus(context.Context, *GetUnitStatusRequest) (*GetUnitStatusReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUnitStatus not implemented")
+}
+func (UnimplementedSchedulerServer) GetMissionStatus(context.Context, *GetMissionStatusRequest) (*GetMissionStatusReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMissionStatus not implemented")
+}
+func (UnimplementedSchedulerServer) SyncCamera(context.Context, *SyncCameraRequest) (*SyncCameraReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncCamera not implemented")
+}
+func (UnimplementedSchedulerServer) SyncMission(context.Context, *SyncMissionRequest) (*SyncMissionReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncMission not implemented")
+}
+func (UnimplementedSchedulerServer) SyncUnit(context.Context, *SyncUnitRequest) (*SyncUnitReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncUnit not implemented")
 }
 func (UnimplementedSchedulerServer) mustEmbedUnimplementedSchedulerServer() {}
 
@@ -88,6 +144,78 @@ func _Scheduler_GetUnitStatus_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Scheduler_GetMissionStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMissionStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SchedulerServer).GetMissionStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.scheduler.v1.Scheduler/GetMissionStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SchedulerServer).GetMissionStatus(ctx, req.(*GetMissionStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Scheduler_SyncCamera_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncCameraRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SchedulerServer).SyncCamera(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.scheduler.v1.Scheduler/SyncCamera",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SchedulerServer).SyncCamera(ctx, req.(*SyncCameraRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Scheduler_SyncMission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncMissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SchedulerServer).SyncMission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.scheduler.v1.Scheduler/SyncMission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SchedulerServer).SyncMission(ctx, req.(*SyncMissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Scheduler_SyncUnit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncUnitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SchedulerServer).SyncUnit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.scheduler.v1.Scheduler/SyncUnit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SchedulerServer).SyncUnit(ctx, req.(*SyncUnitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Scheduler_ServiceDesc is the grpc.ServiceDesc for Scheduler service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +226,22 @@ var Scheduler_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUnitStatus",
 			Handler:    _Scheduler_GetUnitStatus_Handler,
+		},
+		{
+			MethodName: "GetMissionStatus",
+			Handler:    _Scheduler_GetMissionStatus_Handler,
+		},
+		{
+			MethodName: "SyncCamera",
+			Handler:    _Scheduler_SyncCamera_Handler,
+		},
+		{
+			MethodName: "SyncMission",
+			Handler:    _Scheduler_SyncMission_Handler,
+		},
+		{
+			MethodName: "SyncUnit",
+			Handler:    _Scheduler_SyncUnit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
