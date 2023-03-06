@@ -3,12 +3,29 @@ syntax = "proto3";
 package api.retrieval;
 
 import "google/api/annotations.proto";
-
 option go_package = "retrieval/api/retrieval/v1;v1";
 option java_multiple_files = true;
 option java_package = "api.retrieval";
 
 service Retrieval {
+	rpc FindEventCount(FindEventCountRequest) returns (FindEventCountReply) {
+		option (google.api.http) = {
+			post: "/api/v1/report/count"
+			body: "*"
+		};
+	}
+	rpc FindMulTimeEventCount(FindMulTimeEventCountRequest) returns (FindMulTimeEventCountReply) {
+		option (google.api.http) = {
+			post: "/api/v1/report/time/count"
+			body: "*"
+		};
+	}
+	rpc FindRegionEventCount(FindRegionEventCountRequest) returns (FindRegionEventCountReply) {
+		option (google.api.http) = {
+			post: "/api/v1/report/region/count"
+			body: "*"
+		};
+	}
 	rpc FindEvents(FindEventsRequest) returns (FindEventsReply) {
 		option (google.api.http) = {
 			post: "/api/v1/event/find"
@@ -171,4 +188,56 @@ message GetEventByIndexRequest {
 }
 message GetEventByIndexReply {
 	Event event = 1;
+}
+
+
+message FindEventCountRequest {
+	repeated string cameras = 1;  //点位列表
+	repeated int32 regions= 2; //区域列表
+	repeated string types = 3; //事件类型
+	TimeRange time = 4;
+	bool Finished = 5; //该事件是否是最后事件
+}
+message FindEventCountReply {
+	message EventCount {
+		string type = 1;
+		int64 count = 2;
+	}
+	repeated EventCount eventCounts = 1; //事件类型
+}
+message TimeRange {
+	string start_time = 1; //起始时间
+	string end_time = 2; //截止时间
+}
+
+message FindMulTimeEventCountRequest {
+	repeated TimeRange timeRanges = 1;
+	repeated string cameras = 2;  //点位列表
+	repeated int32 regions= 3; //区域列表
+	bool Finished = 4; //该事件是否是最后事件
+}
+message FindMulTimeEventCountReply{
+	message TimeRangeEventCount {
+		string today = 1;
+		int64 count = 2;
+	}
+	message MulTimeEventCount {
+		repeated TimeRangeEventCount timeRangeEventCount = 1;
+	}
+	repeated MulTimeEventCount mulTimeEventCount = 1;
+}
+
+
+message FindRegionEventCountRequest {
+	repeated string cameras = 1;  //点位列表
+	repeated int32 regions= 2; //区域列表
+	TimeRange time = 3;
+	bool Finished = 4; //该事件是否是最后事件
+}
+message RegionEventCount {
+	string target = 1;  //点位或者区域名称
+	int64 count = 2;
+}
+message FindRegionEventCountReply {
+	repeated RegionEventCount regionEventCount = 1;
 }
