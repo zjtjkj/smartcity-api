@@ -162,7 +162,7 @@ service Settings {
 	}
 }
 message RegionModule {
-	string id = 1;
+	int64 id = 1;
 	google.protobuf.Timestamp created = 2;
 	string name = 3;
 }
