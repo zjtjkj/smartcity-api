@@ -149,37 +149,6 @@ service Settings {
 
 	rpc CreateEventConfig(CreateEventConfigRequest) returns (CreateEventConfigReply){}
 	rpc GetEventConfig(GetEventConfigRequest) returns (GetEventConfigReply){}
-
-	rpc ListRegionModules(ListRegionModulesRequest) returns (ListRegionModulesReply) {
-		option(google.api.http) = {
-			get: "/api/v1/settings/region/module"
-		};
-	}
-	rpc ListCameraModules(ListCameraModulesRequest) returns (ListCameraModulesReply) {
-		option(google.api.http) = {
-			get: "/api/v1/settings/camera/module"
-		};
-	}
-}
-message RegionModule {
-	int64 id = 1;
-	google.protobuf.Timestamp created = 2;
-	string name = 3;
-}
-message ListRegionModulesRequest {}
-message ListRegionModulesReply{
-	repeated RegionModule regionModules = 1;
-}
-
-message CameraModule {
-	string id = 1;
-	google.protobuf.Timestamp created = 2;
-	int64 region = 4;
-	string name = 5;
-}
-message ListCameraModulesRequest{}
-message ListCameraModulesReply{
-	repeated CameraModule cameraModule = 1;
 }
 
 message CreateEventConfigRequest{
