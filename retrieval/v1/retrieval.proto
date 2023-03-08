@@ -198,11 +198,11 @@ message FindEventCountRequest {
 	TimeRange time = 4;
 	bool Finished = 5; //该事件是否是最后事件
 }
+message EventCount {
+	string target = 1;
+	int64 count = 2;
+}
 message FindEventCountReply {
-	message EventCount {
-		string type = 1;
-		int64 count = 2;
-	}
 	repeated EventCount eventCounts = 1; //事件类型
 }
 message TimeRange {
@@ -216,17 +216,16 @@ message FindMulTimeEventCountRequest {
 	repeated int32 regions= 3; //区域列表
 	bool Finished = 4; //该事件是否是最后事件
 }
+message TimeRangeEventCount {
+	string today = 1;
+	int64 count = 2;
+}
+message MulTimeEventCount {
+	repeated TimeRangeEventCount timeRangeEventCount = 1;
+}
 message FindMulTimeEventCountReply{
-	message TimeRangeEventCount {
-		string today = 1;
-		int64 count = 2;
-	}
-	message MulTimeEventCount {
-		repeated TimeRangeEventCount timeRangeEventCount = 1;
-	}
 	repeated MulTimeEventCount mulTimeEventCount = 1;
 }
-
 
 message FindRegionEventCountRequest {
 	repeated string cameras = 1;  //点位列表
@@ -235,9 +234,9 @@ message FindRegionEventCountRequest {
 	bool Finished = 4; //该事件是否是最后事件
 }
 message RegionEventCount {
-	string target = 1;  //点位或者区域名称
-	int64 count = 2;
+	repeated EventCount reginEventCounts = 1;
+	repeated EventCount CameraEventCounts = 2;
 }
 message FindRegionEventCountReply {
-	repeated RegionEventCount regionEventCount = 1;
+	RegionEventCount regionEventCount = 1;
 }
