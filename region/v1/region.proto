@@ -48,6 +48,11 @@ service RegionService {
 			get: "/api/v1/region/list/linear"
 		};
 	}
+	rpc GetBatchRegion (GetBatchRegionRequest) returns (GetBatchRegionReply) {
+		option (google.api.http) = {
+			get: "/api/v1/region/batch/get"
+		};
+	}
 }
 
 message Region {
@@ -109,5 +114,13 @@ message ListRegionByIdReply {
 
 message ListRegionByLinearRequest {}
 message ListRegionByLinearReply {
+	repeated Region regions = 1;
+}
+
+message GetBatchRegionRequest {
+	repeated int64 id = 1;
+}
+
+message GetBatchRegionReply{
 	repeated Region regions = 1;
 }
