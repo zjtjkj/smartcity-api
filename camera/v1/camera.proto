@@ -47,6 +47,11 @@ service Camera {
 			body: "*"
 		};
 	}
+	rpc GetBatchCamera (GetBatchCameraRequest) returns (GetBatchCameraReply) {
+		option (google.api.http) = {
+			get: "/api/v1/camera/batch/get"
+		};
+	}
 }
 
 enum Source {
@@ -60,6 +65,13 @@ enum Manufacture {
 	DaHua = 3;    // 大华
 }
 
+message GetBatchCameraRequest {
+	repeated string id = 1;
+}
+
+message GetBatchCameraReply{
+	repeated Instance instance = 1;
+}
 
 message Instance {
 	string id = 1; // 点位ID
