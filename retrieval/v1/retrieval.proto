@@ -10,12 +10,6 @@ option java_package = "api.retrieval";
 service Retrieval {
 	rpc FindEventCount(FindEventCountRequest) returns (FindEventCountReply) {
 		option (google.api.http) = {
-			post: "/api/v1/report/count"
-			body: "*"
-		};
-	}
-	rpc FindMulTimeEventCount(FindMulTimeEventCountRequest) returns (FindMulTimeEventCountReply) {
-		option (google.api.http) = {
 			post: "/api/v1/report/time/count"
 			body: "*"
 		};
@@ -195,36 +189,22 @@ message FindEventCountRequest {
 	repeated string cameras = 1;  //点位列表
 	repeated int32 regions= 2; //区域列表
 	repeated string types = 3; //事件类型
-	TimeRange time = 4;
+	repeated TimeRange time = 4;
 	bool Finished = 5; //该事件是否是最后事件
 }
 message EventCount {
 	string target = 1;
 	int64 count = 2;
 }
+message MulEventCount {
+	repeated EventCount eventCounts = 1;
+}
 message FindEventCountReply {
-	repeated EventCount eventCounts = 1; //事件类型
+	repeated MulEventCount mulEventCount = 1;
 }
 message TimeRange {
 	string start_time = 1; //起始时间
 	string end_time = 2; //截止时间
-}
-
-message FindMulTimeEventCountRequest {
-	repeated TimeRange timeRanges = 1;
-	repeated string cameras = 2;  //点位列表
-	repeated int32 regions= 3; //区域列表
-	bool Finished = 4; //该事件是否是最后事件
-}
-message TimeRangeEventCount {
-	string today = 1;
-	int64 count = 2;
-}
-message MulTimeEventCount {
-	repeated TimeRangeEventCount timeRangeEventCount = 1;
-}
-message FindMulTimeEventCountReply{
-	repeated MulTimeEventCount mulTimeEventCount = 1;
 }
 
 message FindRegionEventCountRequest {

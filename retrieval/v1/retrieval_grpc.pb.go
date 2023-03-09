@@ -23,7 +23,6 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RetrievalClient interface {
 	FindEventCount(ctx context.Context, in *FindEventCountRequest, opts ...grpc.CallOption) (*FindEventCountReply, error)
-	FindMulTimeEventCount(ctx context.Context, in *FindMulTimeEventCountRequest, opts ...grpc.CallOption) (*FindMulTimeEventCountReply, error)
 	FindRegionEventCount(ctx context.Context, in *FindRegionEventCountRequest, opts ...grpc.CallOption) (*FindRegionEventCountReply, error)
 	FindEvents(ctx context.Context, in *FindEventsRequest, opts ...grpc.CallOption) (*FindEventsReply, error)
 	GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error)
@@ -47,15 +46,6 @@ func NewRetrievalClient(cc grpc.ClientConnInterface) RetrievalClient {
 func (c *retrievalClient) FindEventCount(ctx context.Context, in *FindEventCountRequest, opts ...grpc.CallOption) (*FindEventCountReply, error) {
 	out := new(FindEventCountReply)
 	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/FindEventCount", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *retrievalClient) FindMulTimeEventCount(ctx context.Context, in *FindMulTimeEventCountRequest, opts ...grpc.CallOption) (*FindMulTimeEventCountReply, error) {
-	out := new(FindMulTimeEventCountReply)
-	err := c.cc.Invoke(ctx, "/api.retrieval.Retrieval/FindMulTimeEventCount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -157,7 +147,6 @@ func (c *retrievalClient) GetEventByIndex(ctx context.Context, in *GetEventByInd
 // for forward compatibility
 type RetrievalServer interface {
 	FindEventCount(context.Context, *FindEventCountRequest) (*FindEventCountReply, error)
-	FindMulTimeEventCount(context.Context, *FindMulTimeEventCountRequest) (*FindMulTimeEventCountReply, error)
 	FindRegionEventCount(context.Context, *FindRegionEventCountRequest) (*FindRegionEventCountReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
@@ -177,9 +166,6 @@ type UnimplementedRetrievalServer struct {
 
 func (UnimplementedRetrievalServer) FindEventCount(context.Context, *FindEventCountRequest) (*FindEventCountReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindEventCount not implemented")
-}
-func (UnimplementedRetrievalServer) FindMulTimeEventCount(context.Context, *FindMulTimeEventCountRequest) (*FindMulTimeEventCountReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindMulTimeEventCount not implemented")
 }
 func (UnimplementedRetrievalServer) FindRegionEventCount(context.Context, *FindRegionEventCountRequest) (*FindRegionEventCountReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindRegionEventCount not implemented")
@@ -238,24 +224,6 @@ func _Retrieval_FindEventCount_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RetrievalServer).FindEventCount(ctx, req.(*FindEventCountRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Retrieval_FindMulTimeEventCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FindMulTimeEventCountRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RetrievalServer).FindMulTimeEventCount(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.retrieval.Retrieval/FindMulTimeEventCount",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RetrievalServer).FindMulTimeEventCount(ctx, req.(*FindMulTimeEventCountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -450,10 +418,6 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FindEventCount",
 			Handler:    _Retrieval_FindEventCount_Handler,
-		},
-		{
-			MethodName: "FindMulTimeEventCount",
-			Handler:    _Retrieval_FindMulTimeEventCount_Handler,
 		},
 		{
 			MethodName: "FindRegionEventCount",

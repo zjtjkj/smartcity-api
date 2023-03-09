@@ -23,7 +23,6 @@ const OperationRetrievalDeleteEvent = "/api.retrieval.Retrieval/DeleteEvent"
 const OperationRetrievalDeleteTag = "/api.retrieval.Retrieval/DeleteTag"
 const OperationRetrievalFindEventCount = "/api.retrieval.Retrieval/FindEventCount"
 const OperationRetrievalFindEvents = "/api.retrieval.Retrieval/FindEvents"
-const OperationRetrievalFindMulTimeEventCount = "/api.retrieval.Retrieval/FindMulTimeEventCount"
 const OperationRetrievalFindRegionEventCount = "/api.retrieval.Retrieval/FindRegionEventCount"
 const OperationRetrievalGetEvent = "/api.retrieval.Retrieval/GetEvent"
 const OperationRetrievalGetEventByIndex = "/api.retrieval.Retrieval/GetEventByIndex"
@@ -37,7 +36,6 @@ type RetrievalHTTPServer interface {
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagReply, error)
 	FindEventCount(context.Context, *FindEventCountRequest) (*FindEventCountReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
-	FindMulTimeEventCount(context.Context, *FindMulTimeEventCountRequest) (*FindMulTimeEventCountReply, error)
 	FindRegionEventCount(context.Context, *FindRegionEventCountRequest) (*FindRegionEventCountReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetEventByIndex(context.Context, *GetEventByIndexRequest) (*GetEventByIndexReply, error)
@@ -49,8 +47,7 @@ type RetrievalHTTPServer interface {
 
 func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/v1/report/count", _Retrieval_FindEventCount0_HTTP_Handler(srv))
-	r.POST("/api/v1/report/time/count", _Retrieval_FindMulTimeEventCount0_HTTP_Handler(srv))
+	r.POST("/api/v1/report/time/count", _Retrieval_FindEventCount0_HTTP_Handler(srv))
 	r.POST("/api/v1/report/region/count", _Retrieval_FindRegionEventCount0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/find", _Retrieval_FindEvents0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/get", _Retrieval_GetEvent0_HTTP_Handler(srv))
@@ -78,25 +75,6 @@ func _Retrieval_FindEventCount0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx h
 			return err
 		}
 		reply := out.(*FindEventCountReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _Retrieval_FindMulTimeEventCount0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in FindMulTimeEventCountRequest
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationRetrievalFindMulTimeEventCount)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.FindMulTimeEventCount(ctx, req.(*FindMulTimeEventCountRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*FindMulTimeEventCountReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -296,7 +274,6 @@ type RetrievalHTTPClient interface {
 	DeleteTag(ctx context.Context, req *DeleteTagRequest, opts ...http.CallOption) (rsp *DeleteTagReply, err error)
 	FindEventCount(ctx context.Context, req *FindEventCountRequest, opts ...http.CallOption) (rsp *FindEventCountReply, err error)
 	FindEvents(ctx context.Context, req *FindEventsRequest, opts ...http.CallOption) (rsp *FindEventsReply, err error)
-	FindMulTimeEventCount(ctx context.Context, req *FindMulTimeEventCountRequest, opts ...http.CallOption) (rsp *FindMulTimeEventCountReply, err error)
 	FindRegionEventCount(ctx context.Context, req *FindRegionEventCountRequest, opts ...http.CallOption) (rsp *FindRegionEventCountReply, err error)
 	GetEvent(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
 	GetEventByIndex(ctx context.Context, req *GetEventByIndexRequest, opts ...http.CallOption) (rsp *GetEventByIndexReply, err error)
@@ -342,7 +319,7 @@ func (c *RetrievalHTTPClientImpl) DeleteTag(ctx context.Context, in *DeleteTagRe
 
 func (c *RetrievalHTTPClientImpl) FindEventCount(ctx context.Context, in *FindEventCountRequest, opts ...http.CallOption) (*FindEventCountReply, error) {
 	var out FindEventCountReply
-	pattern := "/api/v1/report/count"
+	pattern := "/api/v1/report/time/count"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalFindEventCount))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -358,19 +335,6 @@ func (c *RetrievalHTTPClientImpl) FindEvents(ctx context.Context, in *FindEvents
 	pattern := "/api/v1/event/find"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalFindEvents))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *RetrievalHTTPClientImpl) FindMulTimeEventCount(ctx context.Context, in *FindMulTimeEventCountRequest, opts ...http.CallOption) (*FindMulTimeEventCountReply, error) {
-	var out FindMulTimeEventCountReply
-	pattern := "/api/v1/report/time/count"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationRetrievalFindMulTimeEventCount))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
