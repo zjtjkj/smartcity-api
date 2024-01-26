@@ -81,7 +81,7 @@ service Settings {
 	}
 	rpc UpdateModule (UpdateModuleRequest) returns (UpdateModuleReply) {
 		option (google.api.http) = {
-			post: "/api/v1/setting/module/{id}"
+			post: "/api/v1/settings/module/{id}"
 			body: "*"
 		};
 	}
@@ -92,7 +92,7 @@ service Settings {
 	}
 	rpc ListModules (ListModulesRequest) returns (ListModulesReply) {
 		option (google.api.http) = {
-			get: "/api/v1/settings/module"
+			get: "/api/v1/settings/modules"
 		};
 	}
 
@@ -142,6 +142,20 @@ service Settings {
 		};
 	}
 
+
+	/**
+	2024/01/24 告警升级
+	 */
+	rpc CreateAlertFeature(CreateAlertFeatureRequest) returns (CreateAlertFeatureReply);
+	rpc UpdateAlertFeature(UpdateAlertFeatureRequest) returns (UpdateAlertFeatureReply);
+	rpc DeleteAlertFeature(DeleteAlertFeatureRequest) returns (DeleteAlertFeatureReply);
+	rpc ListAlertFeature(ListAlertFeatureRequest) returns (ListAlertFeatureReply);
+	rpc ListAlertLevel(ListAlertLevelRequest) returns (ListAlertLevelReply);
+	rpc CreateAlertBehavior(CreateAlertBehaviorRequest) returns (CreateAlertBehaviorReply);
+	rpc UpdateAlertBehavior(UpdateAlertBehaviorRequest) returns (UpdateAlertBehaviorReply);
+	rpc DeleteAlertBehavior(DeleteAlertBehaviorRequest) returns (DeleteAlertBehaviorReply);
+
+
 	rpc CreateDrawingConfig(CreatDrawingConfigRequest) returns (CreateDrawingConfigReply) {}
 	rpc GetDrawingConfig(GetDrawingConfigRequest) returns (GetDrawingConfigReply) {}
 	rpc DeleteDrawingConfig(DeleteDrawingConfigRequest) returns (DeleteDrawingConfigReply) {}
@@ -149,6 +163,98 @@ service Settings {
 
 	rpc CreateEventConfig(CreateEventConfigRequest) returns (CreateEventConfigReply){}
 	rpc GetEventConfig(GetEventConfigRequest) returns (GetEventConfigReply){}
+}
+
+message CreateAlertFeatureRequest{
+	string name = 1 [(validate.rules).string = {min_len: 1}];
+	string image = 2;
+	string describe = 3;
+	uint32 moduleId = 4 [(validate.rules).uint32 = {gte: 1}];
+}
+message CreateAlertFeatureReply{
+	string alertFeatureId = 1;
+}
+
+message UpdateAlertFeatureRequest{
+	string alertFeatureId = 1 [(validate.rules).string = {min_len: 1}];
+	string name = 2 [(validate.rules).string = {min_len: 1}];
+	string image = 3;
+	string describe = 4;
+}
+message UpdateAlertFeatureReply{}
+
+message DeleteAlertFeatureRequest{
+	string alertFeatureId = 1;
+}
+message DeleteAlertFeatureReply{}
+
+message ListAlertFeatureRequest{
+	uint32 moduleId = 1 [(validate.rules).uint32 = {gt: 0}];
+}
+message ListAlertFeatureReply{
+	message AlertFeature{
+		string alertFeatureId = 1;
+		string name = 2;
+		string image = 3;
+		string describe = 4;
+	}
+	repeated  AlertFeature alertFeatures = 1;
+}
+
+message Period {
+	repeated int32 period = 1;
+}
+
+message CreateAlertBehaviorRequest{
+	string alertLevelId = 1 [(validate.rules).string = {min_len: 1}];
+	uint32 moduleId = 2[(validate.rules).uint32 = {gt: 0}]; //模型id
+	int32 triggerTime = 3;
+	repeated string features = 4; //特征id集合
+	repeated Period periods = 5;
+}
+message CreateAlertBehaviorReply{
+	string alertBehaviorId = 1;
+}
+
+message UpdateAlertBehaviorRequest{
+	string alertBehaviorId = 1 [(validate.rules).string = {min_len: 1}];
+	int32 triggerTime = 2;
+	bool enable= 3;
+	repeated string features = 4; //特征id集合
+	repeated Period periods = 5;
+}
+message UpdateAlertBehaviorReply{}
+
+message DeleteAlertBehaviorRequest{
+	string alertBehaviorId = 1 [(validate.rules).string = {min_len: 1}];
+}
+message DeleteAlertBehaviorReply{}
+
+
+message ListAlertLevelRequest{}
+message ListAlertLevelReply{
+	message AlertBehavior {
+		message Feature {
+			string id = 1;
+			string name = 2;
+		}
+		message Module {
+			uint32 id = 1;
+			string name = 2;
+		}
+		string alertBehaviorId = 1;
+		Module module = 2;
+		int32 triggerTime = 3;
+		repeated Feature features = 4; //特征id集合
+		repeated Period periods = 5;
+		bool enable= 6;
+	}
+	message AlertLevel{
+		string alertLevelId = 1;
+		string name = 2;
+		repeated  AlertBehavior alertBehaviors = 3;
+	}
+	repeated AlertLevel alertLevels = 1;
 }
 
 message CreateEventConfigRequest{
@@ -402,6 +508,7 @@ message CreateModuleRequest {
 	string code = 1 [(validate.rules).string = {min_len: 1}];
 	string name = 2 [(validate.rules).string = {min_len: 1}];
 	string alias = 3;
+	int32 minimumTriggerTime = 4;
 }
 message CreateModuleReply {}
 
@@ -415,6 +522,7 @@ message UpdateModuleRequest {
 	string code = 2 [(validate.rules).string = {min_len: 1}];
 	string name = 3 [(validate.rules).string = {min_len: 1}];
 	string alias = 4;
+	int32 minimumTriggerTime = 5;
 }
 message UpdateModuleReply {}
 
@@ -424,6 +532,7 @@ message Module {
 	string code = 3;
 	string name = 4;
 	string alias = 5;
+	int32 minimumTriggerTime = 6;
 }
 
 message GetModuleRequest {
