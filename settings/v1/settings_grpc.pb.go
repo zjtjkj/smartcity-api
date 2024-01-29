@@ -53,6 +53,7 @@ const (
 	Settings_CreateAlertBehavior_FullMethodName     = "/api.settings.v1.Settings/CreateAlertBehavior"
 	Settings_UpdateAlertBehavior_FullMethodName     = "/api.settings.v1.Settings/UpdateAlertBehavior"
 	Settings_DeleteAlertBehavior_FullMethodName     = "/api.settings.v1.Settings/DeleteAlertBehavior"
+	Settings_EnableAlertBehavior_FullMethodName     = "/api.settings.v1.Settings/EnableAlertBehavior"
 	Settings_CreateDrawingConfig_FullMethodName     = "/api.settings.v1.Settings/CreateDrawingConfig"
 	Settings_GetDrawingConfig_FullMethodName        = "/api.settings.v1.Settings/GetDrawingConfig"
 	Settings_DeleteDrawingConfig_FullMethodName     = "/api.settings.v1.Settings/DeleteDrawingConfig"
@@ -101,6 +102,7 @@ type SettingsClient interface {
 	CreateAlertBehavior(ctx context.Context, in *CreateAlertBehaviorRequest, opts ...grpc.CallOption) (*CreateAlertBehaviorReply, error)
 	UpdateAlertBehavior(ctx context.Context, in *UpdateAlertBehaviorRequest, opts ...grpc.CallOption) (*UpdateAlertBehaviorReply, error)
 	DeleteAlertBehavior(ctx context.Context, in *DeleteAlertBehaviorRequest, opts ...grpc.CallOption) (*DeleteAlertBehaviorReply, error)
+	EnableAlertBehavior(ctx context.Context, in *EnableAlertBehaviorRequest, opts ...grpc.CallOption) (*EnableAlertBehaviorReply, error)
 	CreateDrawingConfig(ctx context.Context, in *CreatDrawingConfigRequest, opts ...grpc.CallOption) (*CreateDrawingConfigReply, error)
 	GetDrawingConfig(ctx context.Context, in *GetDrawingConfigRequest, opts ...grpc.CallOption) (*GetDrawingConfigReply, error)
 	DeleteDrawingConfig(ctx context.Context, in *DeleteDrawingConfigRequest, opts ...grpc.CallOption) (*DeleteDrawingConfigReply, error)
@@ -423,6 +425,15 @@ func (c *settingsClient) DeleteAlertBehavior(ctx context.Context, in *DeleteAler
 	return out, nil
 }
 
+func (c *settingsClient) EnableAlertBehavior(ctx context.Context, in *EnableAlertBehaviorRequest, opts ...grpc.CallOption) (*EnableAlertBehaviorReply, error) {
+	out := new(EnableAlertBehaviorReply)
+	err := c.cc.Invoke(ctx, Settings_EnableAlertBehavior_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *settingsClient) CreateDrawingConfig(ctx context.Context, in *CreatDrawingConfigRequest, opts ...grpc.CallOption) (*CreateDrawingConfigReply, error) {
 	out := new(CreateDrawingConfigReply)
 	err := c.cc.Invoke(ctx, Settings_CreateDrawingConfig_FullMethodName, in, out, opts...)
@@ -517,6 +528,7 @@ type SettingsServer interface {
 	CreateAlertBehavior(context.Context, *CreateAlertBehaviorRequest) (*CreateAlertBehaviorReply, error)
 	UpdateAlertBehavior(context.Context, *UpdateAlertBehaviorRequest) (*UpdateAlertBehaviorReply, error)
 	DeleteAlertBehavior(context.Context, *DeleteAlertBehaviorRequest) (*DeleteAlertBehaviorReply, error)
+	EnableAlertBehavior(context.Context, *EnableAlertBehaviorRequest) (*EnableAlertBehaviorReply, error)
 	CreateDrawingConfig(context.Context, *CreatDrawingConfigRequest) (*CreateDrawingConfigReply, error)
 	GetDrawingConfig(context.Context, *GetDrawingConfigRequest) (*GetDrawingConfigReply, error)
 	DeleteDrawingConfig(context.Context, *DeleteDrawingConfigRequest) (*DeleteDrawingConfigReply, error)
@@ -631,6 +643,9 @@ func (UnimplementedSettingsServer) UpdateAlertBehavior(context.Context, *UpdateA
 }
 func (UnimplementedSettingsServer) DeleteAlertBehavior(context.Context, *DeleteAlertBehaviorRequest) (*DeleteAlertBehaviorReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlertBehavior not implemented")
+}
+func (UnimplementedSettingsServer) EnableAlertBehavior(context.Context, *EnableAlertBehaviorRequest) (*EnableAlertBehaviorReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnableAlertBehavior not implemented")
 }
 func (UnimplementedSettingsServer) CreateDrawingConfig(context.Context, *CreatDrawingConfigRequest) (*CreateDrawingConfigReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDrawingConfig not implemented")
@@ -1275,6 +1290,24 @@ func _Settings_DeleteAlertBehavior_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Settings_EnableAlertBehavior_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableAlertBehaviorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).EnableAlertBehavior(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Settings_EnableAlertBehavior_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).EnableAlertBehavior(ctx, req.(*EnableAlertBehaviorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Settings_CreateDrawingConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreatDrawingConfigRequest)
 	if err := dec(in); err != nil {
@@ -1525,6 +1558,10 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAlertBehavior",
 			Handler:    _Settings_DeleteAlertBehavior_Handler,
+		},
+		{
+			MethodName: "EnableAlertBehavior",
+			Handler:    _Settings_EnableAlertBehavior_Handler,
 		},
 		{
 			MethodName: "CreateDrawingConfig",

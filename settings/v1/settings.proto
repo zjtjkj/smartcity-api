@@ -154,6 +154,7 @@ service Settings {
 	rpc CreateAlertBehavior(CreateAlertBehaviorRequest) returns (CreateAlertBehaviorReply);
 	rpc UpdateAlertBehavior(UpdateAlertBehaviorRequest) returns (UpdateAlertBehaviorReply);
 	rpc DeleteAlertBehavior(DeleteAlertBehaviorRequest) returns (DeleteAlertBehaviorReply);
+	rpc EnableAlertBehavior(EnableAlertBehaviorRequest) returns (EnableAlertBehaviorReply);
 
 
 	rpc CreateDrawingConfig(CreatDrawingConfigRequest) returns (CreateDrawingConfigReply) {}
@@ -229,6 +230,11 @@ message DeleteAlertBehaviorRequest{
 	string alertBehaviorId = 1 [(validate.rules).string = {min_len: 1}];
 }
 message DeleteAlertBehaviorReply{}
+
+message EnableAlertBehaviorRequest{
+	string alertBehaviorId = 1 [(validate.rules).string = {min_len: 1}];
+}
+message EnableAlertBehaviorReply{}
 
 
 message ListAlertLevelRequest{}

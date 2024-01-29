@@ -1782,6 +1782,221 @@ var _ interface {
 	ErrorName() string
 } = DeleteAlertBehaviorReplyValidationError{}
 
+// Validate checks the field values on EnableAlertBehaviorRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EnableAlertBehaviorRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EnableAlertBehaviorRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EnableAlertBehaviorRequestMultiError, or nil if none found.
+func (m *EnableAlertBehaviorRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EnableAlertBehaviorRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetAlertBehaviorId()) < 1 {
+		err := EnableAlertBehaviorRequestValidationError{
+			field:  "AlertBehaviorId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return EnableAlertBehaviorRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// EnableAlertBehaviorRequestMultiError is an error wrapping multiple
+// validation errors returned by EnableAlertBehaviorRequest.ValidateAll() if
+// the designated constraints aren't met.
+type EnableAlertBehaviorRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EnableAlertBehaviorRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EnableAlertBehaviorRequestMultiError) AllErrors() []error { return m }
+
+// EnableAlertBehaviorRequestValidationError is the validation error returned
+// by EnableAlertBehaviorRequest.Validate if the designated constraints aren't met.
+type EnableAlertBehaviorRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EnableAlertBehaviorRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EnableAlertBehaviorRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EnableAlertBehaviorRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EnableAlertBehaviorRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EnableAlertBehaviorRequestValidationError) ErrorName() string {
+	return "EnableAlertBehaviorRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EnableAlertBehaviorRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEnableAlertBehaviorRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EnableAlertBehaviorRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EnableAlertBehaviorRequestValidationError{}
+
+// Validate checks the field values on EnableAlertBehaviorReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *EnableAlertBehaviorReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on EnableAlertBehaviorReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// EnableAlertBehaviorReplyMultiError, or nil if none found.
+func (m *EnableAlertBehaviorReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *EnableAlertBehaviorReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return EnableAlertBehaviorReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// EnableAlertBehaviorReplyMultiError is an error wrapping multiple validation
+// errors returned by EnableAlertBehaviorReply.ValidateAll() if the designated
+// constraints aren't met.
+type EnableAlertBehaviorReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m EnableAlertBehaviorReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m EnableAlertBehaviorReplyMultiError) AllErrors() []error { return m }
+
+// EnableAlertBehaviorReplyValidationError is the validation error returned by
+// EnableAlertBehaviorReply.Validate if the designated constraints aren't met.
+type EnableAlertBehaviorReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e EnableAlertBehaviorReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e EnableAlertBehaviorReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e EnableAlertBehaviorReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e EnableAlertBehaviorReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e EnableAlertBehaviorReplyValidationError) ErrorName() string {
+	return "EnableAlertBehaviorReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e EnableAlertBehaviorReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sEnableAlertBehaviorReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = EnableAlertBehaviorReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = EnableAlertBehaviorReplyValidationError{}
+
 // Validate checks the field values on ListAlertLevelRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
