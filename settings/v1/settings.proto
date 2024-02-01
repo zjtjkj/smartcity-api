@@ -260,7 +260,8 @@ message ListAlertLevelReply{
 	message AlertLevel{
 		string alertLevelId = 1;
 		string name = 2;
-		repeated  AlertBehavior alertBehaviors = 3;
+		int32 level = 3;
+		repeated  AlertBehavior alertBehaviors = 4;
 	}
 	repeated AlertLevel alertLevels = 1;
 }

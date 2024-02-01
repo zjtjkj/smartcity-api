@@ -10016,6 +10016,8 @@ func (m *ListAlertLevelReply_AlertLevel) validate(all bool) error {
 
 	// no validation rules for Name
 
+	// no validation rules for Level
+
 	for idx, item := range m.GetAlertBehaviors() {
 		_, _ = idx, item
 
