@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package api.settings.v1;
+option go_package = "settings/api/settings/v1;v1";
+
+import "errors/errors.proto";
+
+
+
+enum ErrorReason {
+  BAD_REQUEST = 0 [(errors.code) = 400];
+  INTERNAL_SERVER_ERROR = 1 [(errors.code) = 500];
+  FORBIDDEN = 2 [(errors.code) = 403];
+
+  ALERT_FEATURE_NOT_FOUND = 3 [(errors.code) = 500];
+  ALERT_FEATURE_ALREADY_EXISTED = 4 [(errors.code) = 500];
+  CREATE_ALERT_FEATURE = 5 [(errors.code) = 500];
+  UPDATE_ALERT_FEATURE = 6 [(errors.code) = 500];
+  OBTAIN_ALERT_FEATURE = 7 [(errors.code) = 500];
+  DELETE_ALERT_FEATURE = 8 [(errors.code) = 500];
+
+  ALERT_BEHAVIOR_NOT_FOUND = 9 [(errors.code) = 500];
+  ALERT_BEHAVIOR_ALREADY_EXISTED = 10 [(errors.code) = 500];
+  CREATE_ALERT_BEHAVIOR = 11 [(errors.code) = 500];
+  UPDATE_ALERT_BEHAVIOR = 12 [(errors.code) = 500];
+  OBTAIN_ALERT_BEHAVIOR = 13 [(errors.code) = 500];
+  DELETE_ALERT_BEHAVIOR = 14 [(errors.code) = 500];
+
+  ALERT_LEVEL_ALREADY_EXISTED = 15 [(errors.code) = 500];
+  UPDATE_ALERT_LEVEL = 16 [(errors.code) = 500];
+  OBTAIN_ALERT_LEVEL = 17 [(errors.code) = 500];
+
+  UPLOAD_ALERT_FEATURE_IMAGE = 18 [(errors.code) = 500];
+}

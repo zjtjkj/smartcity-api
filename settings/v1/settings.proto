@@ -156,7 +156,6 @@ service Settings {
 	rpc DeleteAlertBehavior(DeleteAlertBehaviorRequest) returns (DeleteAlertBehaviorReply);
 	rpc EnableAlertBehavior(EnableAlertBehaviorRequest) returns (EnableAlertBehaviorReply);
 
-
 	rpc CreateDrawingConfig(CreatDrawingConfigRequest) returns (CreateDrawingConfigReply) {}
 	rpc GetDrawingConfig(GetDrawingConfigRequest) returns (GetDrawingConfigReply) {}
 	rpc DeleteDrawingConfig(DeleteDrawingConfigRequest) returns (DeleteDrawingConfigReply) {}
@@ -171,6 +170,7 @@ message CreateAlertFeatureRequest{
 	string image = 2;
 	string describe = 3;
 	uint32 moduleId = 4 [(validate.rules).uint32 = {gte: 1}];
+	string code = 5 [(validate.rules).string = {min_len: 1}];
 }
 message CreateAlertFeatureReply{
 	string alertFeatureId = 1;
@@ -181,6 +181,7 @@ message UpdateAlertFeatureRequest{
 	string name = 2 [(validate.rules).string = {min_len: 1}];
 	string image = 3;
 	string describe = 4;
+	string code = 5 [(validate.rules).string = {min_len: 1}];
 }
 message UpdateAlertFeatureReply{}
 
@@ -198,6 +199,7 @@ message ListAlertFeatureReply{
 		string name = 2;
 		string image = 3;
 		string describe = 4;
+		string code = 5;
 	}
 	repeated  AlertFeature alertFeatures = 1;
 }

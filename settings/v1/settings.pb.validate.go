@@ -83,6 +83,17 @@ func (m *CreateAlertFeatureRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if utf8.RuneCountInString(m.GetCode()) < 1 {
+		err := CreateAlertFeatureRequestValidationError{
+			field:  "Code",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return CreateAlertFeatureRequestMultiError(errors)
 	}
@@ -314,6 +325,17 @@ func (m *UpdateAlertFeatureRequest) validate(all bool) error {
 	// no validation rules for Image
 
 	// no validation rules for Describe
+
+	if utf8.RuneCountInString(m.GetCode()) < 1 {
+		err := UpdateAlertFeatureRequestValidationError{
+			field:  "Code",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return UpdateAlertFeatureRequestMultiError(errors)
@@ -9675,6 +9697,8 @@ func (m *ListAlertFeatureReply_AlertFeature) validate(all bool) error {
 	// no validation rules for Image
 
 	// no validation rules for Describe
+
+	// no validation rules for Code
 
 	if len(errors) > 0 {
 		return ListAlertFeatureReply_AlertFeatureMultiError(errors)
