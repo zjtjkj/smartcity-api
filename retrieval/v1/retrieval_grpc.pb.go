@@ -23,6 +23,7 @@ const (
 	Retrieval_FindRegionEventCount_FullMethodName = "/api.retrieval.Retrieval/FindRegionEventCount"
 	Retrieval_FindEvents_FullMethodName           = "/api.retrieval.Retrieval/FindEvents"
 	Retrieval_GetEvent_FullMethodName             = "/api.retrieval.Retrieval/GetEvent"
+	Retrieval_GetChainEvidence_FullMethodName     = "/api.retrieval.Retrieval/GetChainEvidence"
 	Retrieval_GetImage_FullMethodName             = "/api.retrieval.Retrieval/GetImage"
 	Retrieval_DeleteEvent_FullMethodName          = "/api.retrieval.Retrieval/DeleteEvent"
 	Retrieval_MissionLatestInfo_FullMethodName    = "/api.retrieval.Retrieval/MissionLatestInfo"
@@ -40,6 +41,7 @@ type RetrievalClient interface {
 	FindRegionEventCount(ctx context.Context, in *FindRegionEventCountRequest, opts ...grpc.CallOption) (*FindRegionEventCountReply, error)
 	FindEvents(ctx context.Context, in *FindEventsRequest, opts ...grpc.CallOption) (*FindEventsReply, error)
 	GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error)
+	GetChainEvidence(ctx context.Context, in *GetChainEvidenceRequest, opts ...grpc.CallOption) (*GetChainEvidenceReply, error)
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*GetImageReply, error)
 	DeleteEvent(ctx context.Context, in *DeleteEventRequest, opts ...grpc.CallOption) (*DeleteEventReply, error)
 	MissionLatestInfo(ctx context.Context, in *MissionLatestInfoRequest, opts ...grpc.CallOption) (*MissionLatestInfoReply, error)
@@ -87,6 +89,15 @@ func (c *retrievalClient) FindEvents(ctx context.Context, in *FindEventsRequest,
 func (c *retrievalClient) GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*GetEventReply, error) {
 	out := new(GetEventReply)
 	err := c.cc.Invoke(ctx, Retrieval_GetEvent_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *retrievalClient) GetChainEvidence(ctx context.Context, in *GetChainEvidenceRequest, opts ...grpc.CallOption) (*GetChainEvidenceReply, error) {
+	out := new(GetChainEvidenceReply)
+	err := c.cc.Invoke(ctx, Retrieval_GetChainEvidence_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -164,6 +175,7 @@ type RetrievalServer interface {
 	FindRegionEventCount(context.Context, *FindRegionEventCountRequest) (*FindRegionEventCountReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
+	GetChainEvidence(context.Context, *GetChainEvidenceRequest) (*GetChainEvidenceReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
 	DeleteEvent(context.Context, *DeleteEventRequest) (*DeleteEventReply, error)
 	MissionLatestInfo(context.Context, *MissionLatestInfoRequest) (*MissionLatestInfoReply, error)
@@ -189,6 +201,9 @@ func (UnimplementedRetrievalServer) FindEvents(context.Context, *FindEventsReque
 }
 func (UnimplementedRetrievalServer) GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEvent not implemented")
+}
+func (UnimplementedRetrievalServer) GetChainEvidence(context.Context, *GetChainEvidenceRequest) (*GetChainEvidenceReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChainEvidence not implemented")
 }
 func (UnimplementedRetrievalServer) GetImage(context.Context, *GetImageRequest) (*GetImageReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetImage not implemented")
@@ -292,6 +307,24 @@ func _Retrieval_GetEvent_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RetrievalServer).GetEvent(ctx, req.(*GetEventRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Retrieval_GetChainEvidence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChainEvidenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RetrievalServer).GetChainEvidence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Retrieval_GetChainEvidence_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RetrievalServer).GetChainEvidence(ctx, req.(*GetChainEvidenceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -444,6 +477,10 @@ var Retrieval_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEvent",
 			Handler:    _Retrieval_GetEvent_Handler,
+		},
+		{
+			MethodName: "GetChainEvidence",
+			Handler:    _Retrieval_GetChainEvidence_Handler,
 		},
 		{
 			MethodName: "GetImage",

@@ -32,6 +32,14 @@ service Retrieval {
 			body: "*"
 		};
 	}
+
+	rpc GetChainEvidence(GetChainEvidenceRequest) returns (GetChainEvidenceReply) {
+		option (google.api.http) = {
+			post: "/api/v1/event/chain/find"
+			body: "*"
+		};
+	}
+
 	rpc GetImage(GetImageRequest) returns (GetImageReply) {
 		option (google.api.http) = {
 			post: "/api/v1/image/get"
@@ -76,6 +84,20 @@ service Retrieval {
 	}
 }
 
+message GetChainEvidenceRequest{
+	string eventId = 1;
+	int32 size = 2;
+	int32 page = 3;
+}
+message GetChainEvidenceReply{
+	message ChainEvidence {
+		string image = 1;
+		int64 CreatedAt = 2;
+	}
+	repeated ChainEvidence ChainEvidences = 1;
+	int32 total = 2;
+}
+
 message Event {
 	string id = 1;
 	string eid = 2; // the first event of one alert
@@ -93,7 +115,7 @@ message Event {
 	}
 	repeated Alert alerts = 11;
 
-	repeated string features  = 13;
+	repeated string alertFeatures  = 13;
 	string alertLevel = 14;
 }
 

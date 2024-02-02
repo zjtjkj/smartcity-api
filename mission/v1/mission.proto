@@ -162,6 +162,7 @@ message Area {
 	uint32 type = 5;
 	repeated Point points = 6;
 	uint32 object = 7;
+	string plane = 8;
 }
 
 message Instance {
@@ -187,6 +188,7 @@ message CreateAreaRequest {
 	string name = 2;
 	uint32 type = 3;
 	repeated Point points = 4;
+	string plane = 5;
 }
 message CreateAreaReply{
 	Area area = 1;

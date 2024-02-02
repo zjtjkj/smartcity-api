@@ -24,6 +24,7 @@ const OperationRetrievalDeleteTag = "/api.retrieval.Retrieval/DeleteTag"
 const OperationRetrievalFindEventCount = "/api.retrieval.Retrieval/FindEventCount"
 const OperationRetrievalFindEvents = "/api.retrieval.Retrieval/FindEvents"
 const OperationRetrievalFindRegionEventCount = "/api.retrieval.Retrieval/FindRegionEventCount"
+const OperationRetrievalGetChainEvidence = "/api.retrieval.Retrieval/GetChainEvidence"
 const OperationRetrievalGetEvent = "/api.retrieval.Retrieval/GetEvent"
 const OperationRetrievalGetEventByIndex = "/api.retrieval.Retrieval/GetEventByIndex"
 const OperationRetrievalGetImage = "/api.retrieval.Retrieval/GetImage"
@@ -37,6 +38,7 @@ type RetrievalHTTPServer interface {
 	FindEventCount(context.Context, *FindEventCountRequest) (*FindEventCountReply, error)
 	FindEvents(context.Context, *FindEventsRequest) (*FindEventsReply, error)
 	FindRegionEventCount(context.Context, *FindRegionEventCountRequest) (*FindRegionEventCountReply, error)
+	GetChainEvidence(context.Context, *GetChainEvidenceRequest) (*GetChainEvidenceReply, error)
 	GetEvent(context.Context, *GetEventRequest) (*GetEventReply, error)
 	GetEventByIndex(context.Context, *GetEventByIndexRequest) (*GetEventByIndexReply, error)
 	GetImage(context.Context, *GetImageRequest) (*GetImageReply, error)
@@ -51,6 +53,7 @@ func RegisterRetrievalHTTPServer(s *http.Server, srv RetrievalHTTPServer) {
 	r.POST("/api/v1/report/region/count", _Retrieval_FindRegionEventCount0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/find", _Retrieval_FindEvents0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/get", _Retrieval_GetEvent0_HTTP_Handler(srv))
+	r.POST("/api/v1/event/chain/find", _Retrieval_GetChainEvidence0_HTTP_Handler(srv))
 	r.POST("/api/v1/image/get", _Retrieval_GetImage0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/delete", _Retrieval_DeleteEvent0_HTTP_Handler(srv))
 	r.POST("/api/v1/event/delete", _Retrieval_MissionLatestInfo0_HTTP_Handler(srv))
@@ -132,6 +135,25 @@ func _Retrieval_GetEvent0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Co
 			return err
 		}
 		reply := out.(*GetEventReply)
+		return ctx.Result(200, reply)
+	}
+}
+
+func _Retrieval_GetChainEvidence0_HTTP_Handler(srv RetrievalHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in GetChainEvidenceRequest
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationRetrievalGetChainEvidence)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.GetChainEvidence(ctx, req.(*GetChainEvidenceRequest))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*GetChainEvidenceReply)
 		return ctx.Result(200, reply)
 	}
 }
@@ -275,6 +297,7 @@ type RetrievalHTTPClient interface {
 	FindEventCount(ctx context.Context, req *FindEventCountRequest, opts ...http.CallOption) (rsp *FindEventCountReply, err error)
 	FindEvents(ctx context.Context, req *FindEventsRequest, opts ...http.CallOption) (rsp *FindEventsReply, err error)
 	FindRegionEventCount(ctx context.Context, req *FindRegionEventCountRequest, opts ...http.CallOption) (rsp *FindRegionEventCountReply, err error)
+	GetChainEvidence(ctx context.Context, req *GetChainEvidenceRequest, opts ...http.CallOption) (rsp *GetChainEvidenceReply, err error)
 	GetEvent(ctx context.Context, req *GetEventRequest, opts ...http.CallOption) (rsp *GetEventReply, err error)
 	GetEventByIndex(ctx context.Context, req *GetEventByIndexRequest, opts ...http.CallOption) (rsp *GetEventByIndexReply, err error)
 	GetImage(ctx context.Context, req *GetImageRequest, opts ...http.CallOption) (rsp *GetImageReply, err error)
@@ -348,6 +371,19 @@ func (c *RetrievalHTTPClientImpl) FindRegionEventCount(ctx context.Context, in *
 	pattern := "/api/v1/report/region/count"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRetrievalFindRegionEventCount))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *RetrievalHTTPClientImpl) GetChainEvidence(ctx context.Context, in *GetChainEvidenceRequest, opts ...http.CallOption) (*GetChainEvidenceReply, error) {
+	var out GetChainEvidenceReply
+	pattern := "/api/v1/event/chain/find"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationRetrievalGetChainEvidence))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
