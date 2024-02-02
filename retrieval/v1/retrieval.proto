@@ -91,7 +91,7 @@ message GetChainEvidenceRequest{
 }
 message GetChainEvidenceReply{
 	message ChainEvidence {
-		string image = 1;
+		string id = 1;
 		int64 CreatedAt = 2;
 	}
 	repeated ChainEvidence ChainEvidences = 1;
