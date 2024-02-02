@@ -48,8 +48,10 @@ const (
 	Settings_CreateAlertFeature_FullMethodName      = "/api.settings.v1.Settings/CreateAlertFeature"
 	Settings_UpdateAlertFeature_FullMethodName      = "/api.settings.v1.Settings/UpdateAlertFeature"
 	Settings_DeleteAlertFeature_FullMethodName      = "/api.settings.v1.Settings/DeleteAlertFeature"
+	Settings_GetBatchAlertFeature_FullMethodName    = "/api.settings.v1.Settings/GetBatchAlertFeature"
 	Settings_ListAlertFeature_FullMethodName        = "/api.settings.v1.Settings/ListAlertFeature"
 	Settings_ListAlertLevel_FullMethodName          = "/api.settings.v1.Settings/ListAlertLevel"
+	Settings_GetAlertLevel_FullMethodName           = "/api.settings.v1.Settings/GetAlertLevel"
 	Settings_CreateAlertBehavior_FullMethodName     = "/api.settings.v1.Settings/CreateAlertBehavior"
 	Settings_UpdateAlertBehavior_FullMethodName     = "/api.settings.v1.Settings/UpdateAlertBehavior"
 	Settings_DeleteAlertBehavior_FullMethodName     = "/api.settings.v1.Settings/DeleteAlertBehavior"
@@ -97,8 +99,10 @@ type SettingsClient interface {
 	CreateAlertFeature(ctx context.Context, in *CreateAlertFeatureRequest, opts ...grpc.CallOption) (*CreateAlertFeatureReply, error)
 	UpdateAlertFeature(ctx context.Context, in *UpdateAlertFeatureRequest, opts ...grpc.CallOption) (*UpdateAlertFeatureReply, error)
 	DeleteAlertFeature(ctx context.Context, in *DeleteAlertFeatureRequest, opts ...grpc.CallOption) (*DeleteAlertFeatureReply, error)
+	GetBatchAlertFeature(ctx context.Context, in *GetBatchAlertFeatureRequest, opts ...grpc.CallOption) (*GetBatchAlertFeatureReply, error)
 	ListAlertFeature(ctx context.Context, in *ListAlertFeatureRequest, opts ...grpc.CallOption) (*ListAlertFeatureReply, error)
 	ListAlertLevel(ctx context.Context, in *ListAlertLevelRequest, opts ...grpc.CallOption) (*ListAlertLevelReply, error)
+	GetAlertLevel(ctx context.Context, in *GetAlertLevelRequest, opts ...grpc.CallOption) (*GetAlertLevelReply, error)
 	CreateAlertBehavior(ctx context.Context, in *CreateAlertBehaviorRequest, opts ...grpc.CallOption) (*CreateAlertBehaviorReply, error)
 	UpdateAlertBehavior(ctx context.Context, in *UpdateAlertBehaviorRequest, opts ...grpc.CallOption) (*UpdateAlertBehaviorReply, error)
 	DeleteAlertBehavior(ctx context.Context, in *DeleteAlertBehaviorRequest, opts ...grpc.CallOption) (*DeleteAlertBehaviorReply, error)
@@ -380,6 +384,15 @@ func (c *settingsClient) DeleteAlertFeature(ctx context.Context, in *DeleteAlert
 	return out, nil
 }
 
+func (c *settingsClient) GetBatchAlertFeature(ctx context.Context, in *GetBatchAlertFeatureRequest, opts ...grpc.CallOption) (*GetBatchAlertFeatureReply, error) {
+	out := new(GetBatchAlertFeatureReply)
+	err := c.cc.Invoke(ctx, Settings_GetBatchAlertFeature_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *settingsClient) ListAlertFeature(ctx context.Context, in *ListAlertFeatureRequest, opts ...grpc.CallOption) (*ListAlertFeatureReply, error) {
 	out := new(ListAlertFeatureReply)
 	err := c.cc.Invoke(ctx, Settings_ListAlertFeature_FullMethodName, in, out, opts...)
@@ -392,6 +405,15 @@ func (c *settingsClient) ListAlertFeature(ctx context.Context, in *ListAlertFeat
 func (c *settingsClient) ListAlertLevel(ctx context.Context, in *ListAlertLevelRequest, opts ...grpc.CallOption) (*ListAlertLevelReply, error) {
 	out := new(ListAlertLevelReply)
 	err := c.cc.Invoke(ctx, Settings_ListAlertLevel_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *settingsClient) GetAlertLevel(ctx context.Context, in *GetAlertLevelRequest, opts ...grpc.CallOption) (*GetAlertLevelReply, error) {
+	out := new(GetAlertLevelReply)
+	err := c.cc.Invoke(ctx, Settings_GetAlertLevel_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -523,8 +545,10 @@ type SettingsServer interface {
 	CreateAlertFeature(context.Context, *CreateAlertFeatureRequest) (*CreateAlertFeatureReply, error)
 	UpdateAlertFeature(context.Context, *UpdateAlertFeatureRequest) (*UpdateAlertFeatureReply, error)
 	DeleteAlertFeature(context.Context, *DeleteAlertFeatureRequest) (*DeleteAlertFeatureReply, error)
+	GetBatchAlertFeature(context.Context, *GetBatchAlertFeatureRequest) (*GetBatchAlertFeatureReply, error)
 	ListAlertFeature(context.Context, *ListAlertFeatureRequest) (*ListAlertFeatureReply, error)
 	ListAlertLevel(context.Context, *ListAlertLevelRequest) (*ListAlertLevelReply, error)
+	GetAlertLevel(context.Context, *GetAlertLevelRequest) (*GetAlertLevelReply, error)
 	CreateAlertBehavior(context.Context, *CreateAlertBehaviorRequest) (*CreateAlertBehaviorReply, error)
 	UpdateAlertBehavior(context.Context, *UpdateAlertBehaviorRequest) (*UpdateAlertBehaviorReply, error)
 	DeleteAlertBehavior(context.Context, *DeleteAlertBehaviorRequest) (*DeleteAlertBehaviorReply, error)
@@ -629,11 +653,17 @@ func (UnimplementedSettingsServer) UpdateAlertFeature(context.Context, *UpdateAl
 func (UnimplementedSettingsServer) DeleteAlertFeature(context.Context, *DeleteAlertFeatureRequest) (*DeleteAlertFeatureReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlertFeature not implemented")
 }
+func (UnimplementedSettingsServer) GetBatchAlertFeature(context.Context, *GetBatchAlertFeatureRequest) (*GetBatchAlertFeatureReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBatchAlertFeature not implemented")
+}
 func (UnimplementedSettingsServer) ListAlertFeature(context.Context, *ListAlertFeatureRequest) (*ListAlertFeatureReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAlertFeature not implemented")
 }
 func (UnimplementedSettingsServer) ListAlertLevel(context.Context, *ListAlertLevelRequest) (*ListAlertLevelReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAlertLevel not implemented")
+}
+func (UnimplementedSettingsServer) GetAlertLevel(context.Context, *GetAlertLevelRequest) (*GetAlertLevelReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAlertLevel not implemented")
 }
 func (UnimplementedSettingsServer) CreateAlertBehavior(context.Context, *CreateAlertBehaviorRequest) (*CreateAlertBehaviorReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAlertBehavior not implemented")
@@ -1200,6 +1230,24 @@ func _Settings_DeleteAlertFeature_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Settings_GetBatchAlertFeature_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBatchAlertFeatureRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetBatchAlertFeature(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Settings_GetBatchAlertFeature_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetBatchAlertFeature(ctx, req.(*GetBatchAlertFeatureRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Settings_ListAlertFeature_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAlertFeatureRequest)
 	if err := dec(in); err != nil {
@@ -1232,6 +1280,24 @@ func _Settings_ListAlertLevel_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SettingsServer).ListAlertLevel(ctx, req.(*ListAlertLevelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Settings_GetAlertLevel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAlertLevelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SettingsServer).GetAlertLevel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Settings_GetAlertLevel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SettingsServer).GetAlertLevel(ctx, req.(*GetAlertLevelRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1540,12 +1606,20 @@ var Settings_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Settings_DeleteAlertFeature_Handler,
 		},
 		{
+			MethodName: "GetBatchAlertFeature",
+			Handler:    _Settings_GetBatchAlertFeature_Handler,
+		},
+		{
 			MethodName: "ListAlertFeature",
 			Handler:    _Settings_ListAlertFeature_Handler,
 		},
 		{
 			MethodName: "ListAlertLevel",
 			Handler:    _Settings_ListAlertLevel_Handler,
+		},
+		{
+			MethodName: "GetAlertLevel",
+			Handler:    _Settings_GetAlertLevel_Handler,
 		},
 		{
 			MethodName: "CreateAlertBehavior",

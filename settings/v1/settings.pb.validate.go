@@ -35,6 +35,480 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on GetBatchAlertFeatureRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBatchAlertFeatureRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBatchAlertFeatureRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBatchAlertFeatureRequestMultiError, or nil if none found.
+func (m *GetBatchAlertFeatureRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBatchAlertFeatureRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return GetBatchAlertFeatureRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBatchAlertFeatureRequestMultiError is an error wrapping multiple
+// validation errors returned by GetBatchAlertFeatureRequest.ValidateAll() if
+// the designated constraints aren't met.
+type GetBatchAlertFeatureRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBatchAlertFeatureRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBatchAlertFeatureRequestMultiError) AllErrors() []error { return m }
+
+// GetBatchAlertFeatureRequestValidationError is the validation error returned
+// by GetBatchAlertFeatureRequest.Validate if the designated constraints
+// aren't met.
+type GetBatchAlertFeatureRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBatchAlertFeatureRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBatchAlertFeatureRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBatchAlertFeatureRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBatchAlertFeatureRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBatchAlertFeatureRequestValidationError) ErrorName() string {
+	return "GetBatchAlertFeatureRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBatchAlertFeatureRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBatchAlertFeatureRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBatchAlertFeatureRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBatchAlertFeatureRequestValidationError{}
+
+// Validate checks the field values on GetBatchAlertFeatureReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetBatchAlertFeatureReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetBatchAlertFeatureReply with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetBatchAlertFeatureReplyMultiError, or nil if none found.
+func (m *GetBatchAlertFeatureReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBatchAlertFeatureReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAlertFeatures() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetBatchAlertFeatureReplyValidationError{
+						field:  fmt.Sprintf("AlertFeatures[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetBatchAlertFeatureReplyValidationError{
+						field:  fmt.Sprintf("AlertFeatures[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetBatchAlertFeatureReplyValidationError{
+					field:  fmt.Sprintf("AlertFeatures[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetBatchAlertFeatureReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBatchAlertFeatureReplyMultiError is an error wrapping multiple validation
+// errors returned by GetBatchAlertFeatureReply.ValidateAll() if the
+// designated constraints aren't met.
+type GetBatchAlertFeatureReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBatchAlertFeatureReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBatchAlertFeatureReplyMultiError) AllErrors() []error { return m }
+
+// GetBatchAlertFeatureReplyValidationError is the validation error returned by
+// GetBatchAlertFeatureReply.Validate if the designated constraints aren't met.
+type GetBatchAlertFeatureReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBatchAlertFeatureReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBatchAlertFeatureReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBatchAlertFeatureReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBatchAlertFeatureReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBatchAlertFeatureReplyValidationError) ErrorName() string {
+	return "GetBatchAlertFeatureReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBatchAlertFeatureReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBatchAlertFeatureReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBatchAlertFeatureReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBatchAlertFeatureReplyValidationError{}
+
+// Validate checks the field values on GetAlertLevelRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAlertLevelRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAlertLevelRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAlertLevelRequestMultiError, or nil if none found.
+func (m *GetAlertLevelRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAlertLevelRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AlertLevel
+
+	if len(errors) > 0 {
+		return GetAlertLevelRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAlertLevelRequestMultiError is an error wrapping multiple validation
+// errors returned by GetAlertLevelRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetAlertLevelRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAlertLevelRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAlertLevelRequestMultiError) AllErrors() []error { return m }
+
+// GetAlertLevelRequestValidationError is the validation error returned by
+// GetAlertLevelRequest.Validate if the designated constraints aren't met.
+type GetAlertLevelRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAlertLevelRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAlertLevelRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAlertLevelRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAlertLevelRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAlertLevelRequestValidationError) ErrorName() string {
+	return "GetAlertLevelRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAlertLevelRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAlertLevelRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAlertLevelRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAlertLevelRequestValidationError{}
+
+// Validate checks the field values on GetAlertLevelReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAlertLevelReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAlertLevelReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAlertLevelReplyMultiError, or nil if none found.
+func (m *GetAlertLevelReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAlertLevelReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetAlertLevel()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAlertLevelReplyValidationError{
+					field:  "AlertLevel",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAlertLevelReplyValidationError{
+					field:  "AlertLevel",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetAlertLevel()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAlertLevelReplyValidationError{
+				field:  "AlertLevel",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetAlertLevelReplyMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAlertLevelReplyMultiError is an error wrapping multiple validation errors
+// returned by GetAlertLevelReply.ValidateAll() if the designated constraints
+// aren't met.
+type GetAlertLevelReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAlertLevelReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAlertLevelReplyMultiError) AllErrors() []error { return m }
+
+// GetAlertLevelReplyValidationError is the validation error returned by
+// GetAlertLevelReply.Validate if the designated constraints aren't met.
+type GetAlertLevelReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAlertLevelReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAlertLevelReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAlertLevelReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAlertLevelReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAlertLevelReplyValidationError) ErrorName() string {
+	return "GetAlertLevelReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAlertLevelReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAlertLevelReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAlertLevelReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAlertLevelReplyValidationError{}
+
 // Validate checks the field values on CreateAlertFeatureRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -9666,6 +10140,229 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListModulesReplyValidationError{}
+
+// Validate checks the field values on GetBatchAlertFeatureReply_AlertFeature
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the first error encountered is returned, or nil if
+// there are no violations.
+func (m *GetBatchAlertFeatureReply_AlertFeature) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on
+// GetBatchAlertFeatureReply_AlertFeature with the rules defined in the proto
+// definition for this message. If any rules are violated, the result is a
+// list of violation errors wrapped in
+// GetBatchAlertFeatureReply_AlertFeatureMultiError, or nil if none found.
+func (m *GetBatchAlertFeatureReply_AlertFeature) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetBatchAlertFeatureReply_AlertFeature) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AlertFeatureId
+
+	// no validation rules for Name
+
+	// no validation rules for Code
+
+	if len(errors) > 0 {
+		return GetBatchAlertFeatureReply_AlertFeatureMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetBatchAlertFeatureReply_AlertFeatureMultiError is an error wrapping
+// multiple validation errors returned by
+// GetBatchAlertFeatureReply_AlertFeature.ValidateAll() if the designated
+// constraints aren't met.
+type GetBatchAlertFeatureReply_AlertFeatureMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetBatchAlertFeatureReply_AlertFeatureMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetBatchAlertFeatureReply_AlertFeatureMultiError) AllErrors() []error { return m }
+
+// GetBatchAlertFeatureReply_AlertFeatureValidationError is the validation
+// error returned by GetBatchAlertFeatureReply_AlertFeature.Validate if the
+// designated constraints aren't met.
+type GetBatchAlertFeatureReply_AlertFeatureValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetBatchAlertFeatureReply_AlertFeatureValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetBatchAlertFeatureReply_AlertFeatureValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetBatchAlertFeatureReply_AlertFeatureValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetBatchAlertFeatureReply_AlertFeatureValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetBatchAlertFeatureReply_AlertFeatureValidationError) ErrorName() string {
+	return "GetBatchAlertFeatureReply_AlertFeatureValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetBatchAlertFeatureReply_AlertFeatureValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetBatchAlertFeatureReply_AlertFeature.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetBatchAlertFeatureReply_AlertFeatureValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetBatchAlertFeatureReply_AlertFeatureValidationError{}
+
+// Validate checks the field values on GetAlertLevelReply_AlertLevel with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetAlertLevelReply_AlertLevel) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAlertLevelReply_AlertLevel with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the result is a list of violation errors wrapped in
+// GetAlertLevelReply_AlertLevelMultiError, or nil if none found.
+func (m *GetAlertLevelReply_AlertLevel) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAlertLevelReply_AlertLevel) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for AlertLevelId
+
+	// no validation rules for Name
+
+	// no validation rules for Level
+
+	// no validation rules for Enable
+
+	if len(errors) > 0 {
+		return GetAlertLevelReply_AlertLevelMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAlertLevelReply_AlertLevelMultiError is an error wrapping multiple
+// validation errors returned by GetAlertLevelReply_AlertLevel.ValidateAll()
+// if the designated constraints aren't met.
+type GetAlertLevelReply_AlertLevelMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAlertLevelReply_AlertLevelMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAlertLevelReply_AlertLevelMultiError) AllErrors() []error { return m }
+
+// GetAlertLevelReply_AlertLevelValidationError is the validation error
+// returned by GetAlertLevelReply_AlertLevel.Validate if the designated
+// constraints aren't met.
+type GetAlertLevelReply_AlertLevelValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAlertLevelReply_AlertLevelValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAlertLevelReply_AlertLevelValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAlertLevelReply_AlertLevelValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAlertLevelReply_AlertLevelValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAlertLevelReply_AlertLevelValidationError) ErrorName() string {
+	return "GetAlertLevelReply_AlertLevelValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAlertLevelReply_AlertLevelValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAlertLevelReply_AlertLevel.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAlertLevelReply_AlertLevelValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAlertLevelReply_AlertLevelValidationError{}
 
 // Validate checks the field values on ListAlertFeatureReply_AlertFeature with
 // the rules defined in the proto definition for this message. If any rules

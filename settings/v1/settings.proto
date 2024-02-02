@@ -149,8 +149,12 @@ service Settings {
 	rpc CreateAlertFeature(CreateAlertFeatureRequest) returns (CreateAlertFeatureReply);
 	rpc UpdateAlertFeature(UpdateAlertFeatureRequest) returns (UpdateAlertFeatureReply);
 	rpc DeleteAlertFeature(DeleteAlertFeatureRequest) returns (DeleteAlertFeatureReply);
+	rpc GetBatchAlertFeature(GetBatchAlertFeatureRequest) returns (GetBatchAlertFeatureReply);
 	rpc ListAlertFeature(ListAlertFeatureRequest) returns (ListAlertFeatureReply);
+
 	rpc ListAlertLevel(ListAlertLevelRequest) returns (ListAlertLevelReply);
+	rpc GetAlertLevel(GetAlertLevelRequest) returns (GetAlertLevelReply);
+
 	rpc CreateAlertBehavior(CreateAlertBehaviorRequest) returns (CreateAlertBehaviorReply);
 	rpc UpdateAlertBehavior(UpdateAlertBehaviorRequest) returns (UpdateAlertBehaviorReply);
 	rpc DeleteAlertBehavior(DeleteAlertBehaviorRequest) returns (DeleteAlertBehaviorReply);
@@ -163,6 +167,31 @@ service Settings {
 
 	rpc CreateEventConfig(CreateEventConfigRequest) returns (CreateEventConfigReply){}
 	rpc GetEventConfig(GetEventConfigRequest) returns (GetEventConfigReply){}
+}
+
+message GetBatchAlertFeatureRequest{
+	repeated string feature = 1;
+}
+message GetBatchAlertFeatureReply{
+	message AlertFeature {
+		string alertFeatureId = 1;
+		string name = 2;
+		string code = 3;
+	}
+	repeated AlertFeature alertFeatures = 1;
+}
+
+message GetAlertLevelRequest{
+	string alertLevel = 1;
+}
+message GetAlertLevelReply{
+	message AlertLevel {
+		string alertLevelId = 1;
+		string name = 2;
+		int32 level = 3;
+		bool enable = 4;
+	}
+	AlertLevel alertLevel = 1;
 }
 
 message CreateAlertFeatureRequest{
