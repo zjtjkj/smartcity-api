@@ -92,6 +92,9 @@ message Event {
 		int64 created_at = 2;
 	}
 	repeated Alert alerts = 11;
+
+	repeated string features  = 13;
+	string alertLevel = 14;
 }
 
 message FindEventsRequest {
@@ -110,6 +113,7 @@ message FindEventsRequest {
 	repeated string tags = 9;
 	int64 after = 10;
 	int64 before = 11;
+	repeated string alertLevel = 12;
 }
 message FindEventsReply {
 	int64 index = 1;
